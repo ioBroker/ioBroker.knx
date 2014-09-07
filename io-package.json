@@ -13,7 +13,8 @@
             "Oliver Wagner <owagner@vapor.com>"
         ],
         "license":                  "MIT",
-        "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md"
+        "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+        "icon":                     "eib_knx.png"
     },
     "native": {
 
