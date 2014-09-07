@@ -1,0 +1,27 @@
+{
+    "common": {
+        "name":                     "knx",
+        "title":                    "KNX",
+        "desc":                     "Connect KNX via eibd",
+        "version":                  "0.0.0",
+        "mode":                     "daemon",
+        "platform":                 "Javascript/Node.js",
+        "loglevel":                 "info",
+        "keywords":                 ["knx", "eibd"],
+        "main":                     "knx.js",
+        "authors": [
+            "Oliver Wagner <owagner@vapor.com>"
+        ],
+        "license":                  "MIT",
+        "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md"
+    },
+    "native": {
+
+    },
+    "objects": [
+
+    ],
+    "instanceObjects": [
+
+    ]
+}
