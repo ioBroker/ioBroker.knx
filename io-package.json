@@ -14,7 +14,8 @@
         ],
         "license":                  "MIT",
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-        "icon":                     "eib_knx.png"
+        "icon":                     "eib_knx.png",
+        "extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/eib_knx.png"
     },
     "native": {
 
