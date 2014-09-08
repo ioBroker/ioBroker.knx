@@ -10,7 +10,7 @@
         "keywords":                 ["knx", "eibd"],
         "main":                     "knx.js",
         "authors": [
-            "Oliver Wagner <owagner@vapor.com>"
+            "Oliver Wagner <owagner@tellerulam.com>"
         ],
         "license":                  "MIT",
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
