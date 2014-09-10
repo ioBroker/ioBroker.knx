@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
+<script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<script type="text/javascript" src="../../js/adapter-settings.js"></script>
+<script type="text/javascript">
+    function load(settings) {
+        console.log('load', settings)
+        for (var key in settings) {
+            $('#' + key + '.value').val(settings[key]);
+            if (settings[key]) {
+                $('#' + key + '.check').attr('checked', true);
+            } else {
+                $('#' + key + '.check').removeAttr('checked');
+            }
+        }
+    }
+    function save(callback) {
+        var obj = {};
+        $('.value').each(function () {
+            var $this = $(this);
+            obj[$this.attr('id')] = $this.val();
+        });
+        $('.check').each(function () {
+            var $this = $(this);
+            obj[$this.attr('id')] = $this.is(':checked');
+        });
+        callback(obj);
+    }
+</script>
+<div id="adapter-container">
+    <p>&nbsp;</p>
+    <table>
+        <tr>
+            <td>eibd Address</td>
+            <td><input type="text" id="eibdAddress" class="value"></td>
+        </tr>
+        <tr>
+            <td>eibd Port (<strong>not</strong> the EIBnet/IP port!) </td>
+            <td><input type="number" id="eibdPort" class="value"></td>
+        </tr>
+    </table>
+</div>
+</html>

@@ -2,6 +2,8 @@
 /*jslint node: true */
 "use strict";
 
+require("eibd");
+
 // you have to require the adapter module and pass a options object
 var adapter = require(__dirname + '/../../lib/adapter.js')({
 
@@ -45,49 +47,31 @@ function main() {
 
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
-    adapter.log.info('config test1: ' + adapter.config.test1);
-    adapter.log.info('config test1: ' + adapter.config.test2);
+    adapter.log.info('Connecting to eibd ' + adapter.config.eibdAddress + ":" +adapter.config.eibdPort);
 
+    // Establish the eibd connection
+    function groupsocketlisten(opts, callback) {
+        var conn = eibd.Connection();
+        conn.socketRemote(opts, function() {
+            conn.openGroupSocket(0, callback);
+        });
+    }
 
-    /**
-     *
-     *      For every state in the system there has to be also an object of type state
-     *
-     *      Here a simple example for a boolean variable named "testVariable"
-     *
-     *      Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-     *
-     */
+    // and setup the message parser
+    groupsocketlisten({ host: adapter.config.eibdAddress, port: adapter.config.eibdPort }, function(parser) {
 
-    adapter.setObject('testVariable', {
-        type: 'state',
-        common: {
-            type: 'boolean'
-        }
+        parser.on('write', function(src, dest, dpt, val){
+            adapter.log.info('Write from '+src+' to '+dest+': '+val);
+        });
+
+        parser.on('response', function(src, dest, val) {
+            adapter.log.info('Response from '+src+' to '+dest+': '+val);
+        });
+
+        parser.on('read', function(src, dest) {
+            adapter.log.info('Read from '+src+' to '+dest);
+        });
+
     });
-
-    // in this example all states changes inside the adapters namespace are subscribed
-    adapter.subscribeStates('*');
-
-
-    /**
-     *   setState examples
-     *
-     *   you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-     *
-     */
-
-        // the variable testVariable is set to true
-    adapter.setState('testVariable', true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    adapter.setState('testVariable', {val: true, ack: true});
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    adapter.setState('testVariable', {val: true, ack: true, expire: 30});
-
-
-
 
 }
