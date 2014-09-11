@@ -1,6 +1,7 @@
 # ioBroker.knx
 
-This adapter provides an interface to a KNX bus system via  eibd: http://www.auto.tuwien.ac.at/~mkoegler/index.php/eibd
+This adapter provides an interface to a KNX bus system via eibd: http://www.auto.tuwien.ac.at/~mkoegler/index.php/eibd
+
 eibd in turn connects to a physical KNX interface like an IP Gateway or Router, USB KNX interfaces or direct TP
 interfaces (TPUARTS)
 
@@ -10,6 +11,8 @@ node-eibd module: https://github.com/andreek/node-eibd
 NOTE: This adapter is currently INCOMPLETE and DYSFUNCTIONAL. Do NOT attempt to use it, it will turn you
 into a hamster.
 
-Connects HomeMatic Interface-Processes ("BidCos-Service" or rfd/hs485d on a CCU) to ioBroker
-
 ## ChangeLog
+
+### 0.0.1
+* (owagner) initial version
+
