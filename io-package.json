@@ -19,7 +19,8 @@
     },
     "native": {
         "eibdAddress":  "127.0.0.1",
-        "eibdPort": 6720
+        "eibdPort": 6720,
+        "gaTable": ""
     },
     "objects": [
 

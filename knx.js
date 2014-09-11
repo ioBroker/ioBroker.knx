@@ -2,7 +2,8 @@
 /*jslint node: true */
 "use strict";
 
-require("eibd");
+var eibd = require('eibd');
+var eibdConnection;
 
 // you have to require the adapter module and pass a options object
 var adapter = require(__dirname + '/../../lib/adapter.js')({
@@ -28,6 +29,8 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
     // is called when adapter shuts down - callback has to be called under any circumstances!
     unload: function (callback) {
         try {
+            if(eibdConnection)
+                eibdConnection.end();
             adapter.log.info('cleaned everything up...');
             callback();
         } catch (e) {
@@ -48,12 +51,13 @@ function main() {
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
     adapter.log.info('Connecting to eibd ' + adapter.config.eibdAddress + ":" +adapter.config.eibdPort);
+    adapter.log.info('XML table '+adapter.config.gaTable);
 
     // Establish the eibd connection
     function groupsocketlisten(opts, callback) {
-        var conn = eibd.Connection();
-        conn.socketRemote(opts, function() {
-            conn.openGroupSocket(0, callback);
+        eibdConnection = eibd.Connection();
+        eibdConnection.socketRemote(opts, function() {
+            eibdConnection.openGroupSocket(0, callback);
         });
     }
 
@@ -61,7 +65,9 @@ function main() {
     groupsocketlisten({ host: adapter.config.eibdAddress, port: adapter.config.eibdPort }, function(parser) {
 
         parser.on('write', function(src, dest, dpt, val){
-            adapter.log.info('Write from '+src+' to '+dest+': '+val);
+            /* Message received to a GA */
+            adapter.log.info('Write from '+src+' to '+dest+': '+val+' ('+dpt+')');
+            adapter.setState(dest,{val: val, ack: true, from: src});
         });
 
         parser.on('response', function(src, dest, val) {
