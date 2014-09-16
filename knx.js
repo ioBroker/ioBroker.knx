@@ -3,6 +3,8 @@
 "use strict";
 
 var eibd = require('eibd');
+var parseString = require('xml2js').parseString;
+
 var eibdConnection;
 
 // you have to require the adapter module and pass a options object
@@ -51,7 +53,30 @@ function main() {
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
     adapter.log.info('Connecting to eibd ' + adapter.config.eibdAddress + ":" +adapter.config.eibdPort);
-    adapter.log.info('XML table '+adapter.config.gaTable);
+
+    // Parse the group address table
+    function parseGARange(gaRange)
+    {
+        for(var ix in gaRange) {
+            var gar=gaRange[ix];
+            if(gar.GroupRange)
+            {
+                parseGARange(gaRange[ix].GroupRange)
+            }
+            else if(gar.GroupAddress) {
+                for(var gaIX in gar.GroupAddress)
+                {
+                    var ga=gar.GroupAddress[gaIX];
+                    var obj={_id: ga["Address"], common: {name: ga["Name"] } };
+                    adapter.extendForeignObject(obj._id,obj);
+                }
+            }
+        }
+    }
+
+    parseString(adapter.config.gaTable, function (err, result) {
+        parseGARange(result["GroupAddress-Export"].GroupRange);
+    });
 
     // Establish the eibd connection
     function groupsocketlisten(opts, callback) {

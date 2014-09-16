@@ -1,6 +1,7 @@
 {
 "private": true,
 "dependencies": {
-"eibd": "^0.2.0"
+"eibd": "^0.2.0",
+"xml2js": "~0.4.4"
 }
 }
