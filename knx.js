@@ -66,9 +66,12 @@ function main() {
             else if(gar.GroupAddress) {
                 for(var gaIX in gar.GroupAddress)
                 {
-                    var ga=gar.GroupAddress[gaIX];
-                    var obj={_id: ga["Address"], common: {name: ga["Name"] } };
-                    adapter.extendForeignObject(obj._id,obj);
+                    var ga=gar.GroupAddress[gaIX].$;
+                    console.log(ga);
+                    // Heavy magic - enrich object if there, create otherwise
+                    var obj={_id: ga["Address"], type: "state", common: {name: ga["Name"] }, native: {} };
+                    console.log(obj)
+                    adapter.extendObject(obj._id,obj);
                 }
             }
         }
