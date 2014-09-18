@@ -34,8 +34,7 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
             if(eibdConnection)
                 eibdConnection.end();
             adapter.log.info('cleaned everything up...');
-            callback();
-        } catch (e) {
+        } finally {
             callback();
         }
     },
