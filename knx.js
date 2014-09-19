@@ -31,8 +31,10 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
     // is called when adapter shuts down - callback has to be called under any circumstances!
     unload: function (callback) {
         try {
-            if(eibdConnection)
+            if (eibdConnection) {
+                eibdConnection.parser.end=function(){ /* Dummy */ };
                 eibdConnection.end();
+            }
             adapter.log.info('cleaned everything up...');
         } finally {
             callback();
