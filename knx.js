@@ -24,7 +24,22 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
         // you can use the ack flag to detect if state is desired or acknowledged
         if (!state.ack)
         {
-            adapter.log.info('setting state '+id+' to '+state);
+            var ga = id.split('.')[2];
+            adapter.log.info('setting state '+ga+' to '+state.val);
+            var gad=eibd.str2addr(ga);
+            adapter.log.info(gad);
+            /* Todo: Guess DPT */
+            var tempCon=eibd.Connection();
+            tempCon.socketRemote({ host: adapter.config.eibdAddress, port: adapter.config.eibdPort },function(x){
+                tempCon.openTGroup(gad,1,function(err){
+                    var data=new Array(2);
+                    data[0]=0;
+                    data[1]=0x80 | state.val;
+                    tempCon.sendAPDU(data,function(){
+                        tempCon.end();
+                    });
+                });
+            });
         }
 
     },
@@ -80,6 +95,8 @@ function main() {
             }
         }
     }
+
+    return;
 
     parseString(adapter.config.gaTable, function (err, result) {
         parseGARange(result["GroupAddress-Export"].GroupRange);
