@@ -22,8 +22,9 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
         adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
 
         // you can use the ack flag to detect if state is desired or acknowledged
-        if (!state.ack) {
-            adapter.log.info('ack is not set!');
+        if (!state.ack)
+        {
+            adapter.log.info('setting state '+id+' to '+state);
         }
 
     },
@@ -32,6 +33,7 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
     unload: function (callback) {
         try {
             if (eibdConnection) {
+                /* Workaround against Parser not implementing end() - https://github.com/andreek/node-eibd/issues/7 */
                 eibdConnection.parser.end=function(){ /* Dummy */ };
                 eibdConnection.end();
             }
@@ -44,6 +46,7 @@ var adapter = require(__dirname + '/../../lib/adapter.js')({
     // is called when databases are connected and adapter received configuration.
     // start here!
     ready: function () {
+        adapter.subscribeStates('*');
         main();
     }
 
