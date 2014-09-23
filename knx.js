@@ -96,8 +96,6 @@ function main() {
         }
     }
 
-    return;
-
     parseString(adapter.config.gaTable, function (err, result) {
         parseGARange(result["GroupAddress-Export"].GroupRange);
     });
