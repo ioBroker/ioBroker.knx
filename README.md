@@ -1,3 +1,4 @@
+![Logo](admin/eib_knx.png)
 # ioBroker.knx
 
 This adapter provides an interface to a KNX bus system via eibd: http://www.auto.tuwien.ac.at/~mkoegler/index.php/eibd
