@@ -3,7 +3,7 @@
         "name":                     "knx",
         "title":                    "KNX",
         "desc":                     "Connect KNX via eibd",
-        "version":                  "0.0.1",
+        "version":                  "0.2.10",
         "mode":                     "daemon",
         "platform":                 "Javascript/Node.js",
         "loglevel":                 "info",
