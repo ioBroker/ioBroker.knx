@@ -1,50 +1,181 @@
 <html>
+
+<!-- these 4 files always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
 <script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
+
+
+<!-- these two file always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<script type="text/javascript" src="../../js/translate.js"></script>
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
+
+
+<!-- you have to define 2 functions in the global scope: -->
 <script type="text/javascript">
-    function load(settings) {
-        console.log('load', settings)
-        for (var key in settings) {
-            $('#' + key + '.value').val(settings[key]);
-            if (settings[key]) {
-                $('#' + key + '.check').attr('checked', true);
-            } else {
-                $('#' + key + '.check').removeAttr('checked');
-            }
+    systemDictionary = {
+        "KNX adapter settings": {
+            "de": "KNX Adaptereinstellungen",
+            "ru": "KNX адаптер конфигурация"
+        },
+        "Gateway IP :":          {"de": "KNX Gateway IP :",           "ru": "IP :"},
+        "Port :":                {"de": "Port :",                     "ru": "Порт :"},
+        "phys. EIB address :":   {"de": "phys. EIB Adresse :",   "ru": "физическая EIB адрес :"},
+
+
+
+        "help_tip":         {
+            "en": "On save the adapter restarts with new configuration immediately",
+            "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
+            "ru": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
+        },
+        "socket_help":         {
+            "en": "Used by adapters like rickshaw or vis",
+            "de": "Wird von Rickshaw oder Vis benutzt",
+            "ru": "Используется для Rickshaw или Vis"
+        },
+
+    };
+    function setValue(id, value) {
+        // example: select elements with id=key and class=value and insert value
+
+        if ($('#' + id + '.value').attr('type') == 'checkbox') {
+            alert(" IF setValue");
+            $('#' + id + '.value').prop('checkesd', value).change(function() {
+                onChange();
+            });
+        } else {
+            $('#' + id + '.value').val(value).blur(function() {
+                // check if entered values are valid
+                if (id == 'gwip') {
+
+                    var ip1 = $('#gwip').val();
+                        if (ValidateIPaddress(ip1)) {
+                            $('#gwip').val(ip1);
+                        } else {
+                            alert("Adresse ist NICHT gültig");
+                        }
+                }
+                if (id == 'eibadr') {
+                    var eibadr1 = $('#eibadr').val();
+                    if (ValidateEIBaddress(eibadr1)) {
+                        $('#eibadr').val(eibadr1);
+                    } else {
+                        alert("Physikalische EIB - Adresse ist NICHT gültig");
+                    }
+                }
+                if (id == 'gaTable') {
+                    var gaTable1 = $('#gaTable').val();
+                    $('#gaTable').val(gaTable1);
+                    alert("gaTable");
+                }
+           //     if (id == 'selectfile'){
+           //         var selectfile1 = $('#selectfile').file();
+           //         $('#selectfile').val(document.getElementById("selectfile").addEventListener("change", doit, false));​
+           //     }
+                onChange();
+            }).keyup(function() {
+                $(this).trigger('change');
+            });
         }
     }
+
+
+    function load(settings, _onChange) {
+        onChange = _onChange;
+        if (!settings) return;
+
+        fillSelectIPs('#gwip', settings.adapterAddress, false, true);
+        settings.gwip = settings.gwip || 0;
+        settings.port = settings.port || 0;
+
+        for (var key in settings) {
+            //alert("load function key: " + key);
+            setValue(key, settings[key]);
+        }
+
+        onChange(false);
+    }
+
+
+    function ValidateIPaddress(inputText) {
+        var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        if(inputText.match(ipformat)) {
+            //document.form1.text1.focus();
+            return true;
+        }
+        return false;
+    }
+
+    function ValidateEIBaddress(inputText) {
+        var eibformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        if(inputText.match(eibformat)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    // ... and the function save has to exist.
+    // you have to make sure the callback is called with the settings object as first param!
     function save(callback) {
+        // example: select elements with class=value and build settings object
         var obj = {};
         $('.value').each(function () {
             var $this = $(this);
             obj[$this.attr('id')] = $this.val();
         });
-        $('.check').each(function () {
-            var $this = $(this);
-            obj[$this.attr('id')] = $this.is(':checked');
-        });
         callback(obj);
     }
+/*
+    function doit(e) {
+        var files = e.target.files;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var parsed = new DOMParser().parseFromString(this.result, "text/xml");
+            console.log(parsed);
+        };
+        reader.readAsText(files[0]);
+    }
+*/
 </script>
+
+<!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
-    <p>&nbsp;</p>
+
+    <table><tr>
+        <td><img src="knx.png" width="50%" height="auto"/></td>
+        <td><h3 class="translate">KNX adapter settings</h3></td>
+    </tr></table>
     <table>
         <tr>
-            <td>eibd Address</td>
-            <td><input type="text" id="eibdAddress" class="value"></td>
+            <td class="translate">Gateway IP :</td>
+            <td><input value="127.0.0.11" class="value" id="gwip"></td>
+
         </tr>
         <tr>
-            <td>eibd Port (<strong>not</strong> the EIBnet/IP port!) </td>
-            <td><input type="number" id="eibdPort" class="value"></td>
+            <td class="translate">Port :</td>
+            <td><input type="number" min="1025" max="65535" value="6720" class="value" id="gwipport"><td>
+        </tr>
+        <tr>
+            <td class="translate">phys. EIB address :</td>
+            <td><input value="1.1.5" class="value" id="eibadr"><td>
         </tr>
         <tr>
             <td>ETS4 Group Address Table (xml)</td>
-            <td><textarea id="gaTable" class="value" cols="80" rows="20"></textarea></td>
+            <td><textarea type="text/xml" id="gaTable" class="value" cols="80" rows="20"></textarea></td>
         </tr>
+<!--
+        <tr>
+            <td>Upload xml Adress File: </td>
+            <td><input type="file" id="selectfile" /></td>
+        </tr>
+        -->
     </table>
+    <p class="translate">help_tip</p>
+
 </div>
+
 </html>

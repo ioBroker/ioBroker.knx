@@ -1,32 +1,36 @@
 {
     "common": {
         "name":                     "knx",
-        "title":                    "KNX",
-        "desc":                     "Connect KNX via eibd",
-        "version":                  "0.2.10",
-        "mode":                     "daemon",
+        "version": "0.6.0",
+		"news": {
+			"0.6.0": {
+				"en":               "redesign",
+				"de":               "redesign",
+				"ru":               "redesign"
+			}
+        },
+        "title":                    "KNX Adapter",
+        "desc":                     {
+ 			             "en": "ioBroker knx Adapter",
+ 			             "de": "ioBroker knx Adapter",
+ 			             "ru": "ioBroker knx драйвер как образец"
+		},
+		"license":                  "CC BY-NC",
         "platform":                 "Javascript/Node.js",
-        "loglevel":                 "info",
-        "keywords":                 ["knx", "eibd"],
-        "main":                     "knx.js",
-        "authors": [
-            "Oliver Wagner <owagner@tellerulam.com>"
-        ],
-        "license":                  "MIT",
-        "type":                     "hardware",
+        "mode":                     "daemon",
+        "icon":                     "knx.png",
+        "enabled":                  true,
+		"extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+		"keywords":                 ["knx", "vis", "GUI", "graphical", "scada"],
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-        "icon":                     "eib_knx.png",
-        "extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/eib_knx.png"
+		"loglevel":                 "info",
+        "type":                     "common adapters"
     },
     "native": {
-        "eibdAddress":  "127.0.0.1",
-        "eibdPort": 6720,
-        "gaTable": ""
+        "test1": true,
+        "test2": 42
     },
     "objects": [
-
-    ],
-    "instanceObjects": [
 
     ]
 }

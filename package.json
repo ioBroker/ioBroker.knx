@@ -1,42 +1,46 @@
 {
   "name": "iobroker.knx",
-  "version": "0.2.10",
-  "description": "Lets control KNX devices from ioBroker",
+  "version": "0.6.0",
+  "description": "ioBroker knx Adapter",
   "author": {
-    "name": "bluefox",
-    "email": "bluefox@ccu.io"
+    "name": "K.Ringmann",
+    "email": "info@punktnetzwerk.net"
   },
+  "contributors": [
+    {
+      "name": "K.Ringmann",
+      "email": "info@punktnetzwerk.net"
+    }
+  ],
   "homepage": "https://github.com/ioBroker/ioBroker.knx",
+  "licenses": [
+    {
+      "type": "CC-BY-NC-4.0",
+      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE"
+    }
+  ],
   "keywords": [
     "ioBroker",
-    "KNX"
+    "knx",
+    "Smart Home",
+    "home automation"
   ],
+  "main": "knx.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ioBroker/ioBroker.knx"
   },
   "dependencies": {
-	"eibd": "^0.3.1",
-	"xml2js": "~0.4.12"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-replace": "^0.9.3",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-jscs": "^2.0.0",
-    "grunt-http": "^1.6.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-compress": "^0.13.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-exec": "^0.4.6",
-    "keypress": "*"
+      "grunt": "^0.4.5",
+      "grunt-replace": "^0.9.3",
+      "grunt-contrib-jshint": "^0.11.2",
+      "grunt-jscs": "^2.0.0",
+      "grunt-http": "^1.6.0"
   },
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.knx/issues"
   },
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "license": "MIT"
+  "readmeFilename": "README.md"
 }
