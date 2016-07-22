@@ -8,7 +8,7 @@ var parseString = require('xml2js').parseString;
 
 var eibdConnection;
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
-// you have to require the adapter module and pass a options object
+
 var mapping = {};
 
 var adapter = utils.adapter({
@@ -26,17 +26,22 @@ var adapter = utils.adapter({
         // you can use the ack flag to detect if state is desired or acknowledged
         if (!state.ack)
         {
-            var ga = id.split('.')[2];
+            var ga = id.split('.')[4];
+            ga = ga.replace(/_/g, '/');
             adapter.log.info('setting state '+ga+' to '+state.val);
-            var gad=eibd.str2addr(ga);
+            //var gad=eibd.str2addr(ga);
+            var gad=ga;
             adapter.log.info('Gad : ' + gad);
      //       / * Todo: Guess DPT */
+
             var tempCon=eibd.Connection();
+
             tempCon.socketRemote({ host: adapter.config.gwip, port: adapter.config.gwipport },function(x){
                 tempCon.openTGroup(gad,1,function(err){
                     var data=new Array(2);
                     data[0]=0;
                     data[1]=0x80 | state.val;
+                    adapter.log.info('Send ' + data[0] + ' ' + data[1]);
                     tempCon.sendAPDU(data,function(){
                         tempCon.end();
                     });
@@ -106,28 +111,13 @@ function main() {
                 }
                 for (var gaIX = 0; gaIX < gar.GroupAddress.length; gaIX++) {
                     var ga = gar.GroupAddress[gaIX].$;
-                    //adapter.log.info('ga : ' + ga);
-                    // Heavy magic - enrich object if there, create otherwise
                     var obj = {_id: (locpath ? locpath + '.' : '') + ga.Address.replace(/\//g, '_'), type: 'state', common: {name: ga.Name}, native: {address: ga.Address}};
-                    //adapter.log.info('obj : ' + obj);
-                    //obj.getElementsByName("Address")
                     adapter.extendObject(obj._id, obj);
                     mapping[ga.Address] = obj;
                 }
             }
         }
     }
-
-
-   // function parseGARange(gaRange) {
-   //     adapter.log.info('gaRange : ' + gaRange);
-   // }
-
-    /*parseString(adapter.config.gaTable, function (err, result) {
-        adapter.log.info('parseString : ' + result["GroupAddress-Export"]);
-        parseGARange(result["GroupAddress-Export"].GroupRange);
-        //adapter.log.info("GroupAddress-Export : " + result["GroupAddress-Export"].GroupRange);
-    });*/
 
 
    // Establish the eibd connection
@@ -196,21 +186,22 @@ function main() {
                     callback(err, type, value);
                 }
             };
+
             parser.on('write', function(src, dest, dpt, val){
-                if (mapping[dest]) dest = mapping[dest].common.name;
+                if (mapping[dest]) var mappedName = mapping[dest].common.name;
                 /* Message received to a GA */
-                adapter.log.info('Write from ' + src + ' to ' + dest + ': ' + val + ' (' + dpt + ')');
+                adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
                 adapter.setState(dest,{val: val, ack: true, from: src});
             });
 
             parser.on('response', function(src, dest, val) {
-                if (mapping[dest]) dest = mapping[dest].common.name;
-                adapter.log.info('Response from ' + src + ' to ' + dest + ': '+val);
+                if (mapping[dest]) var mappedName = mapping[dest].common.name;
+                adapter.log.info('Response from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
             });
 
             parser.on('read', function(src, dest) {
-                if (mapping[dest]) dest = mapping[dest].common.name;
-                adapter.log.info('Read from ' + src + ' to ' + dest);
+                if (mapping[dest]) var mappedName = mapping[dest].common.name;
+                adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
             });
 
         });
