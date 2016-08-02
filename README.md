@@ -11,7 +11,7 @@ This adapter is a knx for the creation of an ioBroker adapter.
 1. download and unpack this packet from github ```https://github.com/ioBroker/ioBroker.knx/archive/master.zip```
   or clone git repository ```git clone https://github.com/ioBroker/ioBroker.knx.git```
 
-2. download required npm packets. Write in ioBroker.eib-knx directory:
+2. download required npm eib packets. Write in ioBroker.knx directory:
 
   ```npm install```
   

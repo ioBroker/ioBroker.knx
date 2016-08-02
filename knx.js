@@ -10,6 +10,7 @@ var eibdConnection;
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var mapping = {};
+var valtype ='';
 
 var adapter = utils.adapter({
     // name has to be set and has to be equal to adapters folder name and main file name excluding extension
@@ -17,32 +18,45 @@ var adapter = utils.adapter({
 
     // is called if a subscribed object changes
     objectChange: function (id, obj) {
-
+        adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
     },
+
     // is called if a subscribed state changes
     stateChange: function (id, state) {
-        adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
+
+        adapter.log.info('stateChange ' + id  + '  .....  state : ' + JSON.stringify(state));
+        // parse Groupaddress from id-string
+        var ga = id.substring(id.lastIndexOf('.') + 1);
+        ga = ga.replace(/_/g, '/');
+        var val;
+        adapter.log.info('state ack : ' + state.ack + ' ga :' + ga);
+        if (state.ack) {
+            adapter.log.info(' setze val von ' + ga + ' auf ' + state.val);
+            val = state.val;
+        }
 
         // you can use the ack flag to detect if state is desired or acknowledged
         if (!state.ack)
         {
-            var ga = id.split('.')[4];
-            ga = ga.replace(/_/g, '/');
             adapter.log.info('setting state '+ga+' to '+state.val);
-            //var gad=eibd.str2addr(ga);
-            var gad=ga;
+            adapter.log.info('str2addr(' + ga + ') : '+ eibd.str2addr(ga));
+
+            var gad=eibd.str2addr(ga);
             adapter.log.info('Gad : ' + gad);
      //       / * Todo: Guess DPT */
 
             var tempCon=eibd.Connection();
-
             tempCon.socketRemote({ host: adapter.config.gwip, port: adapter.config.gwipport },function(x){
-                tempCon.openTGroup(gad,1,function(err){
-                    var data=new Array(2);
+                tempCon.openTGroup(gad,0,function(err){
+                    var data = new Array(2);
+
+                    //adapter.log.info('Send ' + data[0] + ' ' + data[1]);
+                   // var data=new Array(2);
                     data[0]=0;
                     data[1]=0x80 | state.val;
                     adapter.log.info('Send ' + data[0] + ' ' + data[1]);
                     tempCon.sendAPDU(data,function(){
+                        adapter.log.info('SendAPDU ' + data[0] + ' ' + data[1]);
                         tempCon.end();
                     });
                 });
@@ -190,8 +204,9 @@ function main() {
             parser.on('write', function(src, dest, dpt, val){
                 if (mapping[dest]) var mappedName = mapping[dest].common.name;
                 /* Message received to a GA */
-                adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
-                adapter.setState(dest,{val: val, ack: true, from: src});
+                //adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
+                valtype = dpt;
+                adapter.setState(mappedName + '.' + dest.replace(/\//g, '_'),{val: val, ack: true, from: src});
             });
 
             parser.on('response', function(src, dest, val) {

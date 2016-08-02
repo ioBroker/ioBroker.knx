@@ -58,6 +58,10 @@
                             alert("Adresse ist NICHT gültig");
                         }
                 }
+                if (id == 'gwipport') {
+                    var gwipport1 = $('#gwipport').val();
+                    $('#gwipport').val(gwipport1);
+                }
                 if (id == 'eibadr') {
                     var eibadr1 = $('#eibadr').val();
                     if (ValidateEIBaddress(eibadr1)) {
@@ -89,7 +93,7 @@
 
         fillSelectIPs('#gwip', settings.adapterAddress, false, true);
         settings.gwip = settings.gwip || 0;
-        settings.port = settings.port || 0;
+        settings.gwipport = settings.gwipport || 0;
 
         for (var key in settings) {
             //alert("load function key: " + key);
