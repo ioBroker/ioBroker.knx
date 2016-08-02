@@ -11,6 +11,7 @@ var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var mapping = {};
 var valtype ='';
+var esf = new FileReader;
 
 var adapter = utils.adapter({
     // name has to be set and has to be equal to adapters folder name and main file name excluding extension
@@ -48,17 +49,87 @@ var adapter = utils.adapter({
             var tempCon=eibd.Connection();
             tempCon.socketRemote({ host: adapter.config.gwip, port: adapter.config.gwipport },function(x){
                 tempCon.openTGroup(gad,0,function(err){
-                    var data = new Array(2);
+                    // var data = new Array(2);
+                    var data;
+                    var dataValid = false;
+                    adapter.log.info('valType : ' + valtype);
+                    switch (valtype) {
+                        case (valtype == 'DPT1') :
+                            adapter.log.info(valtype + ' encoded ' + data.decodeDPT1);
+                            dataValid = true;
+                            data = new Array(2);
+                            data = data.decodeDPT1;
+                            break;
+                        case (valtype == 'DPT2') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT2);
+                            dataValid = true;
+                            data = data.encodeDPT2;
+                            break;
+                        case (valtype == 'DPT3') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT3);
+                            dataValid = true;
+                            data = data.encodeDPT3;
+                            break;
+                        case (valtype == 'DPT4') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT4);
+                            dataValid = true;
+                            data = data.encodeDPT4;
+                            break;
+                        case (valtype == 'DPT5') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT5);
+                            dataValid = true;
+                            data = data.encodeDPT5;
+                            break;
+                        case (valtype == 'DPT6') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT6);
+                            dataValid = true;
+                            data = data.encodeDPT6;
+                            break;
+                        case (valtype == 'DPT7') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT7);
+                            dataValid = true;
+                            data = data.encodeDPT7;
+                            break;
+                        case (valtype == 'DPT8') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT8);
+                            dataValid = true;
+                            data = data.encodeDPT8;
+                            break;
+                        case (valtype == 'DPT9') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT9);
+                            dataValid = true;
+                            data = data.encodeDPT9;
+                            break;
+                        case (valtype == 'DPT10') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT10);
+                            dataValid = true;
+                            data = data.encodeDPT10;
+                            break;
+                        case (valtype == 'DPT11') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT11);
+                            dataValid = true;
+                            data = data.encodeDPT11;
+                            break;
+                        case (valtype == 'DPT12') :
+                            adapter.log.info(valtype + ' encoded ' + data.encodeDPT12);
+                            dataValid = true;
+                            data = data.encodeDPT12;
+                            break;
+                        default :
+                            dataValid = false;
 
-                    //adapter.log.info('Send ' + data[0] + ' ' + data[1]);
+                    }
+
                    // var data=new Array(2);
-                    data[0]=0;
-                    data[1]=0x80 | state.val;
-                    adapter.log.info('Send ' + data[0] + ' ' + data[1]);
-                    tempCon.sendAPDU(data,function(){
-                        adapter.log.info('SendAPDU ' + data[0] + ' ' + data[1]);
-                        tempCon.end();
-                    });
+                   // data[0]=0;
+                   // data[1]=0x80 | state.val;
+                   // adapter.log.info('Send ' + data[0] + ' ' + data[1]);
+                    if (dataValid) {
+                        tempCon.sendAPDU(data, function () {
+                            //adapter.log.info('SendAPDU ' + data[0] + ' ' + data[1]);
+                            tempCon.end();
+                        });
+                    }
                 });
             });
         }
@@ -206,6 +277,7 @@ function main() {
                 /* Message received to a GA */
                 //adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
                 valtype = dpt;
+                adapter.log.info('====>> ESF File : ' + esf.Name);
                 adapter.setState(mappedName + '.' + dest.replace(/\//g, '_'),{val: val, ack: true, from: src});
             });
 

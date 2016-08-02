@@ -75,10 +75,20 @@
                     $('#gaTable').val(gaTable1);
                     alert("gaTable");
                 }
-           //     if (id == 'selectfile'){
-           //         var selectfile1 = $('#selectfile').file();
-           //         $('#selectfile').val(document.getElementById("selectfile").addEventListener("change", doit, false));​
-           //     }
+              //  if (id == 'esffile'){
+              //      var esffile1 = $('#esffile').get(0).files[0];
+              //      $('#esffile').val(document.getElementById("esffile").addEventListener("change", doit, false));​
+              //  }
+                if (id == 'esffile') {
+                 //   document.getElementById('esffile').addEventListener('change', function () {
+                        var esf1 = this.files[0];
+                        //$('#esffile').val(esf1);
+                        // This code is only for demo ...
+                        //console.log("name : " + esf1.name);
+                        alert("size : " + esf1.size);
+                        //console.log("type : " + esf1.type);
+                }//, false);
+
                 onChange();
             }).keyup(function() {
                 $(this).trigger('change');
@@ -171,12 +181,10 @@
             <td>ETS4 Group Address Table (xml)</td>
             <td><textarea type="text/xml" id="gaTable" class="value" cols="80" rows="20"></textarea></td>
         </tr>
-<!--
         <tr>
-            <td>Upload xml Adress File: </td>
-            <td><input type="file" id="selectfile" /></td>
+            <td>Upload esf File: </td>
+            <td><input type="file" id="esffile"></td>
         </tr>
-        -->
     </table>
     <p class="translate">help_tip</p>
 
