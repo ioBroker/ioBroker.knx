@@ -40,7 +40,6 @@
     };
     function setValue(id, value) {
         // example: select elements with id=key and class=value and insert value
-
         if ($('#' + id + '.value').attr('type') == 'checkbox') {
             alert(" IF setValue");
             $('#' + id + '.value').prop('checkesd', value).change(function() {
@@ -50,7 +49,6 @@
             $('#' + id + '.value').val(value).blur(function() {
                 // check if entered values are valid
                 if (id == 'gwip') {
-
                     var ip1 = $('#gwip').val();
                         if (ValidateIPaddress(ip1)) {
                             $('#gwip').val(ip1);
@@ -75,20 +73,11 @@
                     $('#gaTable').val(gaTable1);
                     alert("gaTable");
                 }
-              //  if (id == 'esffile'){
-              //      var esffile1 = $('#esffile').get(0).files[0];
-              //      $('#esffile').val(document.getElementById("esffile").addEventListener("change", doit, false));​
-              //  }
-                if (id == 'esffile') {
-                 //   document.getElementById('esffile').addEventListener('change', function () {
-                        var esf1 = this.files[0];
-                        //$('#esffile').val(esf1);
-                        // This code is only for demo ...
-                        //console.log("name : " + esf1.name);
-                        alert("size : " + esf1.size);
-                        //console.log("type : " + esf1.type);
-                }//, false);
-
+                if (id == 'esfFile') {
+                    var esfFile1 = $('#esfFile').val();
+                    $('#esfFile').val(esfFile1);
+                    alert("esfFile");
+                }
                 onChange();
             }).keyup(function() {
                 $(this).trigger('change');
@@ -100,24 +89,20 @@
     function load(settings, _onChange) {
         onChange = _onChange;
         if (!settings) return;
-
         fillSelectIPs('#gwip', settings.adapterAddress, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
-
-        for (var key in settings) {
+        settings.esfFile = settings.esfFile || 'no value loaded';
+            for (var key in settings) {
             //alert("load function key: " + key);
             setValue(key, settings[key]);
         }
-
         onChange(false);
     }
-
 
     function ValidateIPaddress(inputText) {
         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         if(inputText.match(ipformat)) {
-            //document.form1.text1.focus();
             return true;
         }
         return false;
@@ -129,6 +114,23 @@
             return true;
         }
         return false;
+    }
+
+     function readESFFile(event){
+        var input = event.target;
+        //alert('event.target : ' + input);
+        var string;
+        var reader = new FileReader();
+        reader.onload = function(){
+            var arrayBuffer = reader.result;
+            var decoder = new TextDecoder ("utf-8");
+            //string = decoder.decode (arrayBuffer);
+            $('#esfFile').val(arrayBuffer);
+            alert(' view : ' + string );
+        };
+        reader.readAsArrayBuffer(input.files[0]);
+        onChange();
+        return(string);
     }
 
 
@@ -143,17 +145,10 @@
         });
         callback(obj);
     }
-/*
-    function doit(e) {
-        var files = e.target.files;
-        var reader = new FileReader();
-        reader.onload = function() {
-            var parsed = new DOMParser().parseFromString(this.result, "text/xml");
-            console.log(parsed);
-        };
-        reader.readAsText(files[0]);
-    }
-*/
+
+
+    // onchange='readESFFile(event)'
+
 </script>
 
 <!-- you have to put your config page in a div with id adapter-container -->
@@ -182,9 +177,15 @@
             <td><textarea type="text/xml" id="gaTable" class="value" cols="80" rows="20"></textarea></td>
         </tr>
         <tr>
-            <td>Upload esf File: </td>
-            <td><input type="file" id="esffile"></td>
+            <td>ETS4 esf Export</td>
+            <td><textarea type="text/xml" id="esfFile" class="value" cols="80" rows="20"></textarea></td>
         </tr>
+        <!--
+        <tr>
+            <td>Upload esf File: </td>
+            <td><input type='file' id='esfFile' accept='text/*.esf' onchange='readESFFile(event)' ></td>
+        </tr>
+        -->
     </table>
     <p class="translate">help_tip</p>
 
