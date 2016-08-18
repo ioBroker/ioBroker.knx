@@ -40,6 +40,7 @@
     };
     function setValue(id, value) {
         // example: select elements with id=key and class=value and insert value
+        //alert('Set Value : ' + $('#' + id + '.value').attr('type'));
         if ($('#' + id + '.value').attr('type') == 'checkbox') {
             alert(" IF setValue");
             $('#' + id + '.value').prop('checkesd', value).change(function() {
@@ -73,10 +74,10 @@
                     $('#gaTable').val(gaTable1);
                     alert("gaTable");
                 }
-                if (id == 'esfFile') {
-                    var esfFile1 = $('#esfFile').val();
-                    $('#esfFile').val(esfFile1);
-                    alert("esfFile");
+                if (id == 'esfText') {
+                    var esfText1 = $('#esfText').val();
+                    $('#esfText').val(esfText1);
+                    alert("esfText");
                 }
                 onChange();
             }).keyup(function() {
@@ -92,7 +93,8 @@
         fillSelectIPs('#gwip', settings.adapterAddress, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
-        settings.esfFile = settings.esfFile || 'no value loaded';
+        settings.esfText = settings.esfText || 'no value loaded';
+        settings.esfFile.name = settings.esfFile.name || '';
             for (var key in settings) {
             //alert("load function key: " + key);
             setValue(key, settings[key]);
@@ -116,9 +118,11 @@
         return false;
     }
 
-     function readESFFile(event){
+
+
+    function readESFFile(event){
         var input = event.target;
-        //alert('event.target : ' + input);
+        alert('event.target : ' + input);
         var string;
         var reader = new FileReader();
         reader.onload = function(){
@@ -143,11 +147,15 @@
             var $this = $(this);
             obj[$this.attr('id')] = $this.val();
         });
+        $('.file').each(function () {
+            var $this = $(this)
+            obj[$this.attr('id')] = $this.file();
+        });
         callback(obj);
     }
 
-
-    // onchange='readESFFile(event)'
+    //document.getElementById("esfFile").click();
+    onchange='esfFile(event)'
 
 </script>
 
@@ -178,14 +186,12 @@
         </tr>
         <tr>
             <td>ETS4 esf Export</td>
-            <td><textarea type="text/xml" id="esfFile" class="value" cols="80" rows="20"></textarea></td>
+            <td><textarea type="text/xml" id="esfText" class="value" cols="80" rows="20"></textarea></td>
         </tr>
-        <!--
         <tr>
             <td>Upload esf File: </td>
-            <td><input type='file' id='esfFile' accept='text/*.esf' onchange='readESFFile(event)' ></td>
+            <td><input type='file' id='esfFile' onchange="readESFFile(event)" ></td>
         </tr>
-        -->
     </table>
     <p class="translate">help_tip</p>
 
