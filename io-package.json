@@ -24,7 +24,7 @@
 		"keywords":                 ["knx", "vis", "GUI", "graphical", "scada"],
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
 		"loglevel":                 "info",
-        "type":                     "common adapters"
+        "type":                     "hardware"
     },
     "native": {
         "esfFile": "KNX concept - Büro Plön"
