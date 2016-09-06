@@ -177,6 +177,25 @@ var adapter = utils.adapter({
     }
 });
 
+// New message arrived. obj is array with current messages
+adapter.on('message', function (obj) {
+    if (obj) {
+        switch (obj.command) {
+            case 'project':
+                pasrseProject(obj.message.xml0, obj.message.knx_master, function (res) {
+                    if (obj.callback) adapter.sendTo(obj.from, obj.command, res, obj.callback);
+                });
+                break;
+                
+            default:
+                adapter.log.warn("Unknown command: " + obj.command);
+                break;
+        }
+    }
+
+    return true;
+});
+
 /*function parseXml(text, callback) {
     //adapter.log.info(' text : ' + text);
     parseString(text, function (err, result) {
@@ -186,9 +205,21 @@ var adapter = utils.adapter({
     });
 }*/
 
+function pasrseProject(xml0, knx_master, callback) {
+    getGAS(xml0, knx_master, function (error, result) {
+        if (error) {
+            callback({error: error});
+        } else {
+            syncObjects(result, 0, function (length) {
+                callback({error: null, count: length});
+            });
+        }
+    });
+}
+
 function syncObjects(objects, index, callback) {
     if (index >= objects.length) {
-        if (typeof callback === 'function') callback();
+        if (typeof callback === 'function') callback(objects.length);
         return;
     }
     adapter.extendObject(objects[index]._id, objects[index], function () {
@@ -228,6 +259,7 @@ function groupSocketListen(opts, callback) {
     } finally {
     }
 }
+
 function startKnxServer() {
     groupSocketListen({host: adapter.config.gwip, port: adapter.config.gwipport}, function (parser) {
 
