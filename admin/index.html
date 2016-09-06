@@ -1,6 +1,7 @@
 <html>
 
 <!-- these 4 files always have to be included -->
+<script src="../../../ioBroker.sonos/sonos.js"></script>
 <link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
 <script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
@@ -193,7 +194,11 @@
                                 $('#progress').hide();
                                 $dz.hide();
                                 sendTo(null, 'project', {xml0: xml0, knx_master: e.srcElement.result}, function (result) {
-
+                                    if (!result || result.error) {
+                                        showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
+                                    } else {
+                                        showMessage(_('Extracted %s states', result.count));
+                                    }
                                 });
                                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
                             });
