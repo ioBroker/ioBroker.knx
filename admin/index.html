@@ -94,7 +94,8 @@
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
         settings.esfText = settings.esfText || 'no value loaded';
-        settings.esfFile.name = settings.esfFile.name || '';
+//        settings.esfFile.name = settings.esfFile.name || '';
+//        settings.esfFile = readESFFile(event) || null;
             for (var key in settings) {
             //alert("load function key: " + key);
             setValue(key, settings[key]);
@@ -118,26 +119,6 @@
         return false;
     }
 
-
-
-    function readESFFile(event){
-        var input = event.target;
-        alert('event.target : ' + input);
-        var string;
-        var reader = new FileReader();
-        reader.onload = function(){
-            var arrayBuffer = reader.result;
-            var decoder = new TextDecoder ("utf-8");
-            //string = decoder.decode (arrayBuffer);
-            $('#esfFile').val(arrayBuffer);
-            alert(' view : ' + string );
-        };
-        reader.readAsArrayBuffer(input.files[0]);
-        onChange();
-        return(string);
-    }
-
-
     // ... and the function save has to exist.
     // you have to make sure the callback is called with the settings object as first param!
     function save(callback) {
@@ -147,21 +128,68 @@
             var $this = $(this);
             obj[$this.attr('id')] = $this.val();
         });
-        $('.file').each(function () {
-            var $this = $(this)
-            obj[$this.attr('id')] = $this.file();
-        });
+ //       $('.file').each(function () {
+ //           var $this = $(this)
+ //           obj[$this.attr('id')] = $this.file;
+
+//        });
         callback(obj);
     }
 
     //document.getElementById("esfFile").click();
-    onchange='esfFile(event)'
+   // onchange='esfFile(event)'
+
+
+    var express = require('express');
+    var multer = require('multer');
+    var app = express();
+    var port = 5000;
+
+    app.set('port', port);
+
+    /* Disk Storage engine of multer gives you full control on storing files to disk. The options are destination (for determining which folder the file should be saved) and filename (name of the file inside the folder) */
+
+    var store = multer.diskStorage({
+        destination: function (request, file, callback) {
+            callback(null, '/scratch/');
+        },
+        filename: function (request, file, callback) {
+            callback(null, file.originalname)
+        }
+    });
+
+    /*Multer accepts a single file with the name knxprojFile. This file will be stored in request.file*/
+
+    var upload = multer({storage: store}).single('knxprojFile');
+
+    //Showing index.html file on our homepage
+    app.get('/', function(resuest, response) {
+        response.sendFile('/admin/index.html');
+    });
+
+    //Posting the file upload
+    app.post('/upload', function(request, response) {
+        upload(request, response, function(err) {
+            if(err) {
+                console.log('Error Occured');
+                return;
+            }
+            console.log(request.file);
+            response.end('Your File Uploaded');
+            console.log('File Uploaded');
+        });
+    });
+
+    var server = app.listen(port, function () {
+        console.log('Listening on port ' + server.address().port);
+        alert('Listening on port ' + server.address().port);
+    });
+
 
 </script>
 
 <!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
-
     <table><tr>
         <td><img src="knx.png" width="50%" height="auto"/></td>
         <td><h3 class="translate">KNX adapter settings</h3></td>
@@ -188,10 +216,19 @@
             <td>ETS4 esf Export</td>
             <td><textarea type="text/xml" id="esfText" class="value" cols="80" rows="20"></textarea></td>
         </tr>
+<!--
         <tr>
-            <td>Upload esf File: </td>
-            <td><input type='file' id='esfFile' onchange="readESFFile(event)" ></td>
+            <td>Upload knxproj File: </td>
+            <td><input type="file" id="knxprojFile" name="knxprojFile"></input></td>
         </tr>
+-->
+        <form enctype="multipart/form-data" action="/upload" method="post">
+            <input type="file" name="knxprojFile" />
+            <input type="submit" value="Upload File" name="submit" />
+        </form>
+
+
+
     </table>
     <p class="translate">help_tip</p>
 

@@ -2,9 +2,6 @@
 /*jslint node: true */
 "use strict";
 
-var knxObj = require('./lib/generateGAS');
-
-
 var eibd = require('eibd');
 
 var parseESFString = parseESFString;
@@ -18,16 +15,17 @@ var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 var mapping = {};
 var valtype ='';
 
-var knxprojfilename = 'KNX concept - Büro Plön.knxproj';
-console.info('knx.js:  ' + '/lib/generateGAS.js' + '         ' + knxprojfilename);
+var generateGAS = require('./lib/generateGAS.js');
 
-var knxobj = new knxObj();
-var gasobj = knxobj.getGAS(knxprojfilename);
+var GAS = generateGAS.getGAS();
+
+
 
 var gaRjson = {
         'ga' : [],
         'state' : true,
     };
+
 
 
 var adapter = utils.adapter({
@@ -136,8 +134,13 @@ var adapter = utils.adapter({
 
                     }
 
+                    // var data=new Array(2);
+                    // data[0]=0;
+                    // data[1]=0x80 | state.val;
+                    // adapter.log.info('Send ' + data[0] + ' ' + data[1]);
                     if (dataValid) {
                         tempCon.sendAPDU(data, function () {
+                            //adapter.log.info('SendAPDU ' + data[0] + ' ' + data[1]);
                             tempCon.end();
                         });
                     }
@@ -189,12 +192,118 @@ function parseXml(text, callback) {
     });
 }
 
+function parseESFString(text) {
+    if (!text) {
+        adapter.log.info('no ESF info found.');
+        return;
+    }
+    adapter.log.info('function parseESFString   ... here we go :-)');
+    adapter.log.info('text länge : ' + text.length);
+    // Regexp for esf-Line String
+    //var re_ga = /\d*[/b]\d*[/b]\d*/;
+    var re_ga = /\.(\d*\/\d*\/\d*)/;
+    var re_hgName = /(^\w*)\./;
+    var re_mgName = /\.(.*)\./;
+    var re_ugName = /\.\d{1,3}\/\d{1,3}\/\d{1,3}\s(.*)\sEIS|\.\d{1,3}\/\d{1,3}\/\d{1,3}\s(.*)\sUncertain/;
+    var re_dpType = /\((\d\W.*)\)/;
+    var match;
+    var hgName = 'empty-HG';
+    var mgName = 'empty-MG';
+    var ugName = 'empty-UG';
+    var dp_Type ='undef';
+
+    var lines = text.split('\n');
+    for (var line=0; line < lines.length; line++) {
+        // Matcher
+        // Maingroup Name
+        var tmp = lines[line];
+
+        //Maingroup Name
+        match = re_hgName.exec(tmp);
+        if (match){
+            hgName = match[1];
+        }
+
+
+        //Middlegroup Name
+        match = re_mgName.exec(tmp);
+        if (match){
+            mgName = match[1];
+        }
+
+        match = re_ugName.exec(tmp);
+        if (match){
+            if (match[1]) {
+                ugName = match[1];
+            } else {
+                ugName = match[2];
+            }
+        }
+
+        //Groupaddress
+        var ga = tmp.match(re_ga);
+        match = re_ga.exec(tmp);
+        if (match){
+            ga = match[1];
+        }
+
+        // DPT
+        //var dp_Type = tmp.match(re_dpType);
+        match = re_dpType.exec(tmp);
+        if (match){
+            dp_Type = match[1];
+            switch (dp_Type) {
+                case "1 Bit" :
+                    valtype = 'DPT1';
+                    break;
+                case "2 Bit" :
+                    valtype = 'DPT2';
+                    break;
+                case "4 Bit" :
+                    valtype = 'DPT3';
+                    break;
+                case "8 Bit" :
+                    valtype = 'DPT3';
+                    break;
+                case "1 Byte" :
+                    valtype = 'DPT5';
+                    break;
+
+            }
+        }
+        //valtype = dp_Type;
+        if (ga) {
+            var obj = {
+                //_id: (hgName ? hgName + '.' : '' ) + (mgName ? mgName + '.' : '') + ga,
+                _id: ugName +  '.'+ ga.replace(/\//g, '_'),
+                type: 'state',
+                common: {name: ugName},
+                native: {address: ga}
+            };
+            adapter.extendObject(obj._id, obj);
+            adapter.log.info('  ' + JSON.stringify(obj));
+            mapping[ga] = obj;
+
+            gaRjson.ga.push(obj);
+        }
+    }
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        var localStorage = new LocalStorage('./scratch');
+    }
+    localStorage.setItem('gaRjson', JSON.stringify(gaRjson));
+    var gaRange = JSON.parse(localStorage.getItem('gaRjson'));
+    adapter.log.info('stringify gaRange : ' + JSON.stringify(gaRange));
+
+}
+
 function main() {
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
     adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport);
 
 
+    var esfString = adapter.config.esfText;
     var gaTable = adapter.config.gaTable;
 
     adapter.log.info(utils.controllerDir);
@@ -246,6 +355,36 @@ function main() {
         } finally {
         }
     }
+
+    parseESF(adapter.config.esfText, function (error, result) {
+        adapter.log.info('parseESF');
+        if (result){
+            parseESFString(result);
+        }
+        // and setup the message parser
+        groupsocketlisten({host: adapter.config.gwip, port: adapter.config.gwipport}, function (parser) {
+            adapter.log.info('ESF' + adapter.config.esfText);
+        });
+
+        parser.on('write', function(src, dest, dpt, val){
+            //if (mapping[dest]) var mappedName = mapping[dest].common.name;
+            /* Message received to a GA */
+            //adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
+            valtype = dpt;
+            adapter.log.info('====>> ESF File : ' );
+            adapter.setState(mappedName + '.' + dest.replace(/\//g, '_') + '.'+ dpt,{val: val, ack: true, from: src});
+        });
+
+        parser.on('response', function(src, dest, val) {
+            if (mapping[dest]) var mappedName = mapping[dest].common.name;
+            adapter.log.info('Response from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
+        });
+
+        parser.on('read', function(src, dest) {
+            if (mapping[dest]) var mappedName = mapping[dest].common.name;
+            adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+        });
+    });
 
 
     parseXml(adapter.config.gaTable, function (error, result) {
