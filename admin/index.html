@@ -11,7 +11,33 @@
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
 <script type="text/javascript" src="../../js/translate.js"></script>
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
-
+<script type="text/javascript" src="zip/zip.js"></script>
+<script type="text/javascript" src="zip/zip-ext.js"></script>
+<script type="text/javascript" src="zip/z-worker.js"></script>
+<script type="text/javascript" src="zip/inflate.js"></script>
+<style>
+    #drop-zone {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        position: absolute;
+        opacity: 0.8;
+        top: 0;
+        left: 0;
+        background: #eee;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        z-index: 1;
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        border: 5px dashed darkgray;
+    }
+    .dropZone-error {
+        background: #faa !important;
+        color: #f00;
+    }
+</style>
 
 <!-- you have to define 2 functions in the global scope: -->
 <script type="text/javascript">
@@ -35,8 +61,7 @@
             "en": "Used by adapters like rickshaw or vis",
             "de": "Wird von Rickshaw oder Vis benutzt",
             "ru": "Используется для Rickshaw или Vis"
-        },
-
+        }
     };
     function setValue(id, value) {
         // example: select elements with id=key and class=value and insert value
@@ -86,8 +111,44 @@
         }
     }
 
+    var onChange;
 
-    function load(settings, _onChange) {
+    var model = (function() {
+        var URL = window.webkitURL || window.mozURL || window.URL;
+
+        return {
+            getEntries : function(file, onend) {
+                zip.createReader(new zip.BlobReader(file), function(zipReader) {
+                    zipReader.getEntries(onend);
+                }, function (e) {
+                    alert(e);
+                });
+            },
+            getEntryFile : function(entry, creationMethod, onend, onprogress) {
+                var writer, zipFileEntry;
+
+                function getData() {
+                    entry.getData(writer, function(blob) {
+                        var blobURL = creationMethod == "Blob" ? URL.createObjectURL(blob) : zipFileEntry.toURL();
+                        onend(blobURL);
+                    }, onprogress);
+                }
+
+                if (creationMethod == "Blob") {
+                    writer = new zip.BlobWriter();
+                    getData();
+                } else {
+                    createTempFile(function(fileEntry) {
+                        zipFileEntry = fileEntry;
+                        writer = new zip.FileWriter(zipFileEntry);
+                        getData();
+                    });
+                }
+            }
+        };
+    })();
+
+    function load (settings, _onChange) {
         onChange = _onChange;
         if (!settings) return;
         fillSelectIPs('#gwip', settings.adapterAddress, false, true);
@@ -100,6 +161,9 @@
             //alert("load function key: " + key);
             setValue(key, settings[key]);
         }
+
+        $('#knxprojFile').change(fileHandler);
+
         onChange(false);
     }
 
@@ -135,56 +199,94 @@
 //        });
         callback(obj);
     }
+    function fileHandler(event) {
+        event.preventDefault();
+        var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
 
-    //document.getElementById("esfFile").click();
-   // onchange='esfFile(event)'
+        var $dz = $('#drop-zone');
 
-
-    var express = require('express');
-    var multer = require('multer');
-    var app = express();
-    var port = 5000;
-
-    app.set('port', port);
-
-    /* Disk Storage engine of multer gives you full control on storing files to disk. The options are destination (for determining which folder the file should be saved) and filename (name of the file inside the folder) */
-
-    var store = multer.diskStorage({
-        destination: function (request, file, callback) {
-            callback(null, '/scratch/');
-        },
-        filename: function (request, file, callback) {
-            callback(null, file.originalname)
+        if (file.size > 100000000) {
+            $('#drop-text').html(_('File is too big!'));
+            $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
+                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+                showMessage(_('File is too big!'));
+                $('#drop-text').html(_('Drop the files here'));
+            });
+            return false;
         }
-    });
+        $dz.show();
+        zip.useWebWorkers = false;
 
-    /*Multer accepts a single file with the name knxprojFile. This file will be stored in request.file*/
+        model.getEntries(file, function (entries) {
+            var xml0;
+            var knx_master;
+            for (var e = 0; e < entries.length; e++) {
+                if (entries[e].filename == '0.xml' || entries[e].filename == 'knx_master.xml') {
+                    model.getEntryFile(entries[e], 'Blob', function (result) {
+                        xml0 = result;
 
-    var upload = multer({storage: store}).single('knxprojFile');
-
-    //Showing index.html file on our homepage
-    app.get('/', function(resuest, response) {
-        response.sendFile('/admin/index.html');
-    });
-
-    //Posting the file upload
-    app.post('/upload', function(request, response) {
-        upload(request, response, function(err) {
-            if(err) {
-                console.log('Error Occured');
-                return;
+                    }, function (current, total) {
+                        console.log('0.xml ' + current + '/' + total);
+                    });
+                }
             }
-            console.log(request.file);
-            response.end('Your File Uploaded');
-            console.log('File Uploaded');
+             /*if (unzipProgress.parentNode)
+                unzipProgress.parentNode.removeChild(unzipProgress);
+            unzipProgress.value = 0;
+            unzipProgress.max = 0;*/
+            //clickEvent.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            //a.href = blobURL;
+           // a.download = entry.filename;
+           // a.dispatchEvent(clickEvent);
+        }, function(current, total) {
+            console.log(current + '/' + total);
         });
-    });
+        /*var reader = new FileReader();
+        reader.onload = function (evt) {
+            var text;
+            try {
+                text = evt.target.result; // string has form data:;base64,TEXT==
+                var pos = text.indexOf(',');
+                text = atob(text.substring(pos + 1));
 
-    var server = app.listen(port, function () {
-        console.log('Listening on port ' + server.address().port);
-        alert('Listening on port ' + server.address().port);
-    });
+                // use a BlobReader to read the zip from a Blob object
+                zip.createReader(new zip.BlobReader(text), function (zipReader) {
+                    // get all entries from the zip
+                    reader.getEntries(function(entries) {
+                        if (entries.length) {
+                            // get first entry content as text
+                            entries[0].getData(new zip.TextWriter(), function(text) {
+                                // text contains the entry data as a String
+                                console.log(text);
 
+                                // close the zip reader
+                                reader.close(function() {
+                                    // onclose callback
+                                });
+
+                            }, function (current, total) {
+                                // onprogress callback
+                                console.log(((current / total) * 100) + '%');
+                            });
+                        }
+                    });
+                }, function(error) {
+                    // onerror callback
+                });
+
+                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+            } catch (err) {
+                console.error(err);
+                $('#drop-text').html(_('Cannot read file!'));
+                $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
+                    $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+                    showMessage(_('Cannot read file!'));
+                    $('#drop-text').html(_('Drop the files here'));
+                });
+            }
+        };
+        reader.readAsDataURL(file);*/
+    }
 
 </script>
 
@@ -194,6 +296,9 @@
         <td><img src="knx.png" width="50%" height="auto"/></td>
         <td><h3 class="translate">KNX adapter settings</h3></td>
     </tr></table>
+    <div id="drop-zone" style="display: none"><div style="padding-top: 15%" class="translate" id="drop-text"></div>
+        <input type="file" id="drop-file" style="display: none">
+    </div>
     <table>
         <tr>
             <td class="translate">Gateway IP :</td>
@@ -208,6 +313,7 @@
             <td class="translate">phys. EIB address :</td>
             <td><input value="1.1.5" class="value" id="eibadr"><td>
         </tr>
+       <!--
         <tr>
             <td>ETS4 Group Address Table (xml)</td>
             <td><textarea type="text/xml" id="gaTable" class="value" cols="80" rows="20"></textarea></td>
@@ -216,19 +322,11 @@
             <td>ETS4 esf Export</td>
             <td><textarea type="text/xml" id="esfText" class="value" cols="80" rows="20"></textarea></td>
         </tr>
-<!--
+-->
         <tr>
             <td>Upload knxproj File: </td>
-            <td><input type="file" id="knxprojFile" name="knxprojFile"></input></td>
+            <td><input type="file" id="knxprojFile" accept="application/zip"/></td>
         </tr>
--->
-        <form enctype="multipart/form-data" action="/upload" method="post">
-            <input type="file" name="knxprojFile" />
-            <input type="submit" value="Upload File" name="submit" />
-        </form>
-
-
-
     </table>
     <p class="translate">help_tip</p>
 
