@@ -6,16 +6,11 @@ var getGAS = require(__dirname + '/lib/generateGAS');
 
 var eibd = require('eibd');
 
-//var parseString = require('xml2js').parseString;
-
-
-//var esfBuf = require('text-encoding');
-
 var eibdConnection;
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var mapping = {};
-var valtype ='';
+//var valtype ='';
 var states;
 var isConnected = false;
 
@@ -33,124 +28,74 @@ var adapter = utils.adapter({
 
     // is called if a subscribed state changes
     stateChange: function (id, state) {
+      //  console.info('from : ' + state.from);
+        //id = id.replace(/(knx.\d.)/g, '');
         if (!id) return;
-        if (!states || !eibdConnection) {
+        //console.info(state[id]);
+        if (!state || !eibdConnection) {
             adapter.log.warn('stateChange: not ready');
             return;
         }
         if (!state) {
             var ga = states[id].native.address;
-            if (states[id])  delete states[id];
+            if (state[id])  delete state[id];
             if (mapping[ga]) delete mapping[ga];
             return;
         }
+
+       // console.info('Auflösung :  id: ' + id + '    mappedName: ' + states[id].native.address );
         if (state.ack) return;
-        if (!states[id]) {
+        if (!id) {
             adapter.log.warn('stateChange: unknown ID ' + id);
             return;
         }
+        var statestmp = states;
+        adapter.log.debug('stateChange ' + id  + '  .....  state : ' + JSON.stringify(states[id]));
+        var ga ='';
+        var valtype = '';
+        if (statestmp){
+            valtype = statestmp[id].common.desc;
+            ga = statestmp[id].native.address;
+        }
 
-        adapter.log.debug('stateChange ' + id  + '  .....  state : ' + JSON.stringify(state));
-        var ga = states[id].native.address;
-        // parse Groupaddress from id-string
         adapter.log.debug('state ack : ' + state.ack + ' ga :' + ga);
 
-        // you can use the ack flag to detect if state is desired or acknowledged
-        adapter.log.debug('setting state ' + ga + ' to ' + state.val);
-        adapter.log.debug('str2addr(' + ga + ') : '+ eibd.str2addr(ga));
+            // you can use the ack flag to detect if state is desired or acknowledged
+        adapter.log.debug('setting state to ' + state.val);
 
-        var gad = eibd.str2addr(ga);
+        var gad =  eibd.str2addr(ga);
         adapter.log.debug('Gad : ' + gad);
         //       / * Todo: Guess DPT */
+        var data =  state.val;
+        var data2buffer = new Buffer(1);
+        var tempCon = eibd.Connection();
+        eibdConnection.socketRemote({host: adapter.config.gwip, port: adapter.config.gwipport}, function (x) {
+            if (isConnected) {
+                eibdConnection.openTGroup(gad, 0, function (err) {
+                    if (err) {
+                        adapter.log.error(err);
+                        return;
+                    }
+                    var dataValid = true; //false;
+                    var buffer;
+                    adapter.log.info('valType : ' + valtype);
+                    switch (valtype) {
+                        case 'DPT-1' :
+                            var data = new Array(2);
+                            data[0] = 0;
+                            data[1] = 0x80 | state.val;
+                            adapter.log.info(valtype + ' encoded ');
+                            eibdConnection.sendAPDU(data, function () {
+                                tempCon.end();
+                            });
+                            break;
+                        default :
+                            dataValid = false;
+                    }
+                });
+            }
 
-        //var tempCon = eibd.Connection();
-        //eibdConnection.socketRemote({host: adapter.config.gwip, port: adapter.config.gwipport}, function (x) {
-        if (isConnected) {
-            eibdConnection.openTGroup(gad, 0, function (err) {
-
-                if (err) {
-                    adapter.log.error(err);
-                    return;
-                }
-                // var data = new Array(2);
-                var data;
-                var dataValid = false;
-                adapter.log.info('valType : ' + valtype);
-                switch (valtype) {
-                    case (valtype == 'DPT1') :
-                        adapter.log.info(valtype + ' encoded ' + data.decodeDPT1);
-                        dataValid = true;
-                        data = new Array(2);
-                        data = data.decodeDPT1;
-                        break;
-                    case (valtype == 'DPT2') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT2);
-                        dataValid = true;
-                        data = data.encodeDPT2;
-                        break;
-                    case (valtype == 'DPT3') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT3);
-                        dataValid = true;
-                        data = data.encodeDPT3;
-                        break;
-                    case (valtype == 'DPT4') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT4);
-                        dataValid = true;
-                        data = data.encodeDPT4;
-                        break;
-                    case (valtype == 'DPT5') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT5);
-                        dataValid = true;
-                        data = data.encodeDPT5;
-                        break;
-                    case (valtype == 'DPT6') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT6);
-                        dataValid = true;
-                        data = data.encodeDPT6;
-                        break;
-                    case (valtype == 'DPT7') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT7);
-                        dataValid = true;
-                        data = data.encodeDPT7;
-                        break;
-                    case (valtype == 'DPT8') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT8);
-                        dataValid = true;
-                        data = data.encodeDPT8;
-                        break;
-                    case (valtype == 'DPT9') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT9);
-                        dataValid = true;
-                        data = data.encodeDPT9;
-                        break;
-                    case (valtype == 'DPT10') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT10);
-                        dataValid = true;
-                        data = data.encodeDPT10;
-                        break;
-                    case (valtype == 'DPT11') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT11);
-                        dataValid = true;
-                        data = data.encodeDPT11;
-                        break;
-                    case (valtype == 'DPT12') :
-                        adapter.log.info(valtype + ' encoded ' + data.encodeDPT12);
-                        dataValid = true;
-                        data = data.encodeDPT12;
-                        break;
-                    default :
-                        dataValid = false;
-
-                }
-
-                if (dataValid) {
-                    eibdConnection.sendAPDU(data, function () {
-                        //tempCon.end();
-                    });
-                }
-            });
-        }
-        //});
+        });
     },
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
@@ -233,12 +178,19 @@ function startKnxServer() {
 
         parser.on('write', function(src, dest, dpt, val) {
             var mappedName;
-            if (mapping[dest]) mappedName = mapping[dest].common.name;
+            if (mapping[dest]) {
+                mappedName = mapping[dest].common.name;
+                dpt = mapping[dest].common.desc;
+            }
+
+         //   console.info('mappedName:  ' +  mappedName);
             /* Message received to a GA */
             adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
-            valtype = dpt;
+           // valtype = dpt;
             // adapter.log.info('====>> ESF File : ' + esf.Name);
-            adapter.setState(mappedName + '.' + dest.replace(/\//g, '_'),{val: val, ack: true, from: src});
+
+            console.info('mappedName : ' + mappedName + '    dest : ' + dest );
+            adapter.setState(mappedName ,{val: val, ack: true, from: src });
         });
 
         parser.on('response', function(src, dest, val) {
