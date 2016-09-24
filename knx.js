@@ -3,19 +3,17 @@
 'use strict';
 
 var getGAS = require(__dirname + '/lib/generateGAS');
-
 var eibd = require('eibd');
-var eibdEncode = require(__dirname + '/lib/encoder');
-
-var eibdConnection;
+var eibdEncode = require(__dirname + '/lib/dptEncode');
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var mapping = {};
-//var valtype ='';
 var states;
 var isConnected = false;
+var eibdConnection;
 
 var knxprojfilename = 'KNX concept - Büro Plön.knxproj';
+
 console.info('knx.js:  ' + '/lib/generateGAS.js' + '         ' + knxprojfilename);
 
 var adapter = utils.adapter({
@@ -42,14 +40,13 @@ var adapter = utils.adapter({
             return;
         }
 
-       // console.info('Auflösung :  id: ' + id + '    mappedName: ' + states[id].native.address );
         if (state.ack) return;
         if (!id) {
             adapter.log.warn('stateChange: unknown ID ' + id);
             return;
         }
         var statestmp = states;
-        adapter.log.debug('stateChange ' + id  + '  .....  state : ' + JSON.stringify(states[id]));
+        //adapter.log.debug('stateChange ' + id  + '  .....  state : ' + JSON.stringify(states[id]));
         var ga ='';
         var valtype = '';
         if (statestmp){
@@ -63,13 +60,10 @@ var adapter = utils.adapter({
         adapter.log.debug('setting state to ' + state.val);
 
         var gad =  eibd.str2addr(ga);
-        adapter.log.debug('Gad : ' + gad);
-        //       / * Todo: Guess DPT */
-        var data =  state.val;
-        //var data2buffer = new Buffer(1);
-        var tempCon = eibd.Connection();
 
-        var buf ;
+        var data =  state.val;
+
+        var tempCon = eibd.Connection();
 
         eibdConnection.socketRemote({host: adapter.config.gwip, port: adapter.config.gwipport}, function (x) {
             if (isConnected) {
@@ -79,118 +73,11 @@ var adapter = utils.adapter({
                         return;
                     }
 
-                    var foo = new eibdEncode(data);
-
                     adapter.log.info('valType : ' + valtype);
-
-                    //var re = /s([T]-\d*)/i;
-                    if (valtype) {
-                        var tmpdpt = valtype.match(/[T]-\d*/)[0];
-                    }
-                    var statevalue = state.val;
-                    console.info('valType : ' + valtype + '    Switch : ' + tmpdpt);
-                    switch (tmpdpt) {
-                        // switch
-                        case 'T-1' :
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80 | state.val & 0x01;
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 1-Bit controlled
-                        case 'T-2' :
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80 | state.val & 0x03;
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 4-Bit (3-bit controlled)
-                        case 'T-3' :
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80 | state.val & 0x0F;
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 8-Bit Character
-                        case 'T-4' :
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80 | state.val & 0xFF;
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 8-Bit unsigned value
-                        case 'T-5' :
-                            if ( valtype === 'DPST-5-1'){
-                                statevalue = statevalue * 2.55;
-                            }
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80;
-                            data[2] = 0xFF & statevalue;
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data + ' state.val: ' + statevalue);
-                            break;
-
-                        // 2-byte unsigned
-                        case 'T-6' :
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80;
-                            data[2] = 0xFF & state.val;
-                            data[3] = 0xFF
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 2-byte unsigned
-                        case 'T-7' :
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 2-byte signed value
-                        case 'T-8' :
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        // 2-byte float value
-                        case 'T-9' :
-                            var tmpar = [0,0];
-                            // Reverse of the formula: FloatValue = (0,01M)2^E
-                            var exp = Math.floor(Math.max(Math.log(Math.abs(state.val)*100)/Math.log(2)-10, 0));
-                            var mant = state.val * 100 / (1 << exp);
-
-                            //Fill in sign bit
-                            if(value < 0) {
-                                data[0] |= 0x80;
-                                mant = (~(mant * -1) + 1) & 0x07ff;
-                            }
-
-                            //Fill in exp (4bit)
-                            tmpar[0] |= (exp & 0x0F) << 3;
-
-                            //Fill in mant
-                            tmpar[0] |= (mant >> 8) & 0x7;
-                            tmpar[1] |= mant & 0xFF;
-
-                            data[0] = 0;
-                            data[1] = tempar[0];
-                            data[2] = tempar[1];
-
-                            console.info('Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-
-                        default:
-                            var data = new Array(2);
-                            data[0] = 0;
-                            data[1] = 0x80 | state.val;
-                            console.info('DEFAULT Schreibe DP' + tmpdpt + ' mit ' + data);
-                            break;
-                    }
-
+                    var data = new Array(2);
+                    data = eibdEncode(state.val, valtype);
                     if (data) {
-                        console.info('Schreibe ' + data);
+                        //console.info('Schreibe ' + data);
                         eibdConnection.sendAPDU(data, function () {
                             tempCon.end();
                         });
@@ -224,27 +111,6 @@ var adapter = utils.adapter({
     }
 });
 
-function toHex(i, pad) {
-
-    if (typeof(pad) === 'undefined' || pad === null) {
-        pad = 2;
-    }
-
-    var strToParse = i.toString(16);
-
-    while (strToParse.length < pad) {
-        strToParse = "0" + strToParse;
-    }
-
-    var finalVal =  parseInt(strToParse, 16);
-
-    if ( finalVal < 0 ) {
-        finalVal = 0xFFFFFFFF + finalVal + 1;
-    }
-
-    return finalVal;
-}
-
 function syncObjects(objects, index, callback) {
     if (index >= objects.length) {
         if (typeof callback === 'function') callback();
@@ -255,16 +121,6 @@ function syncObjects(objects, index, callback) {
     });
 }
 
-function encodeDPT1 (value) {
-    var buffer = new Buffer(1);
-    buffer.writeUInt8(value & 0x1 | 0x80, 0);
-    return buffer;
-}
-
-
-// Establish the eibd connection
-
-// Todo: autoreconnect
 function groupSocketListen(opts, callback) {
     eibdConnection = eibd.Connection();
     try {
@@ -303,12 +159,21 @@ function startKnxServer() {
             if (mapping[dest]) {
                 mappedName = mapping[dest].common.name;
                 dpt = mapping[dest].common.desc;
+                // reverse value modification from vis => knx
+                if (dpt === 'DPST-5-1'){
+                    val = val / 2.55;
+                }
+                mapping[dest].common.value = val;
             }
 
             adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
 
-            console.info('mappedName : ' + mappedName + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ')');
-            adapter.setState(mappedName ,{val: val, ack: true, from: src });
+            //console.info('mappedName : ' + adapter.namespace + '.' + mappedName  + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ')' );
+
+            if (mapping[dest]) {
+               // console.info('mappedName : ' + adapter.namespace + '.' + mappedName  + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ')' + mapping[dest]._id.replace(/(.*\.)/g, '') );
+                adapter.setState(adapter.namespace + '.' + mapping[dest]._id, val, true);
+            }
         });
 
         parser.on('response', function(src, dest, val) {
