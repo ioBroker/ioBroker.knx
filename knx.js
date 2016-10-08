@@ -7,6 +7,7 @@ var eibd = require('eibd');
 var eibdEncode = require(__dirname + '/lib/dptEncode');
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
+
 var mapping = {};
 var states;
 var isConnected = false;
@@ -15,6 +16,7 @@ var eibdConnection;
 var knxprojfilename = 'KNX concept - Büro Plön.knxproj';
 
 console.info('knx.js:  ' + '/lib/generateGAS.js' + '         ' + knxprojfilename);
+
 
 var adapter = utils.adapter({
     // name has to be set and has to be equal to adapters folder name and main file name excluding extension
@@ -65,6 +67,7 @@ var adapter = utils.adapter({
 
         var tempCon = eibd.Connection();
 
+
         eibdConnection.socketRemote({host: adapter.config.gwip, port: adapter.config.gwipport}, function (x) {
             if (isConnected) {
                 eibdConnection.openTGroup(gad, 0, function (err) {
@@ -84,7 +87,6 @@ var adapter = utils.adapter({
                     }
                 });
             }
-
         });
     },
 
@@ -104,12 +106,69 @@ var adapter = utils.adapter({
     // is called when databases are connected and adapter received configuration.
     // start here!
     ready: function () {
-        getGAS(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
-            adapter.subscribeStates('*');
-            main(result);
-        });
+            getGAS.getGAS(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
+                adapter.subscribeStates('*');
+                main(result);
+            });
+
+            getGAS.getRoomFunctions(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
+                generateRoomAndFunction(result);
+                adapter.subscribeForeignObjects('enum.rooms',true);
+            });
+
     }
 });
+
+
+function getKeysWithValue(gaRefId, obj) {
+    return Object.keys(obj).filter(function (k) {
+        //console.info(k);
+        return obj[k].native.addressRefId === gaRefId;
+    });
+}
+
+
+
+function generateRoomAndFunction(roomObj) {
+/* roomObj = [{
+                building: <Name of Building>
+                functions: <csv String of names of adressgroups>
+                room: <name of room>
+                }]
+*/
+
+    adapter.getForeignObject('enum.rooms','function',  function (err,obj){
+        adapter.getForeignObjects(adapter.namespace + '.*', function (err,gaObj){
+            for (var a = 0; a < roomObj.length; a++) {
+                var tmproomObj = roomObj[a];
+                var membersRefIdArray = [];
+                var membersArray = [];
+                if (tmproomObj.functions) {
+                    membersRefIdArray = tmproomObj.functions.split(",");
+                    for (var b = 0; b < membersRefIdArray.length; b++ ){
+
+                        var memberId = getKeysWithValue(membersRefIdArray[b],gaObj);
+                        membersArray.push(memberId[0]);
+                    }
+                }
+
+                var enumRoomObj =
+                {
+                    "_id": "enum.rooms." + tmproomObj.building + '.' + tmproomObj.room,
+                    "common": {
+                        "name": tmproomObj.room,
+                        "members": membersArray
+                    },
+                    "type": "enum"
+                };
+                adapter.setForeignObject('enum.rooms' + '.' + tmproomObj.building + '.' + tmproomObj.room, enumRoomObj,true);
+            }
+
+
+        });
+    });
+}
+
 
 function syncObjects(objects, index, callback) {
     if (index >= objects.length) {
@@ -143,7 +202,6 @@ function groupSocketListen(opts, callback) {
                 });
             }
         });
-        //throw 'connectionError';
     } catch (e) {
         if (e == 'connectionError')
             adapter.log.error("Connection Error. I'm not able to write to LAN-KNX Gateway ! Check availability of " + adapter.config.gwip);
@@ -167,7 +225,6 @@ function startKnxServer() {
             }
 
             adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
-
             //console.info('mappedName : ' + adapter.namespace + '.' + mappedName  + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ')' );
 
             if (mapping[dest]) {
@@ -198,6 +255,7 @@ function main(objGAS) {
     adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport);
 
     adapter.log.info(utils.controllerDir);
+
     syncObjects(objGAS, 0, function () {
         adapter.getForeignStates(adapter.namespace + '.*', function (err, _states) {
             states = _states;
@@ -205,6 +263,7 @@ function main(objGAS) {
                 if (!objGAS.hasOwnProperty(id)) continue;
                 states[adapter.namespace + '.' + objGAS[id]._id] = objGAS[id];
                 mapping[objGAS[id].native.address] = objGAS[id];
+                mapping[objGAS[id].native.addressRefId] = objGAS[id];
             }
 
             startKnxServer();
