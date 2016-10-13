@@ -107,7 +107,11 @@ var adapter = utils.adapter({
     // is called when databases are connected and adapter received configuration.
     // start here!
     ready: function () {
-            getGAS.getGAS(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
+        adapter.subscribeStates('*');
+        adapter.subscribeForeignObjects('enum.rooms', true);
+
+        main();
+            /*getGAS.getGAS(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
                 adapter.subscribeStates('*');
                 main(result);
             });
@@ -115,11 +119,47 @@ var adapter = utils.adapter({
             getGAS.getRoomFunctions(__dirname + '/scratch/' + knxprojfilename, function (error, result) {
                 generateRoomAndFunction(result);
                 adapter.subscribeForeignObjects('enum.rooms',true);
-            });
-
+            });*/
     }
 });
 
+// New message arrived. obj is array with current messages
+adapter.on('message', function (obj) {
+    if (obj) {
+        switch (obj.command) {
+            case 'project':
+                pasrseProject(obj.message.xml0, obj.message.knx_master, function (res) {
+                    if (obj.callback) adapter.sendTo(obj.from, obj.command, res, obj.callback);
+                    setTimeout(function () {
+                        process.exit();
+                    }, 2000);
+                });
+                break;
+
+            default:
+                adapter.log.warn('Unknown command: ' + obj.command);
+                break;
+        }
+    }
+
+    return true;
+});
+
+function pasrseProject(xml0, knx_master, callback) {
+    getGAS.getGAS(xml0, knx_master, function (error, result) {
+        if (error) {
+            callback({error: error});
+        } else {
+            syncObjects(result, 0, function (length) {
+                getGAS.getRoomFunctions(xml0, knx_master, function (error, result) {
+                    generateRoomAndFunction(result, function () {
+                        callback({error: null, count: length});
+                    });
+                });
+            });
+        }
+    });
+}
 
 function getKeysWithValue(gaRefId, obj) {
     return Object.keys(obj).filter(function (k) {
@@ -128,9 +168,7 @@ function getKeysWithValue(gaRefId, obj) {
     });
 }
 
-
-
-function generateRoomAndFunction(roomObj) {
+function generateRoomAndFunction(roomObj, callback) {
 /* roomObj = [{
                 building: <Name of Building>
                 functions: <csv String of names of adressgroups>
@@ -138,14 +176,16 @@ function generateRoomAndFunction(roomObj) {
                 }]
 */
 
-    adapter.getForeignObject('enum.rooms','function',  function (err,obj){
-        adapter.getForeignObjects(adapter.namespace + '.*', function (err,gaObj){
+    adapter.getForeignObjects('enum.rooms.*', function (err, actualRooms){
+
+        adapter.getForeignObjects(adapter.namespace + '.*', function (err, gaObj) {
+            var objects = [];
             for (var a = 0; a < roomObj.length; a++) {
                 var tmproomObj = roomObj[a];
                 var membersRefIdArray = [];
                 var membersArray = [];
                 if (tmproomObj.functions) {
-                    membersRefIdArray = tmproomObj.functions.split(",");
+                    membersRefIdArray = tmproomObj.functions.split(',');
                     for (var b = 0; b < membersRefIdArray.length; b++ ){
 
                         var memberId = getKeysWithValue(membersRefIdArray[b],gaObj);
@@ -153,27 +193,25 @@ function generateRoomAndFunction(roomObj) {
                     }
                 }
 
-                var enumRoomObj =
-                {
-                    "_id": "enum.rooms." + tmproomObj.building + '.' + tmproomObj.room,
-                    "common": {
-                        "name": tmproomObj.room,
-                        "members": membersArray
+                var enumRoomObj = {
+                    _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.room,
+                    common: {
+                        name: tmproomObj.room,
+                        members: membersArray
                     },
-                    "type": "enum"
+                    type: 'enum'
                 };
-                adapter.setForeignObject('enum.rooms' + '.' + tmproomObj.building + '.' + tmproomObj.room, enumRoomObj,true);
+
+                objects.push(enumRoomObj);
             }
-
-
+            syncObjects(objects, 0, callback);
         });
     });
 }
 
-
 function syncObjects(objects, index, callback) {
     if (index >= objects.length) {
-        if (typeof callback === 'function') callback();
+        if (typeof callback === 'function') callback(objects.length);
         return;
     }
     adapter.extendObject(objects[index]._id, objects[index], function () {
@@ -265,17 +303,33 @@ function main(objGAS) {
 
     adapter.log.info(utils.controllerDir);
 
-    syncObjects(objGAS, 0, function () {
+    adapter.objects.getObjectView('system', 'state', {startkey: adapter.namespace + '.', endkey: adapter.namespace + '.\u9999', include_docs: true}, function (err, res) {
+        if (err) {
+            adapter.log.error('Cannot get objects: ' + err);
+        } else {
+            states = {};
+            for (var i = res.rows.length - 1; i >= 0; i--) {
+                var id = res.rows[i].id;
+                states[id] = res.rows[i].value;
+                mapping[states[id].native.address]      = states[id];
+                mapping[states[id].native.addressRefId] = states[id];
+            }
+            startKnxServer();
+        }
+    });
+
+
+    /*syncObjects(objGAS, 0, function () {
         adapter.getForeignStates(adapter.namespace + '.*', function (err, _states) {
             states = _states;
-            for (var id in objGAS) {
-                if (!objGAS.hasOwnProperty(id)) continue;
-                states[adapter.namespace + '.' + objGAS[id]._id] = objGAS[id];
-                mapping[objGAS[id].native.address] = objGAS[id];
-                mapping[objGAS[id].native.addressRefId] = objGAS[id];
+            for (var id in states) {
+                if (!states.hasOwnProperty(id)) continue;
+                //states[adapter.namespace + '.' + objGAS[id]._id] = objGAS[id];
+                mapping[states[id].native.address]      = states[id];
+                mapping[states[id].native.addressRefId] = states[id];
             }
 
             startKnxServer();
         });
-   });
-}
+ //  });*/
+ }

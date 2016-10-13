@@ -50,9 +50,6 @@
         "Gateway IP :":          {"de": "KNX Gateway IP :",           "ru": "IP :"},
         "Port :":                {"de": "Port :",                     "ru": "Порт :"},
         "phys. EIB address :":   {"de": "phys. EIB Adresse :",   "ru": "физическая EIB адрес :"},
-
-
-
         "help_tip":         {
             "en": "On save the adapter restarts with new configuration immediately",
             "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
@@ -167,8 +164,8 @@
             var xml0E;
             var knx_masterE;
             for (var e = 0; e < entries.length; e++) {
-                if (entries[e].filename == 'knx_master.xml') knx_masterE = entries[e];
-                if (entries[e].filename == '0.xml') xml0E = entries[e];
+                if (entries[e].filename === 'knx_master.xml') knx_masterE = entries[e];
+                if (entries[e].filename.match(/\/0\.xml$/)) xml0E = entries[e];
             }
 
             if (!xml0E || !knx_masterE) {
