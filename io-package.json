@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.6.0",
+        "version": "0.7.0",
 		"news": {
+            "0.7.0": {
+              "en":                 "Support of project export",
+              "de":                 "Projekt-Export Unterstützung",
+              "ru":                 "Support of project export"
+            },
 			"0.6.0": {
 				"en":               "redesign",
 				"de":               "redesign",

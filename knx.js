@@ -5,7 +5,7 @@
 var getGAS     = require(__dirname + '/lib/generateGAS');
 var eibd       = require('eibd');
 var eibdEncode = require(__dirname + '/lib/dptEncode');
-var utils      =    require(__dirname + '/lib/utils'); // Get common adapter utils
+var utils      = require(__dirname + '/lib/utils'); // Get common adapter utils
 
 
 var mapping = {};

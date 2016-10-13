@@ -2,21 +2,24 @@
 # ioBroker.knx
 =================
 
+[![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
+
+[![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
+
+
 !! This adapter has development state. Do NOT use for production !!
 
 This adapter is a knx for the creation of an ioBroker adapter. 
-
-
-##Steps 
-1. download and unpack this packet from github ```https://github.com/ioBroker/ioBroker.knx/archive/master.zip```
-  or clone git repository ```git clone https://github.com/ioBroker/ioBroker.knx.git```
-
-2. download required npm eib packets. Write in ioBroker.knx directory:
-
-  ```npm install```
   
+## Usage
+### Import project.knxproj
+
 
 ## Changelog
+
+### 0.7.0 (2016-10-13)
+* (chefkoch009) Support of project export
 
 ### 0.6.0 (2016-07-20)
 * (chefkoch009) redesign
