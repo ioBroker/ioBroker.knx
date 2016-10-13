@@ -2,10 +2,10 @@
 /*jslint node: true */
 'use strict';
 
-var getGAS = require(__dirname + '/lib/generateGAS');
-var eibd = require('eibd');
+var getGAS     = require(__dirname + '/lib/generateGAS');
+var eibd       = require('eibd');
 var eibdEncode = require(__dirname + '/lib/dptEncode');
-var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
+var utils      =    require(__dirname + '/lib/utils'); // Get common adapter utils
 
 
 var mapping = {};
@@ -150,7 +150,7 @@ function pasrseProject(xml0, knx_master, callback) {
         if (error) {
             callback({error: error});
         } else {
-            syncObjects(result, 0, function (length) {
+            syncObjects(result, 0, false, function (length) {
                 getGAS.getRoomFunctions(xml0, knx_master, function (error, result) {
                     generateRoomAndFunction(result, function () {
                         callback({error: null, count: length});
@@ -186,8 +186,7 @@ function generateRoomAndFunction(roomObj, callback) {
                 var membersArray = [];
                 if (tmproomObj.functions) {
                     membersRefIdArray = tmproomObj.functions.split(',');
-                    for (var b = 0; b < membersRefIdArray.length; b++ ){
-
+                    for (var b = 0; b < membersRefIdArray.length; b++){
                         var memberId = getKeysWithValue(membersRefIdArray[b],gaObj);
                         membersArray.push(memberId[0]);
                     }
@@ -204,19 +203,41 @@ function generateRoomAndFunction(roomObj, callback) {
 
                 objects.push(enumRoomObj);
             }
-            syncObjects(objects, 0, callback);
+            syncObjects(objects, 0, true, callback);
         });
     });
 }
 
-function syncObjects(objects, index, callback) {
+function syncObjects(objects, index, isForeign, callback) {
     if (index >= objects.length) {
         if (typeof callback === 'function') callback(objects.length);
         return;
     }
-    adapter.extendObject(objects[index]._id, objects[index], function () {
-        setTimeout(syncObjects, 0, objects, index + 1, callback);
-    });
+    if (isForeign) {
+        adapter.getForeignObject(objects[index]._id, function (err, obj) {
+            if (!obj) {
+                adapter.setForeignObject(objects[index]._id, objects[index], function () {
+                    setTimeout(syncObjects, 0, objects, index + 1, isForeign, callback);
+                });
+            } else {
+                if (objects[index].common.members) {
+                    obj.common = obj.common || {};
+                    obj.common.members = obj.common.members || [];
+                    for (var m = 0; m < objects[index].common.members.length; m++) {
+                        if (obj.common.members.indexOf(objects[index].common.members[m]) === -1) obj.common.members.push(objects[index].common.members[m]);
+                    }
+                }
+                adapter.setForeignObject(obj._id, obj, function () {
+                    setTimeout(syncObjects, 0, objects, index + 1, isForeign, callback);
+                });
+            }
+        });
+    } else {
+        adapter.extendObject(objects[index]._id, objects[index], function () {
+            setTimeout(syncObjects, 0, objects, index + 1, isForeign, callback);
+        });
+    }
+
 }
 
 function groupSocketListen(opts, callback) {
