@@ -20,6 +20,7 @@
         "mode":                     "daemon",
         "icon":                     "knx.png",
         "enabled":                  true,
+        "messagebox":               true,
 		"extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
 		"keywords":                 ["knx", "vis", "GUI", "graphical", "scada"],
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",

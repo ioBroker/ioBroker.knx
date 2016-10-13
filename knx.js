@@ -82,7 +82,8 @@ var adapter = utils.adapter({
                     if (data) {
                         //console.info('Schreibe ' + data);
                         eibdConnection.sendAPDU(data, function () {
-                            tempCon.end();
+                            //tempCon.end();
+                            eibdConnection.end();
                         });
                     }
                 });
@@ -209,6 +210,11 @@ function groupSocketListen(opts, callback) {
     }
 }
 
+function roundDec(nbr,dec_places){
+    var mult = Math.pow(10,dec_places);
+    return Math.round(nbr * mult) / mult;
+}
+
 function startKnxServer() {
     groupSocketListen({host: adapter.config.gwip, port: adapter.config.gwipport}, function (parser) {
 
@@ -219,12 +225,15 @@ function startKnxServer() {
                 dpt = mapping[dest].common.desc;
                 // reverse value modification from vis => knx
                 if (dpt === 'DPST-5-1'){
-                    val = val / 2.55;
+                    val = (val / 2.55);
+                    val = roundDec(val,2);
                 }
+
                 mapping[dest].common.value = val;
             }
 
-            adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val + ' (' + dpt + ')');
+
+            adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val+ ' (' + dpt + ')');
             //console.info('mappedName : ' + adapter.namespace + '.' + mappedName  + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ')' );
 
             if (mapping[dest]) {

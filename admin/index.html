@@ -1,6 +1,7 @@
 <html>
 
 <!-- these 4 files always have to be included -->
+<script src="../../../ioBroker.sonos/sonos.js"></script>
 <link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
 <script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
@@ -13,7 +14,7 @@
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 <script type="text/javascript" src="zip/zip.js"></script>
 <script type="text/javascript" src="zip/zip-ext.js"></script>
-<script type="text/javascript" src="zip/z-worker.js"></script>
+<!--script type="text/javascript" src="zip/z-worker.js"></script-->
 <script type="text/javascript" src="zip/inflate.js"></script>
 <style>
     #drop-zone {
@@ -114,27 +115,22 @@
     var onChange;
 
     var model = (function() {
-        var URL = window.webkitURL || window.mozURL || window.URL;
-
         return {
-            getEntries : function(file, onend) {
-                zip.createReader(new zip.BlobReader(file), function(zipReader) {
+            getEntries : function (file, onend, onerror) {
+                zip.createReader(new zip.BlobReader(file), function (zipReader) {
                     zipReader.getEntries(onend);
-                }, function (e) {
-                    alert(e);
-                });
+                }, onerror);
             },
-            getEntryFile : function(entry, creationMethod, onend, onprogress) {
+            getEntryFile : function (entry, creationMethod, onend, onprogress) {
                 var writer, zipFileEntry;
 
                 function getData() {
                     entry.getData(writer, function(blob) {
-                        var blobURL = creationMethod == "Blob" ? URL.createObjectURL(blob) : zipFileEntry.toURL();
-                        onend(blobURL);
+                        onend(blob);
                     }, onprogress);
                 }
 
-                if (creationMethod == "Blob") {
+                if (creationMethod === 'Blob') {
                     writer = new zip.BlobWriter();
                     getData();
                 } else {
@@ -147,6 +143,87 @@
             }
         };
     })();
+
+    function fileHandler(event) {
+        event.preventDefault();
+        var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+
+        var $dz = $('#drop-zone');
+
+        if (file.size > 100000000) {
+            $('#drop-text').html(_('File is too big!'));
+            $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
+                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+                showMessage(_('File is too big!'));
+                $('#drop-text').html(_('Drop the files here'));
+            });
+            $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+            return false;
+        }
+        $dz.show();
+        zip.useWebWorkers = false;
+        $('#drop-text').hide();
+        model.getEntries(file, function (entries) {
+            var xml0E;
+            var knx_masterE;
+            for (var e = 0; e < entries.length; e++) {
+                if (entries[e].filename == 'knx_master.xml') knx_masterE = entries[e];
+                if (entries[e].filename == '0.xml') xml0E = entries[e];
+            }
+
+            if (!xml0E || !knx_masterE) {
+                $('#drop-text').html(_('Invalid project')).show();
+                $('#progress').hide();
+                $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
+                    $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+                    showMessage(_('Invalid project'));
+                    $('#drop-text').html(_('Drop the files here'));
+                    $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+                });
+            } else {
+                var xml0;
+                model.getEntryFile(xml0E, 'Blob', function (result) {
+                    //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
+                    var myReader = new FileReader();
+                    myReader.addEventListener('loadend', function(e){
+                        xml0 = e.srcElement.result;
+                        model.getEntryFile(knx_masterE, 'Blob', function (result) {
+                            var myReader = new FileReader();
+                            myReader.addEventListener('loadend', function(e) {
+                                $('#drop-text').show();
+                                $('#progress').hide();
+                                $dz.hide();
+                                sendTo(null, 'project', {xml0: xml0, knx_master: e.srcElement.result}, function (result) {
+                                    if (!result || result.error) {
+                                        showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
+                                    } else {
+                                        showMessage(_('Extracted %s states', result.count));
+                                    }
+                                });
+                                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+                            });
+                            myReader.readAsText(result);
+                        }, function (current, total) {
+                            $('#progress').attr('value', current).attr('max', total);
+                        });
+                    });
+                    myReader.readAsText(result);
+
+                }, function (current, total) {
+                    $('#progress').attr('value', current).attr('max', total);
+                });
+            }
+        }, function (error) {
+            $('#drop-text').html(error).show();
+            $('#progress').hide();
+            $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
+                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
+                showMessage(error);
+                $('#drop-text').html(_('Drop the files here'));
+                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+            });
+        });
+    }
 
     function load (settings, _onChange) {
         onChange = _onChange;
@@ -161,8 +238,15 @@
             //alert("load function key: " + key);
             setValue(key, settings[key]);
         }
-
-        $('#knxprojFile').change(fileHandler);
+        getIsAdapterAlive(function (isAlive) {
+            if (isAlive || common.enabled) {
+                $('#knxprojFile').change(fileHandler);
+                $('#not-started').hide();
+            } else {
+                $('#knxprojFile').prop('disabled', true);
+                $('#not-started').show();
+            }
+        });
 
         onChange(false);
     }
@@ -199,94 +283,6 @@
 //        });
         callback(obj);
     }
-    function fileHandler(event) {
-        event.preventDefault();
-        var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
-
-        var $dz = $('#drop-zone');
-
-        if (file.size > 100000000) {
-            $('#drop-text').html(_('File is too big!'));
-            $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
-                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-                showMessage(_('File is too big!'));
-                $('#drop-text').html(_('Drop the files here'));
-            });
-            return false;
-        }
-        $dz.show();
-        zip.useWebWorkers = false;
-
-        model.getEntries(file, function (entries) {
-            var xml0;
-            var knx_master;
-            for (var e = 0; e < entries.length; e++) {
-                if (entries[e].filename == '0.xml' || entries[e].filename == 'knx_master.xml') {
-                    model.getEntryFile(entries[e], 'Blob', function (result) {
-                        xml0 = result;
-
-                    }, function (current, total) {
-                        console.log('0.xml ' + current + '/' + total);
-                    });
-                }
-            }
-             /*if (unzipProgress.parentNode)
-                unzipProgress.parentNode.removeChild(unzipProgress);
-            unzipProgress.value = 0;
-            unzipProgress.max = 0;*/
-            //clickEvent.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-            //a.href = blobURL;
-           // a.download = entry.filename;
-           // a.dispatchEvent(clickEvent);
-        }, function(current, total) {
-            console.log(current + '/' + total);
-        });
-        /*var reader = new FileReader();
-        reader.onload = function (evt) {
-            var text;
-            try {
-                text = evt.target.result; // string has form data:;base64,TEXT==
-                var pos = text.indexOf(',');
-                text = atob(text.substring(pos + 1));
-
-                // use a BlobReader to read the zip from a Blob object
-                zip.createReader(new zip.BlobReader(text), function (zipReader) {
-                    // get all entries from the zip
-                    reader.getEntries(function(entries) {
-                        if (entries.length) {
-                            // get first entry content as text
-                            entries[0].getData(new zip.TextWriter(), function(text) {
-                                // text contains the entry data as a String
-                                console.log(text);
-
-                                // close the zip reader
-                                reader.close(function() {
-                                    // onclose callback
-                                });
-
-                            }, function (current, total) {
-                                // onprogress callback
-                                console.log(((current / total) * 100) + '%');
-                            });
-                        }
-                    });
-                }, function(error) {
-                    // onerror callback
-                });
-
-                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-            } catch (err) {
-                console.error(err);
-                $('#drop-text').html(_('Cannot read file!'));
-                $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
-                    $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-                    showMessage(_('Cannot read file!'));
-                    $('#drop-text').html(_('Drop the files here'));
-                });
-            }
-        };
-        reader.readAsDataURL(file);*/
-    }
 
 </script>
 
@@ -296,7 +292,9 @@
         <td><img src="knx.png" width="50%" height="auto"/></td>
         <td><h3 class="translate">KNX adapter settings</h3></td>
     </tr></table>
-    <div id="drop-zone" style="display: none"><div style="padding-top: 15%" class="translate" id="drop-text"></div>
+    <div id="drop-zone" style="display: none">
+        <div style="padding-top: 15%" class="translate" id="drop-text"></div>
+        <progress id="progress" value="22" max="100" width="100%"></progress>
         <input type="file" id="drop-file" style="display: none">
     </div>
     <table>
@@ -325,7 +323,9 @@
 -->
         <tr>
             <td>Upload knxproj File: </td>
-            <td><input type="file" id="knxprojFile" accept="application/zip"/></td>
+            <td><input type="file" id="knxprojFile" /> <!-- accept="application/zip"-->
+                <div id="not-started" class="translate">not-started</div>
+            </td>
         </tr>
     </table>
     <p class="translate">help_tip</p>
