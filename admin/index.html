@@ -1,12 +1,10 @@
 <html>
 
-<!-- these 4 files always have to be included -->
-<script src="../../../ioBroker.sonos/sonos.js"></script>
+<!-- these 4 files always have to be included <script src="../../../ioBroker.sonos/sonos.js"></script> -->
 <link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
 <script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
-
 
 <!-- these two file always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
@@ -74,11 +72,11 @@
                 // check if entered values are valid
                 if (id == 'gwip') {
                     var ip1 = $('#gwip').val();
-                        if (ValidateIPaddress(ip1)) {
-                            $('#gwip').val(ip1);
-                        } else {
-                            alert("Adresse ist NICHT gültig");
-                        }
+                    if (ValidateIPaddress(ip1)) {
+                        $('#gwip').val(ip1);
+                    } else {
+                        alert("Adresse ist NICHT gültig");
+                    }
                 }
                 if (id == 'gwipport') {
                     var gwipport1 = $('#gwipport').val();
@@ -92,16 +90,7 @@
                         alert("Physikalische EIB - Adresse ist NICHT gültig");
                     }
                 }
-                if (id == 'gaTable') {
-                    var gaTable1 = $('#gaTable').val();
-                    $('#gaTable').val(gaTable1);
-                    alert("gaTable");
-                }
-                if (id == 'esfText') {
-                    var esfText1 = $('#esfText').val();
-                    $('#esfText').val(esfText1);
-                    alert("esfText");
-                }
+
                 onChange();
             }).keyup(function() {
                 $(this).trigger('change');
@@ -145,21 +134,23 @@
         event.preventDefault();
         var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
 
-        var $dz = $('#drop-zone');
+        //var $dz = $('#drop-zone');
 
         if (file.size > 100000000) {
-            $('#drop-text').html(_('File is too big!'));
+          /*  $('#drop-text').html(_('File is too big!'));
             $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
                 $dz.hide().removeClass('dropZone-error').css({opacity: 1});
                 showMessage(_('File is too big!'));
                 $('#drop-text').html(_('Drop the files here'));
             });
+            */
+            showMessage('File is too big!');
             $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
             return false;
         }
-        $dz.show();
+        //$dz.show();
         zip.useWebWorkers = false;
-        $('#drop-text').hide();
+        //$('#drop-text').hide();
         model.getEntries(file, function (entries) {
             var xml0E;
             var knx_masterE;
@@ -169,56 +160,65 @@
             }
 
             if (!xml0E || !knx_masterE) {
-                $('#drop-text').html(_('Invalid project')).show();
-                $('#progress').hide();
+                //$('#drop-text').html(_('Invalid project')).show();
+                showMessage('Invalid project');
+                $('#progress').show();
+                /*
                 $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
                     $dz.hide().removeClass('dropZone-error').css({opacity: 1});
                     showMessage(_('Invalid project'));
                     $('#drop-text').html(_('Drop the files here'));
                     $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
                 });
+                */
+                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
             } else {
                 var xml0;
+                $('#progress').show();
                 model.getEntryFile(xml0E, 'Blob', function (result) {
                     //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
                     var myReader = new FileReader();
                     myReader.addEventListener('loadend', function(e){
-                        xml0 = e.srcElement.result;
+                        xml0 = (e.srcElement || e.target).result;
                         model.getEntryFile(knx_masterE, 'Blob', function (result) {
                             var myReader = new FileReader();
-                            myReader.addEventListener('loadend', function(e) {
-                                $('#drop-text').show();
-                                $('#progress').hide();
-                                $dz.hide();
-                                sendTo(null, 'project', {xml0: xml0, knx_master: e.srcElement.result}, function (result) {
+                            myReader.addEventListener('progress', function(e) {
+                                //$('#drop-text').show();
+                                $('#progress').show();
+                               // $dz.hide();
+                                sendTo(null, 'project', {xml0: xml0, knx_master: (e.srcElement || e.target).result}, function (result) {
                                     if (!result || result.error) {
                                         showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
                                     } else {
-                                        showMessage(_('Extracted %s states', result.count));
+                                        showMessage(_('Extracted %s states ', result.count));
                                     }
                                 });
                                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
                             });
                             myReader.readAsText(result);
-                        }, function (current, total) {
-                            $('#progress').attr('value', current).attr('max', total);
                         });
                     });
                     myReader.readAsText(result);
 
                 }, function (current, total) {
-                    $('#progress').attr('value', current).attr('max', total);
+                    //$('#progress').attr('value', current).attr('max', total);
+                    if (current > 0) {
+                        $('#progress').val(Math.floor((100 / total) * current));
+                        $('#progress').html(Math.floor((100 / total) * current) + '%');
+                    }
                 });
             }
         }, function (error) {
-            $('#drop-text').html(error).show();
-            $('#progress').hide();
+            //$('#drop-text').html(error).show();
+            //$('#progress').hide();
+            /*
             $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
                 $dz.hide().removeClass('dropZone-error').css({opacity: 1});
                 showMessage(error);
                 $('#drop-text').html(_('Drop the files here'));
                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-            });
+            });*/
+            $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
         });
     }
 
@@ -228,11 +228,9 @@
         fillSelectIPs('#gwip', settings.adapterAddress, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
-        settings.esfText = settings.esfText || 'no value loaded';
-//        settings.esfFile.name = settings.esfFile.name || '';
-//        settings.esfFile = readESFFile(event) || null;
-            for (var key in settings) {
-            //alert("load function key: " + key);
+       // settings.esfText = settings.esfText || 'no value loaded';
+
+        for (var key in settings) {
             setValue(key, settings[key]);
         }
         getIsAdapterAlive(function (isAlive) {
@@ -273,11 +271,7 @@
             var $this = $(this);
             obj[$this.attr('id')] = $this.val();
         });
- //       $('.file').each(function () {
- //           var $this = $(this)
- //           obj[$this.attr('id')] = $this.file;
 
-//        });
         callback(obj);
     }
 
@@ -289,11 +283,12 @@
         <td><img src="knx.png" width="50%" height="auto"/></td>
         <td><h3 class="translate">KNX adapter settings</h3></td>
     </tr></table>
-    <div id="drop-zone" style="display: none">
+
+    <!--div id="drop-zone" style="display: none">
         <div style="padding-top: 15%" class="translate" id="drop-text"></div>
-        <progress id="progress" value="22" max="100" width="100%"></progress>
+        <progress id="progress" value="22" max="100" width="100%"></progress >
         <input type="file" id="drop-file" style="display: none">
-    </div>
+    </div -->
     <table>
         <tr>
             <td class="translate">Gateway IP :</td>
@@ -308,20 +303,12 @@
             <td class="translate">phys. EIB address :</td>
             <td><input value="1.1.5" class="value" id="eibadr"><td>
         </tr>
-       <!--
-        <tr>
-            <td>ETS4 Group Address Table (xml)</td>
-            <td><textarea type="text/xml" id="gaTable" class="value" cols="80" rows="20"></textarea></td>
-        </tr>
-        <tr>
-            <td>ETS4 esf Export</td>
-            <td><textarea type="text/xml" id="esfText" class="value" cols="80" rows="20"></textarea></td>
-        </tr>
--->
+
         <tr>
             <td>Upload knxproj File: </td>
             <td><input type="file" id="knxprojFile" /> <!-- accept="application/zip"-->
                 <div id="not-started" class="translate">not-started</div>
+                <progress id="progress" value="0" max="100"></progress>
             </td>
         </tr>
     </table>

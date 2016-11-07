@@ -36,7 +36,7 @@ This adapter is a knx for the creation of an ioBroker adapter.
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016 K.Ringmann<info@punktnetzwerk.net>
+Copyright (c) 2016 K.Ringmann <info@punktnetzwerk.net> 
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
