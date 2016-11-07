@@ -236,6 +236,7 @@ function convertDPTtype( dpt ){
 
 function startKnxServer() {
 
+    //knxConnection = knx.IpTunnelingConnection({ipAddr: adapter.config.gwip, ipPort: adapter.config.gwipport, interface: adapter.config.adapterAddress});
     knxConnection = knx.IpTunnelingConnection({ipAddr: adapter.config.gwip});
     //knxConnection = knx.IpRoutingConnection();
     //knxConnection.debug = true;
@@ -358,7 +359,7 @@ function startKnxServer() {
 function main(objGAS) {
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
-    adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport);
+    adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport + '  via Interface : ' + adapter.config.adapterAddress);
 
     adapter.log.info(utils.controllerDir);
 

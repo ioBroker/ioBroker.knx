@@ -68,7 +68,37 @@
                 onChange();
             });
         } else {
-            $('#' + id + '.value').val(value).blur(function() {
+
+        /*
+            $('#' + id + '.value').val(value).change(function() {
+
+                if (id == 'gwip' || id == 'adapterAddress') {
+                    var ip1 = $('#gwip').val();
+                    var ip2 = $('#adapterAddress').val();
+
+                    if (id == 'gwip' && ip2 == '0.0.0.0') {
+                        var max = 0;
+                        var ip = '';
+                        $('#adapterAddress option').each(function () {
+                            var c = checkIPs(ip1, $(this).attr('value'));
+                            if (c > max) {
+                                max = c;
+                                ip = $(this).attr('value');
+                            }
+                        });
+                        if (ip) $('#adapterAddress').val(ip);
+
+                    }
+
+                    if (!ip2 || ip2 == '0.0.0.0' || !checkIPs(ip1, ip2)) {
+                        $('#adapterAddress').addClass('invalid').attr('title', _('This IP is unreachable from %s', $('#gwip').val()));
+                    } else {
+                        $('#adapterAddress').removeClass('invalid').attr('title', '');
+                    }
+                }
+                */
+
+                $('#' + id + '.value').val(value).blur(function() {
                 // check if entered values are valid
                 if (id == 'gwip') {
                     var ip1 = $('#gwip').val();
@@ -137,13 +167,6 @@
         //var $dz = $('#drop-zone');
 
         if (file.size > 100000000) {
-          /*  $('#drop-text').html(_('File is too big!'));
-            $dz.addClass('dropZone-error').animate({opacity: 0}, 1000, function () {
-                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-                showMessage(_('File is too big!'));
-                $('#drop-text').html(_('Drop the files here'));
-            });
-            */
             showMessage('File is too big!');
             $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
             return false;
@@ -160,17 +183,10 @@
             }
 
             if (!xml0E || !knx_masterE) {
-                //$('#drop-text').html(_('Invalid project')).show();
+
                 showMessage('Invalid project');
                 $('#progress').show();
-                /*
-                $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
-                    $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-                    showMessage(_('Invalid project'));
-                    $('#drop-text').html(_('Drop the files here'));
-                    $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-                });
-                */
+
                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
             } else {
                 var xml0;
@@ -209,15 +225,7 @@
                 });
             }
         }, function (error) {
-            //$('#drop-text').html(error).show();
-            //$('#progress').hide();
-            /*
-            $dz.addClass('dropZone-error').animate({opacity: 0}, 2000, function () {
-                $dz.hide().removeClass('dropZone-error').css({opacity: 1});
-                showMessage(error);
-                $('#drop-text').html(_('Drop the files here'));
-                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-            });*/
+
             $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
         });
     }
@@ -225,7 +233,8 @@
     function load (settings, _onChange) {
         onChange = _onChange;
         if (!settings) return;
-        fillSelectIPs('#gwip', settings.adapterAddress, false, true);
+        fillSelectIPs('#adapterAddress', settings.adapterAddress, false, true);
+        //fillSelectIPs('#gwip', settings.gwip, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
        // settings.esfText = settings.esfText || 'no value loaded';
@@ -233,6 +242,7 @@
         for (var key in settings) {
             setValue(key, settings[key]);
         }
+
         getIsAdapterAlive(function (isAlive) {
             if (isAlive || common.enabled) {
                 $('#knxprojFile').change(fileHandler);
@@ -244,6 +254,23 @@
         });
 
         onChange(false);
+    }
+
+    function checkIPs(ip1, ip2) {
+        // normally it must be calculated the common subnet mask and applyed to both ip addresses, if result is the same => ok
+        // I will check only 2 first numbers of ipV4
+        var i1 = ip1.split('.');
+        var i2 = ip2.split('.');
+
+        // If ipv6 or DNS name
+        if (i1.length != i2.length || i1.length != 4) return 1;
+
+        if (i1[0] != i2[0]) return 0;
+        if (i1[1] != i2[1]) return 1;
+        if (i1[2] != i2[2]) return 2;
+        if (i1[3] != i2[3]) return 3;
+
+        return 4;
     }
 
     function ValidateIPaddress(inputText) {
@@ -269,7 +296,16 @@
         var obj = {};
         $('.value').each(function () {
             var $this = $(this);
-            obj[$this.attr('id')] = $this.val();
+
+            var id = $this.attr('id');
+
+            if ($this.attr('type') == 'checkbox') {
+                obj[$this.attr('id')] = $this.prop('checked');
+            } else {
+                obj[$this.attr('id')] = $this.val();
+            }
+
+            //obj[$this.attr('id')] = $this.val();
         });
 
         callback(obj);
@@ -279,22 +315,24 @@
 
 <!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
-    <table><tr>
-        <td><img src="knx.png" width="50%" height="auto"/></td>
-        <td><h3 class="translate">KNX adapter settings</h3></td>
-    </tr></table>
-
-    <!--div id="drop-zone" style="display: none">
-        <div style="padding-top: 15%" class="translate" id="drop-text"></div>
-        <progress id="progress" value="22" max="100" width="100%"></progress >
-        <input type="file" id="drop-file" style="display: none">
-    </div -->
     <table>
+        <!--
+        <tr>
+            <td class="translate">KNX-Gateway IP : </td>
+            <td><input type="text" id="gwip" class="value"/></td>
+        </tr>
+        <tr>
+            <td class="translate">Adapter Address</td>
+            <td><select id="adapterAddress" class="value"></select></td>
+        </tr>
+        -->
+
         <tr>
             <td class="translate">Gateway IP :</td>
             <td><input value="127.0.0.11" class="value" id="gwip"></td>
 
         </tr>
+
         <tr>
             <td class="translate">Port :</td>
             <td><input type="number" min="1025" max="65535" value="6720" class="value" id="gwipport"><td>

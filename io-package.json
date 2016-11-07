@@ -34,7 +34,7 @@
         "type":                     "hardware"
     },
     "native": {
-        "esfFile": "KNX concept - Büro Plön"
+        "esfFile": "KNX concept"
     },
     "objects": [
 
