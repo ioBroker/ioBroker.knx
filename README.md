@@ -7,16 +7,21 @@
 
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
-
 !! This adapter has development state. Do NOT use for production !!
 
-This adapter is a knx for the creation of an ioBroker adapter. 
-  
+This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put 
+the devices into rooms (esp. for MobileUI).
+
+It connects to standard KNX/LAN Gateways.
+
 ## Usage
 ### Import project.knxproj
 
 
 ## Changelog
+
+### 0.7.1 (2016-11-19)
+* (chefkoch009) Support standard KNX/LAN Gateways.
 
 ### 0.7.0 (2016-10-13)
 * (chefkoch009) Support of project export

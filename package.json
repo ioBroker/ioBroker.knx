@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "ioBroker knx Adapter",
   "author": {
     "name": "K.Ringmann",
@@ -33,7 +33,6 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "xml2js": "^0.4.17",
-    "eibd": "^0.3.5",
     "xml2js-xpath": "^0.7.0",
     "underscore": "^1.8.3",
     "fs": "^0.0.2"

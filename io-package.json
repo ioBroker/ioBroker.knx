@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.7.0",
+        "version": "0.7.1",
 		"news": {
+			"0.7.1": {
+              "en":                 "Support of connection to standard KNX/LAN gateways",
+              "de":                 "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
+              "ru":                 "Support of connection to standard KNX/LAN gateways"
+            },
             "0.7.0": {
               "en":                 "Support of project export",
               "de":                 "Projekt-Export Unterstützung",

@@ -3,12 +3,9 @@
 'use strict';
 
 var getGAS      = require(__dirname + '/lib/generateGAS');
-var eibd        = require('eibd');
-var knx         = require('knx');
-//var eibdEncode  = require(__dirname + '/lib/dptEncode');
+var knx         = require(__dirname + '/lib/connector');
 var utils       = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util        = require('util');
-var async       = require('async');
 
 var mapping = {};
 var states  = {};
@@ -54,8 +51,6 @@ var adapter = utils.adapter({
         }
 
         if ( states[id].native.dpt.indexOf('DP') != -1) {
-           // adapter.log.debug('Set state "' + id + '": ' + ga + '[' + states[id].native.dpt + '], with ' + state.val);
-            //controlDPTarray[ga].write( state.val );
             adapter.log.debug(' setState value of DPT : -' + ga + '-  -' + state.val + '-  -'  + states[id].native.dpt + '- ');
             knxConnection.write(ga, state.val, states[id].native.dpt );
         } else {
@@ -67,8 +62,6 @@ var adapter = utils.adapter({
     unload: function (callback) {
         try {
             if (knxConnection) {
-                /* Workaround against Parser not implementing end() - https://github.com/andreek/node-eibd/issues/7 */
-                //if (eibdConnection.parser) eibdConnection.parser.end = function(){ /* Dummy */ };
                 knxConnection.Disconnect();
             }
         } finally {
@@ -85,8 +78,6 @@ var adapter = utils.adapter({
         main();
     }
 });
-
-
 
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
@@ -236,39 +227,39 @@ function convertDPTtype( dpt ){
 
 function startKnxServer() {
 
-    //knxConnection = knx.IpTunnelingConnection({ipAddr: adapter.config.gwip, ipPort: adapter.config.gwipport, interface: adapter.config.adapterAddress});
     knxConnection = knx.IpTunnelingConnection({ipAddr: adapter.config.gwip});
-    //knxConnection = knx.IpRoutingConnection();
     //knxConnection.debug = true;
-    knxConnection.Connect(function () {
-        console.log('----------');
-        console.log('Connected!');
-        console.log('----------');
-        adapter.setState('info.connection', true, true);
-        var cnt = 0;
-        if (isEmptyObject(controlDPTarray))
-        {
-        for (var key in mapping) {
-            if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
-               try {
-                    //console.log(cnt + 'generate controlDPT : ' + key + '     ' + mapping[key].common.desc);
 
-                    controlDPTarray[key] = new knx.Datapoint({ga: key, dpt: convertDPTtype(mapping[key].common.desc)}, knxConnection);
-                    console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
-                    cnt++;
-               }
-               catch (e) {
-                   console.warn(' could not create controlDPT for ' + key + ' with error: ' + e );
-               }
+    knxConnection.Connect(function () {
+        console.log(' Connecting ...');
+        if (knxConnection.compositeState()){
+            //adapter.setState('info.connection', true, true);
+            console.log('----------');
+            console.log('Connected!');
+            console.log('----------');
+        }
+
+        var cnt = 0;
+        if (isEmptyObject(controlDPTarray)) {
+            for (var key in mapping) {
+                if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
+                    try {
+                        controlDPTarray[key] = new knx.Datapoint({ga: key, dpt: convertDPTtype(mapping[key].common.desc)}, knxConnection);
+                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
+                        cnt++;
+                    }
+                    catch (e) {
+                        console.warn(' could not create controlDPT for ' + key + ' with error: ' + e );
+                    }
+                }
             }
         }
-        }
-
+        adapter.setState('info.connection', true, true);
     });
 
     knxConnection.on('GroupValue_Write', function (src, dest, val) {
-       // adapter.log.debug('EVENT: ' + evt);
         var mappedName;
+
         if (mapping[dest] && val !== undefined) {
             var obj = mapping[dest];
             //controlDPTarray[dest].current_value = val;
@@ -316,51 +307,10 @@ function startKnxServer() {
             }
         }
     })
-
-    /*
-            knxConnection.on('event', function(evt, src, dest, val) { //function(src, dest, dpt, val)
-                var dpt ;
-                var mappedName;
-
-                if (mapping[dest]) {
-                    mappedName = mapping[dest].common.name;
-                    dpt = mapping[dest].common.desc;
-                    mapping[dest].common.value = val;
-                }
-
-               // adapter.log.info('Write from ' + src + ' to ' + '(' + dest + ')'  + ' mappedName  : ' + mappedName + '  dpt ' + dpt + '  val : ' + util.format(val));
-                console.info('Event : ' + evt );
-                if (mapping[dest]) {
-                    console.info('mappedName : ' + mappedName  + '    dest : ' + dest + ' val ' + val + ' (' + dpt + ') ' + mapping[dest]._id.replace(/(.*\.)/g, '') );
-                    adapter.setState(mapping[dest]._id, val, true);
-                }
-            });
-*/
-/*
-            knxConnection.on('GroupValue_Response', function(src, dest, val) {
-                var mappedName;
-                if (mapping[dest]) mappedName = mapping[dest].common.name;
-                console.log("%s **** KNX CHANGE: %j, src: %j, dest: %j, value: %j",
-                        new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''), evt, src, dest, val);
-
-                adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
-            })
-
-            knxConnection.on('GroupValue_Read', function(src, dest) {
-                var mappedName;
-                if (mapping[dest]) mappedName = mapping[dest].common.name;
-                adapter.getState(dest);
-                adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-            })
-*/
-  //  })
 }
 
 function main(objGAS) {
-    // The adapters config (in the instance object everything under the attribute "native") is accessible via
-    // adapter.config:
-    adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport + '  via Interface : ' + adapter.config.adapterAddress);
-
+    adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport);
     adapter.log.info(utils.controllerDir);
 
     adapter.setState('info.connection', false, true);
