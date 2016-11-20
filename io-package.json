@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.7.1",
+        "version": "0.7.2",
 		"news": {
+			"0.7.2": {
+              "en":                 "Added necessary dependicies",
+              "de":                 "unerfüllte Abhängigkeiten beseitigt",
+              "ru":                 "Added necessary dependicies"
+            },
 			"0.7.1": {
               "en":                 "Support of connection to standard KNX/LAN gateways",
               "de":                 "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
