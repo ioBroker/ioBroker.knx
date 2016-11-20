@@ -20,6 +20,9 @@ It connects to standard KNX/LAN Gateways.
 
 ## Changelog
 
+### 0.7.2 (2016-11-20)
+* (chefkoch009) added necessary dependicies
+
 ### 0.7.1 (2016-11-19)
 * (chefkoch009) Support standard KNX/LAN Gateways.
 
