@@ -6,3 +6,5 @@ node_modules
 /node_modules
 test
 /scratch
+.travis.yml
+appveyor.yml
