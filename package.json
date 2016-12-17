@@ -37,6 +37,7 @@
     "underscore": "^1.8.3",
 	"machina": "^2.0.0",
 	"ipv4.js": "^0.0.2",
+    "knx": "^2.0.1",
 	"binary-parser": "^1.1.5",
 	"binary-protocol": "^0.0.0",
     "fs": "^0.0.2"

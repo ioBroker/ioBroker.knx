@@ -3,7 +3,8 @@
 'use strict';
 
 var getGAS      = require(__dirname + '/lib/generateGAS');
-var knx         = require(__dirname + '/lib/connector');
+//var knx         = require(__dirname + '/lib/connector');
+var knx         = require('knx');
 var utils       = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util        = require('util');
 
@@ -74,7 +75,6 @@ var adapter = utils.adapter({
     ready: function () {
         adapter.subscribeStates('*');
         adapter.subscribeForeignObjects('enum.rooms', true);
-
         main();
     }
 });
@@ -211,7 +211,7 @@ function isEmptyObject(obj) {
 function convertDPTtype( dpt ){
     if (dpt.indexOf('-') != -1){
         var parts = dpt.split('-'); // DPST, 9, 4
-        if (parts.length === 3) {
+        if (parts.length == 3) {
             if (parts[2].length === 1) {
                 parts[2] = '00' + parts[2]
             } else if (parts[2].length === 2) {
@@ -227,90 +227,96 @@ function convertDPTtype( dpt ){
 
 function startKnxServer() {
 
-    knxConnection = knx.IpTunnelingConnection({ipAddr: adapter.config.gwip});
-    //knxConnection.debug = true;
-
-    knxConnection.Connect(function () {
-        console.log(' Connecting ...');
-        if (knxConnection.compositeState()){
-            //adapter.setState('info.connection', true, true);
-            console.log('----------');
-            console.log('Connected!');
-            console.log('----------');
-        }
-
-        var cnt = 0;
-        if (isEmptyObject(controlDPTarray)) {
-            for (var key in mapping) {
-                if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
-                    try {
-                        controlDPTarray[key] = new knx.Datapoint({ga: key, dpt: convertDPTtype(mapping[key].common.desc)}, knxConnection);
-                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
-                        cnt++;
-                    }
-                    catch (e) {
-                        console.warn(' could not create controlDPT for ' + key + ' with error: ' + e );
+    knxConnection = knx.Connection({
+        ipAddr:     adapter.config.gwip,
+        ipPort:     adapter.config.gwipport,
+        physAddr:   adapter.config.eibadr,
+        minimumDelay: 10,
+        handlers: {
+            connected: function() {
+                var cnt = 0;
+                if (isEmptyObject(controlDPTarray)) {
+                    for (var key in mapping) {
+                        if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
+                            try {
+                                controlDPTarray[key] = new knx.Datapoint({ga: key, dpt: convertDPTtype(mapping[key].common.desc)}, knxConnection);
+                                console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
+                                cnt++;
+                            }
+                            catch (e) {
+                                console.warn(' could not create controlDPT for ' + key + ' with error: ' + e );
+                            }
+                        }
                     }
                 }
-            }
-        }
-        adapter.setState('info.connection', true, true);
-    });
+                adapter.setState('info.connection', true, true);
+                console.log('Connected!');
+            },
 
-    knxConnection.on('GroupValue_Write', function (src, dest, val) {
-        var mappedName;
+            write: function(src, dest, val){
+                var mappedName;
 
-        if (mapping[dest] && val !== undefined) {
-            var obj = mapping[dest];
-            //controlDPTarray[dest].current_value = val;
-            if (controlDPTarray[dest]) {
-                console.log('Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
-            } else {
-                console.log('No controlDPTarray for ' + dest);
-            }
+                if (mapping[dest] && val !== undefined) {
+                    var obj = mapping[dest];
+                    //controlDPTarray[dest].current_value = val;
+                    if (controlDPTarray[dest]) {
+                        console.log('Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
+                    } else {
+                        console.log('No controlDPTarray for ' + dest);
+                    }
 
-            if (val && typeof val === 'object') {
-                if (controlDPTarray[dest]){
+                    if (val && typeof val === 'object') {
+                        if (controlDPTarray[dest]){
+                            try {
+                                adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
+                                adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
+                            } catch(e){
+                                console.info('Wrong bufferlength on ga:' + obj._id + ' mit ' + e);
+                            }
+                        }
+                    }
+                } else {
+                    adapter.log.warn('Value recieved on unknown GA : ' + dest );
+                    //  adapter.setForeignState(mapping[dest]._id, val , true);
+                }
+            },
+
+            response: function(src, dest, val){
+                var mappedName;
+                if (mapping[dest]) {
+                    mappedName = mapping[dest].common.name;
+                    adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
+                }
+                adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
+            },
+
+            read: function(src, dest){
+                var mappedName;
+                if (mapping[dest]) {
+                    mappedName = mapping[dest].common.name;
                     try {
-                        adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
-                        adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
-                    } catch(e){
-                        console.info('Wrong bufferlength on ga:' + obj._id + ' mit ' + e);
+                        adapter.getForeignState(mapping[dest]._id);
+                        adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+
+                    } catch (e){
+                        console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
                     }
                 }
+            },
+
+            event: function (evt, src, dest, value) {
+                console.log("%s **** KNX EVENT: %j, src: %j, dest: %j, value: %j",
+                    new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                    evt, src, dest, value);
             }
-        } else {
-            adapter.log.warn('Value recieved on unknown GA : ' + dest );
-            //  adapter.setForeignState(mapping[dest]._id, val , true);
         }
     });
 
-    knxConnection.on('GroupValue_Response', function(src, dest, val) {
-        var mappedName;
-        if (mapping[dest]) {
-            mappedName = mapping[dest].common.name;
-            adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
-        }
-        adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
-    })
-
-    knxConnection.on('GroupValue_Read', function(src, dest) {
-        var mappedName;
-        if (mapping[dest]) {
-            mappedName = mapping[dest].common.name;
-            try {
-                adapter.getForeignState(mapping[dest]._id);
-                adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-
-            } catch (e){
-                console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
-            }
-        }
-    })
+   //knxConnection.debug = true;
 }
 
 function main(objGAS) {
-    adapter.log.info('Connecting to eibd ' + adapter.config.gwip + ":" +adapter.config.gwipport);
+    adapter.log.info('Connecting to knx GW:  ' + adapter.config.gwip + ":" +adapter.config.gwipport + '   with phy. Adr:  ' + adapter.config.eibadr);
     adapter.log.info(utils.controllerDir);
 
     adapter.setState('info.connection', false, true);
