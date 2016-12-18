@@ -9,7 +9,9 @@
 
 !! This adapter has development state. Do NOT use for production !!
 
-This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put 
+*** The adapter is only compatible with Node 4.x and higher!! ***
+
+This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put
 the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
@@ -44,7 +46,7 @@ It connects to standard KNX/LAN Gateways.
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016 K.Ringmann <info@punktnetzwerk.net> 
+Copyright (c) 2016 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
