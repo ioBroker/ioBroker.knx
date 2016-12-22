@@ -53,7 +53,12 @@ var adapter = utils.adapter({
 
         if ( states[id].native.dpt.indexOf('DP') != -1) {
             adapter.log.debug(' setState value of DPT : -' + ga + '-  -' + state.val + '-  -'  + states[id].native.dpt + '- ');
-            knxConnection.write(ga, state.val, states[id].native.dpt );
+            if (states[id].native.dpt === 'DPT5.001') {
+                knxConnection.write(ga, state.val * 2.55, states[id].native.dpt);
+            } else {
+                knxConnection.write(ga, state.val, states[id].native.dpt);
+            }
+
         } else {
             adapter.log.warn('Cannot control "' + id + '", because invalid type: ' + valtype);
         }
@@ -253,61 +258,64 @@ function startKnxServer() {
                 console.log('Connected!');
             },
 
-            write: function(src, dest, val){
-                var mappedName;
-
-                if (mapping[dest] && val !== undefined) {
-                    var obj = mapping[dest];
-                    //controlDPTarray[dest].current_value = val;
-                    if (controlDPTarray[dest]) {
-                        console.log('Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
-                    } else {
-                        console.log('No controlDPTarray for ' + dest);
-                    }
-
-                    if (val && typeof val === 'object') {
-                        if (controlDPTarray[dest]){
+            event: function (evt, src, dest, val) {
+                switch (evt){
+                    case 'GroupValue_Read'  :
+                        var mappedName;
+                        if (mapping[dest]) {
+                            mappedName = mapping[dest].common.name;
                             try {
-                                adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
-                                adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
-                            } catch(e){
-                                console.info('Wrong bufferlength on ga:' + obj._id + ' mit ' + e);
+                                adapter.getForeignState(mapping[dest]._id);
+                                adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+
+                            } catch (e){
+                                console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
                             }
                         }
-                    }
-                } else {
-                    adapter.log.warn('Value recieved on unknown GA : ' + dest );
-                    //  adapter.setForeignState(mapping[dest]._id, val , true);
+                    break;
+
+                    case 'GroupValue_Response' :
+                        var mappedName;
+                        if (mapping[dest]) {
+                            mappedName = mapping[dest].common.name;
+                            adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
+                        }
+                        adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
+                    break;
+
+                    case 'GroupValue_Write' :
+                        var mappedName;
+
+                        if (mapping[dest] && val !== undefined) {
+                            var obj = mapping[dest];
+                            //controlDPTarray[dest].current_value = val;
+                            if (controlDPTarray[dest]) {
+                                console.log('Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
+                            } else {
+                                console.log('No controlDPTarray for ' + dest);
+                            }
+
+                            if (val && typeof val === 'object') {
+                                if (controlDPTarray[dest]){
+                                    try {
+                                        adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
+                                        adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
+                                    } catch(e){
+                                        console.info('Wrong bufferlength on ga:' + obj._id + ' mit ' + e);
+                                    }
+                                }
+                            }
+                        } else {
+                            adapter.log.warn('Value recieved on unknown GA : ' + dest );
+                            //  adapter.setForeignState(mapping[dest]._id, val , true);
+                        }
+                    break;
+
+                    default:    console.log("%s **** KNX EVENT: %j, src: %j, dest: %j, value: %j",
+                                    new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                                    evt, src, dest, val);
                 }
-            },
 
-            response: function(src, dest, val){
-                var mappedName;
-                if (mapping[dest]) {
-                    mappedName = mapping[dest].common.name;
-                    adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
-                }
-                adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
-            },
-
-            read: function(src, dest){
-                var mappedName;
-                if (mapping[dest]) {
-                    mappedName = mapping[dest].common.name;
-                    try {
-                        adapter.getForeignState(mapping[dest]._id);
-                        adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-
-                    } catch (e){
-                        console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
-                    }
-                }
-            },
-
-            event: function (evt, src, dest, value) {
-                console.log("%s **** KNX EVENT: %j, src: %j, dest: %j, value: %j",
-                    new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-                    evt, src, dest, value);
             }
         }
     });
