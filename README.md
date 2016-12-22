@@ -7,7 +7,6 @@
 
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
-!! This adapter has development state. Do NOT use for production !!
 
 *** The adapter is only compatible with Node 4.x and higher!! ***
 
@@ -21,6 +20,11 @@ It connects to standard KNX/LAN Gateways.
 
 
 ## Changelog
+
+### 0.7.3 (2016-12-22)
+* (chefkoch009) more DPT's are supported
+* faster Startup
+* implemented generation of room list with device dependicies
 
 ### 0.7.2 (2016-11-20)
 * (chefkoch009) added necessary dependicies

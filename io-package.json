@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.7.2",
+        "version": "0.7.3",
 		"news": {
+           "0.7.3": {
+            "en":                 "more DPT's, faster startup",
+            "de":                 "mehr DPT's, schnellerer Start",
+            "ru":                 "more DPT's, faster startup"
+           },
 			"0.7.2": {
               "en":                 "Added necessary dependicies",
               "de":                 "unerfüllte Abhängigkeiten beseitigt",
