@@ -51,17 +51,20 @@ var adapter = utils.adapter({
                 states[id].native.dpt = convertDPTtype(valtype);
         }
 
+        knxConnection.write(ga, state.val, states[id].native.dpt);
+        /*
         if ( states[id].native.dpt.indexOf('DP') != -1) {
             adapter.log.debug(' setState value of DPT : -' + ga + '-  -' + state.val + '-  -'  + states[id].native.dpt + '- ');
-            if (states[id].native.dpt === 'DPT5.001') {
-                knxConnection.write(ga, state.val * 2.55, states[id].native.dpt);
-            } else {
+            //if (states[id].native.dpt === 'DPT5.001') {
+            //    knxConnection.write(ga, state.val * 2.55, states[id].native.dpt);
+            //} else {
                 knxConnection.write(ga, state.val, states[id].native.dpt);
-            }
+            //}
 
         } else {
             adapter.log.warn('Cannot control "' + id + '", because invalid type: ' + valtype);
         }
+        */
     },
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
@@ -236,7 +239,7 @@ function startKnxServer() {
         ipAddr:     adapter.config.gwip,
         ipPort:     adapter.config.gwipport,
         physAddr:   adapter.config.eibadr,
-        minimumDelay: 10,
+        minimumDelay: 2,
         handlers: {
             connected: function() {
                 var cnt = 0;
