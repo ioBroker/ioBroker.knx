@@ -144,28 +144,66 @@ function generateRoomAndFunction(roomObj, callback) {
 
         adapter.getForeignObjects(adapter.namespace + '.*', function (err, gaObj) {
             var objects = [];
+            var enumRoomObjType = 0;
+            // Type 0 : building + room
+            // Type 1 : building + buildingpart + room
+            // Type 2 : building + buildingpart + floor + room
             for (var a = 0; a < roomObj.length; a++) {
                 var tmproomObj = roomObj[a];
                 var membersRefIdArray = [];
                 var membersArray = [];
-                if (tmproomObj.functions) {
-                    membersRefIdArray = tmproomObj.functions.split(',');
-                    for (var b = 0; b < membersRefIdArray.length; b++){
-                        var memberId = getKeysWithValue(membersRefIdArray[b],gaObj);
-                        membersArray.push(memberId[0]);
+                var enumRoomObj = {};
+                if (tmproomObj.hasOwnProperty('floor')){
+                    enumRoomObjType = 1;
+                    for (var c = 0; c < tmproomObj.floor.rooms.length; c++ ) {
+                        membersArray = [];
+                        membersRefIdArray = [];
+                        enumRoomObj = {};
+                        if (tmproomObj.floor.rooms[c].functions) {
+                            membersRefIdArray = tmproomObj.floor.rooms[c].functions.split(',');
+                            for (var b = 0; b < membersRefIdArray.length; b++) {
+                                var memberId = getKeysWithValue(membersRefIdArray[b], gaObj);
+                                membersArray.push(memberId[0]);
+                            }
+
+                        }
+
+                        enumRoomObj = {
+                            _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.part + '.' + tmproomObj.floor.rooms[c].room,
+                            common: {
+                                name: tmproomObj.floor.rooms[c].room,
+                                members: membersArray
+                            },
+                            type: 'enum'
+                        };
+                        objects.push(enumRoomObj);
                     }
                 }
 
-                var enumRoomObj = {
-                    _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.room,
-                    common: {
-                        name: tmproomObj.room,
-                        members: membersArray
-                    },
-                    type: 'enum'
-                };
+                if ( ! tmproomObj.hasOwnProperty('floor')) {
+                    membersArray = [];
+                    membersRefIdArray = [];
+                    enumRoomObj = {};
+                    if (tmproomObj.functions) {
+                        membersRefIdArray = tmproomObj.functions.split(',');
+                        for (var b = 0; b < membersRefIdArray.length; b++) {
+                            var memberId = getKeysWithValue(membersRefIdArray[b], gaObj);
+                            membersArray.push(memberId[0]);
+                        }
+                    }
 
-                objects.push(enumRoomObj);
+                    enumRoomObj = {
+                        _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.room,
+                        common: {
+                            name: tmproomObj.room,
+                            members: membersArray
+                        },
+                        type: 'enum'
+                    };
+                    objects.push(enumRoomObj);
+                }
+
+
             }
             syncObjects(objects, 0, true, callback);
         });
