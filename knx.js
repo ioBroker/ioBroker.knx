@@ -277,7 +277,7 @@ function startKnxServer() {
         ipAddr:     adapter.config.gwip,
         ipPort:     adapter.config.gwipport,
         physAddr:   adapter.config.eibadr,
-        minimumDelay: 2,
+        minimumDelay: 0,
         handlers: {
             connected: function() {
                 var cnt = 0;
@@ -285,8 +285,22 @@ function startKnxServer() {
                     for (var key in mapping) {
                         if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
                             try {
-                                controlDPTarray[key] = new knx.Datapoint({ga: key, dpt: convertDPTtype(mapping[key].common.desc)}, knxConnection);
-                                console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
+                                    if (mapping[key].common.read) {
+                                        controlDPTarray[key] = new knx.Datapoint({
+                                            ga: key,
+                                            dpt: convertDPTtype(mapping[key].common.desc),
+                                            autoread: true
+                                        }, knxConnection);
+                                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt + ' READABLE');
+                                    } else {
+                                        controlDPTarray[key] = new knx.Datapoint({
+                                            ga: key,
+                                            dpt: convertDPTtype(mapping[key].common.desc)
+                                        }, knxConnection);
+                                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
+                                    }
+
+
                                 cnt++;
                             }
                             catch (e) {
