@@ -52,19 +52,7 @@ var adapter = utils.adapter({
         }
 
         knxConnection.write(ga, state.val, states[id].native.dpt);
-        /*
-        if ( states[id].native.dpt.indexOf('DP') != -1) {
-            adapter.log.debug(' setState value of DPT : -' + ga + '-  -' + state.val + '-  -'  + states[id].native.dpt + '- ');
-            //if (states[id].native.dpt === 'DPT5.001') {
-            //    knxConnection.write(ga, state.val * 2.55, states[id].native.dpt);
-            //} else {
-                knxConnection.write(ga, state.val, states[id].native.dpt);
-            //}
 
-        } else {
-            adapter.log.warn('Cannot control "' + id + '", because invalid type: ' + valtype);
-        }
-        */
     },
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
@@ -345,7 +333,7 @@ function startKnxServer() {
                             var obj = mapping[dest];
                             //controlDPTarray[dest].current_value = val;
                             if (controlDPTarray[dest]) {
-                                console.log('Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
+                                console.log('Write Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
                             } else {
                                 console.log('No controlDPTarray for ' + dest);
                             }
