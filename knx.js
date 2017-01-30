@@ -7,6 +7,8 @@ var getGAS      = require(__dirname + '/lib/generateGAS');
 var knx         = require('knx');
 var utils       = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util        = require('util');
+var _           = require('underscore');
+
 
 var mapping = {};
 var states  = {};
@@ -113,90 +115,51 @@ function pasrseProject(xml0, knx_master, callback) {
     });
 }
 
-function getKeysWithValue(gaRefId, obj) {
-    return Object.keys(obj).filter(function (k) {
-        //console.info(k);
-        return obj[k].native.addressRefId === gaRefId;
-    });
-}
+
 
 function generateRoomAndFunction(roomObj, callback) {
-/* roomObj = [{
-                building: <Name of Building>
-                functions: <csv String of names of adressgroups>
-                room: <name of room>
-                }]
-*/
-
     adapter.getForeignObjects('enum.rooms.*', function (err, actualRooms){
-
         adapter.getForeignObjects(adapter.namespace + '.*', function (err, gaObj) {
             var objects = [];
             var enumRoomObjType = 0;
-            // Type 0 : building + room
-            // Type 1 : building + buildingpart + room
-            // Type 2 : building + buildingpart + floor + room
-            for (var a = 0; a < roomObj.length; a++) {
-                var tmproomObj = roomObj[a];
-                var membersRefIdArray = [];
-                var membersArray = [];
+            var adressRefIdByName = {};
+            _.each ( gaObj , function(fullName){
+                adressRefIdByName[fullName.native.addressRefId] = fullName;
+            });
+
+            _.each ( roomObj , function(rooms) {
+                var facility = rooms.facility;
+                var part = rooms.functions.rooms;
                 var enumRoomObj = {};
-                if (tmproomObj.hasOwnProperty('floor')){
-                    enumRoomObjType = 1;
-                    for (var c = 0; c < tmproomObj.floor.rooms.length; c++ ) {
-                        membersArray = [];
-                        membersRefIdArray = [];
-                        enumRoomObj = {};
-                        if (tmproomObj.floor.rooms[c].functions) {
-                            membersRefIdArray = tmproomObj.floor.rooms[c].functions.split(',');
-                            for (var b = 0; b < membersRefIdArray.length; b++) {
-                                var memberId = getKeysWithValue(membersRefIdArray[b], gaObj);
-                                membersArray.push(memberId[0]);
-                            }
 
-                        }
-
-                        enumRoomObj = {
-                            _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.part + '.' + tmproomObj.floor.rooms[c].room,
-                            common: {
-                                name: tmproomObj.floor.rooms[c].room,
-                                members: membersArray
-                            },
-                            type: 'enum'
-                        };
-                        objects.push(enumRoomObj);
-                    }
-                }
-
-                if ( ! tmproomObj.hasOwnProperty('floor')) {
-                    membersArray = [];
-                    membersRefIdArray = [];
+                for ( var i = 0; i < part.length; i++){
+                    var membersArray = [];
+                    var membersRefIdArray = [];
                     enumRoomObj = {};
-                    if (tmproomObj.functions) {
-                        membersRefIdArray = tmproomObj.functions.split(',');
+                    if (part[i].functions) {
+                        membersRefIdArray = part[i].functions.split(',');
                         for (var b = 0; b < membersRefIdArray.length; b++) {
-                            var memberId = getKeysWithValue(membersRefIdArray[b], gaObj);
-                            membersArray.push(memberId[0]);
+                            if ( membersRefIdArray[b] in adressRefIdByName )
+                                membersArray.push(adressRefIdByName[membersRefIdArray[b]]._id);
                         }
                     }
-
                     enumRoomObj = {
-                        _id: 'enum.rooms.' + tmproomObj.building + '.' + tmproomObj.room,
+                        _id: 'enum.rooms.' + facility + '.' + part[i].room,
                         common: {
-                            name: tmproomObj.room,
+                            name: part[i].room,
                             members: membersArray
                         },
                         type: 'enum'
                     };
                     objects.push(enumRoomObj);
                 }
-
-
-            }
+            });
             syncObjects(objects, 0, true, callback);
         });
     });
 }
+
+
 
 function syncObjects(objects, index, isForeign, callback) {
     if (index >= objects.length) {
@@ -265,7 +228,7 @@ function startKnxServer() {
         ipAddr:     adapter.config.gwip,
         ipPort:     adapter.config.gwipport,
         physAddr:   adapter.config.eibadr,
-        minimumDelay: 0,
+        minimumDelay: 10,
         handlers: {
             connected: function() {
                 var cnt = 0;
@@ -321,6 +284,7 @@ function startKnxServer() {
                         var mappedName;
                         if (mapping[dest]) {
                             mappedName = mapping[dest].common.name;
+
                             adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
                         }
                         adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
