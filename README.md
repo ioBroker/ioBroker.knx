@@ -20,10 +20,10 @@ Befor beginning: Every DPT of com.Objects should be set an every device should b
 
 # Adapterconfiguration
 After installing this adapter, open the adapter configuration. Fill in:
-##### KNX Gateway IP : <IP of your KNX/Lan GW>
-##### Port : 3671
-##### phys. EIB Adress: <a free phys. adr. of your KNX system>
-##### Upload knxproj File: select File
+##### KNX Gateway IP  <IP of your KNX/Lan GW>
+##### Port  3671
+##### phys. EIB Adress <a free phys. adr. of your KNX system>
+##### Upload knxproj File select File
 ###### !!! I'm sorry but at the moment, there is no user feedback while processing the file (it can take a while)!!!
 After successful import a message shows how much objects where recognized
 
