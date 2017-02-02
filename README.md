@@ -15,11 +15,42 @@ the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
 
-## Usage
-### Import project.knxproj
+Befor beginning: Every DPT of com.Objects should be set an every device should be sortet into you
+ facility structure.
+
+# Adapterconfiguration
+After installing this adapter, open the adapter configuration. Fill in:
+##### KNX Gateway IP : <IP of your KNX/Lan GW>
+##### Port : 3671
+##### phys. EIB Adress: <a free phys. adr. of your KNX system>
+##### Upload knxproj File: select File
+###### !!! I'm sorry but at the moment, there is no user feedback while processing the file (it can take a while)!!!
+After successful import a message shows how much objects where recognized
+
+ Hit "save & close". And the adapter should start.
+ While starting the adapter reads all groupAdresses with read-Flag. This could take a while. But the values
+ in your visu are updatet after start.
+
+## Objects
+Here is under knx.0 the group adress tree like in your ETS project.
+
+## Enumerations
+If you have a Buildingstructure in your ETS with the corresponding devices, it will be shown here.
+ Under "members" are the names of groupaddresses listet from the devices with send-Flag in this Group.
+
+
+#Usage
+If the adapter startet successfully your datapoints will be available for everything you like to do.
+Try out "mobileUI".
+
+# Known Problems
+- many Datapointtypes are missing ( takes time to implement )
+- does not work with babtec
+- DPT5.001 (Dimming) sends wrong value >25%
 
 
 ## Changelog
+### 0.8.0 (2017-02-xx) comming soon
 
 ### 0.7.3 (2016-12-22)
 * (chefkoch009) more DPT's are supported
