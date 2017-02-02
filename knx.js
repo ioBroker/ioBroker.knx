@@ -3,7 +3,6 @@
 'use strict';
 
 var getGAS      = require(__dirname + '/lib/generateGAS');
-//var knx         = require(__dirname + '/lib/connector');
 var knx         = require('knx');
 var utils       = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util        = require('util');
@@ -54,7 +53,7 @@ var adapter = utils.adapter({
         }
 
         knxConnection.write(ga, state.val, states[id].native.dpt);
-
+        //controlDPTarray[states[id].native.address].write(state.val);
     },
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
@@ -95,7 +94,6 @@ adapter.on('message', function (obj) {
                 break;
         }
     }
-
     return true;
 });
 
@@ -114,8 +112,6 @@ function pasrseProject(xml0, knx_master, callback) {
         }
     });
 }
-
-
 
 function generateRoomAndFunction(roomObj, callback) {
     adapter.getForeignObjects('enum.rooms.*', function (err, actualRooms){
@@ -159,8 +155,6 @@ function generateRoomAndFunction(roomObj, callback) {
     });
 }
 
-
-
 function syncObjects(objects, index, isForeign, callback) {
     if (index >= objects.length) {
         if (typeof callback === 'function') callback(objects.length);
@@ -193,10 +187,10 @@ function syncObjects(objects, index, isForeign, callback) {
 
 }
 
-function roundDec(nbr, dec_places){
-    var mult = Math.pow(10,dec_places);
-    return Math.round(nbr * mult) / mult;
-}
+//function roundDec(nbr, dec_places){
+//    var mult = Math.pow(10,dec_places);
+//    return Math.round(nbr * mult) / mult;
+//}
 
 function isEmptyObject(obj) {
     for (var key in obj) {
@@ -228,7 +222,8 @@ function startKnxServer() {
         ipAddr:     adapter.config.gwip,
         ipPort:     adapter.config.gwipport,
         physAddr:   adapter.config.eibadr,
-        minimumDelay: 10,
+       // debug: true,
+        minimumDelay: 0,
         handlers: {
             connected: function() {
                 var cnt = 0;
@@ -242,16 +237,26 @@ function startKnxServer() {
                                             dpt: convertDPTtype(mapping[key].common.desc),
                                             autoread: true
                                         }, knxConnection);
-                                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt + ' READABLE');
                                     } else {
-                                        controlDPTarray[key] = new knx.Datapoint({
-                                            ga: key,
-                                            dpt: convertDPTtype(mapping[key].common.desc)
-                                        }, knxConnection);
-                                        console.log(cnt + '  generate controlDPT : ' + controlDPTarray[key].options.ga + '     ' + controlDPTarray[key].options.dpt);
+                                        if ( mapping[key].native.statusGARefId ) {
+                                            controlDPTarray[key] = new knx.Datapoint({
+                                                ga: key,
+                                                status_ga: mapping[key].native.statusGARefId,
+                                                dpt: convertDPTtype(mapping[key].common.desc)
+                                            }, knxConnection);
+                                            controlDPTarray[key] = new knx.Datapoint({
+                                                ga: key,
+                                                status_ga: mapping[key].native.statusGARefId,
+                                                dpt: convertDPTtype(mapping[key].common.desc)
+                                            }, knxConnection);
+                                        } else {
+                                            controlDPTarray[key] = new knx.Datapoint({
+                                                ga: key,
+                                                status_ga: mapping[key].native.statusGARefId,
+                                                dpt: convertDPTtype(mapping[key].common.desc)
+                                            }, knxConnection);
+                                        }
                                     }
-
-
                                 cnt++;
                             }
                             catch (e) {
@@ -284,8 +289,8 @@ function startKnxServer() {
                         var mappedName;
                         if (mapping[dest]) {
                             mappedName = mapping[dest].common.name;
-
-                            adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
+                            if ( controlDPTarray[dest] && controlDPTarray[dest].current_value )
+                                adapter.setForeignState(mapping[dest]._id, {val: controlDPTarray[dest].current_value, ack:true});
                         }
                         adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': '+val);
                     break;

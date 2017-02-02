@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "ioBroker knx Adapter",
   "author": {
     "name": "K.Ringmann",
@@ -40,7 +40,10 @@
     "knx": "^2.0.3",
 	"binary-parser": "^1.1.5",
 	"binary-protocol": "^0.0.0",
-    "fs": "^0.0.2"
+    "fs": "^0.0.2",
+    "xmldom" : "^0.1.27",
+    "similarity" : "^1.1.0",
+    "xpath": "^0.0.23"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
