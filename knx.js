@@ -8,7 +8,6 @@ var utils       = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util        = require('util');
 var _           = require('underscore');
 
-
 var mapping = {};
 var states  = {};
 var knxConnection;

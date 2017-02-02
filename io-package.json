@@ -4,9 +4,9 @@
         "version": "0.8.0",
 		"news": {
            "0.8.0": {
-            "en":                 "support of Builingstructure, check for similarities between switch and state",
-            "de":                 "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen",
-            "ru":                 "support of Builingstructure, check for similarities between switch and state"
+            "en":                 "support of Builingstructure, check for similarities between switch and state ",
+            "de":                 "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
+            "ru":                 "support of Builingstructure, check for similarities between switch and state "
            },
            "0.7.3": {
             "en":                 "more DPT's, faster startup",
