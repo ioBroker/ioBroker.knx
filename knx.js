@@ -4,7 +4,7 @@
 
 var getGAS = require(__dirname + '/lib/generateGAS');
 //var knx         = require('knx');
-var knx = require(__dirname + '/modules/knx-mod')
+var knx = require(__dirname + '/lib/knx-mod')
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util = require('util');
 var _ = require('underscore');
