@@ -10,43 +10,48 @@
 
 *** The adapter is only compatible with Node 4.x and higher!! ***
 
-This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put
-the devices into rooms (esp. for MobileUI).
+This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
 
-Befor beginning: Every DPT of com.Objects should be set an every device should be sortet into you
- facility structure.
+Befor beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sortet into your facility structure.
 
 # Adapterconfiguration
 After installing this adapter, open the adapter configuration. Fill in:
-##### KNX Gateway IP  <IP of your KNX/Lan GW>
-##### Port  3671
-##### phys. EIB Adress <a free phys. adr. of your KNX system>
-##### Upload knxproj File select File
-###### !!! I'm sorry but at the moment, there is no user feedback while processing the file (it can take a while)!!!
-After successful import a message shows how much objects where recognized
+##### KNX Gateway IP
+<IP of your KNX/Lan GW> with ipv4 format
 
- Hit "save & close". And the adapter should start.
- While starting the adapter reads all groupAdresses with read-Flag. This could take a while. But the values
- in your visu are updatet after start.
+##### Port
+this is normally port 3671
+
+##### phys. EIB Adress
+fill in free phys. address corresponding to your KNX-architecture
+
+##### Upload knxproj
+here you can upload your ETS Export in "knxproj" format.
+###### !!! I'm sorry, but at the moment, there is no user feedback while processing the file (it can take up to a minute) !!!
+After successful import a message shows how much objects where recognized.
+
+Hit "save & close" and the adapter should start.
+While starting the adapter reads all groupAdresses with read-Flag. This could take a while and can produce a high load on your KNX-bus. But the values in your visare updatet after start.
 
 ## Objects
 Here is under knx.0 the group adress tree like in your ETS project.
 
 ## Enumerations
-If you have a Buildingstructure in your ETS with the corresponding devices, it will be shown here.
- Under "members" are the names of groupaddresses listet from the devices with send-Flag in this Group.
-
+If you have a Buildingstructure in your ETS with the corresponding devices, it will be shown here. Under "members" are the names of groupaddresses listet from the devices with send-Flag in this Group.
 
 #Usage
 If the adapter startet successfully your datapoints will be available for everything you like to do.
 Try out "mobileUI".
 
+## Datapoint Types
+At the moment are DPT1 - DPT20 with subtypes and DPT238 available. But not all are validated.
+
+
 # Known Problems
 - many Datapointtypes are missing ( takes time to implement )
-- does not work with babtec
-- DPT5.001 (Dimming) sends wrong value >25%
+- does not work with babtec (means it does not work with babtec as KNX/LAN gateway)
 
 
 ## Changelog

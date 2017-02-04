@@ -35,16 +35,16 @@
     "xml2js": "^0.4.17",
     "xml2js-xpath": "^0.7.0",
     "underscore": "^1.8.3",
-	"machina": "^2.0.0",
 	"ipv4.js": "^0.0.2",
-    "knx": "^2.0.3",
 	"binary-parser": "^1.1.5",
 	"binary-protocol": "^0.0.0",
     "fs": "^0.0.2",
     "xmldom" : "^0.1.27",
     "similarity" : "^1.1.0",
     "xpath": "^0.0.23",
-    "similarity" : "^1.1.0"
+    "similarity" : "^1.1.0",
+    "ipaddr.js": "1.2.0",
+    "machina": "^2.0.0-1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -53,7 +53,9 @@
     "grunt-jscs": "^2.0.0",
     "grunt-http": "^1.6.0",
     "mocha": "^2.3.4",
-    "chai": "^3.4.1"
+    "chai": "^3.4.1",
+	"multi-tape": "^1.1.1",
+    "tape": "^4.6.2"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha"
