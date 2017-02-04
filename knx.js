@@ -4,7 +4,7 @@
 
 var getGAS = require(__dirname + '/lib/generateGAS');
 //var knx         = require('knx');
-var knx = require(__dirname + '/node_modules/knx')
+var knx = require(__dirname + '/modules/knx-mod')
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util = require('util');
 var _ = require('underscore');
@@ -260,6 +260,7 @@ function startKnxServer() {
                 adapter.log.info('Connected!');
                 console.log('Connected!');
             },
+
 
             event: function (evt, src, dest, val) {
                 switch (evt) {
