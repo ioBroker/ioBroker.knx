@@ -55,6 +55,9 @@ At the moment are DPT1 - DPT20 with subtypes and DPT238 available. But not all a
 
 
 ## Changelog
+### 0.8.1 (2017-02-06)
+* fixed DPT1 switch problem
+
 ### 0.8.0 (2017-02-xx) comming soon
 
 ### 0.7.3 (2016-12-22)

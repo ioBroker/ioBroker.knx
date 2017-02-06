@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.8.0",
+        "version": "0.8.1",
 		"news": {
+          "0.8.1": {
+            "en":                 "fixed DPT1 problem",
+            "de":                 "DPT1 Problem behoben",
+            "ru":                 "fixed DPT1 problem"
+          },
            "0.8.0": {
             "en":                 "support of Builingstructure, check for similarities between switch and state ",
             "de":                 "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",

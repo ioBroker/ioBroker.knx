@@ -217,7 +217,7 @@ function startKnxServer() {
         ipPort: adapter.config.gwipport,
         physAddr: adapter.config.eibadr,
         //debug: true,
-        minimumDelay: 50,
+        minimumDelay: 0,
         handlers: {
             connected: function () {
                 var cnt = 0;
