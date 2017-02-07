@@ -212,6 +212,9 @@ function convertDPTtype(dpt) {
 
 function startKnxServer() {
 
+    var cnt_complete = 0;
+    var cnt_withDPT = 0;
+
     knxConnection = knx.Connection({
         ipAddr: adapter.config.gwip,
         ipPort: adapter.config.gwipport,
@@ -220,7 +223,6 @@ function startKnxServer() {
         minimumDelay: 0,
         handlers: {
             connected: function () {
-                var cnt = 0;
                 if (isEmptyObject(controlDPTarray)) {
                     for (var key in mapping) {
                         if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
@@ -248,17 +250,18 @@ function startKnxServer() {
                                         }, knxConnection);
                                     }
                                 }
-                                cnt++;
                             }
                             catch (e) {
                                 adapter.log.info(' could not create controlDPT for ' + key + ' with error: ' + e);
                             }
+                            cnt_withDPT++;
                         }
+                        cnt_complete++;
                     }
                 }
                 adapter.setState('info.connection', true, true);
                 adapter.log.info('Connected!');
-                console.log('Connected!');
+                console.log('Connected!   with ' + cnt_withDPT + ' datapoints of ' + cnt_complete + ' Datapoints over all.');
             },
 
 
