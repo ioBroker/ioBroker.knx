@@ -76,12 +76,15 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 ## Vermeidung von Problemen
 1) saubere ETS Programmierung und saubere ETS Programmierung und saubere ETS Programmierung
-   a) zuweisen der DPT's !!
-   b) einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
-   c) Vermeidung von Sonderzeichen (kann zu Problemen bei der Erzeugung der GAS führen)
+
+*   zuweisen der DPT's !!
+*   einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
+*   Vermeidung von Sonderzeichen (kann zu Problemen bei der Erzeugung der GAS führen)
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
+
 3) Physikalische Adresse richtig wählen ( wichtig beim Einsatz von Linienkopplern )
+
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
 
