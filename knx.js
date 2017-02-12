@@ -45,15 +45,15 @@ var adapter = utils.adapter({
             adapter.log.warn('Unknown ID: ' + id);
             return;
         }
-        var valtype = states[id].common.desc;
+        var valtype = convertDPTtype(states[id].common.desc);
         var ga = states[id].native.address;
 
-        if (!states[id].native.dpt) {
-            states[id].native.dpt = convertDPTtype(valtype);
+        if (!states[id].common.desc) {
+            states[id].common.desc = convertDPTtype(valtype);
         }
 
-        knxConnection.write(ga, state.val, states[id].native.dpt);
-    },
+        knxConnection.write(ga, state.val, valtype);
+       },
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
     unload: function (callback) {
@@ -77,9 +77,13 @@ var adapter = utils.adapter({
 
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
+    var tmp = obj;
+    console.log('knx.js');
     if (obj) {
         switch (obj.command) {
             case 'project':
+
+                //pasrseProject(obj.message.xml0, obj.message.knx_master, obj.message.deviceFiles, function (res) {
                 pasrseProject(obj.message.xml0, obj.message.knx_master, function (res) {
                     if (obj.callback) adapter.sendTo(obj.from, obj.command, res, obj.callback);
                     setTimeout(function () {
@@ -95,6 +99,7 @@ adapter.on('message', function (obj) {
     }
     return true;
 });
+
 
 function pasrseProject(xml0, knx_master, callback) {
     getGAS.getGAS(xml0, knx_master, function (error, result) {
@@ -183,7 +188,6 @@ function syncObjects(objects, index, isForeign, callback) {
             setTimeout(syncObjects, 0, objects, index + 1, isForeign, callback);
         });
     }
-
 }
 
 function isEmptyObject(obj) {
@@ -255,6 +259,8 @@ function startKnxServer() {
                                 adapter.log.info(' could not create controlDPT for ' + key + ' with error: ' + e);
                             }
                             cnt_withDPT++;
+                            adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                            console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
                         }
                         cnt_complete++;
                     }
@@ -290,6 +296,16 @@ function startKnxServer() {
                                     val: controlDPTarray[dest].current_value,
                                     ack: true
                                 });
+                            /*
+                                if (controlDPTarray[dest].hasOwnProperty('native') && controlDPTarray[dest].native.hasOwnProperty('statusGARefId')) {
+                                    var statusGARefId = controlDPTarray[dest].native.statusGARefId
+                                    adapter.setForeignState(mapping[statusGARefId]._id, {
+                                            val: controlDPTarray[dest].current_value,
+                                            ack: true
+                                        }
+                                    );
+                                }
+                            */
                         }
                         adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val);
                         break;

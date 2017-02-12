@@ -12,6 +12,7 @@
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 <script type="text/javascript" src="zip/zip.js"></script>
 <script type="text/javascript" src="zip/zip-ext.js"></script>
+
 <!--script type="text/javascript" src="zip/z-worker.js"></script-->
 <script type="text/javascript" src="zip/inflate.js"></script>
 <style>
@@ -69,36 +70,7 @@
             });
         } else {
 
-        /*
-            $('#' + id + '.value').val(value).change(function() {
-
-                if (id == 'gwip' || id == 'adapterAddress') {
-                    var ip1 = $('#gwip').val();
-                    var ip2 = $('#adapterAddress').val();
-
-                    if (id == 'gwip' && ip2 == '0.0.0.0') {
-                        var max = 0;
-                        var ip = '';
-                        $('#adapterAddress option').each(function () {
-                            var c = checkIPs(ip1, $(this).attr('value'));
-                            if (c > max) {
-                                max = c;
-                                ip = $(this).attr('value');
-                            }
-                        });
-                        if (ip) $('#adapterAddress').val(ip);
-
-                    }
-
-                    if (!ip2 || ip2 == '0.0.0.0' || !checkIPs(ip1, ip2)) {
-                        $('#adapterAddress').addClass('invalid').attr('title', _('This IP is unreachable from %s', $('#gwip').val()));
-                    } else {
-                        $('#adapterAddress').removeClass('invalid').attr('title', '');
-                    }
-                }
-                */
-
-                $('#' + id + '.value').val(value).blur(function() {
+            $('#' + id + '.value').val(value).blur(function() {
                 // check if entered values are valid
                 if (id == 'gwip') {
                     var ip1 = $('#gwip').val();
@@ -161,6 +133,7 @@
     })();
 
     function fileHandler(event) {
+
         event.preventDefault();
         var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
 
@@ -174,58 +147,133 @@
         //$dz.show();
         zip.useWebWorkers = false;
         //$('#drop-text').hide();
+
         model.getEntries(file, function (entries) {
             var xml0E;
             var knx_masterE;
+            var devicesFilesE = [];
+            var maxCat = 0;
+            var scanComplete = false;
+            //alert('entrie.length: '+ entries.length);
             for (var e = 0; e < entries.length; e++) {
-                if (entries[e].filename === 'knx_master.xml') knx_masterE = entries[e];
-                if (entries[e].filename.match(/\/0\.xml$/)) xml0E = entries[e];
+                if (entries[e].filename === 'knx_master.xml') {
+                    knx_masterE = entries[e];
+                    maxCat++;
+                }
+
+                if (entries[e].filename.match(/\/0\.xml$/)) {
+                    xml0E = entries[e];
+                    //alert(' xml0E : ' + xml0E);
+                    maxCat++;
+                }
+
+                if (entries[e].filename.match(/\/M.*\.xml$/)) {
+                    devicesFilesE.push(entries[e]);
+                    maxCat++;
+                    //alert('deviceFilesE[' + e +  '] :' + devicesFilesE[e]);
+                }
+
+                if ( e == entries.length-1 ) scanComplete = true;
             }
 
+            //alert('maxCat : ' + maxCat + '   ' + scanComplete);
+
+            $('#progress').show();
             if (!xml0E || !knx_masterE) {
-
                 showMessage('Invalid project');
-                $('#progress').show();
-
                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-            } else {
-                var xml0;
-                $('#progress').show();
-                model.getEntryFile(xml0E, 'Blob', function (result) {
-                    //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
-                    var myReader = new FileReader();
-                    myReader.addEventListener('loadend', function(e){
-                        xml0 = (e.srcElement || e.target).result;
-                        model.getEntryFile(knx_masterE, 'Blob', function (result) {
-                            var myReader = new FileReader();
-                            myReader.addEventListener('progress', function(e) {
-                                //$('#drop-text').show();
-                                $('#progress').show();
-                               // $dz.hide();
-                                sendTo(null, 'project', {xml0: xml0, knx_master: (e.srcElement || e.target).result}, function (result) {
-                                    if (!result || result.error) {
-                                        showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
-                                    } else {
-                                        showMessage(_('Extracted %s states ', result.count));
-                                    }
-                                });
-                                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-                            });
-                            myReader.readAsText(result);
-                        });
-                    });
-                    myReader.readAsText(result);
+            }
 
-                }, function (current, total) {
-                    //$('#progress').attr('value', current).attr('max', total);
-                    if (current > 0) {
-                        $('#progress').val(Math.floor((100 / total) * current));
-                        $('#progress').html(Math.floor((100 / total) * current) + '%');
+            else
+            {
+                var xml0;
+                var knx_master;
+                var deviceFiles = {};
+                var callback = 0;
+
+                $('#progress').show();
+              //  alert(' vor readFiles() mit scanComplete' + scanComplete);
+                readFiles();
+
+                function readFiles() {
+                //    alert(' in readFiles()');
+                    // Wait for filescan to complete
+                    if ( !scanComplete ) {
+                        alert(' in readFiles()  repeat' + scanComplete);
+                        setTimeout(readFiles(), 100);
+                        return;
                     }
-                });
+
+                    model.getEntryFile(xml0E, 'Blob', function (result) {
+                        //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
+                        var myReader = new FileReader();
+                        myReader.readAsText(result);
+                        myReader.addEventListener('loadend', function (e) {
+                            xml0 = (e.srcElement || e.target).result;
+                            callback++;
+                        });
+                        $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+                    });
+
+                    //alert('knx_masterE' + JSON.stringify(knx_masterE));
+                    model.getEntryFile(knx_masterE, 'Blob', function (result) {
+                        //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
+                        var myReader = new FileReader();
+                        myReader.readAsText(result);
+                        myReader.addEventListener('loadend', function (e) {
+                            knx_master = (e.srcElement || e.target).result;
+                            callback++;
+                        });
+                        $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+                    });
+
+                    alert(' devicesFilesE.length :   ' + devicesFilesE.length);
+                    deviceFileUL(0);
+                    function deviceFileUL (key) {
+                        if ( key < devicesFilesE.length ) {
+                            model.getEntryFile(devicesFilesE[key], 'Blob', function (result) {
+                                //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
+                                var myReader = new FileReader();
+                                myReader.readAsText(result);
+                                myReader.addEventListener('loadend', function (e) {
+                                    deviceFiles[key] = ((e.srcElement || e.target).result);
+                                    callback++;
+                                    //alert('result [' + key + '] :' + result);
+                                });
+
+                                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
+                                deviceFileUL(key + 1)
+                            });
+                        }
+                    }
+                    alert(JSON.stringify(deviceFiles));
+                    // wait for complete file readout
+                    transmitXML();
+                    function transmitXML() {
+
+                        $('#progress').attr('value', callback).attr('max', maxCat);
+
+                        if (callback < maxCat) {
+                            setTimeout(transmitXML, 100);
+                            return;
+                        }
+                        alert('deviceFiles-länge in transmitXML ' + deviceFiles.length);
+
+//Die übergabe der "deviceFiles" an generateGAS.js funktioniert nicht. Es geht in der knx.js bei "adapter.on('message', function (obj) {"  schief
+                        sendTo(null, 'project', { xml0: xml0, knx_master: knx_master }, function (result) {
+                        // sendTo(null, 'project', { xml0: xml0, knx_master: knx_master, deviceFiles: deviceFiles }, function (result) {
+                        //sendTo(null, 'project', {deviceFiles} , function (result) {
+                            alert('starte übergabe');
+                            if (!result || result.error) {
+                                showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
+                            } else {
+                                showMessage(_('Extracted %s states ', result.count));
+                            }
+                        });
+                    }
+                }
             }
         }, function (error) {
-
             $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
         });
     }
@@ -237,7 +285,7 @@
         //fillSelectIPs('#gwip', settings.gwip, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
-       // settings.esfText = settings.esfText || 'no value loaded';
+        // settings.esfText = settings.esfText || 'no value loaded';
         settings.eibadr = settings.eibadr;
         for (var key in settings) {
             setValue(key, settings[key]);
