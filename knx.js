@@ -8,6 +8,8 @@ var knx = require(__dirname + '/lib/knx-mod')
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var util = require('util');
 var _ = require('underscore');
+var select = require('xpath');
+var dom = require('xmldom').DOMParser;
 
 var mapping = {};
 var states = {};
@@ -78,20 +80,14 @@ var adapter = utils.adapter({
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
     var tmp = obj;
-    console.log('knx.js');
+    //console.log('knx.js');
     if (obj) {
         switch (obj.command) {
             case 'project':
-
-                //pasrseProject(obj.message.xml0, obj.message.knx_master, obj.message.deviceFiles, function (res) {
-                pasrseProject(obj.message.xml0, obj.message.knx_master, function (res) {
+                parseProject(obj.message.xml0, obj.message.knx_master, obj.message.file, function (res) {
                     if (obj.callback) adapter.sendTo(obj.from, obj.command, res, obj.callback);
-                    setTimeout(function () {
-                        process.exit();
-                    }, 2000);
                 });
                 break;
-
             default:
                 adapter.log.warn('Unknown command: ' + obj.command);
                 break;
@@ -100,14 +96,49 @@ adapter.on('message', function (obj) {
     return true;
 });
 
+// get xml Files from index.html via adapter.on 'message' and put it into file Obj
 
-function pasrseProject(xml0, knx_master, callback) {
-    getGAS.getGAS(xml0, knx_master, function (error, result) {
+function parseProject(xml0, knx_master, file, callback) {
+    var fileObjectList = {};
+    if (file) {
+
+        for (var key in file){
+            adapter.log.info('Found device : ' + file[key].Name);
+            console.log('Found device : ' + file[key].Name + '       with Id: ' + file[key].DeviceId);
+
+            fileObjectList[key] = {
+                Name: file[key].Name,
+                DeviceId: file[key].DeviceId,
+                ComObjectTable: new dom().parseFromString(file[key].ComObjectTable, 'text/xml'),
+                ComObjectRefs: new dom().parseFromString(file[key].ComObjectRefs, 'text/xml'),
+              //  DevParameterBlock: new dom().parseFromString(file[key].DevParameterBlock, 'text/xml')
+            }
+        };
+    }
+
+    if (xml0){
+        var doc = new dom().parseFromString(xml0);
+        fileObjectList['0.xml'] = doc;
+        console.log('Wrote 0.xml');
+    }
+
+    if (knx_master){
+        var doc = new dom().parseFromString(knx_master);
+        fileObjectList['knx_master.xml'] = doc;
+        console.log('Wrote knx_master.xml');
+    }
+    fillProject(fileObjectList, callback);
+}
+
+//  ==> fileObjectList enthält ALLE Daten und Infos ==> zur Weiterverarbeitung
+
+function fillProject(fileObjectList, callback) {
+    getGAS.getGAS(fileObjectList, function (error, result) {
         if (error) {
             callback({error: error});
         } else {
             syncObjects(result, 0, false, function (length) {
-                getGAS.getRoomFunctions(xml0, knx_master, function (error, result) {
+                getGAS.getRoomFunctions(fileObjectList, function (error, result) {
                     generateRoomAndFunction(result, function () {
                         callback({error: null, count: length});
                     });
@@ -231,12 +262,13 @@ function startKnxServer() {
                     for (var key in mapping) {
                         if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
                             try {
-                                if (mapping[key].common.read) {
+                                if (mapping[key].common.read  ) {
                                     controlDPTarray[key] = new knx.Datapoint({
                                         ga: key,
                                         dpt: convertDPTtype(mapping[key].common.desc),
                                         autoread: true
                                     }, knxConnection);
+                                    console.log(' DP (read) erstellt für : ' + key + '    ' + mapping[key].common.name);
                                 } else {
                                     if ( !(mapping[key].native.statusGARefId === '')) {
                                         controlDPTarray[key] = new knx.Datapoint({
@@ -245,22 +277,26 @@ function startKnxServer() {
                                             dpt: convertDPTtype(mapping[key].common.desc),
                                             autoread: false
                                         }, knxConnection);
-
+                                        adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                        console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name + '   mit Status : ' + mapping[key].native.statusGARefId);
                                     } else {
                                         controlDPTarray[key] = new knx.Datapoint({
                                             ga: key,
                                             //status_ga: mapping[key].native.statusGARefId,
                                             dpt: convertDPTtype(mapping[key].common.desc)
                                         }, knxConnection);
+                                        adapter.log.info(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                        console.log(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
                                     }
                                 }
                             }
                             catch (e) {
-                                adapter.log.info(' could not create controlDPT for ' + key + ' with error: ' + e);
+                                adapter.log.info(' could not create controlDPT for ' + key +' with error: ' + e);
+                                adapter.log.info(' maybe missing dptxxx.js definition');
+                                console.log(' could not create controlDPT for ' + key + '     ' + controlDPTarray[key] + ' with error: ' + e);
+                                console.log(' maybe missing dptxxx.js definition');
                             }
                             cnt_withDPT++;
-                            adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
-                            console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
                         }
                         cnt_complete++;
                     }
@@ -296,16 +332,6 @@ function startKnxServer() {
                                     val: controlDPTarray[dest].current_value,
                                     ack: true
                                 });
-                            /*
-                                if (controlDPTarray[dest].hasOwnProperty('native') && controlDPTarray[dest].native.hasOwnProperty('statusGARefId')) {
-                                    var statusGARefId = controlDPTarray[dest].native.statusGARefId
-                                    adapter.setForeignState(mapping[statusGARefId]._id, {
-                                            val: controlDPTarray[dest].current_value,
-                                            ack: true
-                                        }
-                                    );
-                                }
-                            */
                         }
                         adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val);
                         break;
@@ -315,11 +341,6 @@ function startKnxServer() {
 
                         if (mapping[dest] && val !== undefined) {
                             var obj = mapping[dest];
-                            //if (controlDPTarray[dest]) {
-                            //    console.log('Write Value of ' + dest + ' ' + controlDPTarray[dest].current_value);
-                            //} else {
-                            //    console.log('No controlDPTarray for ' + dest);
-                            //}
 
                             if (val && typeof val === 'object') {
                                 if (controlDPTarray[dest]) {

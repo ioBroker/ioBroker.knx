@@ -62,7 +62,6 @@
     };
     function setValue(id, value) {
         // example: select elements with id=key and class=value and insert value
-        //alert('Set Value : ' + $('#' + id + '.value').attr('type'));
         if ($('#' + id + '.value').attr('type') == 'checkbox') {
             alert(" IF setValue");
             $('#' + id + '.value').prop('checkesd', value).change(function() {
@@ -137,16 +136,13 @@
         event.preventDefault();
         var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
 
-        //var $dz = $('#drop-zone');
-
         if (file.size > 100000000) {
             showMessage('File is too big!');
             $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
             return false;
         }
-        //$dz.show();
+
         zip.useWebWorkers = false;
-        //$('#drop-text').hide();
 
         model.getEntries(file, function (entries) {
             var xml0E;
@@ -156,6 +152,7 @@
             var scanComplete = false;
             //alert('entrie.length: '+ entries.length);
             for (var e = 0; e < entries.length; e++) {
+
                 if (entries[e].filename === 'knx_master.xml') {
                     knx_masterE = entries[e];
                     maxCat++;
@@ -167,24 +164,16 @@
                     maxCat++;
                 }
 
-                if (entries[e].filename.match(/\/M.*\.xml$/)) {
+              //  alert('Filename:' + entries[e].filename);
+                if (entries[e].filename.match(/\/M.*\.xml$/) ) {
                     devicesFilesE.push(entries[e]);
                     maxCat++;
-                    //alert('deviceFilesE[' + e +  '] :' + devicesFilesE[e]);
                 }
-
+            //    alert('Filename:' + entries[e].filename);
                 if ( e == entries.length-1 ) scanComplete = true;
             }
 
-            //alert('maxCat : ' + maxCat + '   ' + scanComplete);
-
             $('#progress').show();
-            if (!xml0E || !knx_masterE) {
-                showMessage('Invalid project');
-                $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
-            }
-
-            else
             {
                 var xml0;
                 var knx_master;
@@ -192,14 +181,12 @@
                 var callback = 0;
 
                 $('#progress').show();
-              //  alert(' vor readFiles() mit scanComplete' + scanComplete);
+
                 readFiles();
 
                 function readFiles() {
-                //    alert(' in readFiles()');
                     // Wait for filescan to complete
                     if ( !scanComplete ) {
-                        alert(' in readFiles()  repeat' + scanComplete);
                         setTimeout(readFiles(), 100);
                         return;
                     }
@@ -215,7 +202,6 @@
                         $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
                     });
 
-                    //alert('knx_masterE' + JSON.stringify(knx_masterE));
                     model.getEntryFile(knx_masterE, 'Blob', function (result) {
                         //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
                         var myReader = new FileReader();
@@ -226,19 +212,49 @@
                         });
                         $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
                     });
-
-                    alert(' devicesFilesE.length :   ' + devicesFilesE.length);
+                   // alert(devicesFilesE);
                     deviceFileUL(0);
                     function deviceFileUL (key) {
                         if ( key < devicesFilesE.length ) {
                             model.getEntryFile(devicesFilesE[key], 'Blob', function (result) {
                                 //first arguement must be an regular array. The array can be of any javascript objects. Array can contain array to make it multi dimensional
                                 var myReader = new FileReader();
+                                var dom = new DOMParser();
                                 myReader.readAsText(result);
                                 myReader.addEventListener('loadend', function (e) {
-                                    deviceFiles[key] = ((e.srcElement || e.target).result);
+                                    var doc = dom.parseFromString((e.srcElement || e.target).result, 'text/xml');
+                                    var dev = doc.getElementsByTagName("ApplicationProgram")[0].getAttribute("Id");
+                                    var devComObjectTable = doc.getElementsByTagName("ComObjectTable")[0];
+                                    var devComObjectRefs = doc.getElementsByTagName("ComObjectRefs")[0];
+                                   // var devParameterBlock = doc.getElementsByTagName("Dynamic")[0];
+
+                                    var devComObjectTableTrans = {};
+                                    var devComObjectRefsTrans = {};
+
+                                    if (devComObjectTable && typeof devComObjectTable === 'object') {
+                                        devComObjectTableTrans = devComObjectTable.outerHTML;
+                                   //     alert(devComObjectTable.outerHTML);
+                                    }
+                                    else {
+                                        devComObjectTableTrans = '<ComObjectTable xmlns="http://knx.org/xml/project/13">\n </ComObjectTable>';
+                                    //    alert(' unklare ComObjectsTables in : ' + dev);
+                                    }
+
+                                    if (devComObjectRefs && typeof devComObjectRefs === 'object')
+                                        devComObjectRefsTrans = devComObjectRefs.outerHTML;
+                                    else {
+                                        devComObjectRefsTrans = '<ComObjectRefs xmlns="http://knx.org/xml/project/13">\n </ComObjectRefs>';
+                                    //    alert(' unklare ComObjectsRefs in : ' + dev);
+                                    }
+                                    deviceFiles[dev] = {
+                                            Name : doc.getElementsByTagName("ApplicationProgram")[0].getAttribute("Name"),
+                                            DeviceId : dev,
+                                            ComObjectTable : devComObjectTableTrans,
+                                            ComObjectRefs : devComObjectRefsTrans
+                                     //       DevParameterBlock: devParameterBlock.outerHTML
+                                        }
+
                                     callback++;
-                                    //alert('result [' + key + '] :' + result);
                                 });
 
                                 $('#knxprojFile').replaceWith($('#knxprojFile').clone(true));
@@ -246,7 +262,6 @@
                             });
                         }
                     }
-                    alert(JSON.stringify(deviceFiles));
                     // wait for complete file readout
                     transmitXML();
                     function transmitXML() {
@@ -257,13 +272,8 @@
                             setTimeout(transmitXML, 100);
                             return;
                         }
-                        alert('deviceFiles-länge in transmitXML ' + deviceFiles.length);
-
-//Die übergabe der "deviceFiles" an generateGAS.js funktioniert nicht. Es geht in der knx.js bei "adapter.on('message', function (obj) {"  schief
-                        sendTo(null, 'project', { xml0: xml0, knx_master: knx_master }, function (result) {
-                        // sendTo(null, 'project', { xml0: xml0, knx_master: knx_master, deviceFiles: deviceFiles }, function (result) {
-                        //sendTo(null, 'project', {deviceFiles} , function (result) {
-                            alert('starte übergabe');
+                        showMessage(_('Please wait while generating Objects.....it could take a while.'));
+                        sendTo(null, 'project', {xml0: xml0, knx_master: knx_master, file: deviceFiles}, function (result) {
                             if (!result || result.error) {
                                 showMessage(_('Error: ') + (result ? result.error : _('Unknown')));
                             } else {
@@ -282,10 +292,8 @@
         onChange = _onChange;
         if (!settings) return;
         fillSelectIPs('#adapterAddress', settings.adapterAddress, false, true);
-        //fillSelectIPs('#gwip', settings.gwip, false, true);
         settings.gwip = settings.gwip || 0;
         settings.gwipport = settings.gwipport || 0;
-        // settings.esfText = settings.esfText || 'no value loaded';
         settings.eibadr = settings.eibadr;
         for (var key in settings) {
             setValue(key, settings[key]);
@@ -352,8 +360,6 @@
             } else {
                 obj[$this.attr('id')] = $this.val();
             }
-
-            //obj[$this.attr('id')] = $this.val();
         });
 
         callback(obj);
@@ -364,16 +370,6 @@
 <!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
     <table>
-        <!--
-        <tr>
-            <td class="translate">KNX-Gateway IP : </td>
-            <td><input type="text" id="gwip" class="value"/></td>
-        </tr>
-        <tr>
-            <td class="translate">Adapter Address</td>
-            <td><select id="adapterAddress" class="value"></select></td>
-        </tr>
-        -->
 
         <tr>
             <td class="translate">Gateway IP :</td>
