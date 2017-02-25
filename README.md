@@ -90,6 +90,10 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 
 ## Changelog
+### 0.8.2 (2017-02-26)
+* implemented device-config parsing from knxproj
+* better choice of state/val of DP objects
+
 ### 0.8.1 (2017-02-06)
 * fixed DPT1 switch problem
 

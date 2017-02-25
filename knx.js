@@ -99,12 +99,16 @@ adapter.on('message', function (obj) {
 // get xml Files from index.html via adapter.on 'message' and put it into file Obj
 
 function parseProject(xml0, knx_master, file, callback) {
+
+    var hrstart = process.hrtime();
+    console.log('knx.js Zeitmessung parseProject start.');
+
     var fileObjectList = {};
     if (file) {
 
         for (var key in file){
             adapter.log.info('Found device : ' + file[key].Name);
-            console.log('Found device : ' + file[key].Name + '       with Id: ' + file[key].DeviceId);
+          //  console.log('Found device : ' + file[key].Name + '       with Id: ' + file[key].DeviceId);
 
             fileObjectList[key] = {
                 Name: file[key].Name,
@@ -127,12 +131,20 @@ function parseProject(xml0, knx_master, file, callback) {
         fileObjectList['knx_master.xml'] = doc;
         console.log('Wrote knx_master.xml');
     }
+
+    var hrend = process.hrtime(hrstart);
+    console.log("knx.js Zeitmessung parseProject STOPP : ", hrend[0] + 's  ' +  hrend[1]/1000000 + 'ms');
+
     fillProject(fileObjectList, callback);
 }
 
 //  ==> fileObjectList enthält ALLE Daten und Infos ==> zur Weiterverarbeitung
 
 function fillProject(fileObjectList, callback) {
+
+    var hrstart = process.hrtime();
+    console.log('knx.js Zeitmessung fillProject start.');
+
     getGAS.getGAS(fileObjectList, function (error, result) {
         if (error) {
             callback({error: error});
@@ -146,6 +158,9 @@ function fillProject(fileObjectList, callback) {
             });
         }
     });
+
+    var hrend = process.hrtime(hrstart);
+    console.log("knx.js Zeitmessung fillProject STOPP : ", hrend[0] + 's  ' +  hrend[1]/1000000 + 'ms');
 }
 
 function generateRoomAndFunction(roomObj, callback) {
@@ -268,7 +283,7 @@ function startKnxServer() {
                                         dpt: convertDPTtype(mapping[key].common.desc),
                                         autoread: true
                                     }, knxConnection);
-                                    console.log(' DP (read) erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                    //console.log(' DP (read) erstellt für : ' + key + '    ' + mapping[key].common.name);
                                 } else {
                                     if ( !(mapping[key].native.statusGARefId === '')) {
                                         controlDPTarray[key] = new knx.Datapoint({
@@ -277,16 +292,16 @@ function startKnxServer() {
                                             dpt: convertDPTtype(mapping[key].common.desc),
                                             autoread: false
                                         }, knxConnection);
-                                        adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
-                                        console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name + '   mit Status : ' + mapping[key].native.statusGARefId);
+                                        //adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                        //console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name + '   mit Status : ' + mapping[key].native.statusGARefId);
                                     } else {
                                         controlDPTarray[key] = new knx.Datapoint({
                                             ga: key,
                                             //status_ga: mapping[key].native.statusGARefId,
                                             dpt: convertDPTtype(mapping[key].common.desc)
                                         }, knxConnection);
-                                        adapter.log.info(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
-                                        console.log(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                        //adapter.log.info(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
+                                        //console.log(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
                                     }
                                 }
                             }

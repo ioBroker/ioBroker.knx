@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.8.1",
+        "version": "0.8.2",
 		"news": {
+          "0.8.2": {
+            "en":                 "added parsing of device-config files",
+            "de":                 "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
+            "ru":                 "added parsing of device-config files"
+          },
           "0.8.1": {
             "en":                 "fixed DPT1 problem",
             "de":                 "DPT1 Problem behoben",

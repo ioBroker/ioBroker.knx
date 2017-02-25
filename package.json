@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "ioBroker knx Adapter",
   "author": {
     "name": "K.Ringmann",
@@ -16,7 +16,7 @@
   "licenses": [
     {
       "type": "CC-BY-NC-4.0",
-      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE"
+      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE.txt"
     }
   ],
   "keywords": [
