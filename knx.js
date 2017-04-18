@@ -53,7 +53,7 @@ var adapter = utils.adapter({
         if (!states[id].common.desc) {
             states[id].common.desc = convertDPTtype(valtype);
         }
-
+        console.log(ga, state.val, valtype);
         knxConnection.write(ga, state.val, valtype);
        },
 
@@ -270,7 +270,7 @@ function startKnxServer() {
         ipPort: adapter.config.gwipport,
         physAddr: adapter.config.eibadr,
         //debug: true,
-        minimumDelay: 0,
+        //minimumDelay: 100,
         handlers: {
             connected: function () {
                 if (isEmptyObject(controlDPTarray)) {
@@ -323,6 +323,7 @@ function startKnxServer() {
 
 
             event: function (evt, src, dest, val) {
+
                 switch (evt) {
                     case 'GroupValue_Read'  :
                         var mappedName;
@@ -330,8 +331,8 @@ function startKnxServer() {
                             mappedName = mapping[dest].common.name;
                             try {
                                 adapter.getForeignState(mapping[dest]._id);
-                                adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-
+                              //  adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+                              //  console.log('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
                             } catch (e) {
                                 console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
                             }
@@ -341,19 +342,28 @@ function startKnxServer() {
                     case 'GroupValue_Response' :
                         var mappedName;
                         if (mapping[dest]) {
+                            var obj = mapping[dest];
                             mappedName = mapping[dest].common.name;
                             if (controlDPTarray[dest] && controlDPTarray[dest].current_value)
                                 adapter.setForeignState(mapping[dest]._id, {
                                     val: controlDPTarray[dest].current_value,
                                     ack: true
                                 });
+                            if ( obj.native.actGARefId && !obj.native.actGARefId == '' ){
+                                //console.info(' on CHANGE update of actGARefId : ' + obj.native.actGARefId);
+                                adapter.setForeignState(mapping[obj.native.actGARefId]._id, {
+                                    val: controlDPTarray[dest].current_value,
+                                    ack: true
+                                });
+                            }
+
                         }
-                        adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + val);
+                       // adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
+                        console.log('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
                         break;
 
                     case 'GroupValue_Write' :
                         var mappedName;
-
                         if (mapping[dest] && val !== undefined) {
                             var obj = mapping[dest];
 
@@ -365,6 +375,15 @@ function startKnxServer() {
                                             val: controlDPTarray[dest].current_value,
                                             ack: true
                                         });
+                                        if ( obj.native.actGARefId && !obj.native.actGARefId == '' ){
+                                           // console.info(' update of actGARefId : ' + obj.native.actGARefId);
+                                            adapter.setForeignState(mapping[obj.native.actGARefId]._id, {
+                                                val: controlDPTarray[dest].current_value,
+                                                ack: true
+                                            });
+                                        }
+
+                                        console.log(' knx.js : GroupValue_Write : ' + controlDPTarray[dest].current_value + ' mapping[dest]:' + mapping[dest]._id );
                                     } catch (e) {
                                         console.info('Wrong bufferlength on ga:' + obj._id + ' mit ' + e);
                                     }

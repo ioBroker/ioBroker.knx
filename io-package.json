@@ -61,7 +61,8 @@
 		"keywords":                 ["knx", "vis", "GUI", "graphical", "scada"],
         "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
 		"loglevel":                 "info",
-        "type":                     "hardware"
+        "type":                     "hardware",
+        "restartAdapters":          ["knx"]
     },
     "native": {
         "esfFile": "KNX concept"
