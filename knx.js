@@ -285,7 +285,6 @@ function startKnxServer() {
                                         dpt: convertDPTtype(mapping[key].common.desc),
                                         autoread: true
                                     }, knxConnection);
-
                                     //console.log(' DP (read) erstellt für : ' + key + '    ' + mapping[key].common.name);
                                 } else {
                                     // act-dp with corresponding state
@@ -303,7 +302,6 @@ function startKnxServer() {
                                         // only act datapoint
                                         controlDPTarray[key] = new knx.Datapoint({
                                             ga: key,
-                                            //status_ga: mapping[key].native.statusGARefId,
                                             dpt: convertDPTtype(mapping[key].common.desc),
                                             autoread: false
                                         }, knxConnection);
@@ -338,8 +336,8 @@ function startKnxServer() {
                             mappedName = mapping[dest].common.name;
                             try {
                                 adapter.getForeignState(mapping[dest]._id);
- //                               adapter.log.debug('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-//                                console.log('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+                                // adapter.log.debug('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+                                // console.log('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
                             } catch (e) {
                                 console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
                             }
@@ -367,7 +365,7 @@ function startKnxServer() {
 
                         }
                        // adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
-//                        console.log('GROUPVALUE_RESPONSE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
+                       //   console.log('GROUPVALUE_RESPONSE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
                         break;
 
                     case 'GroupValue_Write' :

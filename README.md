@@ -90,6 +90,11 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 
 ## Changelog
+### 0.8.3 (2017-04-24)
+* added act channel update of corresponding state
+* fix bug in state-vis update
+* optimized knxproj upload
+
 ### 0.8.2 (2017-02-26)
 * implemented device-config parsing from knxproj
 * better choice of state/val of DP objects

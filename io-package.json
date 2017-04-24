@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "knx",
-        "version": "0.8.2",
+        "version": "0.8.3",
 		"news": {
+          "0.8.3": {
+            "en":                 "optimized knxproj load, bugfixes",
+            "de":                 "optimiertes Laden der knxproj datei, bugfixes",
+            "ru":                 "optimized knxproj load, bugfixes"
+          },
           "0.8.2": {
             "en":                 "added parsing of device-config files",
             "de":                 "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
