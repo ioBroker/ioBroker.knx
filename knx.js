@@ -271,21 +271,24 @@ function startKnxServer() {
         ipPort: adapter.config.gwipport,
         physAddr: adapter.config.eibadr,
         //debug: true,
-        //minimumDelay: 100,
+        minimumDelay: 100,
         handlers: {
             connected: function () {
                 if (isEmptyObject(controlDPTarray)) {
                     for (var key in mapping) {
                         if ((key.match(/\d*\/\d*\/\d*/)) && ((mapping[key].common.desc) && (mapping[key].common.desc.indexOf('DP') != -1))) {
                             try {
+                                // act AND state datapoint
                                 if (mapping[key].common.read  ) {
                                     controlDPTarray[key] = new knx.Datapoint({
                                         ga: key,
                                         dpt: convertDPTtype(mapping[key].common.desc),
                                         autoread: true
                                     }, knxConnection);
+
                                     //console.log(' DP (read) erstellt für : ' + key + '    ' + mapping[key].common.name);
                                 } else {
+                                    // act-dp with corresponding state
                                     if ( !(mapping[key].native.statusGARefId === '')) {
                                         controlDPTarray[key] = new knx.Datapoint({
                                             ga: key,
@@ -294,13 +297,15 @@ function startKnxServer() {
                                             autoread: false
                                         }, knxConnection);
                                         //adapter.log.info(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name);
-                                        //console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name + '   mit Status : ' + mapping[key].native.statusGARefId);
+                                        console.log(' DPP erstellt für : ' + key + '    ' + mapping[key].common.name + '   mit Status : ' + mapping[key].native.statusGARefId);
 
                                     } else {
+                                        // only act datapoint
                                         controlDPTarray[key] = new knx.Datapoint({
                                             ga: key,
                                             //status_ga: mapping[key].native.statusGARefId,
-                                            dpt: convertDPTtype(mapping[key].common.desc)
+                                            dpt: convertDPTtype(mapping[key].common.desc),
+                                            autoread: false
                                         }, knxConnection);
                                         //adapter.log.info(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
                                         //console.log(' DP erstellt für : ' + key + '    ' + mapping[key].common.name);
@@ -333,8 +338,8 @@ function startKnxServer() {
                             mappedName = mapping[dest].common.name;
                             try {
                                 adapter.getForeignState(mapping[dest]._id);
-                              //  adapter.log.info('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
-                              //  console.log('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+ //                               adapter.log.debug('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
+//                                console.log('Read from ' + src + ' to ' + '(' + dest + ') ' + mappedName);
                             } catch (e) {
                                 console.warn(' unable to get Value from ' + dest + ' because of : ' + e);
                             }
@@ -353,7 +358,7 @@ function startKnxServer() {
                                 });
 
                             if ( obj.native.actGARefId && !obj.native.actGARefId == '' ){
-                                console.info(' on CHANGE update of actGARefId : ' + obj.native.actGARefId);
+                                console.info(' on Response update of actGARefId : ' + obj.native.actGARefId + '     of  ' + mapping[obj.native.actGARefId]._id + '   with value  ' + controlDPTarray[dest].current_value);
                                 adapter.setForeignState(mapping[obj.native.actGARefId]._id, {
                                     val: controlDPTarray[dest].current_value,
                                     ack: true
@@ -362,7 +367,7 @@ function startKnxServer() {
 
                         }
                        // adapter.log.info('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
-                        console.log('CHANGE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
+//                        console.log('GROUPVALUE_RESPONSE from ' + src + ' to ' + '(' + dest + ') ' + mappedName + ': ' + controlDPTarray[dest].current_value);
                         break;
 
                     case 'GroupValue_Write' :
@@ -373,13 +378,13 @@ function startKnxServer() {
                             if (val && typeof val === 'object') {
                                 if (controlDPTarray[dest]) {
                                     try {
-                                      //  adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
+    //                                    adapter.log.debug('WRITE : mappedName : ' + mapping[dest].common.name + '    dest : ' + dest + '  val: ' + controlDPTarray[dest].toString() + '   (' + convertDPTtype(obj.common.desc) + ') ' + obj._id.replace(/(.*\.)/g, ''));
                                         adapter.setForeignState(mapping[dest]._id, {
                                             val: controlDPTarray[dest].current_value,
                                             ack: true
                                         });
                                         if ( obj.native.actGARefId && !obj.native.actGARefId == '' ){
-                                          //  console.info(' update of actGARefId : ' + obj.native.actGARefId + ' of ' + mapping[obj.native.actGARefId]._id + ' to ' + controlDPTarray[dest].current_value );
+    //                                        console.info(' update of actGARefId : ' + obj.native.actGARefId + ' of ' + mapping[obj.native.actGARefId]._id + ' to ' + controlDPTarray[dest].current_value );
                                             adapter.setForeignState(mapping[obj.native.actGARefId]._id, {
                                                 val: controlDPTarray[dest].current_value,
                                                 ack: true
