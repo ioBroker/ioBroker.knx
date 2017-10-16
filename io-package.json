@@ -1,101 +1,113 @@
 {
     "common": {
-        "name":                     "knx",
+        "name": "knx",
         "version": "0.8.3",
-		"news": {
-          "0.8.3": {
-            "en":                 "optimized knxproj load, bugfixes",
-            "de":                 "optimiertes Laden der knxproj datei, bugfixes",
-            "ru":                 "optimized knxproj load, bugfixes"
-          },
-          "0.8.2": {
-            "en":                 "added parsing of device-config files",
-            "de":                 "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
-            "ru":                 "added parsing of device-config files"
-          },
-          "0.8.1": {
-            "en":                 "fixed DPT1 problem",
-            "de":                 "DPT1 Problem behoben",
-            "ru":                 "fixed DPT1 problem"
-          },
-           "0.8.0": {
-            "en":                 "support of Builingstructure, check for similarities between switch and state ",
-            "de":                 "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
-            "ru":                 "support of Builingstructure, check for similarities between switch and state "
-           },
-           "0.7.3": {
-            "en":                 "more DPT's, faster startup",
-            "de":                 "mehr DPT's, schnellerer Start",
-            "ru":                 "more DPT's, faster startup"
-           },
-			"0.7.2": {
-              "en":                 "Added necessary dependicies",
-              "de":                 "unerfüllte Abhängigkeiten beseitigt",
-              "ru":                 "Added necessary dependicies"
+        "news": {
+            "0.8.3": {
+                "en": "optimized knxproj load, bugfixes",
+                "de": "optimiertes Laden der knxproj datei, bugfixes",
+                "ru": "optimized knxproj load, bugfixes"
             },
-			"0.7.1": {
-              "en":                 "Support of connection to standard KNX/LAN gateways",
-              "de":                 "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
-              "ru":                 "Support of connection to standard KNX/LAN gateways"
+            "0.8.2": {
+                "en": "added parsing of device-config files",
+                "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
+                "ru": "added parsing of device-config files"
+            },
+            "0.8.1": {
+                "en": "fixed DPT1 problem",
+                "de": "DPT1 Problem behoben",
+                "ru": "fixed DPT1 problem"
+            },
+            "0.8.0": {
+                "en": "support of Builingstructure, check for similarities between switch and state ",
+                "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
+                "ru": "support of Builingstructure, check for similarities between switch and state "
+            },
+            "0.7.3": {
+                "en": "more DPT's, faster startup",
+                "de": "mehr DPT's, schnellerer Start",
+                "ru": "more DPT's, faster startup"
+            },
+            "0.7.2": {
+                "en": "Added necessary dependicies",
+                "de": "unerfüllte Abhängigkeiten beseitigt",
+                "ru": "Added necessary dependicies"
+            },
+            "0.7.1": {
+                "en": "Support of connection to standard KNX/LAN gateways",
+                "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
+                "ru": "Support of connection to standard KNX/LAN gateways"
             },
             "0.7.0": {
-              "en":                 "Support of project export",
-              "de":                 "Projekt-Export Unterstützung",
-              "ru":                 "Support of project export"
+                "en": "Support of project export",
+                "de": "Projekt-Export Unterstützung",
+                "ru": "Support of project export"
             },
-			"0.6.0": {
-				"en":               "redesign",
-				"de":               "redesign",
-				"ru":               "redesign"
-			}
+            "0.6.0": {
+                "en": "redesign",
+                "de": "redesign",
+                "ru": "redesign"
+            }
         },
-        "title":                    "KNX Adapter",
-        "desc":                     {
- 			             "en": "ioBroker knx Adapter",
- 			             "de": "ioBroker knx Adapter",
- 			             "ru": "ioBroker knx драйвер как образец"
-		},
-		"license":                  "CC BY-NC",
-        "platform":                 "Javascript/Node.js",
-        "mode":                     "daemon",
-        "icon":                     "knx.png",
-        "enabled":                  true,
-        "messagebox":               true,
-        "subscribe":                "messagebox",
-		"extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
-		"keywords":                 ["knx", "vis", "GUI", "graphical", "scada"],
-        "readme":                   "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-		"loglevel":                 "info",
-        "type":                     "hardware",
-        "restartAdapters":          ["knx"]
+        "title": "KNX Adapter",
+        "desc": {
+            "en": "ioBroker knx Adapter",
+            "de": "ioBroker knx Adapter",
+            "ru": "ioBroker knx драйвер как образец"
+        },
+        "license": "CC BY-NC",
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "knx.png",
+        "enabled": true,
+        "messagebox": true,
+        "subscribe": "messagebox",
+        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+        "keywords": [
+            "knx",
+            "vis",
+            "GUI",
+            "graphical",
+            "scada"
+        ],
+        "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+        "loglevel": "info",
+        "type": "iot-systems",
+        "restartAdapters": [
+            "knx"
+        ],
+        "authors": [
+            {
+                "name": "K.Ringmann",
+                "email": "info@punktnetzwerk.net"
+            }
+        ]
     },
     "native": {
         "esfFile": "KNX concept"
     },
-    "objects": [
-
-    ],
-  "instanceObjects": [
-    {
-      "_id":  "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
-    },
-    {
-      "_id":  "info.connection",
-      "type": "state",
-      "common": {
-        "role":  "indicator.connected",
-        "name":  "If connected to my gateway",
-        "type":  "boolean",
-        "read":  true,
-        "write": false,
-        "def":   false
-      },
-      "native": {}
-    }
-  ]
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If connected to my gateway",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
 }
