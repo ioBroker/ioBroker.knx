@@ -16,7 +16,7 @@ var states = {};
 var knxConnection;
 var controlDPTarray = {};
 
-var adapter = utils.adapter({
+var adapter = utils.Adapter({
     // name has to be set and has to be equal to adapters folder name and main file name excluding extension
     name: 'knx',
 
