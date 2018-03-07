@@ -8,16 +8,17 @@
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
 
-*** The adapter is only compatible with Node 4.x and higher!! ***
+***The adapter is only compatible with Node 4.x and higher!!***
 
 en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
 
-Befor beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sortet into your facility structure.
+Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
-# Adapterconfiguration
+# Adapter configuration
 After installing this adapter, open the adapter configuration. Fill in:
+
 ##### KNX Gateway IP
 <IP of your KNX/Lan GW> with ipv4 format
 
@@ -29,28 +30,29 @@ fill in free phys. address corresponding to your KNX-architecture
 
 ##### Upload knxproj
 here you can upload your ETS Export in "knxproj" format.
-###### !!! I'm sorry, but at the moment, there is no user feedback while processing the file (it can take up to a minute) !!!
-After successful import a message shows how much objects where recognized.
 
-Hit "save & close" and the adapter should start.
-While starting the adapter reads all groupAdresses with read-Flag. This could take a while and can produce a high load on your KNX-bus. But the values in your visare updatet after start.
+After successful import a dialog shows the number of imported object. Now press "save & close" and the adapter should start.
+While starting the adapter reads all groupAdresses with read-Flag. This could take a while and can produce a high load on your KNX-bus. But the values in your vis are updatet after start.
 
 ## Objects
 Here is under knx.0 the group adress tree like in your ETS project.
 
 ## Enumerations
-If you have a Buildingstructure in your ETS with the corresponding devices, it will be shown here. Under "members" are the names of groupaddresses listet from the devices with send-Flag in this Group.
+If you have a building structure in your ETS with the corresponding devices, it will be shown here. Under "members" are the names of group addresses listed from the devices with send-Flag in this Group.
 
 #Usage
-If the adapter startet successfully your datapoints will be available for everything you like to do.
-Try out "mobileUI".
+If the adapter starts successfully your datapoints will be available for everything you like to do.
 
 ## Datapoint Types
-At the moment are DPT1 - DPT20 with subtypes and DPT238 available. But not all are validated.
+All DPT's according to "System Specifications, Interworking, Datapointtypes" from KNX Association are available. That means there are 2 Types of Information you can get:
+1) a Value or a String
+2) comma seperated Values or array of values (for the moment I don't what's the better way to handle)
+
+For example a DPT5.001 is encoded as unsigned Integer with 8-Bit. This gives a single Value. The DPT3.007 (Control Dimming) is encoded as 1Bit(Boolean)+3Bit(unsigned Int).
+This results in f.e. in value like "0,5", where "0" means "decrease" and "5" means number of intervalls.
 
 # Known Problems
-- many Datapointtypes are missing ( takes time to implement )
-- does not work with babtec (means it does not work with babtec as KNX/LAN gateway)
+- don't know for the moment, if it is working since KNX-Stack exchange with babtec and Gira KNX/LAN GW'....waiting for community response
 
 # Wie werden die Datenpunkte generiert
 ## 1) Auslesen aller Kommunikationsobjektreferenzen (im folgenden KOR)
@@ -79,7 +81,7 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 *   zuweisen der DPT's !!
 *   einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
-*   Vermeidung von Sonderzeichen (kann zu Problemen bei der Erzeugung der GAS führen)
+*   Vermeidung von Sonderzeichen "/;\&%$§" (kann zu Problemen bei der Erzeugung der GAS führen)
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
 
@@ -88,8 +90,42 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
 
+## planed features
+
 
 ## Changelog
+### 1.0.5 (2018-03-01)
+* fixed empty objects, related to DPT1 (error message [object Object] unkown Inputvalue)
+* fixed path variable
+* fixed bug with GA's containing a "/" in the name (on proj-import)
+* start implementing crosswise propery update on corresponding DPT (on proj-import)
+
+### 1.0.4 (2018-02-27)
+* schema update for room enumeration coming up with ETS 5.6
+
+### 1.0.2 (2018-02-27)
+* kleine Fehler beseitigt
+
+### 1.0.1 (2018-02-26)
+* fixed certifate error
+
+### 1.0.0 (2018-02-25)
+* substitution of used KNX-stack with own from scratch build stack
+* implemented full scale of DPT according to "System Specifications, Interworking, Datapointtypes" from KNX Association
+* hardening connection handling for tunneling connections
+* upgrade Adapterconfiguration Interface to be ready with Admin3
+* removed "Delay Slider" because of the new knx-stack
+* many other small changes
+* fixed postcomma values to scale-value of DPT
+* implemented "add" mode for knxproject upload (existing Objects stay as they are, only new Objects where added)
+
+### 0.8.6 (2017-06-17)
+* some small bugfixes
+* insert slider to set a sendDelay for slow KNX/LAN Gateways to prevent connection loss
+
+### 0.8.5 (2017-06-05)
+* project loader rebuild, dpt13-fix
+
 ### 0.8.3 (2017-04-24)
 * added act channel update of corresponding state
 * fix bug in state-vis update

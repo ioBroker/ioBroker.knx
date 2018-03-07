@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "0.8.3",
+  "version": "1.0.5",
   "description": "ioBroker knx Adapter",
   "author": {
     "name": "K.Ringmann",
@@ -19,6 +19,7 @@
       "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE.txt"
     }
   ],
+  "license": "CC-BY-NC-4.0",
   "keywords": [
     "ioBroker",
     "knx",
@@ -32,32 +33,40 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.7",
-    "xml2js": "^0.4.17",
-    "xml2js-xpath": "^0.7.0",
-    "underscore": "^1.8.3",
-    "ipv4.js": "^0.0.2",
-    "binary-parser": "^1.1.5",
+    "binary-parser": "^1.3.2",
     "binary-protocol": "^0.0.0",
-    "fs": "^0.0.2",
+    "dgram": "^1.0.1",
+    "events": "^2.0.0",
+    "https": "^1.0.0",
+    "ieee754": "^1.1.8",
+    "ipaddr.js": "1.6.0",
+    "jsonwebtoken": "^8.2.0",
+    "net": "^1.0.2",
+    "os": "^0.1.1",
+    "similarity": "^1.1.1",
+    "underscore": "^1.8.3",
+    "util": "^0.10.3",
     "xmldom": "^0.1.27",
-    "similarity": "^1.1.0",
-    "xpath": "^0.0.23",
-    "ipaddr.js": "1.2.0",
-    "machina": "^2.0.0-1"
+    "xpath": "^0.0.27",
+    "zip": "^1.2.0"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-replace": "^1.0.1",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-jscs": "^3.0.1",
-    "grunt-http": "^2.2.0",
-    "mocha": "^4.1.0",
+    "gulp-javascript-obfuscator": "^1.1.4",
+    "babel-core": "^6.26.0",
+    "babel-minify": "^0.3.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.1.0",
     "chai": "^4.1.2",
-    "multi-tape": "^1.1.1",
-    "tape": "^4.6.2"
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "mocha": "^3.5.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --exit"
+    "test": "node node_modules/mocha/bin/mocha"
   },
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.knx/issues"

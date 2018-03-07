@@ -1,113 +1,75 @@
 {
-    "common": {
-        "name": "knx",
-        "version": "0.8.3",
-        "news": {
-            "0.8.3": {
-                "en": "optimized knxproj load, bugfixes",
-                "de": "optimiertes Laden der knxproj datei, bugfixes",
-                "ru": "optimized knxproj load, bugfixes"
-            },
-            "0.8.2": {
-                "en": "added parsing of device-config files",
-                "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
-                "ru": "added parsing of device-config files"
-            },
-            "0.8.1": {
-                "en": "fixed DPT1 problem",
-                "de": "DPT1 Problem behoben",
-                "ru": "fixed DPT1 problem"
-            },
-            "0.8.0": {
-                "en": "support of Builingstructure, check for similarities between switch and state ",
-                "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
-                "ru": "support of Builingstructure, check for similarities between switch and state "
-            },
-            "0.7.3": {
-                "en": "more DPT's, faster startup",
-                "de": "mehr DPT's, schnellerer Start",
-                "ru": "more DPT's, faster startup"
-            },
-            "0.7.2": {
-                "en": "Added necessary dependicies",
-                "de": "unerfüllte Abhängigkeiten beseitigt",
-                "ru": "Added necessary dependicies"
-            },
-            "0.7.1": {
-                "en": "Support of connection to standard KNX/LAN gateways",
-                "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
-                "ru": "Support of connection to standard KNX/LAN gateways"
-            },
-            "0.7.0": {
-                "en": "Support of project export",
-                "de": "Projekt-Export Unterstützung",
-                "ru": "Support of project export"
-            },
-            "0.6.0": {
-                "en": "redesign",
-                "de": "redesign",
-                "ru": "redesign"
-            }
-        },
-        "title": "KNX Adapter",
-        "desc": {
-            "en": "ioBroker knx Adapter",
-            "de": "ioBroker knx Adapter",
-            "ru": "ioBroker knx драйвер как образец"
-        },
-        "license": "CC BY-NC",
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "knx.png",
-        "enabled": true,
-        "messagebox": true,
-        "subscribe": "messagebox",
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
-        "keywords": [
-            "knx",
-            "vis",
-            "GUI",
-            "graphical",
-            "scada"
-        ],
-        "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "restartAdapters": [
-            "knx"
-        ],
-        "authors": [
-            {
-                "name": "K.Ringmann",
-                "email": "info@punktnetzwerk.net"
-            }
-        ]
-    },
-    "native": {
-        "esfFile": "KNX concept"
-    },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected to my gateway",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
-    ]
+  "name": "iobroker.knx",
+  "version": "1.0.5",
+  "description": "ioBroker knx Adapter",
+  "author": {
+    "name": "K.Ringmann",
+    "email": "info@punktnetzwerk.net"
+  },
+  "contributors": [
+    {
+      "name": "K.Ringmann",
+      "email": "info@punktnetzwerk.net"
+    }
+  ],
+  "homepage": "https://github.com/ioBroker/ioBroker.knx",
+  "licenses": [
+    {
+      "type": "CC-BY-NC-4.0",
+      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE.txt"
+    }
+  ],
+  "license": "CC-BY-NC-4.0",
+  "keywords": [
+    "ioBroker",
+    "knx",
+    "Smart Home",
+    "home automation"
+  ],
+  "main": "knx.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ioBroker/ioBroker.knx"
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "binary-parser": "^1.3.2",
+    "binary-protocol": "^0.0.0",
+    "dgram": "^1.0.1",
+    "events": "^2.0.0",
+    "https": "^1.0.0",
+    "ieee754": "^1.1.8",
+    "ipaddr.js": "1.6.0",
+    "jsonwebtoken": "^8.2.0",
+    "net": "^1.0.2",
+    "os": "^0.1.1",
+    "similarity": "^1.1.1",
+    "underscore": "^1.8.3",
+    "util": "^0.10.3",
+    "xmldom": "^0.1.27",
+    "xpath": "^0.0.27",
+    "zip": "^1.2.0"
+  },
+  "devDependencies": {
+    "gulp-javascript-obfuscator": "^1.1.4",
+    "babel-core": "^6.26.0",
+    "babel-minify": "^0.3.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.1.0",
+    "chai": "^4.1.2",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "mocha": "^3.5.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.knx/issues"
+  },
+  "readmeFilename": "README.md"
 }
