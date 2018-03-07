@@ -169,7 +169,7 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016 K.Ringmann <info@punktnetzwerk.net>
+Copyright (c) 2016-2018 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
