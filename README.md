@@ -7,43 +7,41 @@
 
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
-
-***The adapter is only compatible with Node 4.x and higher!!***
-
+## Description
 en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
-# Adapter configuration
+## Adapter configuration
 After installing this adapter, open the adapter configuration. Fill in:
 
-##### KNX Gateway IP
+### KNX Gateway IP
 <IP of your KNX/Lan GW> with ipv4 format
 
-##### Port
+### Port
 this is normally port 3671
 
-##### phys. EIB Adress
+### phys. EIB Adress
 fill in free phys. address corresponding to your KNX-architecture
 
-##### Upload knxproj
+### Upload knxproj
 here you can upload your ETS Export in "knxproj" format.
 
 After successful import a dialog shows the number of imported object. Now press "save & close" and the adapter should start.
 While starting the adapter reads all groupAdresses with read-Flag. This could take a while and can produce a high load on your KNX-bus. But the values in your vis are updatet after start.
 
-## Objects
+### Objects
 Here is under knx.0 the group adress tree like in your ETS project.
 
-## Enumerations
+### Enumerations
 If you have a building structure in your ETS with the corresponding devices, it will be shown here. Under "members" are the names of group addresses listed from the devices with send-Flag in this Group.
 
-#Usage
+### Usage
 If the adapter starts successfully your datapoints will be available for everything you like to do.
 
-## Datapoint Types
+### Datapoint Types
 All DPT's according to "System Specifications, Interworking, Datapointtypes" from KNX Association are available. That means there are 2 Types of Information you can get:
 1) a Value or a String
 2) comma seperated Values or array of values (for the moment I don't what's the better way to handle)
@@ -51,32 +49,32 @@ All DPT's according to "System Specifications, Interworking, Datapointtypes" fro
 For example a DPT5.001 is encoded as unsigned Integer with 8-Bit. This gives a single Value. The DPT3.007 (Control Dimming) is encoded as 1Bit(Boolean)+3Bit(unsigned Int).
 This results in f.e. in value like "0,5", where "0" means "decrease" and "5" means number of intervalls.
 
-# Known Problems
+## Known Problems
 - don't know for the moment, if it is working since KNX-Stack exchange with babtec and Gira KNX/LAN GW'....waiting for community response
 
-# Wie werden die Datenpunkte generiert
-## 1) Auslesen aller Kommunikationsobjektreferenzen (im folgenden KOR)
+## Wie werden die Datenpunkte generiert
+### 1) Auslesen aller Kommunikationsobjektreferenzen (im folgenden KOR)
 Dabei werden den Gruppenaddressreferenz (im folgenden GAR) ID's der jeweilige DPT der KOR zugeordnet, wenn er vorhanden ist. Ausserdem bekommt der erste Eintrag die Attribute write=yes und read=no. Alle darauf folgenden GAR ID's bekommen nur den DPT zugeordnet
 
-## 2) Erzeugen der Gruppenadressstruktur (im folgenden GAS)
+### 2) Erzeugen der Gruppenadressstruktur (im folgenden GAS)
 Hier wird die GAS anhand der GAR ID's erzeugt und ebenfalls die DPT's zugeordnet, falls dies unter 1) noch nicht geschehen ist.
 
-## 3) Herausfinden der Schalt- und Statusaddressen
+### 3) Herausfinden der Schalt- und Statusaddressen
 In dem ETS Export sind die Schalt- und Statusadressen nicht hinterlegt. Somit führe ich eine Ähnlichkeitsprüfung aller Gruppenadressnamen durch mit der Auswertung auf status und state.
  Wird ein Pärchen gefunden, dessen Ähnlichkeit mehr als 70% beträgt, dann wird angenommen, das die GA1 die Schaltadresse und GA2 die Statusadresse ist. Dabei erhält GA1 das write=true und read=false und GA2 das write=false und read=true.
  Ausserdem werden die DPT abgeglichen aus der jeweilig korrespondierenden GA. Aus diesem Grund ist es schwierig, Pärchen zu finden, wenn die Gruppenadressbeschriftungen nicht konsistent sind.
 
-## 4) Erzeugen der Datenpunktpärchen (im folgenden DPP)
+### 4) Erzeugen der Datenpunktpärchen (im folgenden DPP)
 Ein DPP wird erzeugt, wenn die GA, GAR und der DPT valid sind. Mit diesen DPP arbeitet der Adapter. Fehlen also die DPT's in einer GA, weil sie auf keiner der o. A. Wege gefunden werden konnte, so wird für diese GA kein DPP erzeugt und ist im Weiteren nicht nutzbar.
 
 Im Idealfall werden somit für einen Schaltkanal 2 DPP erzeugt. Das erste ist das Schalten. In diesem ist die GAR ID des Status DPP hinterlegt. Das zweite ist dann das Status DPP ohne weitere Refenrenz.
 
 
-# Beim Start des Adapters
+## Beim Start des Adapters
 Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursacht u.U. eine höhere Buslast und dauert einen Moment. Im Anschluss sind aber alle aktuellen Werte verfügbar.
 
 
-## Vermeidung von Problemen
+### Vermeidung von Problemen
 1) saubere ETS Programmierung und saubere ETS Programmierung und saubere ETS Programmierung
 
 *   zuweisen der DPT's !!
@@ -92,8 +90,11 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 ## planed features
 
-
 ## Changelog
+### 1.0.6 (2018-03-11)
+* fixed connection problem
+* corrected package counter
+
 ### 1.0.5 (2018-03-01)
 * fixed empty objects, related to DPT1 (error message [object Object] unkown Inputvalue)
 * fixed path variable

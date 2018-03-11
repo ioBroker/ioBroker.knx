@@ -1,8 +1,19 @@
 {
   "common": {
     "name": "knx",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "news": {
+      "1.0.6": {
+        "en": "connection problem fixed",
+        "de": "Verbindungsproblem behoben",
+        "ru": "проблема связи исправлена",
+        "pt": "problema de conexão corrigido",
+        "nl": "Verbindingsprobleem opgelost",
+        "fr": "problème de connexion fixe",
+        "it": "problema di connessione risolto",
+        "es": "problema de conexión arreglado",
+        "pl": "problem z połączeniem został naprawiony"
+      },
       "1.0.5": {
         "en": "The empty Object problem was fixed",
         "de": "Das Problem mit dem leeren Objekt wurde behoben",
