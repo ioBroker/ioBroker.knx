@@ -1,75 +1,150 @@
 {
-  "name": "iobroker.knx",
-  "version": "1.0.5",
-  "description": "ioBroker knx Adapter",
-  "author": {
-    "name": "K.Ringmann",
-    "email": "info@punktnetzwerk.net"
+  "common": {
+    "name": "knx",
+    "version": "1.0.5",
+    "news": {
+      "1.0.5": {
+        "en": "The empty Object problem was fixed",
+        "de": "Das Problem mit dem leeren Objekt wurde behoben",
+        "ru": "Исправлена ​​проблема с пустым объектом",
+        "pt": "O problema do objeto vazio foi corrigido",
+        "nl": "Het lege objectprobleem is opgelost",
+        "fr": "Le problème d'objet vide a été résolu",
+        "it": "Il problema dell'oggetto vuoto è stato risolto",
+        "es": "El problema del Objeto vacío fue arreglado",
+        "pl": "Problem z pustym obiektem został naprawiony"
+      },
+      "1.0.4": {
+        "en": "Schema Update für ETS 5.6",
+        "de": "schema update for ETS 5.6",
+        "ru": "scheme update for ETS 5.6"
+      },
+      "1.0.2": {
+        "en": "kleine Fehler beseitigt",
+        "de": "fixed small errors",
+        "ru": "fixed small errors"
+      },
+      "0.8.6": {
+        "en": "fixed some small bugs, insert manual configureable KNX-senddelay",
+        "de": "kleine Fehlerbeseitigungen, manuelle Sendeverzögerung",
+        "ru": "fixed some small bugs, insert manual configureable KNX-senddelay"
+      },
+      "0.8.5": {
+        "en": "project loader rebuild, dpt13-fix",
+        "de": "LAderoutine fuer knxproj überarbeitet, dpt13 fix",
+        "ru": "project loader rebuild, dpt13-fix"
+      },
+      "0.8.3": {
+        "en": "optimized knxproj load, bugfixes",
+        "de": "optimiertes Laden der knxproj datei, bugfixes",
+        "ru": "optimized knxproj load, bugfixes"
+      },
+      "0.8.2": {
+        "en": "added parsing of device-config files",
+        "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
+        "ru": "added parsing of device-config files"
+      },
+      "0.8.1": {
+        "en": "fixed DPT1 problem",
+        "de": "DPT1 Problem behoben",
+        "ru": "fixed DPT1 problem"
+      },
+      "0.8.0": {
+        "en": "support of Builingstructure, check for similarities between switch and state ",
+        "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
+        "ru": "support of Builingstructure, check for similarities between switch and state "
+      },
+      "0.7.3": {
+        "en": "more DPT's, faster startup",
+        "de": "mehr DPT's, schnellerer Start",
+        "ru": "more DPT's, faster startup"
+      },
+      "0.7.2": {
+        "en": "Added necessary dependicies",
+        "de": "unerfüllte Abhängigkeiten beseitigt",
+        "ru": "Added necessary dependicies"
+      },
+      "0.7.1": {
+        "en": "Support of connection to standard KNX/LAN gateways",
+        "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
+        "ru": "Support of connection to standard KNX/LAN gateways"
+      },
+      "0.7.0": {
+        "en": "Support of project export",
+        "de": "Projekt-Export Unterstützung",
+        "ru": "Support of project export"
+      },
+      "0.6.0": {
+        "en": "redesign",
+        "de": "redesign",
+        "ru": "redesign"
+      }
+    },
+    "title": "KNX",
+    "desc": {
+      "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
+      "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
+      "ru": "Этот адаптер позволяет импортировать проекты KNX из ETS и связываться с устройствами через KNX IP Gateway",
+      "pt": "Este adaptador permite importar projetos KNX da ETS e se comunicar com dispositivos via KNX IP Gateway",
+      "nl": "Met deze adapter kunt u KNX-projecten van ETS importeren en met apparaten communiceren via KNX IP Gateway",
+      "fr": "Cet adaptateur permet d'importer des projets KNX depuis ETS et de communiquer avec des appareils via la passerelle IP KNX",
+      "it": "Questo adattatore consente di importare progetti KNX da ETS e comunicare con dispositivi tramite KNX IP Gateway",
+      "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
+      "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
+    },
+    "materialize": true,
+    "license": "CC BY-NC-4.0",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "knx.png",
+    "enabled": true,
+    "messagebox": true,
+    "subscribe": "messagebox",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+    "keywords": [
+      "knx",
+      "vis",
+      "GUI",
+      "graphical",
+      "scada"
+    ],
+    "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+    "loglevel": "info",
+    "type": "hardware",
+    "restartAdapters": [
+      "knx"
+    ]
   },
-  "contributors": [
+  "native": {
+    "gwip": "127.0.0.1",
+    "gwipport": 3671,
+    "eibadr": "1.1.0",
+    "onlyAddNewObjects" : false,
+    "license": ""
+  },
+  "objects": [
+  ],
+  "instanceObjects": [
     {
-      "name": "K.Ringmann",
-      "email": "info@punktnetzwerk.net"
-    }
-  ],
-  "homepage": "https://github.com/ioBroker/ioBroker.knx",
-  "licenses": [
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
     {
-      "type": "CC-BY-NC-4.0",
-      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE.txt"
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected to my gateway",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
     }
-  ],
-  "license": "CC-BY-NC-4.0",
-  "keywords": [
-    "ioBroker",
-    "knx",
-    "Smart Home",
-    "home automation"
-  ],
-  "main": "knx.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ioBroker/ioBroker.knx"
-  },
-  "dependencies": {
-    "adm-zip": "^0.4.7",
-    "binary-parser": "^1.3.2",
-    "binary-protocol": "^0.0.0",
-    "dgram": "^1.0.1",
-    "events": "^2.0.0",
-    "https": "^1.0.0",
-    "ieee754": "^1.1.8",
-    "ipaddr.js": "1.6.0",
-    "jsonwebtoken": "^8.2.0",
-    "net": "^1.0.2",
-    "os": "^0.1.1",
-    "similarity": "^1.1.1",
-    "underscore": "^1.8.3",
-    "util": "^0.10.3",
-    "xmldom": "^0.1.27",
-    "xpath": "^0.0.27",
-    "zip": "^1.2.0"
-  },
-  "devDependencies": {
-    "gulp-javascript-obfuscator": "^1.1.4",
-    "babel-core": "^6.26.0",
-    "babel-minify": "^0.3.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browserify": "^16.1.0",
-    "chai": "^4.1.2",
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "mocha": "^3.5.3",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
-  },
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
-  },
-  "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.knx/issues"
-  },
-  "readmeFilename": "README.md"
+  ]
 }
