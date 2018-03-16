@@ -1,8 +1,19 @@
 {
   "common": {
     "name": "knx",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "news": {
+      "1.0.7": {
+        "en": "fixed adapter lock while uploading project",
+        "de": "fixed Adapter Absturz beim Hochladen des Projekts",
+        "ru": "фиксированная блокировка адаптера при загрузке проекта",
+        "pt": "bloqueio do adaptador fixo durante o upload do projeto",
+        "nl": "vast adaptervergrendeling tijdens het uploaden van het project",
+        "fr": "verrouillage de l'adaptateur fixe lors du téléchargement du projet",
+        "it": "blocco dell'adattatore fisso durante il caricamento del progetto",
+        "es": "bloqueo fijo del adaptador durante la carga del proyecto",
+        "pl": "naprawiono blokadę adaptera podczas przesyłania projektu"
+      },
       "1.0.6": {
         "en": "connection problem fixed",
         "de": "Verbindungsproblem behoben",

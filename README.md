@@ -91,6 +91,9 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## planed features
 
 ## Changelog
+### 1.0.7 (2018-03-16)
+* fixed Adapter-lock while uploading projects
+
 ### 1.0.6 (2018-03-11)
 * fixed connection problem
 * corrected package counter
