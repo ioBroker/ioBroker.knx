@@ -1,8 +1,19 @@
 {
   "common": {
     "name": "knx",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "news": {
+	  "1.0.8":{
+        "en": "modified package queue and ACK Signal",
+        "de": "modifizierte Paketwarteschlange und ACK-Signal",
+        "ru": "измененная очередь пакетов и сигнал ACK",
+        "pt": "fila de pacotes modificados e sinal ACK",
+        "nl": "aangepaste pakketwachtrij en ACK-signaal",
+        "fr": "file d'attente modifiée et signal ACK",
+        "it": "coda pacchetti modificata e segnale ACK",
+        "es": "cola de paquete modificada y señal de ACK",
+        "pl": "zmodyfikowana kolejka pakietów i sygnał ACK"
+      },
       "1.0.7": {
         "en": "fixed adapter lock while uploading project",
         "de": "fixed Adapter Absturz beim Hochladen des Projekts",

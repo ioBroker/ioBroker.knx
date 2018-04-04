@@ -91,6 +91,11 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## planed features
 
 ## Changelog
+### 1.0.8 (2018-04-04)
+* modified package queue
+* fixed ACK if sending to KNX-Bus
+* many small fixes
+
 ### 1.0.7 (2018-03-16)
 * fixed Adapter-lock while uploading projects
 
