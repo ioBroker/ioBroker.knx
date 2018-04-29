@@ -1,183 +1,193 @@
 {
-  "common": {
-    "name": "knx",
-    "version": "1.0.8",
-    "news": {
-	  "1.0.8":{
-        "en": "modified package queue and ACK Signal",
-        "de": "modifizierte Paketwarteschlange und ACK-Signal",
-        "ru": "измененная очередь пакетов и сигнал ACK",
-        "pt": "fila de pacotes modificados e sinal ACK",
-        "nl": "aangepaste pakketwachtrij en ACK-signaal",
-        "fr": "file d'attente modifiée et signal ACK",
-        "it": "coda pacchetti modificata e segnale ACK",
-        "es": "cola de paquete modificada y señal de ACK",
-        "pl": "zmodyfikowana kolejka pakietów i sygnał ACK"
-      },
-      "1.0.7": {
-        "en": "fixed adapter lock while uploading project",
-        "de": "fixed Adapter Absturz beim Hochladen des Projekts",
-        "ru": "фиксированная блокировка адаптера при загрузке проекта",
-        "pt": "bloqueio do adaptador fixo durante o upload do projeto",
-        "nl": "vast adaptervergrendeling tijdens het uploaden van het project",
-        "fr": "verrouillage de l'adaptateur fixe lors du téléchargement du projet",
-        "it": "blocco dell'adattatore fisso durante il caricamento del progetto",
-        "es": "bloqueo fijo del adaptador durante la carga del proyecto",
-        "pl": "naprawiono blokadę adaptera podczas przesyłania projektu"
-      },
-      "1.0.6": {
-        "en": "connection problem fixed",
-        "de": "Verbindungsproblem behoben",
-        "ru": "проблема связи исправлена",
-        "pt": "problema de conexão corrigido",
-        "nl": "Verbindingsprobleem opgelost",
-        "fr": "problème de connexion fixe",
-        "it": "problema di connessione risolto",
-        "es": "problema de conexión arreglado",
-        "pl": "problem z połączeniem został naprawiony"
-      },
-      "1.0.5": {
-        "en": "The empty Object problem was fixed",
-        "de": "Das Problem mit dem leeren Objekt wurde behoben",
-        "ru": "Исправлена ​​проблема с пустым объектом",
-        "pt": "O problema do objeto vazio foi corrigido",
-        "nl": "Het lege objectprobleem is opgelost",
-        "fr": "Le problème d'objet vide a été résolu",
-        "it": "Il problema dell'oggetto vuoto è stato risolto",
-        "es": "El problema del Objeto vacío fue arreglado",
-        "pl": "Problem z pustym obiektem został naprawiony"
-      },
-      "1.0.4": {
-        "en": "Schema Update für ETS 5.6",
-        "de": "schema update for ETS 5.6",
-        "ru": "scheme update for ETS 5.6"
-      },
-      "1.0.2": {
-        "en": "kleine Fehler beseitigt",
-        "de": "fixed small errors",
-        "ru": "fixed small errors"
-      },
-      "0.8.6": {
-        "en": "fixed some small bugs, insert manual configureable KNX-senddelay",
-        "de": "kleine Fehlerbeseitigungen, manuelle Sendeverzögerung",
-        "ru": "fixed some small bugs, insert manual configureable KNX-senddelay"
-      },
-      "0.8.5": {
-        "en": "project loader rebuild, dpt13-fix",
-        "de": "LAderoutine fuer knxproj überarbeitet, dpt13 fix",
-        "ru": "project loader rebuild, dpt13-fix"
-      },
-      "0.8.3": {
-        "en": "optimized knxproj load, bugfixes",
-        "de": "optimiertes Laden der knxproj datei, bugfixes",
-        "ru": "optimized knxproj load, bugfixes"
-      },
-      "0.8.2": {
-        "en": "added parsing of device-config files",
-        "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
-        "ru": "added parsing of device-config files"
-      },
-      "0.8.1": {
-        "en": "fixed DPT1 problem",
-        "de": "DPT1 Problem behoben",
-        "ru": "fixed DPT1 problem"
-      },
-      "0.8.0": {
-        "en": "support of Builingstructure, check for similarities between switch and state ",
-        "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
-        "ru": "support of Builingstructure, check for similarities between switch and state "
-      },
-      "0.7.3": {
-        "en": "more DPT's, faster startup",
-        "de": "mehr DPT's, schnellerer Start",
-        "ru": "more DPT's, faster startup"
-      },
-      "0.7.2": {
-        "en": "Added necessary dependicies",
-        "de": "unerfüllte Abhängigkeiten beseitigt",
-        "ru": "Added necessary dependicies"
-      },
-      "0.7.1": {
-        "en": "Support of connection to standard KNX/LAN gateways",
-        "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
-        "ru": "Support of connection to standard KNX/LAN gateways"
-      },
-      "0.7.0": {
-        "en": "Support of project export",
-        "de": "Projekt-Export Unterstützung",
-        "ru": "Support of project export"
-      },
-      "0.6.0": {
-        "en": "redesign",
-        "de": "redesign",
-        "ru": "redesign"
-      }
+    "common": {
+        "name": "knx",
+        "version": "1.0.9",
+        "news": {
+            "1.0.9":  {
+                "en": "fixed connection handling and some small bugs, changed to state-wise processing",
+                "de": "feste Verbindungsbehandlung und einige kleine Fehler, geändert in zustandsabhängige Verarbeitung",
+                "ru": "фиксированная связь и некоторые небольшие ошибки, измененные на обработку по состоянию",
+                "pt": "manipulação de conexão fixa e alguns pequenos bugs, alterados para processamento em estado",
+                "nl": "vaste verbindingsafhandeling en enkele kleine bugs, veranderd in state-wise verwerking",
+                "fr": "gestion de connexion fixe et quelques petits bugs, changé en traitement par état",
+                "it": "gestione della connessione fissa e alcuni piccoli bug, trasformati in elaborazione a livello di stato",
+                "es": "manejo de conexión fijo y algunos errores pequeños, cambiados a procesamiento en el estado",
+                "pl": "naprawiono obsługę połączenia i kilka drobnych błędów, zmieniono na przetwarzanie stanowe"
+            },
+            "1.0.8": {
+                "en": "modified package queue and ACK Signal",
+                "de": "modifizierte Paketwarteschlange und ACK-Signal",
+                "ru": "измененная очередь пакетов и сигнал ACK",
+                "pt": "fila de pacotes modificados e sinal ACK",
+                "nl": "aangepaste pakketwachtrij en ACK-signaal",
+                "fr": "file d'attente modifiée et signal ACK",
+                "it": "coda pacchetti modificata e segnale ACK",
+                "es": "cola de paquete modificada y señal de ACK",
+                "pl": "zmodyfikowana kolejka pakietów i sygnał ACK"
+            },
+            "1.0.7": {
+                "en": "fixed adapter lock while uploading project",
+                "de": "fixed Adapter Absturz beim Hochladen des Projekts",
+                "ru": "фиксированная блокировка адаптера при загрузке проекта",
+                "pt": "bloqueio do adaptador fixo durante o upload do projeto",
+                "nl": "vast adaptervergrendeling tijdens het uploaden van het project",
+                "fr": "verrouillage de l'adaptateur fixe lors du téléchargement du projet",
+                "it": "blocco dell'adattatore fisso durante il caricamento del progetto",
+                "es": "bloqueo fijo del adaptador durante la carga del proyecto",
+                "pl": "naprawiono blokadę adaptera podczas przesyłania projektu"
+            },
+            "1.0.6": {
+                "en": "connection problem fixed",
+                "de": "Verbindungsproblem behoben",
+                "ru": "проблема связи исправлена",
+                "pt": "problema de conexão corrigido",
+                "nl": "Verbindingsprobleem opgelost",
+                "fr": "problème de connexion fixe",
+                "it": "problema di connessione risolto",
+                "es": "problema de conexión arreglado",
+                "pl": "problem z połączeniem został naprawiony"
+            },
+            "1.0.5": {
+                "en": "The empty Object problem was fixed",
+                "de": "Das Problem mit dem leeren Objekt wurde behoben",
+                "ru": "Исправлена ​​проблема с пустым объектом",
+                "pt": "O problema do objeto vazio foi corrigido",
+                "nl": "Het lege objectprobleem is opgelost",
+                "fr": "Le problème d'objet vide a été résolu",
+                "it": "Il problema dell'oggetto vuoto è stato risolto",
+                "es": "El problema del Objeto vacío fue arreglado",
+                "pl": "Problem z pustym obiektem został naprawiony"
+            },
+            "1.0.4": {
+                "en": "Schema Update für ETS 5.6",
+                "de": "schema update for ETS 5.6",
+                "ru": "scheme update for ETS 5.6"
+            },
+            "1.0.2": {
+                "en": "kleine Fehler beseitigt",
+                "de": "fixed small errors",
+                "ru": "fixed small errors"
+            },
+            "0.8.6": {
+                "en": "fixed some small bugs, insert manual configureable KNX-senddelay",
+                "de": "kleine Fehlerbeseitigungen, manuelle Sendeverzögerung",
+                "ru": "fixed some small bugs, insert manual configureable KNX-senddelay"
+            },
+            "0.8.5": {
+                "en": "project loader rebuild, dpt13-fix",
+                "de": "LAderoutine fuer knxproj überarbeitet, dpt13 fix",
+                "ru": "project loader rebuild, dpt13-fix"
+            },
+            "0.8.3": {
+                "en": "optimized knxproj load, bugfixes",
+                "de": "optimiertes Laden der knxproj datei, bugfixes",
+                "ru": "optimized knxproj load, bugfixes"
+            },
+            "0.8.2": {
+                "en": "added parsing of device-config files",
+                "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
+                "ru": "added parsing of device-config files"
+            },
+            "0.8.1": {
+                "en": "fixed DPT1 problem",
+                "de": "DPT1 Problem behoben",
+                "ru": "fixed DPT1 problem"
+            },
+            "0.8.0": {
+                "en": "support of Builingstructure, check for similarities between switch and state ",
+                "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
+                "ru": "support of Builingstructure, check for similarities between switch and state "
+            },
+            "0.7.3": {
+                "en": "more DPT's, faster startup",
+                "de": "mehr DPT's, schnellerer Start",
+                "ru": "more DPT's, faster startup"
+            },
+            "0.7.2": {
+                "en": "Added necessary dependicies",
+                "de": "unerfüllte Abhängigkeiten beseitigt",
+                "ru": "Added necessary dependicies"
+            },
+            "0.7.1": {
+                "en": "Support of connection to standard KNX/LAN gateways",
+                "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
+                "ru": "Support of connection to standard KNX/LAN gateways"
+            },
+            "0.7.0": {
+                "en": "Support of project export",
+                "de": "Projekt-Export Unterstützung",
+                "ru": "Support of project export"
+            },
+            "0.6.0": {
+                "en": "redesign",
+                "de": "redesign",
+                "ru": "redesign"
+            }
+        },
+        "title": "KNX",
+        "desc": {
+            "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
+            "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
+            "ru": "Этот адаптер позволяет импортировать проекты KNX из ETS и связываться с устройствами через KNX IP Gateway",
+            "pt": "Este adaptador permite importar projetos KNX da ETS e se comunicar com dispositivos via KNX IP Gateway",
+            "nl": "Met deze adapter kunt u KNX-projecten van ETS importeren en met apparaten communiceren via KNX IP Gateway",
+            "fr": "Cet adaptateur permet d'importer des projets KNX depuis ETS et de communiquer avec des appareils via la passerelle IP KNX",
+            "it": "Questo adattatore consente di importare progetti KNX da ETS e comunicare con dispositivi tramite KNX IP Gateway",
+            "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
+            "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
+        },
+        "materialize": true,
+        "license": "CC BY-NC-4.0",
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "knx.png",
+        "enabled": true,
+        "messagebox": true,
+        "subscribe": "messagebox",
+        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+        "keywords": [
+            "knx",
+            "vis",
+            "GUI",
+            "graphical",
+            "scada"
+        ],
+        "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+        "loglevel": "info",
+        "type": "hardware",
+        "restartAdapters": [
+            "knx"
+        ]
     },
-    "title": "KNX",
-    "desc": {
-      "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
-      "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
-      "ru": "Этот адаптер позволяет импортировать проекты KNX из ETS и связываться с устройствами через KNX IP Gateway",
-      "pt": "Este adaptador permite importar projetos KNX da ETS e se comunicar com dispositivos via KNX IP Gateway",
-      "nl": "Met deze adapter kunt u KNX-projecten van ETS importeren en met apparaten communiceren via KNX IP Gateway",
-      "fr": "Cet adaptateur permet d'importer des projets KNX depuis ETS et de communiquer avec des appareils via la passerelle IP KNX",
-      "it": "Questo adattatore consente di importare progetti KNX da ETS e comunicare con dispositivi tramite KNX IP Gateway",
-      "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
-      "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
+    "native": {
+        "gwip": "127.0.0.1",
+        "gwipport": 3671,
+        "eibadr": "1.1.0",
+        "onlyAddNewObjects": false,
+        "license": ""
     },
-    "materialize": true,
-    "license": "CC BY-NC-4.0",
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "knx.png",
-    "enabled": true,
-    "messagebox": true,
-    "subscribe": "messagebox",
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
-    "keywords": [
-      "knx",
-      "vis",
-      "GUI",
-      "graphical",
-      "scada"
-    ],
-    "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-    "loglevel": "info",
-    "type": "hardware",
-    "restartAdapters": [
-      "knx"
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If connected to my gateway",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
     ]
-  },
-  "native": {
-    "gwip": "127.0.0.1",
-    "gwipport": 3671,
-    "eibadr": "1.1.0",
-    "onlyAddNewObjects" : false,
-    "license": ""
-  },
-  "objects": [
-  ],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": "If connected to my gateway",
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
-    }
-  ]
 }

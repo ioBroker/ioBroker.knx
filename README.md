@@ -91,6 +91,12 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## planed features
 
 ## Changelog
+### 1.0.9 (2018-04-29)
+* changed to state-wise processing
+* fixed "disconnect-request"
+* changed connection handling with knxd
+* many small fixes
+
 ### 1.0.8 (2018-04-04)
 * modified package queue
 * fixed ACK if sending to KNX-Bus
