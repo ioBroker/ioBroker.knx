@@ -24,7 +24,7 @@ After installing this adapter, open the adapter configuration. Fill in:
 this is normally port 3671
 
 ### phys. EIB Adress
-fill in free phys. address corresponding to your KNX-architecture
+fill in free phys. address corresponding to your KNX-architecture, !!! BUT NOT the same like your KNX Gateway has !!!
 
 ### Upload knxproj
 here you can upload your ETS Export in "knxproj" format.
@@ -83,7 +83,7 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
 
-3) Physikalische Adresse richtig wählen ( wichtig beim Einsatz von Linienkopplern )
+3) Physikalische Adresse richtig wählen ( wichtig beim Einsatz von Linienkopplern ). !!! ACHTUNG: die hier eingetragene physikalische Adresse ist NICHT die Adresse des LAN Gateways !!!
 
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
