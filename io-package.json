@@ -1,9 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.9",
+        "version": "1.0.10",
         "news": {
-            "1.0.9":  {
+            "1.0.10": {
+                "en": "closing local port in case of undefinded connection state",
+                "de": "Schließen des lokalen Ports im Falle eines nicht definierten Verbindungsstatus",
+                "ru": "закрытие локального порта в случае неопределенного состояния соединения",
+                "pt": "fechando a porta local em caso de estado de conexão indefinido",
+                "nl": "lokale poort sluiten in geval van ongedefinieerde verbindingsstatus",
+                "fr": "fermeture du port local en cas d'état de connexion indéfini",
+                "it": "chiusura della porta locale in caso di stato di connessione non definito",
+                "es": "cerrar el puerto local en caso de un estado de conexión indefinido",
+                "pl": "zamykanie portu lokalnego w przypadku niezdefiniowanego stanu połączenia"
+            },
+            "1.0.9": {
                 "en": "fixed connection handling and some small bugs, changed to state-wise processing",
                 "de": "feste Verbindungsbehandlung und einige kleine Fehler, geändert in zustandsabhängige Verarbeitung",
                 "ru": "фиксированная связь и некоторые небольшие ошибки, измененные на обработку по состоянию",

@@ -26,6 +26,9 @@ this is normally port 3671
 ### phys. EIB Adress
 fill in free phys. address corresponding to your KNX-architecture, !!! BUT NOT the same like your KNX Gateway has !!!
 
+### debug-Level
+extends the output Level of the adapter for debugging purposes
+
 ### Upload knxproj
 here you can upload your ETS Export in "knxproj" format.
 
@@ -79,7 +82,7 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 *   zuweisen der DPT's !!
 *   einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
-*   Vermeidung von Sonderzeichen "/;\&%$§" (kann zu Problemen bei der Erzeugung der GAS führen)
+*   Vermeidung von Sonderzeichen "/;\&%$§[]" (kann zu Problemen bei der Erzeugung der GAS führen)
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
 
@@ -91,6 +94,11 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## planed features
 
 ## Changelog
+### 1.0.10 (2018-05-04)
+* closing local port in case of undefinded connection state
+* added advanced debug-level via adapter-config
+* many fixes
+
 ### 1.0.9 (2018-04-29)
 * changed to state-wise processing
 * fixed "disconnect-request"
