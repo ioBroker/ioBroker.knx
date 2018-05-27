@@ -1,8 +1,19 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.10",
+        "version": "1.0.11",
         "news": {
+            "1.0.11": {
+                "en": "fixed DPT1 issue and reconnect issue",
+                "de": "Problem mit DPT1 behoben und erneut verbunden",
+                "ru": "фиксированная проблема DPT1 и проблема повторного подключения",
+                "pt": "problema de DPT1 fixo e reconectar problema",
+                "nl": "opgelost probleem met DPT1 en opnieuw verbinden",
+                "fr": "problème DPT1 fixe et problème de reconnexion",
+                "it": "risolto problema DPT1 e problema di riconnessione",
+                "es": "problema fijo de DPT1 y problema de reconexión",
+                "pl": "naprawiono problem z DPT1 i problem z ponownym nawiązaniem połączenia"
+            },
             "1.0.10": {
                 "en": "closing local port in case of undefinded connection state",
                 "de": "Schließen des lokalen Ports im Falle eines nicht definierten Verbindungsstatus",

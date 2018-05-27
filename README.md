@@ -94,6 +94,11 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 ## planed features
 
 ## Changelog
+### 1.0.11 (2018-05-27)
+* fixed DPT1 correcting value problem
+* fixed reconnect problem
+* other small optimizations and fixes
+
 ### 1.0.10 (2018-05-04)
 * closing local port in case of undefinded connection state
 * added advanced debug-level via adapter-config
