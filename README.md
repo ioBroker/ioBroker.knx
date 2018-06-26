@@ -14,6 +14,14 @@ It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
+## Features:
+* importing knxproj file
+* generating ETS-like object structure
+* finding and combining act-channel and state-channel (heuristic)
+* updating all states on start
+* emmiting a READ to the KNX-Bus, while writing on state-object
+* sorting channels to rooms
+
 ## Adapter configuration
 After installing this adapter, open the adapter configuration. Fill in:
 
@@ -52,8 +60,6 @@ All DPT's according to "System Specifications, Interworking, Datapointtypes" fro
 For example a DPT5.001 is encoded as unsigned Integer with 8-Bit. This gives a single Value. The DPT3.007 (Control Dimming) is encoded as 1Bit(Boolean)+3Bit(unsigned Int).
 This results in f.e. in value like "0,5", where "0" means "decrease" and "5" means number of intervalls.
 
-## Known Problems
-- don't know for the moment, if it is working since KNX-Stack exchange with babtec and Gira KNX/LAN GW'....waiting for community response
 
 ## Wie werden die Datenpunkte generiert
 ### 1) Auslesen aller Kommunikationsobjektreferenzen (im folgenden KOR)
@@ -76,6 +82,8 @@ Im Idealfall werden somit für einen Schaltkanal 2 DPP erzeugt. Das erste ist da
 ## Beim Start des Adapters
 Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursacht u.U. eine höhere Buslast und dauert einen Moment. Im Anschluss sind aber alle aktuellen Werte verfügbar.
 
+## (hidden) Features:
+Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekte innerhalb dieser Gruppenadresse per GroupValueRead abgefragt.
 
 ### Vermeidung von Problemen
 1) saubere ETS Programmierung und saubere ETS Programmierung und saubere ETS Programmierung
@@ -86,14 +94,21 @@ Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursac
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
 
-3) Physikalische Adresse richtig wählen ( wichtig beim Einsatz von Linienkopplern ). !!! ACHTUNG: die hier eingetragene physikalische Adresse ist NICHT die Adresse des LAN Gateways !!!
+3) Physikalische Adresse richtig wählen ( wichtig beim Einsatz von Linienkopplern ). !!! ACHTUNG: die hier eingetragene physikalische Adresse ist NICHT die Adresse des LAN Gateways und darf nicht auf 0 enden !!!
 
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
 
 ## planed features
+* adding adresses to object-description (id)
+* selective import of knx-project
 
 ## Changelog
+### 1.0.12 (2018-06-19)
+* reduced and sorted log output
+* small bugfixes
+* NEW Feature: request State/Val of stateObject from KNX-Bus
+
 ### 1.0.11 (2018-05-27)
 * fixed DPT1 correcting value problem
 * fixed reconnect problem
