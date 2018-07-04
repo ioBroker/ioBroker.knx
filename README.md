@@ -90,7 +90,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 *   zuweisen der DPT's !!
 *   einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
-*   Vermeidung von Sonderzeichen "/;\&%$§[]" (kann zu Problemen bei der Erzeugung der GAS führen)
+*   Vermeidung von Sonderzeichen ",./;\&%$§[]" (kann zu Problemen bei der Erzeugung der GAS führen)
 
 2) Prüfen ob das KNX/LAN GW erreichbar ist. Wenn es das nicht ist, versucht der Adapter sich kontinuierlich zu verbinden.
 
@@ -102,8 +102,13 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ## planed features
 * adding adresses to object-description (id)
 * selective import of knx-project
+* require node Version >8.9.4!
 
 ## Changelog
+### 1.0.13 (2018-07-04)
+* elemination of special signs while importing
+* small bugfixes
+
 ### 1.0.12 (2018-06-19)
 * reduced and sorted log output
 * small bugfixes

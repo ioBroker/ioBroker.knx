@@ -1,8 +1,30 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.11",
+        "version": "1.0.13",
         "news": {
+            "1.0.13": {
+                "en": "elemination of special signs while project import, small fixes",
+                "de": "Beseitigung von Sonderzeichen beim Projektimport, kleine Korrekturen",
+                "ru": "устранение специальных знаков при импорте проекта, небольшие исправления",
+                "pt": "eliminação de sinais especiais durante a importação do projeto, pequenas correções",
+                "nl": "eliminatie van speciale tekens tijdens projectimport, kleine aanpassingen",
+                "fr": "élimination des signes spéciaux lors de l'importation du projet, petites corrections",
+                "it": "eliminazione di segni speciali durante l'importazione del progetto, piccole correzioni",
+                "es": "eliminación de signos especiales durante la importación del proyecto, pequeñas correcciones",
+                "pl": "eliminacja znaków specjalnych podczas importu projektu, drobne poprawki"
+            },
+            "1.0.12": {
+                "en": "triggerable groupValueRead, small fixes, cleared log ouput",
+                "de": "antriggerbarer groupValueRead, kleine Korrekturen, gelöschte Protokollausgabe",
+                "ru": "groupValueRead, небольшие исправления, очищенный вывод журнала",
+                "pt": "groupValueRead, pequenas correções, saída de log desmarcada",
+                "nl": "groupValueRead, kleine correcties, gewiste logboekuitvoer",
+                "fr": "groupValueRead, petites corrections, sortie du journal effacée",
+                "it": "groupValueRead, piccole correzioni, output di registro cancellato",
+                "es": "groupValueRead, correcciones pequeñas, salida de registro borrada",
+                "pl": "groupValueRead, małe poprawki, wyczyszczone wyjście dziennika"
+            },
             "1.0.11": {
                 "en": "fixed DPT1 issue and reconnect issue",
                 "de": "Problem mit DPT1 behoben und erneut verbunden",
