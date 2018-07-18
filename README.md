@@ -105,6 +105,10 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.15 (2018-07-18)
+* change ChID on reconnect
+* on Startup read wait for response of Statechannel or timeout
+
 ### 1.0.13 (2018-07-04)
 * elemination of special signs while importing
 * small bugfixes

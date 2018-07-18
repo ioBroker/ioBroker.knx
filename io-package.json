@@ -1,8 +1,19 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.13",
+        "version": "1.0.15",
         "news": {
+            "1.0.15": {
+                "en": "change ChID on reconnect, changed Adaptertyp to iot-systems, small bugfixes",
+                "de": "ChILD beim Reconnect ändern, Adapter Type in iot-systems ändern, kleine Bugfixes",
+                "ru": "изменить CHILD при повторном подключении, изменить тип адаптера на iot-системы, небольшие исправления ошибок",
+                "pt": "altere o ChILD na reconexão, altere o Tipo de Adaptador para sistemas iot, pequenas correções de erros",
+                "nl": "verander ChilD bij opnieuw verbinden, veranderd Adapter Type in iot-systemen, kleine bugfixes",
+                "fr": "changez ChILD lors de la reconnexion, changez le type d'adaptateur en iot-systems, correction de bugs",
+                "it": "cambia ChILD su riconnettersi, cambia Tipo di adattatore a iot-systems, correzioni di piccoli bug",
+                "es": "cambie ChILD al volver a conectar, cambie el tipo de adaptador a iot-systems, solucione pequeños errores",
+                "pl": "zmień ChILD po ponownym połączeniu, zmień typ adaptera na iot-systems, małe poprawki błędów"
+            },
             "1.0.13": {
                 "en": "elemination of special signs while project import, small fixes",
                 "de": "Beseitigung von Sonderzeichen beim Projektimport, kleine Korrekturen",
@@ -198,7 +209,7 @@
         ],
         "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
         "loglevel": "info",
-        "type": "hardware",
+        "type": "iot-systems",
         "restartAdapters": [
             "knx"
         ]
