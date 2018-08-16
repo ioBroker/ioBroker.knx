@@ -98,6 +98,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
+5) Durch die Möglichkeit der Statusabfrage ist eines zu beachten: Es ist sicherzustellen das nicht mehr als 40 Anfragen pro Sekunde vom ioBroker generiert werden, denn diese können dann physikalisch
+   bedingt nicht mehr durch den Adapter an das Gateway weitergereicht werden.
+
 
 ## planed features
 * adding adresses to object-description (id)
@@ -105,6 +108,11 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.17 (2018-08-16)
+* Better state processing
+* Add configurable package rate
+* corrected Bug in "import only new objects"
+
 ### 1.0.15 (2018-07-18)
 * change ChID on reconnect
 * on Startup read wait for response of Statechannel or timeout

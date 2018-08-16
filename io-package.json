@@ -1,8 +1,19 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.15",
+        "version": "1.0.17",
         "news": {
+            "1.0.17": {
+                "en": "Better state processing\nConfigurable latency time was added",
+                "de": "Bessere staatliche Verarbeitung\nKonfigurierbare Latenzzeit wurde hinzugefügt",
+                "ru": "Улучшенная обработка состояния\nДобавлено настраиваемое время ожидания",
+                "pt": "Melhor processamento de estado\nO tempo de latência configurável foi adicionado",
+                "nl": "Betere staatsverwerking\nConfigureerbare latentietijd toegevoegd",
+                "fr": "Meilleur traitement d'état\nTemps de latence configurable ajouté",
+                "it": "Migliore elaborazione dello stato\nÈ stato aggiunto il tempo di latenza configurabile",
+                "es": "Mejor procesamiento de estado\nTiempo de latencia configurable fue agregado",
+                "pl": "Lepsze przetwarzanie stanu\nDodano konfigurowalny czas oczekiwania"
+            },
             "1.0.15": {
                 "en": "change ChID on reconnect, changed Adaptertyp to iot-systems, small bugfixes",
                 "de": "ChILD beim Reconnect ändern, Adapter Type in iot-systems ändern, kleine Bugfixes",
@@ -219,7 +230,8 @@
         "gwipport": 3671,
         "eibadr": "1.1.0",
         "onlyAddNewObjects": false,
-        "license": ""
+        "license": "",
+        "frameInterval": 30
     },
     "objects": [],
     "instanceObjects": [
