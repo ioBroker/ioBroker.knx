@@ -1,8 +1,19 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.17",
+        "version": "1.0.18",
         "news": {
+            "1.0.18": {
+                "en": "Troubleshooting, see README",
+                "de": "Fehlerbehebung, siehe README",
+                "ru": "Устранение неполадок, см. README",
+                "pt": "Solução de problemas, consulte o README",
+                "nl": "Problemen oplossen, zie README",
+                "fr": "Dépannage, voir README",
+                "it": "Risoluzione dei problemi, vedere README",
+                "es": "Solución de problemas, ver README",
+                "pl": "Rozwiązywanie problemów, zobacz README"
+            },
             "1.0.17": {
                 "en": "Better state processing\nConfigurable latency time was added",
                 "de": "Bessere staatliche Verarbeitung\nKonfigurierbare Latenzzeit wurde hinzugefügt",
