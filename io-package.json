@@ -1,8 +1,19 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.18",
+        "version": "1.0.19",
         "news": {
+            "1.0.19": {
+                "en": "Reverted true/false to 0/1 due special handling is clear, see README",
+                "de": "Regelung true/false auf 0/1 zurückgeändert, bis das handling geklärt ist, siehe README",
+                "ru": "Устранение неполадок, см. README",
+                "pt": "Solução de problemas, consulte o README",
+                "nl": "Problemen oplossen, zie README",
+                "fr": "Dépannage, voir README",
+                "it": "Risoluzione dei problemi, vedere README",
+                "es": "Solución de problemas, ver README",
+                "pl": "Rozwiązywanie problemów, zobacz README"
+            },
             "1.0.18": {
                 "en": "Troubleshooting, see README",
                 "de": "Fehlerbehebung, siehe README",

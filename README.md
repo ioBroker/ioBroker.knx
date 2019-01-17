@@ -14,8 +14,9 @@ It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
-## ATTENTION for Version 1.0.18: For future releases I've changed the values for "boolean" from 1 and 0 to true false, as it should be. In fact of this, check your scripts to use "true" and "false" instead of 0 and 1 
-## ACHTUNG für Version 1.0.18: Für zukünfige Versionen wurden die Werte für den DPT1.xxx boolean wurde von 1 bzw 0 auf true bzw false gesetzt. Deshalb sind alle Scripte auf diese Auswertung hin zu prüfen.
+## Obsolete for the moment in 1.0.19
+### ATTENTION for Version 1.0.18: For future releases I've changed the values for "boolean" from 1 and 0 to true false, as it should be. In fact of this, check your scripts to use "true" and "false" instead of 0 and 1
+### ACHTUNG für Version 1.0.18: Für zukünfige Versionen wurden die Werte für den DPT1.xxx boolean wurde von 1 bzw 0 auf true bzw false gesetzt. Deshalb sind alle Scripte auf diese Auswertung hin zu prüfen.
 
 
 ## Features:
@@ -112,6 +113,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.19
+* reverted to true/false handling for DPT1.x
+
 ### 1.0.18
 * fixed upload issue with ETS5.6.x project files
 * switched values for "boolean" from 1 and 0 to true false 
