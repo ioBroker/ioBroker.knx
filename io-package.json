@@ -4,7 +4,7 @@
         "version": "1.0.19",
         "news": {
             "1.0.19": {
-                "en": "Reverted true/false to 0/1 due special handling is clear, see README",
+                "en": "Reverted true/false to 0/1 due special handling is clear, see README ",
                 "de": "Regelung true/false auf 0/1 zurückgeändert, bis das handling geklärt ist, siehe README",
                 "ru": "Устранение неполадок, см. README",
                 "pt": "Solução de problemas, consulte o README",

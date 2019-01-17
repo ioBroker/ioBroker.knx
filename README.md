@@ -106,7 +106,6 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 5) Durch die Möglichkeit der Statusabfrage ist eines zu beachten: Es ist sicherzustellen das nicht mehr als 40 Anfragen pro Sekunde vom ioBroker generiert werden, denn diese können dann physikalisch
    bedingt nicht mehr durch den Adapter an das Gateway weitergereicht werden.
 
-
 ## planed features
 * adding adresses to object-description (id)
 * selective import of knx-project
