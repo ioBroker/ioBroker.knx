@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.19",
+        "version": "1.0.20",
         "news": {
+            "1.0.20": {
+                "en": "fixed bug in KNX-processing queue and in knxproj-upload",
+                "de": "Fehler in der KNX-Verarbeitungswarteschlange und im knxproj-Upload behoben",
+                "ru": "исправлена ​​ошибка в очереди KNX-обработки и в knxproj-upload",
+                "pt": "Corrigido o erro na fila de processamento do KNX e no upload do knxproj",
+                "nl": "bug gerepareerd in KNX-verwerkingswachtrij en in knxproj-upload",
+                "fr": "Correction d'un bug dans la file d'attente de traitement KNX et dans knxproj-upload",
+                "it": "corretto bug nella coda di elaborazione KNX e in knxproj-upload",
+                "es": "error corregido en la cola de procesamiento KNX y en knxproj-upload",
+                "pl": "naprawiono błąd w kolejce przetwarzania KNX oraz w knxproj-upload",
+                "zh-cn": "修复了KNX处理队列和knxproj-upload中的错误"
+            },
             "1.0.19": {
                 "en": "Reverted true/false to 0/1 due special handling is clear, see README ",
                 "de": "Regelung true/false auf 0/1 zurückgeändert, bis das handling geklärt ist, siehe README",
@@ -225,7 +237,7 @@
             "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
         },
         "materialize": true,
-        "license": "CC BY-NC-4.0",
+        "license": "CC-BY-NC-4.0",
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "knx.png",
@@ -241,6 +253,9 @@
             "scada"
         ],
         "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+        "authors": [
+            "K.Ringmann <info@punktnetzwerk.net>"
+        ],
         "loglevel": "info",
         "type": "iot-systems",
         "restartAdapters": [

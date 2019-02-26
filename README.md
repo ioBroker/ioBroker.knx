@@ -112,6 +112,10 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.20
+* fixed bug in handling KNX-data packages, which occures periodical reconnects
+* fixed bug in KNX-projectfile upload procedure
+
 ### 1.0.19
 * reverted to true/false handling for DPT1.x
 
