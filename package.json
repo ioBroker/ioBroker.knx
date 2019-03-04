@@ -51,7 +51,8 @@
     "util": "^0.10.3",
     "xmldom": "^0.1.27",
     "xpath": "^0.0.27",
-    "zip": "^1.2.0"
+    "zip": "^1.2.0",
+    "@iobroker/adapter-core": "^1.0.3"
   },
   "devDependencies": {
     "gulp-javascript-obfuscator": "^1.1.4",
@@ -66,8 +67,7 @@
     "gulp-rename": "^1.2.2",
     "mocha": "^6.0.2",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "@iobroker/adapter-core": "^1.0.3"
+    "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",
