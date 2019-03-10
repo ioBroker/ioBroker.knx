@@ -2,7 +2,7 @@
 # ioBroker.knx
 =================
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
+![Number of Installations](http://iobroker.live/badges/knx-installed.svg) ![Number of Installations](http://iobroker.live/badges/knx-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
 
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
