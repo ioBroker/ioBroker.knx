@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.20",
+        "version": "1.0.30",
         "news": {
+            "1.0.30": {
+                "en": "new importer for ETS5.7.2 project-files, new config menu, extended datapointtypes,....",
+                "de": "neuer Importer für ETS5.7.2 Projektdateien, neues Konfigurationsmenü, erweiterte Datenpunkttypen, ....",
+                "ru": "новый импортер для файлов проекта ETS5.7.2, новое меню конфигурации, расширенные типы данных, ....",
+                "pt": "novo importador para arquivos de projeto ETS5.7.2, novo menu de configuração, datapointtypes estendidos, ....",
+                "nl": "nieuwe importeur voor ETS5.7.2 project-bestanden, nieuw configuratiemenu, uitgebreide datapointtypes, ....",
+                "fr": "nouvel importateur pour les fichiers de projet ETS5.7.2, nouveau menu de configuration, types de données étendus, ....",
+                "it": "nuovo importatore per file di progetto ETS5.7.2, nuovo menu di configurazione, tipi di dati estesi, ....",
+                "es": "nuevo importador para archivos de proyecto ETS5.7.2, nuevo menú de configuración, tipos de puntos de datos extendidos, ...",
+                "pl": "nowy importer plików projektu ETS5.7.2, nowe menu konfiguracji, rozszerzone typy punktów danych, ...",
+                "zh-cn": "ETS5.7.2项目文件的新导入程序，新的配置菜单，扩展的数据点类型，...."
+            },
             "1.0.20": {
                 "en": "fixed bug in KNX-processing queue and in knxproj-upload",
                 "de": "Fehler in der KNX-Verarbeitungswarteschlange und im knxproj-Upload behoben",
@@ -263,12 +275,14 @@
         ]
     },
     "native": {
+        "useBooleans": true,
         "gwip": "127.0.0.1",
         "gwipport": 3671,
         "eibadr": "1.1.0",
         "onlyAddNewObjects": false,
         "license": "",
-        "frameInterval": 30
+        "frameInterval": 30,
+        "bind": "0.0.0.0"
     },
     "objects": [],
     "instanceObjects": [
