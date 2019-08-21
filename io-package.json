@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.30",
+        "version": "1.0.31",
         "news": {
+            "1.0.31": {
+                "en": "fixed error in devTree generation",
+                "de": "Fehler bei der devTree-Generierung behoben",
+                "ru": "исправлена ошибка в генерации devTree",
+                "pt": "erro fixo na geração devTree",
+                "nl": "fout opgelost bij het genereren van devTree",
+                "fr": "erreur corrigée dans la génération devTree",
+                "it": "errore risolto nella generazione di devTree",
+                "es": "error corregido en la generación devTree",
+                "pl": "naprawiony błąd w generowaniu devTree",
+                "zh-cn": "devTree生成中的固定错误"
+            },
             "1.0.30": {
                 "en": "new importer for ETS5.7.2 project-files, new config menu, extended datapointtypes,....",
                 "de": "neuer Importer für ETS5.7.2 Projektdateien, neues Konfigurationsmenü, erweiterte Datenpunkttypen, ....",

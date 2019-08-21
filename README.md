@@ -112,6 +112,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.31
+* fixed bug in deviceTree generation
+
 ### 1.0.30
 * new Importer for ETS5.7.2 knxproj files
 * extended accepted Datapointtypes
@@ -270,4 +273,3 @@ CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND
 CONDITIONS.
 
 Read full license text in [LICENSE](LICENSE)
-
