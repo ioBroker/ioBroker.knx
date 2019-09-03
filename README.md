@@ -2,7 +2,7 @@
 # ioBroker.knx
 =================
 
-![Number of Installations](http://iobroker.live/badges/knx-installed.svg) ![Number of Installations](http://iobroker.live/badges/knx-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
+[![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
 
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
@@ -75,8 +75,21 @@ Hier wird die GAS anhand der GAR ID's erzeugt und ebenfalls die DPT's zugeordnet
 
 ### 3) Herausfinden der Schalt- und Statusaddressen
 In dem ETS Export sind die Schalt- und Statusadressen nicht hinterlegt. Somit führe ich eine Ähnlichkeitsprüfung aller Gruppenadressnamen durch mit der Auswertung auf status und state.
- Wird ein Pärchen gefunden, dessen Ähnlichkeit mehr als 70% beträgt, dann wird angenommen, das die GA1 die Schaltadresse und GA2 die Statusadresse ist. Dabei erhält GA1 das write=true und read=false und GA2 das write=false und read=true.
+ Wird ein Pärchen gefunden, dessen Ähnlichkeit mehr als 90% beträgt, dann wird angenommen, das die GA1 die Schaltadresse und GA2 die Statusadresse ist. Dabei erhält GA1 das write=true und read=false und GA2 das write=false und read=true.
  Ausserdem werden die DPT abgeglichen aus der jeweilig korrespondierenden GA. Aus diesem Grund ist es schwierig, Pärchen zu finden, wenn die Gruppenadressbeschriftungen nicht konsistent sind.
+
+Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werden die Flags wie folgt umgesetzt:
+
+|KNX                          |||iobroker                   |||
+| Lesen | Schreiben | Übertragen|Lesen|Schreiben| Erklärung |
+|-----------------------------------------------------------|
+|   -   |    -      |    -      | -   |    -    | der wert wird über GroupValueResponse aktualiesiert |
+|   x   |    -      |    -      | x   |    x    | ein Trigger darauf löst GroupValueRead aus|
+|   -   |    x      |    -      | -   |    x    | Schreibt den angegeben Wert mit GroupValueWrite auf den KNX-Bus|
+|   -   |    -      |    x      | x   |    -    | der Wert wird über GroupValueResponse aktualisiert |
+|   x   |    -      |    x      | x   |    x    | ein Trigger darauf löst GroupValueRead aus|
+
+
 
 ### 4) Erzeugen der Datenpunktpärchen (im folgenden DPP)
 Ein DPP wird erzeugt, wenn die GA, GAR und der DPT valid sind. Mit diesen DPP arbeitet der Adapter. Fehlen also die DPT's in einer GA, weil sie auf keiner der o. A. Wege gefunden werden konnte, so wird für diese GA kein DPP erzeugt und ist im Weiteren nicht nutzbar.
@@ -112,6 +125,14 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.32 (2019-09-03)
+* updated importer for ETS V5.7.2, some changes in KNX-stack statemachine
+
+### 1.0.31
+* some fixes on ETS5.7.2 importer
+* small changes in knx-stack statemachine
+* added (again) phys address to admin config dialog
+
 ### 1.0.31
 * fixed bug in deviceTree generation
 

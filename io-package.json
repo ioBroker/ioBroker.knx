@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.31",
+        "version": "1.0.32",
         "news": {
+            "1.0.32": {
+                "en": "updated importer for ETS V5.7.2, some changes in KNX-stack statemachine",
+                "de": "aktualisierter Importer für ETS V5.7.2, einige Änderungen in der KNX-Stack-Statemachine",
+                "ru": "обновлен импортер для ETS V5.7.2, некоторые изменения в машине состояний стека KNX",
+                "pt": "importador atualizado para o ETS V5.7.2, algumas alterações na máquina de estado da pilha KNX",
+                "nl": "bijgewerkte importeur voor ETS V5.7.2, enkele wijzigingen in de KNX-stack statemachine",
+                "fr": "Importateur mis à jour pour ETS V5.7.2, modifications apportées à la machine à statut KNX",
+                "it": "importatore aggiornato per ETS V5.7.2, alcune modifiche nella macchina a stati stack KNX",
+                "es": "importador actualizado para ETS V5.7.2, algunos cambios en la máquina de estado de la pila KNX",
+                "pl": "zaktualizowany importer do ETS V5.7.2, niektóre zmiany w automatach stosu KNX",
+                "zh-cn": "更新了ETS V5.7.2的导入程序，KNX-stack状态机的一些变化"
+            },
             "1.0.31": {
                 "en": "fixed error in devTree generation",
                 "de": "Fehler bei der devTree-Generierung behoben",
@@ -269,6 +281,7 @@
         "messagebox": true,
         "subscribe": "messagebox",
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+        "compact": true,
         "keywords": [
             "knx",
             "vis",
