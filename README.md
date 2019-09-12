@@ -14,11 +14,6 @@ It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
-## Obsolete for the moment in 1.0.19
-### ATTENTION for Version 1.0.18: For future releases I've changed the values for "boolean" from 1 and 0 to true false, as it should be. In fact of this, check your scripts to use "true" and "false" instead of 0 and 1
-### ACHTUNG für Version 1.0.18: Für zukünfige Versionen wurden die Werte für den DPT1.xxx boolean wurde von 1 bzw 0 auf true bzw false gesetzt. Deshalb sind alle Scripte auf diese Auswertung hin zu prüfen.
-
-
 ## Features:
 * importing knxproj file
 * generating ETS-like object structure
@@ -89,9 +84,7 @@ Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werde
 |   -   |    -      |    x      | x   |    -    | der Wert wird über GroupValueResponse aktualisiert |
 |   x   |    -      |    x      | x   |    x    | ein Trigger darauf löst GroupValueRead aus|
 
-
-
-### 4) Erzeugen der Datenpunktpärchen (im folgenden DPP)
+###  4)Erzeugen der Datenpunktpaaren (im folgenden DPP)
 Ein DPP wird erzeugt, wenn die GA, GAR und der DPT valid sind. Mit diesen DPP arbeitet der Adapter. Fehlen also die DPT's in einer GA, weil sie auf keiner der o. A. Wege gefunden werden konnte, so wird für diese GA kein DPP erzeugt und ist im Weiteren nicht nutzbar.
 
 Im Idealfall werden somit für einen Schaltkanal 2 DPP erzeugt. Das erste ist das Schalten. In diesem ist die GAR ID des Status DPP hinterlegt. Das zweite ist dann das Status DPP ohne weitere Refenrenz.
@@ -125,6 +118,11 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.33 (2019-09-12)
+* fixed bug while writing to bus
+* added units to states
+* fixed "read/write of undefined" error
+
 ### 1.0.32 (2019-09-03)
 * updated importer for ETS V5.7.2, some changes in KNX-stack statemachine
 

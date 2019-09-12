@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.32",
+        "version": "1.0.33",
         "news": {
+            "1.0.33": {
+                "en": "fixed bug while writing to knx-bus, added units to states",
+                "de": "Fehler beim Schreiben auf den KNX-Bus behoben, Einheiten zu Status hinzugefügt",
+                "ru": "исправлена ошибка при записи в knx-bus, добавлены единицы в состояния",
+                "pt": "Corrigido o erro enquanto escrevia no knx-bus, adicionava unidades aos estados",
+                "nl": "bug opgelost tijdens het schrijven naar knx-bus, eenheden toegevoegd aan staten",
+                "fr": "correction d'un bug lors de l'écriture sur knx-bus, ajout d'unités aux états",
+                "it": "corretto bug durante la scrittura su knx-bus, aggiunte unità agli stati",
+                "es": "error corregido al escribir en knx-bus, unidades agregadas a estados",
+                "pl": "naprawiono błąd podczas pisania do knx-bus, dodano jednostki do stanów",
+                "zh-cn": "写入knx-bus时修复了错误，向州增加了单位"
+            },
             "1.0.32": {
                 "en": "updated importer for ETS V5.7.2, some changes in KNX-stack statemachine",
                 "de": "aktualisierter Importer für ETS V5.7.2, einige Änderungen in der KNX-Stack-Statemachine",

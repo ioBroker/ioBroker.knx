@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "ioBroker knx Adapter ",
   "author": {
     "name": "K.Ringmann",
