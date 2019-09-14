@@ -118,6 +118,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.34 (2019-09-15)
+* changes on importer for detecting project-id
+
 ### 1.0.33 (2019-09-12)
 * fixed bug while writing to bus
 * added units to states

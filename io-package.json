@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.33",
+        "version": "1.0.34",
         "news": {
+            "1.0.34": {
+                "en": "changes on importer for detecting project-ID",
+                "de": "Änderungen am Importer zur Erkennung der Projekt-ID",
+                "ru": "изменения в импорте для определения идентификатора проекта",
+                "pt": "mudanças no importador para detectar o ID do projeto",
+                "nl": "wijzigingen in importeur voor het detecteren van project-ID",
+                "fr": "modifications sur l'importateur pour la détection de l'ID de projet",
+                "it": "modifiche sull'importatore per il rilevamento dell'ID progetto",
+                "es": "cambios en el importador para detectar ID de proyecto",
+                "pl": "zmiany w importerze w zakresie wykrywania ID projektu",
+                "zh-cn": "导入器上的更改用于检测项目ID"
+            },
             "1.0.33": {
                 "en": "fixed bug while writing to knx-bus, added units to states",
                 "de": "Fehler beim Schreiben auf den KNX-Bus behoben, Einheiten zu Status hinzugefügt",
