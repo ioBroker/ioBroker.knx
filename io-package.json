@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.34",
+        "version": "1.0.35",
         "news": {
+            "1.0.35": {
+                "en": "fixed permanent reconnects, if no traffic on knx-bus",
+                "de": "feste wiederverbindung behoben, wenn kein verkehr auf knx-bus",
+                "ru": "исправлено постоянное переподключение, если на knx-bus нет трафика",
+                "pt": "reconexões permanentes fixas, se não houver tráfego no knx-bus",
+                "nl": "vaste permanente opnieuw verbindt, als er geen verkeer op knx-bus",
+                "fr": "reconnexions permanentes fixes, si aucun trafic sur knx-bus",
+                "it": "riconnessioni permanenti fisse, se non c'è traffico sul bus knx",
+                "es": "reconexiones permanentes fijas, si no hay tráfico en knx-bus",
+                "pl": "naprawiono stałe ponowne połączenia, jeśli nie ma ruchu na magistrali knx-bus",
+                "zh-cn": "如果knx-bus上没有流量，则固定永久重新连接"
+            },
             "1.0.34": {
                 "en": "changes on importer for detecting project-ID",
                 "de": "Änderungen am Importer zur Erkennung der Projekt-ID",
