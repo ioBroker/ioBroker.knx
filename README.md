@@ -118,6 +118,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.36 (2019-10-16)
+* some bugs fixed 
+
 ### 1.0.35 (2019-09-15)
 * fixed permanent reconnects, if no traffic on knx-bus
 
@@ -284,7 +287,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016-2018 K.Ringmann <info@punktnetzwerk.net>
+Copyright (c) 2016-2019 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY

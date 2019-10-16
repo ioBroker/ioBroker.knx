@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.35",
+        "version": "1.0.36",
         "news": {
+            "1.0.36": {
+                "en": "some bug fixes",
+                "de": "einige Bugfixes",
+                "ru": "некоторые исправления ошибок",
+                "pt": "algumas correções de bugs",
+                "nl": "enkele bugfixes",
+                "fr": "quelques corrections de bugs",
+                "it": "alcune correzioni di bug",
+                "es": "algunas correcciones de errores",
+                "pl": "niektóre poprawki błędów",
+                "zh-cn": "一些错误修复"
+            },
             "1.0.35": {
                 "en": "fixed permanent reconnects, if no traffic on knx-bus",
                 "de": "feste wiederverbindung behoben, wenn kein verkehr auf knx-bus",
