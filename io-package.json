@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.36",
+        "version": "1.0.37",
         "news": {
+            "1.0.37": {
+                "en": "added import for ETS 5.7.3 projects",
+                "de": "Import für ETS 5.7.3 Projekte hinzugefügt",
+                "ru": "добавлен импорт для проектов ETS 5.7.3",
+                "pt": "importação adicionada para projetos ETS 5.7.3",
+                "nl": "import toegevoegd voor ETS 5.7.3-projecten",
+                "fr": "ajout d'une importation pour les projets ETS 5.7.3",
+                "it": "aggiunta importazione per progetti ETS 5.7.3",
+                "es": "importación agregada para proyectos ETS 5.7.3",
+                "pl": "dodano import projektów ETS 5.7.3",
+                "zh-cn": "为ETS 5.7.3项目增加了导入"
+            },
             "1.0.36": {
                 "en": "some bug fixes",
                 "de": "einige Bugfixes",
