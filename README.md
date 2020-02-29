@@ -77,9 +77,13 @@ Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werde
 
 KNX <=> iobroker
 L=0  S=0 Ü=0  <=> L=0 S=0   ==> der wert wird über GroupValueResponse aktualisiert
+
 L=1  S=0 Ü=0  <=> L=1 S=1   ==> ein Trigger darauf löst GroupValueRead aus
+
 L=0  S=1 Ü=0  <=> L=0 S=1   ==> Schreibt den angegeben Wert mit GroupValueWrite auf den KNX-Bus
+
 L=0  S=0 Ü=1  <=> L=1 S=0   ==> der Wert wird über GroupValueResponse aktualisiert
+
 L=1  S=0 Ü=1  <=> L=1 S=1   ==> ein Trigger darauf löst GroupValueRead aus
 
 ###  4)Erzeugen der Datenpunktpaaren (im folgenden DPP)
