@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.38",
+        "version": "1.0.39",
         "news": {
+            "1.0.39": {
+                "en": "fixed import errors",
+                "de": "Importfehler behoben",
+                "ru": "исправлены ошибки импорта",
+                "pt": "erros de importação corrigidos",
+                "nl": "vaste importfouten",
+                "fr": "erreurs d'importation fixes",
+                "it": "errori di importazione corretti",
+                "es": "errores de importación corregidos",
+                "pl": "naprawione błędy importu",
+                "zh-cn": "修复了导入错误"
+            },
             "1.0.38": {
                 "en": "small fixes in KNX-stack, fixed import errors",
                 "de": "kleine Korrekturen im KNX-Stack, Importfehler behoben",

@@ -116,6 +116,9 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.39
+* fixed import error
+
 ### 1.0.38
 * fixed some bugs on import
 * show warning if import-file ist password protected
