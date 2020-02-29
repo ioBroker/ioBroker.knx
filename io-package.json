@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.37",
+        "version": "1.0.38",
         "news": {
+            "1.0.38": {
+                "en": "small fixes in KNX-stack, fixed import errors",
+                "de": "kleine Korrekturen im KNX-Stack, Importfehler behoben",
+                "ru": "небольшие исправления в KNX-стеке, исправлены ошибки импорта",
+                "pt": "pequenas correções na pilha KNX, erros de importação corrigidos",
+                "nl": "kleine fixes in KNX-stack, vaste importfouten",
+                "fr": "petites corrections dans la pile KNX, erreurs d'importation fixes",
+                "it": "piccole correzioni nello stack KNX, errori di importazione corretti",
+                "es": "Pequeñas correcciones en la pila KNX, errores de importación corregidos",
+                "pl": "drobne poprawki w stosie KNX, naprawione błędy importu",
+                "zh-cn": "KNX-stack中的小修复，修复了导入错误"
+            },
             "1.0.37": {
                 "en": "added import for ETS 5.7.3 projects",
                 "de": "Import für ETS 5.7.3 Projekte hinzugefügt",
