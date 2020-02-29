@@ -75,9 +75,9 @@ In dem ETS Export sind die Schalt- und Statusadressen nicht hinterlegt. Somit f�
 
 Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werden die Flags wie folgt umgesetzt:
 
-| KNX   |           |            | iobroker |          |                                                 |
-| Lesen | Schreiben | Übertragen | Lesen    | Schreiben| Erklärung                                       |
+| KNX   |  |  | iobroker |  |  |
 |-------|-----------|------------|----------|----------|-------------------------------------------------|
+| Lesen | Schreiben | Übertragen | Lesen    | Schreiben| Erklärung                                       |
 |   -   |    -      |    -      |   -     |    -    | der wert wird über GroupValueResponse aktualiesiert |
 |   x   |    -      |    -      |   x     |    x    | ein Trigger darauf löst GroupValueRead aus|
 |   -   |    x      |    -      |   -     |    x    | Schreibt den angegeben Wert mit GroupValueWrite auf den KNX-Bus|
