@@ -1,8 +1,80 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.33",
+        "version": "1.0.39",
         "news": {
+            "1.0.39": {
+                "en": "fixed import errors",
+                "de": "Importfehler behoben",
+                "ru": "исправлены ошибки импорта",
+                "pt": "erros de importação corrigidos",
+                "nl": "vaste importfouten",
+                "fr": "erreurs d'importation fixes",
+                "it": "errori di importazione corretti",
+                "es": "errores de importación corregidos",
+                "pl": "naprawione błędy importu",
+                "zh-cn": "修复了导入错误"
+            },
+            "1.0.38": {
+                "en": "small fixes in KNX-stack, fixed import errors",
+                "de": "kleine Korrekturen im KNX-Stack, Importfehler behoben",
+                "ru": "небольшие исправления в KNX-стеке, исправлены ошибки импорта",
+                "pt": "pequenas correções na pilha KNX, erros de importação corrigidos",
+                "nl": "kleine fixes in KNX-stack, vaste importfouten",
+                "fr": "petites corrections dans la pile KNX, erreurs d'importation fixes",
+                "it": "piccole correzioni nello stack KNX, errori di importazione corretti",
+                "es": "Pequeñas correcciones en la pila KNX, errores de importación corregidos",
+                "pl": "drobne poprawki w stosie KNX, naprawione błędy importu",
+                "zh-cn": "KNX-stack中的小修复，修复了导入错误"
+            },
+            "1.0.37": {
+                "en": "added import for ETS 5.7.3 projects",
+                "de": "Import für ETS 5.7.3 Projekte hinzugefügt",
+                "ru": "добавлен импорт для проектов ETS 5.7.3",
+                "pt": "importação adicionada para projetos ETS 5.7.3",
+                "nl": "import toegevoegd voor ETS 5.7.3-projecten",
+                "fr": "ajout d'une importation pour les projets ETS 5.7.3",
+                "it": "aggiunta importazione per progetti ETS 5.7.3",
+                "es": "importación agregada para proyectos ETS 5.7.3",
+                "pl": "dodano import projektów ETS 5.7.3",
+                "zh-cn": "为ETS 5.7.3项目增加了导入"
+            },
+            "1.0.36": {
+                "en": "some bug fixes",
+                "de": "einige Bugfixes",
+                "ru": "некоторые исправления ошибок",
+                "pt": "algumas correções de bugs",
+                "nl": "enkele bugfixes",
+                "fr": "quelques corrections de bugs",
+                "it": "alcune correzioni di bug",
+                "es": "algunas correcciones de errores",
+                "pl": "niektóre poprawki błędów",
+                "zh-cn": "一些错误修复"
+            },
+            "1.0.35": {
+                "en": "fixed permanent reconnects, if no traffic on knx-bus",
+                "de": "feste wiederverbindung behoben, wenn kein verkehr auf knx-bus",
+                "ru": "исправлено постоянное переподключение, если на knx-bus нет трафика",
+                "pt": "reconexões permanentes fixas, se não houver tráfego no knx-bus",
+                "nl": "vaste permanente opnieuw verbindt, als er geen verkeer op knx-bus",
+                "fr": "reconnexions permanentes fixes, si aucun trafic sur knx-bus",
+                "it": "riconnessioni permanenti fisse, se non c'è traffico sul bus knx",
+                "es": "reconexiones permanentes fijas, si no hay tráfico en knx-bus",
+                "pl": "naprawiono stałe ponowne połączenia, jeśli nie ma ruchu na magistrali knx-bus",
+                "zh-cn": "如果knx-bus上没有流量，则固定永久重新连接"
+            },
+            "1.0.34": {
+                "en": "changes on importer for detecting project-ID",
+                "de": "Änderungen am Importer zur Erkennung der Projekt-ID",
+                "ru": "изменения в импорте для определения идентификатора проекта",
+                "pt": "mudanças no importador para detectar o ID do projeto",
+                "nl": "wijzigingen in importeur voor het detecteren van project-ID",
+                "fr": "modifications sur l'importateur pour la détection de l'ID de projet",
+                "it": "modifiche sull'importatore per il rilevamento dell'ID progetto",
+                "es": "cambios en el importador para detectar ID de proyecto",
+                "pl": "zmiany w importerze w zakresie wykrywania ID projektu",
+                "zh-cn": "导入器上的更改用于检测项目ID"
+            },
             "1.0.33": {
                 "en": "fixed bug while writing to knx-bus, added units to states",
                 "de": "Fehler beim Schreiben auf den KNX-Bus behoben, Einheiten zu Status hinzugefügt",
