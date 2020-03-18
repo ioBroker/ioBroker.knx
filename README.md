@@ -1,6 +1,5 @@
 ![Logo](admin/knx.png)
 # ioBroker.knx
-=================
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.knx.svg)](https://www.npmjs.com/package/iobroker.knx)
@@ -295,7 +294,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016-2019 K.Ringmann <info@punktnetzwerk.net>
+Copyright (c) 2016-2020 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
