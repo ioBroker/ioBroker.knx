@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.39",
+        "version": "1.0.40",
         "news": {
+            "1.0.40": {
+                "en": "fixed some import issues, fixed bug on GROUPVALUE_RESPONSE event",
+                "de": "Einige Importprobleme behoben, Fehler beim GROUPVALUE_RESPONSE-Ereignis behoben",
+                "ru": "исправлены некоторые проблемы с импортом, исправлена ошибка в событии GROUPVALUE_RESPONSE",
+                "pt": "corrigidos alguns problemas de importação, corrigido um erro no evento GROUPVALUE_RESPONSE",
+                "nl": "enkele importproblemen opgelost, bug opgelost op GROUPVALUE_RESPONSE-evenement",
+                "fr": "correction de quelques problèmes d'importation, correction d'un bug sur l'événement GROUPVALUE_RESPONSE",
+                "it": "risolti alcuni problemi di importazione, corretto bug sull'evento GROUPVALUE_RESPONSE",
+                "es": "Se corrigieron algunos problemas de importación, se corrigió un error en el evento GROUPVALUE_RESPONSE",
+                "pl": "naprawiono niektóre problemy z importem, naprawiono błąd w zdarzeniu GROUPVALUE_RESPONSE",
+                "zh-cn": "修复了一些导入问题，修复了GROUPVALUE_RESPONSE事件的错误"
+            },
             "1.0.39": {
                 "en": "fixed import errors",
                 "de": "Importfehler behoben",
