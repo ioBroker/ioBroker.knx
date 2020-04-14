@@ -117,6 +117,10 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.41
+* fixed bug on GroupValue_Response event
+* corrected connection to gira GW
+
 ### 1.0.40
 * fixed some import errors for ETS 5.7.x
 * fixed bug on GroupValue_Response event

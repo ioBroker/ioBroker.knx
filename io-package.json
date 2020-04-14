@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.40",
+        "version": "1.0.41",
         "news": {
+            "1.0.41":{
+                "en": "correct recognition of GroupValue_Response, correct connection to gira Gateway",
+                "de": "korrekte Erkennung von GroupValue_Response, korrekte Verbindung zum gira Gateway",
+                "ru": "правильное распознавание GroupValue_Response, правильное подключение к gira Gateway",
+                "pt": "reconhecimento correto de GroupValue_Response, conexão correta com o gira Gateway",
+                "nl": "correcte herkenning van GroupValue_Response, correcte verbinding met gira Gateway",
+                "fr": "reconnaissance correcte de GroupValue_Response, connexion correcte à gira Gateway",
+                "it": "corretto riconoscimento di GroupValue_Response, corretta connessione a gira Gateway",
+                "es": "reconocimiento correcto de GroupValue_Response, conexión correcta a gira Gateway",
+                "pl": "prawidłowe rozpoznawanie GroupValue_Response, prawidłowe połączenie z gira Gateway",
+                "zh-cn": "正确识别GroupValue_Response，正确连接到gira Gateway"
+            },
             "1.0.40": {
                 "en": "fixed some import issues, fixed bug on GROUPVALUE_RESPONSE event",
                 "de": "Einige Importprobleme behoben, Fehler beim GROUPVALUE_RESPONSE-Ereignis behoben",
