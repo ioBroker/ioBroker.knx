@@ -1,9 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.41",
+        "version": "1.0.42",
         "news": {
-            "1.0.41":{
+            "1.0.42": {
+                "en": "Fixed problem with missing index_m.html",
+                "de": "Problem mit fehlender index_m.html behoben",
+                "ru": "Исправлена проблема с отсутствующим index_m.html",
+                "pt": "Corrigido o problema com index_m.html ausente",
+                "nl": "Probleem opgelost met ontbrekende index_m.html",
+                "fr": "Correction d'un problème avec index_m.html manquant",
+                "it": "Risolto problema con index_m.html mancante",
+                "es": "Problema solucionado con index_m.html faltante",
+                "pl": "Naprawiono problem z brakującym index_m.html",
+                "zh-cn": "解决了缺少index_m.html的问题"
+            },
+            "1.0.41": {
                 "en": "correct recognition of GroupValue_Response, correct connection to gira Gateway",
                 "de": "korrekte Erkennung von GroupValue_Response, korrekte Verbindung zum gira Gateway",
                 "ru": "правильное распознавание GroupValue_Response, правильное подключение к gira Gateway",
