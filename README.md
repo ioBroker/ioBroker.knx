@@ -118,7 +118,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 ## Changelog
 ### 1.0.44 (2021_01_22)
-* fixed act and state handling
+* fixed act and state handling 
 * added some new datapoint types
 * fix facility and room recognition and device allocation
 
