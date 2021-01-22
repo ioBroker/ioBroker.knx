@@ -7,70 +7,70 @@
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
 ## Description
-en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- groupaddresses and ioBroker and put the devices into rooms (esp. for MobileUI).
+en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- group addresses and ioBroker and puts the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
 ## Features:
-* importing knxproj file
+* importing `knxproj` file
 * generating ETS-like object structure
 * finding and combining act-channel and state-channel (heuristic)
 * updating all states on start
-* emmiting a READ to the KNX-Bus, while writing on state-object
+* emitting a READ to the KNX-Bus, while writing on state-object
 * sorting channels to rooms
 
 ## Adapter configuration
 After installing this adapter, open the adapter configuration. Fill in:
 
 ### KNX Gateway IP
-<IP of your KNX/Lan GW> with ipv4 format
+<IP of your KNX/Lan GW> with IPv4 format
 
 ### Port
-this is normally port 3671
+This is normally port 3671.
 
-### phys. EIB Adress
-fill in free phys. address corresponding to your KNX-architecture, !!! BUT NOT the same like your KNX Gateway has !!!
+### phys. EIB Address
+Fill in free phys. address corresponding to your KNX-architecture, **BUT NOT the address of your KNX Gateway!** May not end in 0 !!!
 
 ### debug-Level
-extends the output Level of the adapter for debugging purposes
+Extends the output level of the adapter for debugging purposes.
 
 ### Upload knxproj
-here you can upload your ETS Export in "knxproj" format.
+here you can upload your ETS Export in `knxproj` format.
 
-After successful import a dialog shows the number of imported object. Now press "save & close" and the adapter should start.
-While starting the adapter reads all groupAdresses with read-Flag. This could take a while and can produce a high load on your KNX-bus. But the values in your vis are updatet after start.
+After successful import a dialog shows the number of imported objects. Now press "save & close" and the adapter should start.
+While starting the adapter reads all group addresses with read-Flag. This might take a while and can produce a high load on your KNX-bus. But the values in your vis are updated after start.
 
 ### Objects
-Here is under knx.0 the group adress tree like in your ETS project.
+Here is under knx.0 the group address tree like in your ETS project.
 
 ### Enumerations
 If you have a building structure in your ETS with the corresponding devices, it will be shown here. Under "members" are the names of group addresses listed from the devices with send-Flag in this Group.
 
 ### Usage
-If the adapter starts successfully your datapoints will be available for everything you like to do.
+If the adapter starts successfully, your data points will be available for everything you like to do.
 
-### Datapoint Types
-All DPT's according to "System Specifications, Interworking, Datapointtypes" from KNX Association are available. That means there are 2 Types of Information you can get:
+### Data point Types
+All DPTs according to "System Specifications, Interworking, Datapointtypes" from KNX Association are available. That means there are 2 types of information you can get:
 1) a Value or a String
-2) comma seperated Values or array of values (for the moment I don't what's the better way to handle)
+2) comma-separated values or an array of values (for the moment I don't know what's the better way to handle)
 
 For example a DPT5.001 is encoded as unsigned Integer with 8-Bit. This gives a single Value. The DPT3.007 (Control Dimming) is encoded as 1Bit(Boolean)+3Bit(unsigned Int).
-This results in f.e. in value like "0,5", where "0" means "decrease" and "5" means number of intervalls.
+This results e.g. in a value like "0,5", where "0" means "decrease" and "5" means number of intervals.
 
 
-## Wie werden die Datenpunkte generiert
+## Wie werden die Datenpunkte generiert (Deutsch)
 ### 1) Auslesen aller Kommunikationsobjektreferenzen (im folgenden KOR)
-Dabei werden den Gruppenaddressreferenz (im folgenden GAR) ID's der jeweilige DPT der KOR zugeordnet, wenn er vorhanden ist. Ausserdem bekommt der erste Eintrag die Attribute write=yes und read=no. Alle darauf folgenden GAR ID's bekommen nur den DPT zugeordnet
+Dabei werden den Gruppenaddressreferenz (im folgenden GAR) IDs der jeweilige DPT der KOR zugeordnet, wenn er vorhanden ist. Ausserdem bekommt der erste Eintrag die Attribute write=yes und read=no. Alle darauf folgenden GAR ID's bekommen nur den DPT zugeordnet
 
 ### 2) Erzeugen der Gruppenadressstruktur (im folgenden GAS)
-Hier wird die GAS anhand der GAR ID's erzeugt und ebenfalls die DPT's zugeordnet, falls dies unter 1) noch nicht geschehen ist.
+Hier wird die GAS anhand der GAR IDs erzeugt und ebenfalls die DPTs zugeordnet, falls dies unter 1) noch nicht geschehen ist.
 
 ### 3) Herausfinden der Schalt- und Statusaddressen
-In dem ETS Export sind die Schalt- und Statusadressen nicht hinterlegt. Somit führe ich eine Ähnlichkeitsprüfung aller Gruppenadressnamen durch mit der Auswertung auf status und state.
- Wird ein Pärchen gefunden, dessen Ähnlichkeit mehr als 90% beträgt, dann wird angenommen, das die GA1 die Schaltadresse und GA2 die Statusadresse ist. Dabei erhält GA1 das write=true und read=false und GA2 das write=false und read=true.
- Ausserdem werden die DPT abgeglichen aus der jeweilig korrespondierenden GA. Aus diesem Grund ist es schwierig, Pärchen zu finden, wenn die Gruppenadressbeschriftungen nicht konsistent sind.
+In dem ETS-Export sind die Schalt- und Statusadressen nicht hinterlegt. Somit führe ich eine Ähnlichkeitsprüfung aller Gruppenadressnamen durch mit der Auswertung auf status und state.
+ Wird ein Pärchen gefunden, dessen Ähnlichkeit mehr als 90% beträgt, dann wird angenommen, dass die GA1 die Schaltadresse und GA2 die Statusadresse ist. Dabei erhält GA1 das write=true und read=false und GA2 das write=false und read=true.
+ Außerdem werden die DPT abgeglichen aus der jeweilig korrespondierenden GA. Aus diesem Grund ist es schwierig, Pärchen zu finden, wenn die Gruppenadressbeschriftungen nicht konsistent sind.
 
 Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werden die Flags wie folgt umgesetzt:
 
@@ -83,14 +83,14 @@ Weiterhin werden die Flags in den Gerätekonfigurationen betrachtet. Dabei werde
 |   -   |    -      |    x      |   x     |    -    | der Wert wird über GroupValueResponse aktualisiert |
 |   x   |    -      |    x      |   x     |    x    | ein Trigger darauf löst GroupValueRead aus|
 
-###  4)Erzeugen der Datenpunktpaaren (im folgenden DPP)
-Ein DPP wird erzeugt, wenn die GA, GAR und der DPT valid sind. Mit diesen DPP arbeitet der Adapter. Fehlen also die DPT's in einer GA, weil sie auf keiner der o. A. Wege gefunden werden konnte, so wird für diese GA kein DPP erzeugt und ist im Weiteren nicht nutzbar.
+###  4)Erzeugen der Datenpunktpaare (im folgenden DPP)
+Ein DPP wird erzeugt, wenn die GA, GAR und der DPT valid sind. Mit diesen DPP arbeitet der Adapter. Fehlen also der DPT in einer GA, weil er auf keiner der o. A. Wege gefunden werden konnte, so wird für diese GA kein DPP erzeugt und sie ist im Weiteren nicht nutzbar.
 
-Im Idealfall werden somit für einen Schaltkanal 2 DPP erzeugt. Das erste ist das Schalten. In diesem ist die GAR ID des Status DPP hinterlegt. Das zweite ist dann das Status DPP ohne weitere Refenrenz.
+Im Idealfall werden somit für einen Schaltkanal 2 DPP erzeugt. Das erste ist das Schalten. In diesem ist die GAR ID des Status DPP hinterlegt. Das zweite ist dann das Status DPP ohne weitere Referenz.
 
 
 ## Beim Start des Adapters
-Alle mit dem Lesen-Flag markieren DPP werden beim Start abgefragt. Dies verursacht u.U. eine höhere Buslast und dauert einen Moment. Im Anschluss sind aber alle aktuellen Werte verfügbar.
+Alle mit dem Lesen-Flag markierten DPP werden beim Start abgefragt. Dies verursacht u.U. eine höhere Buslast und dauert einen Moment. Im Anschluss sind aber alle aktuellen Werte verfügbar.
 
 ## (hidden) Features:
 Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekte innerhalb dieser Gruppenadresse per GroupValueRead abgefragt.
@@ -98,7 +98,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ### Vermeidung von Problemen
 1) saubere ETS Programmierung und saubere ETS Programmierung und saubere ETS Programmierung
 
-*   zuweisen der DPT's !!
+*   zuweisen der DPTs!!
 *   einheitliche Beschriftung der GA-Namen (z.B "EG Wohnen Decke Licht schalten" und "EG Wohnen Decke Licht schalten status" )
 *   Vermeidung von Sonderzeichen ",./;\&%$§[]" (kann zu Problemen bei der Erzeugung der GAS führen)
 
@@ -108,18 +108,26 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 4) Der Port der LAN Schnittstelle ist i.d.R. 3671
 
-5) Durch die Möglichkeit der Statusabfrage ist eines zu beachten: Es ist sicherzustellen das nicht mehr als 40 Anfragen pro Sekunde vom ioBroker generiert werden, denn diese können dann physikalisch
+5) Durch die Möglichkeit der Statusabfrage ist eines zu beachten: Es ist sicherzustellen, dass nicht mehr als 40 Anfragen pro Sekunde vom ioBroker generiert werden, denn diese können dann physikalisch
    bedingt nicht mehr durch den Adapter an das Gateway weitergereicht werden.
 
-## planed features
-* adding adresses to object-description (id)
+## Planned features
+* adding addresses to object-description (id)
 * selective import of knx-project
 * require node Version >8.9.4!
 
 ## Changelog
+### 1.0.44 (2021_01_22)
+* fixed act and state handling
+* added some new datapoint types
+* fix facility and room recognition and device allocation
+
+### 1.0.42 (2020_09_03)
+* Fixed problem with missing index_m.html
+
 ### 1.0.41
 * fixed bug on GroupValue_Response event
-* corrected connection to gira GW
+* corrected connection to Gira GW
 
 ### 1.0.40
 * fixed some import errors for ETS 5.7.x
@@ -150,7 +158,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * fixed "read/write of undefined" error
 
 ### 1.0.32 (2019-09-03)
-* updated importer for ETS V5.7.2, some changes in KNX-stack statemachine
+* updated importer for ETS V5.7.2, some changes in KNX-stack state-machine
 
 ### 1.0.31
 * some fixes on ETS5.7.2 importer
@@ -162,17 +170,17 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 ### 1.0.30
 * new Importer for ETS5.7.2 knxproj files
-* extended accepted Datapointtypes
+* extended accepted Data point types
 * new adapter configuration menu
 * implemented a switch for the user to decide to use "true" and "false" or "0" or "1" for binary values
 * fixed bug in GroupValue_Read
-* implemented a selector for local network interface for KNX to Gateway communiction
+* implemented a selector for local network interface for KNX to Gateway communication
 * extended State Object for later features
 * fixed some small other bugs
 
 ### 1.0.20
-* fixed bug in handling KNX-data packages, which occures periodical reconnects
-* fixed bug in KNX-projectfile upload procedure
+* fixed bug in handling KNX-data packages, which occurs periodical reconnects
+* fixed bug in KNX-project file upload procedure
 
 ### 1.0.19
 * reverted to true/false handling for DPT1.x
@@ -190,15 +198,15 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 
 ### 1.0.15 (2018-07-18)
 * change ChID on reconnect
-* on Startup read wait for response of Statechannel or timeout
+* on Startup read wait for response of State channel or timeout
 
 ### 1.0.13 (2018-07-04)
-* elemination of special signs while importing
-* small bugfixes
+* elimination of special signs while importing
+* small bug-fixes
 
 ### 1.0.12 (2018-06-19)
 * reduced and sorted log output
-* small bugfixes
+* small bug-fixes
 * NEW Feature: request State/Val of stateObject from KNX-Bus
 
 ### 1.0.11 (2018-05-27)
@@ -207,7 +215,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * other small optimizations and fixes
 
 ### 1.0.10 (2018-05-04)
-* closing local port in case of undefinded connection state
+* closing local port in case of undefined connection state
 * added advanced debug-level via adapter-config
 * many fixes
 
@@ -230,10 +238,10 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * corrected package counter
 
 ### 1.0.5 (2018-03-01)
-* fixed empty objects, related to DPT1 (error message [object Object] unkown Inputvalue)
+* fixed empty objects, related to DPT1 (error message [object Object] unknown Input value)
 * fixed path variable
 * fixed bug with GA's containing a "/" in the name (on proj-import)
-* start implementing crosswise propery update on corresponding DPT (on proj-import)
+* start implementing crosswise property update on corresponding DPT (on proj-import)
 
 ### 1.0.4 (2018-02-27)
 * schema update for room enumeration coming up with ETS 5.6
@@ -242,20 +250,20 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * kleine Fehler beseitigt
 
 ### 1.0.1 (2018-02-26)
-* fixed certifate error
+* fixed certificate error
 
 ### 1.0.0 (2018-02-25)
 * substitution of used KNX-stack with own from scratch build stack
 * implemented full scale of DPT according to "System Specifications, Interworking, Datapointtypes" from KNX Association
 * hardening connection handling for tunneling connections
-* upgrade Adapterconfiguration Interface to be ready with Admin3
+* upgrade Adapter-configuration Interface to be ready with Admin3
 * removed "Delay Slider" because of the new knx-stack
 * many other small changes
-* fixed postcomma values to scale-value of DPT
+* fixed post-comma values to scale-value of DPT
 * implemented "add" mode for knxproject upload (existing Objects stay as they are, only new Objects where added)
 
 ### 0.8.6 (2017-06-17)
-* some small bugfixes
+* some small bug-fixes
 * insert slider to set a sendDelay for slow KNX/LAN Gateways to prevent connection loss
 
 ### 0.8.5 (2017-06-05)
@@ -278,10 +286,10 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ### 0.7.3 (2016-12-22)
 * (chefkoch009) more DPT's are supported
 * faster Startup
-* implemented generation of room list with device dependicies
+* implemented generation of room list with device dependencies
 
 ### 0.7.2 (2016-11-20)
-* (chefkoch009) added necessary dependicies
+* (chefkoch009) added necessary dependencies
 
 ### 0.7.1 (2016-11-19)
 * (chefkoch009) Support standard KNX/LAN Gateways.
@@ -304,7 +312,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016-2020 K.Ringmann <info@punktnetzwerk.net>
+Copyright (c) 2016-2021 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY

@@ -1,9 +1,33 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.41",
+        "version": "1.0.44",
         "news": {
-            "1.0.41":{
+            "1.0.44": {
+                "en": "fixed act and state handling, added some new datapoint types, fix facility and room recognition and device allocation",
+                "de": "Feste Akt- und Statusbehandlung, einige neue Datenpunkttypen hinzugefügt, Erkennung von Einrichtungen und Räumen sowie Gerätezuordnung korrigiert",
+                "ru": "исправлена обработка действий и состояний, добавлены некоторые новые типы точек данных, исправлено распознавание объектов и помещений, а также выделение устройств",
+                "pt": "ato fixo e manipulação de estado, adicionados alguns novos tipos de pontos de dados, instalação de conserto e reconhecimento de sala e alocação de dispositivo",
+                "nl": "vaste handeling en statusafhandeling, enkele nieuwe datapunttypes toegevoegd, fixfaciliteit en kamerherkenning en apparaattoewijzing",
+                "fr": "Gestion des actes et des états fixes, ajout de nouveaux types de points de données, reconnaissance des installations et des salles et allocation des appareils",
+                "it": "azioni fisse e gestione dello stato, aggiunti alcuni nuovi tipi di punti dati, funzioni di correzione e riconoscimento della stanza e assegnazione dei dispositivi",
+                "es": "manejo de actos y estados fijos, se agregaron algunos tipos de puntos de datos nuevos, instalaciones de reparación y reconocimiento de salas y asignación de dispositivos",
+                "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
+                "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
+            },
+            "1.0.42": {
+                "en": "Fixed problem with missing index_m.html",
+                "de": "Problem mit fehlender index_m.html behoben",
+                "ru": "Исправлена проблема с отсутствующим index_m.html",
+                "pt": "Corrigido o problema com index_m.html ausente",
+                "nl": "Probleem opgelost met ontbrekende index_m.html",
+                "fr": "Correction d'un problème avec index_m.html manquant",
+                "it": "Risolto problema con index_m.html mancante",
+                "es": "Problema solucionado con index_m.html faltante",
+                "pl": "Naprawiono problem z brakującym index_m.html",
+                "zh-cn": "解决了缺少index_m.html的问题"
+            },
+            "1.0.41": {
                 "en": "correct recognition of GroupValue_Response, correct connection to gira Gateway",
                 "de": "korrekte Erkennung von GroupValue_Response, korrekte Verbindung zum gira Gateway",
                 "ru": "правильное распознавание GroupValue_Response, правильное подключение к gira Gateway",
@@ -74,298 +98,6 @@
                 "es": "algunas correcciones de errores",
                 "pl": "niektóre poprawki błędów",
                 "zh-cn": "一些错误修复"
-            },
-            "1.0.35": {
-                "en": "fixed permanent reconnects, if no traffic on knx-bus",
-                "de": "feste wiederverbindung behoben, wenn kein verkehr auf knx-bus",
-                "ru": "исправлено постоянное переподключение, если на knx-bus нет трафика",
-                "pt": "reconexões permanentes fixas, se não houver tráfego no knx-bus",
-                "nl": "vaste permanente opnieuw verbindt, als er geen verkeer op knx-bus",
-                "fr": "reconnexions permanentes fixes, si aucun trafic sur knx-bus",
-                "it": "riconnessioni permanenti fisse, se non c'è traffico sul bus knx",
-                "es": "reconexiones permanentes fijas, si no hay tráfico en knx-bus",
-                "pl": "naprawiono stałe ponowne połączenia, jeśli nie ma ruchu na magistrali knx-bus",
-                "zh-cn": "如果knx-bus上没有流量，则固定永久重新连接"
-            },
-            "1.0.34": {
-                "en": "changes on importer for detecting project-ID",
-                "de": "Änderungen am Importer zur Erkennung der Projekt-ID",
-                "ru": "изменения в импорте для определения идентификатора проекта",
-                "pt": "mudanças no importador para detectar o ID do projeto",
-                "nl": "wijzigingen in importeur voor het detecteren van project-ID",
-                "fr": "modifications sur l'importateur pour la détection de l'ID de projet",
-                "it": "modifiche sull'importatore per il rilevamento dell'ID progetto",
-                "es": "cambios en el importador para detectar ID de proyecto",
-                "pl": "zmiany w importerze w zakresie wykrywania ID projektu",
-                "zh-cn": "导入器上的更改用于检测项目ID"
-            },
-            "1.0.33": {
-                "en": "fixed bug while writing to knx-bus, added units to states",
-                "de": "Fehler beim Schreiben auf den KNX-Bus behoben, Einheiten zu Status hinzugefügt",
-                "ru": "исправлена ошибка при записи в knx-bus, добавлены единицы в состояния",
-                "pt": "Corrigido o erro enquanto escrevia no knx-bus, adicionava unidades aos estados",
-                "nl": "bug opgelost tijdens het schrijven naar knx-bus, eenheden toegevoegd aan staten",
-                "fr": "correction d'un bug lors de l'écriture sur knx-bus, ajout d'unités aux états",
-                "it": "corretto bug durante la scrittura su knx-bus, aggiunte unità agli stati",
-                "es": "error corregido al escribir en knx-bus, unidades agregadas a estados",
-                "pl": "naprawiono błąd podczas pisania do knx-bus, dodano jednostki do stanów",
-                "zh-cn": "写入knx-bus时修复了错误，向州增加了单位"
-            },
-            "1.0.32": {
-                "en": "updated importer for ETS V5.7.2, some changes in KNX-stack statemachine",
-                "de": "aktualisierter Importer für ETS V5.7.2, einige Änderungen in der KNX-Stack-Statemachine",
-                "ru": "обновлен импортер для ETS V5.7.2, некоторые изменения в машине состояний стека KNX",
-                "pt": "importador atualizado para o ETS V5.7.2, algumas alterações na máquina de estado da pilha KNX",
-                "nl": "bijgewerkte importeur voor ETS V5.7.2, enkele wijzigingen in de KNX-stack statemachine",
-                "fr": "Importateur mis à jour pour ETS V5.7.2, modifications apportées à la machine à statut KNX",
-                "it": "importatore aggiornato per ETS V5.7.2, alcune modifiche nella macchina a stati stack KNX",
-                "es": "importador actualizado para ETS V5.7.2, algunos cambios en la máquina de estado de la pila KNX",
-                "pl": "zaktualizowany importer do ETS V5.7.2, niektóre zmiany w automatach stosu KNX",
-                "zh-cn": "更新了ETS V5.7.2的导入程序，KNX-stack状态机的一些变化"
-            },
-            "1.0.31": {
-                "en": "fixed error in devTree generation",
-                "de": "Fehler bei der devTree-Generierung behoben",
-                "ru": "исправлена ошибка в генерации devTree",
-                "pt": "erro fixo na geração devTree",
-                "nl": "fout opgelost bij het genereren van devTree",
-                "fr": "erreur corrigée dans la génération devTree",
-                "it": "errore risolto nella generazione di devTree",
-                "es": "error corregido en la generación devTree",
-                "pl": "naprawiony błąd w generowaniu devTree",
-                "zh-cn": "devTree生成中的固定错误"
-            },
-            "1.0.30": {
-                "en": "new importer for ETS5.7.2 project-files, new config menu, extended datapointtypes,....",
-                "de": "neuer Importer für ETS5.7.2 Projektdateien, neues Konfigurationsmenü, erweiterte Datenpunkttypen, ....",
-                "ru": "новый импортер для файлов проекта ETS5.7.2, новое меню конфигурации, расширенные типы данных, ....",
-                "pt": "novo importador para arquivos de projeto ETS5.7.2, novo menu de configuração, datapointtypes estendidos, ....",
-                "nl": "nieuwe importeur voor ETS5.7.2 project-bestanden, nieuw configuratiemenu, uitgebreide datapointtypes, ....",
-                "fr": "nouvel importateur pour les fichiers de projet ETS5.7.2, nouveau menu de configuration, types de données étendus, ....",
-                "it": "nuovo importatore per file di progetto ETS5.7.2, nuovo menu di configurazione, tipi di dati estesi, ....",
-                "es": "nuevo importador para archivos de proyecto ETS5.7.2, nuevo menú de configuración, tipos de puntos de datos extendidos, ...",
-                "pl": "nowy importer plików projektu ETS5.7.2, nowe menu konfiguracji, rozszerzone typy punktów danych, ...",
-                "zh-cn": "ETS5.7.2项目文件的新导入程序，新的配置菜单，扩展的数据点类型，...."
-            },
-            "1.0.20": {
-                "en": "fixed bug in KNX-processing queue and in knxproj-upload",
-                "de": "Fehler in der KNX-Verarbeitungswarteschlange und im knxproj-Upload behoben",
-                "ru": "исправлена ​​ошибка в очереди KNX-обработки и в knxproj-upload",
-                "pt": "Corrigido o erro na fila de processamento do KNX e no upload do knxproj",
-                "nl": "bug gerepareerd in KNX-verwerkingswachtrij en in knxproj-upload",
-                "fr": "Correction d'un bug dans la file d'attente de traitement KNX et dans knxproj-upload",
-                "it": "corretto bug nella coda di elaborazione KNX e in knxproj-upload",
-                "es": "error corregido en la cola de procesamiento KNX y en knxproj-upload",
-                "pl": "naprawiono błąd w kolejce przetwarzania KNX oraz w knxproj-upload",
-                "zh-cn": "修复了KNX处理队列和knxproj-upload中的错误"
-            },
-            "1.0.19": {
-                "en": "Reverted true/false to 0/1 due special handling is clear, see README ",
-                "de": "Regelung true/false auf 0/1 zurückgeändert, bis das handling geklärt ist, siehe README",
-                "ru": "Устранение неполадок, см. README",
-                "pt": "Solução de problemas, consulte o README",
-                "nl": "Problemen oplossen, zie README",
-                "fr": "Dépannage, voir README",
-                "it": "Risoluzione dei problemi, vedere README",
-                "es": "Solución de problemas, ver README",
-                "pl": "Rozwiązywanie problemów, zobacz README"
-            },
-            "1.0.18": {
-                "en": "Troubleshooting, see README",
-                "de": "Fehlerbehebung, siehe README",
-                "ru": "Устранение неполадок, см. README",
-                "pt": "Solução de problemas, consulte o README",
-                "nl": "Problemen oplossen, zie README",
-                "fr": "Dépannage, voir README",
-                "it": "Risoluzione dei problemi, vedere README",
-                "es": "Solución de problemas, ver README",
-                "pl": "Rozwiązywanie problemów, zobacz README"
-            },
-            "1.0.17": {
-                "en": "Better state processing\nConfigurable latency time was added",
-                "de": "Bessere staatliche Verarbeitung\nKonfigurierbare Latenzzeit wurde hinzugefügt",
-                "ru": "Улучшенная обработка состояния\nДобавлено настраиваемое время ожидания",
-                "pt": "Melhor processamento de estado\nO tempo de latência configurável foi adicionado",
-                "nl": "Betere staatsverwerking\nConfigureerbare latentietijd toegevoegd",
-                "fr": "Meilleur traitement d'état\nTemps de latence configurable ajouté",
-                "it": "Migliore elaborazione dello stato\nÈ stato aggiunto il tempo di latenza configurabile",
-                "es": "Mejor procesamiento de estado\nTiempo de latencia configurable fue agregado",
-                "pl": "Lepsze przetwarzanie stanu\nDodano konfigurowalny czas oczekiwania"
-            },
-            "1.0.15": {
-                "en": "change ChID on reconnect, changed Adaptertyp to iot-systems, small bugfixes",
-                "de": "ChILD beim Reconnect ändern, Adapter Type in iot-systems ändern, kleine Bugfixes",
-                "ru": "изменить CHILD при повторном подключении, изменить тип адаптера на iot-системы, небольшие исправления ошибок",
-                "pt": "altere o ChILD na reconexão, altere o Tipo de Adaptador para sistemas iot, pequenas correções de erros",
-                "nl": "verander ChilD bij opnieuw verbinden, veranderd Adapter Type in iot-systemen, kleine bugfixes",
-                "fr": "changez ChILD lors de la reconnexion, changez le type d'adaptateur en iot-systems, correction de bugs",
-                "it": "cambia ChILD su riconnettersi, cambia Tipo di adattatore a iot-systems, correzioni di piccoli bug",
-                "es": "cambie ChILD al volver a conectar, cambie el tipo de adaptador a iot-systems, solucione pequeños errores",
-                "pl": "zmień ChILD po ponownym połączeniu, zmień typ adaptera na iot-systems, małe poprawki błędów"
-            },
-            "1.0.13": {
-                "en": "elemination of special signs while project import, small fixes",
-                "de": "Beseitigung von Sonderzeichen beim Projektimport, kleine Korrekturen",
-                "ru": "устранение специальных знаков при импорте проекта, небольшие исправления",
-                "pt": "eliminação de sinais especiais durante a importação do projeto, pequenas correções",
-                "nl": "eliminatie van speciale tekens tijdens projectimport, kleine aanpassingen",
-                "fr": "élimination des signes spéciaux lors de l'importation du projet, petites corrections",
-                "it": "eliminazione di segni speciali durante l'importazione del progetto, piccole correzioni",
-                "es": "eliminación de signos especiales durante la importación del proyecto, pequeñas correcciones",
-                "pl": "eliminacja znaków specjalnych podczas importu projektu, drobne poprawki"
-            },
-            "1.0.12": {
-                "en": "triggerable groupValueRead, small fixes, cleared log ouput",
-                "de": "antriggerbarer groupValueRead, kleine Korrekturen, gelöschte Protokollausgabe",
-                "ru": "groupValueRead, небольшие исправления, очищенный вывод журнала",
-                "pt": "groupValueRead, pequenas correções, saída de log desmarcada",
-                "nl": "groupValueRead, kleine correcties, gewiste logboekuitvoer",
-                "fr": "groupValueRead, petites corrections, sortie du journal effacée",
-                "it": "groupValueRead, piccole correzioni, output di registro cancellato",
-                "es": "groupValueRead, correcciones pequeñas, salida de registro borrada",
-                "pl": "groupValueRead, małe poprawki, wyczyszczone wyjście dziennika"
-            },
-            "1.0.11": {
-                "en": "fixed DPT1 issue and reconnect issue",
-                "de": "Problem mit DPT1 behoben und erneut verbunden",
-                "ru": "фиксированная проблема DPT1 и проблема повторного подключения",
-                "pt": "problema de DPT1 fixo e reconectar problema",
-                "nl": "opgelost probleem met DPT1 en opnieuw verbinden",
-                "fr": "problème DPT1 fixe et problème de reconnexion",
-                "it": "risolto problema DPT1 e problema di riconnessione",
-                "es": "problema fijo de DPT1 y problema de reconexión",
-                "pl": "naprawiono problem z DPT1 i problem z ponownym nawiązaniem połączenia"
-            },
-            "1.0.10": {
-                "en": "closing local port in case of undefinded connection state",
-                "de": "Schließen des lokalen Ports im Falle eines nicht definierten Verbindungsstatus",
-                "ru": "закрытие локального порта в случае неопределенного состояния соединения",
-                "pt": "fechando a porta local em caso de estado de conexão indefinido",
-                "nl": "lokale poort sluiten in geval van ongedefinieerde verbindingsstatus",
-                "fr": "fermeture du port local en cas d'état de connexion indéfini",
-                "it": "chiusura della porta locale in caso di stato di connessione non definito",
-                "es": "cerrar el puerto local en caso de un estado de conexión indefinido",
-                "pl": "zamykanie portu lokalnego w przypadku niezdefiniowanego stanu połączenia"
-            },
-            "1.0.9": {
-                "en": "fixed connection handling and some small bugs, changed to state-wise processing",
-                "de": "feste Verbindungsbehandlung und einige kleine Fehler, geändert in zustandsabhängige Verarbeitung",
-                "ru": "фиксированная связь и некоторые небольшие ошибки, измененные на обработку по состоянию",
-                "pt": "manipulação de conexão fixa e alguns pequenos bugs, alterados para processamento em estado",
-                "nl": "vaste verbindingsafhandeling en enkele kleine bugs, veranderd in state-wise verwerking",
-                "fr": "gestion de connexion fixe et quelques petits bugs, changé en traitement par état",
-                "it": "gestione della connessione fissa e alcuni piccoli bug, trasformati in elaborazione a livello di stato",
-                "es": "manejo de conexión fijo y algunos errores pequeños, cambiados a procesamiento en el estado",
-                "pl": "naprawiono obsługę połączenia i kilka drobnych błędów, zmieniono na przetwarzanie stanowe"
-            },
-            "1.0.8": {
-                "en": "modified package queue and ACK Signal",
-                "de": "modifizierte Paketwarteschlange und ACK-Signal",
-                "ru": "измененная очередь пакетов и сигнал ACK",
-                "pt": "fila de pacotes modificados e sinal ACK",
-                "nl": "aangepaste pakketwachtrij en ACK-signaal",
-                "fr": "file d'attente modifiée et signal ACK",
-                "it": "coda pacchetti modificata e segnale ACK",
-                "es": "cola de paquete modificada y señal de ACK",
-                "pl": "zmodyfikowana kolejka pakietów i sygnał ACK"
-            },
-            "1.0.7": {
-                "en": "fixed adapter lock while uploading project",
-                "de": "fixed Adapter Absturz beim Hochladen des Projekts",
-                "ru": "фиксированная блокировка адаптера при загрузке проекта",
-                "pt": "bloqueio do adaptador fixo durante o upload do projeto",
-                "nl": "vast adaptervergrendeling tijdens het uploaden van het project",
-                "fr": "verrouillage de l'adaptateur fixe lors du téléchargement du projet",
-                "it": "blocco dell'adattatore fisso durante il caricamento del progetto",
-                "es": "bloqueo fijo del adaptador durante la carga del proyecto",
-                "pl": "naprawiono blokadę adaptera podczas przesyłania projektu"
-            },
-            "1.0.6": {
-                "en": "connection problem fixed",
-                "de": "Verbindungsproblem behoben",
-                "ru": "проблема связи исправлена",
-                "pt": "problema de conexão corrigido",
-                "nl": "Verbindingsprobleem opgelost",
-                "fr": "problème de connexion fixe",
-                "it": "problema di connessione risolto",
-                "es": "problema de conexión arreglado",
-                "pl": "problem z połączeniem został naprawiony"
-            },
-            "1.0.5": {
-                "en": "The empty Object problem was fixed",
-                "de": "Das Problem mit dem leeren Objekt wurde behoben",
-                "ru": "Исправлена ​​проблема с пустым объектом",
-                "pt": "O problema do objeto vazio foi corrigido",
-                "nl": "Het lege objectprobleem is opgelost",
-                "fr": "Le problème d'objet vide a été résolu",
-                "it": "Il problema dell'oggetto vuoto è stato risolto",
-                "es": "El problema del Objeto vacío fue arreglado",
-                "pl": "Problem z pustym obiektem został naprawiony"
-            },
-            "1.0.4": {
-                "en": "Schema Update für ETS 5.6",
-                "de": "schema update for ETS 5.6",
-                "ru": "scheme update for ETS 5.6"
-            },
-            "1.0.2": {
-                "en": "kleine Fehler beseitigt",
-                "de": "fixed small errors",
-                "ru": "fixed small errors"
-            },
-            "0.8.6": {
-                "en": "fixed some small bugs, insert manual configureable KNX-senddelay",
-                "de": "kleine Fehlerbeseitigungen, manuelle Sendeverzögerung",
-                "ru": "fixed some small bugs, insert manual configureable KNX-senddelay"
-            },
-            "0.8.5": {
-                "en": "project loader rebuild, dpt13-fix",
-                "de": "LAderoutine fuer knxproj überarbeitet, dpt13 fix",
-                "ru": "project loader rebuild, dpt13-fix"
-            },
-            "0.8.3": {
-                "en": "optimized knxproj load, bugfixes",
-                "de": "optimiertes Laden der knxproj datei, bugfixes",
-                "ru": "optimized knxproj load, bugfixes"
-            },
-            "0.8.2": {
-                "en": "added parsing of device-config files",
-                "de": "Dateien der Gerätekonfigurationen werden beim Import mit untersucht",
-                "ru": "added parsing of device-config files"
-            },
-            "0.8.1": {
-                "en": "fixed DPT1 problem",
-                "de": "DPT1 Problem behoben",
-                "ru": "fixed DPT1 problem"
-            },
-            "0.8.0": {
-                "en": "support of Builingstructure, check for similarities between switch and state ",
-                "de": "erfassen der Gebäudestruktur, Ähnlichkeitsverknüpfungen zwischen schalt und Statusadressen ",
-                "ru": "support of Builingstructure, check for similarities between switch and state "
-            },
-            "0.7.3": {
-                "en": "more DPT's, faster startup",
-                "de": "mehr DPT's, schnellerer Start",
-                "ru": "more DPT's, faster startup"
-            },
-            "0.7.2": {
-                "en": "Added necessary dependicies",
-                "de": "unerfüllte Abhängigkeiten beseitigt",
-                "ru": "Added necessary dependicies"
-            },
-            "0.7.1": {
-                "en": "Support of connection to standard KNX/LAN gateways",
-                "de": "Unterstützung zur Anbindung an standart KNX/LAN gateways ",
-                "ru": "Support of connection to standard KNX/LAN gateways"
-            },
-            "0.7.0": {
-                "en": "Support of project export",
-                "de": "Projekt-Export Unterstützung",
-                "ru": "Support of project export"
-            },
-            "0.6.0": {
-                "en": "redesign",
-                "de": "redesign",
-                "ru": "redesign"
             }
         },
         "title": "KNX",
@@ -405,6 +137,29 @@
         "type": "iot-systems",
         "restartAdapters": [
             "knx"
+        ],
+        "adminColumns": [
+            {
+                "name": {
+                    "en": "KNX addr",
+                    "de": "KNX-Adr",
+                    "ru": "KNX-адр",
+                    "pt": "End. KNX",
+                    "nl": "KNX-adr",
+                    "fr": "Adr KNX",
+                    "it": "Ind KNX",
+                    "es": "Dir KNX",
+                    "pl": "Adr KNX",
+                    "zh-cn": "KNX地址"
+                },
+                "path": "native.address",
+                "width": 100
+            },
+            {
+                "name": "DPT",
+                "path": "native.dpt",
+                "width": 100
+            }
         ]
     },
     "native": {
