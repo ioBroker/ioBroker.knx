@@ -1,7 +1,6 @@
 {
     "common": {
         "name": "knx",
-<<<<<<< HEAD
         "version": "1.0.44",
         "news": {
             "1.0.44": {
@@ -16,10 +15,7 @@
                 "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
                 "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
             },
-=======
         "version": "1.0.42",
-        "news": {
->>>>>>> 13b9fe440755228304ffff502205cbac0df53f11
             "1.0.42": {
                 "en": "Fixed problem with missing index_m.html",
                 "de": "Problem mit fehlender index_m.html behoben",
@@ -143,7 +139,6 @@
         "restartAdapters": [
             "knx"
         ],
-<<<<<<< HEAD
         "adminColumns": [
             {
                 "name": {
@@ -167,28 +162,6 @@
                 "width": 100
             }
         ]
-=======
-        "adminColumns": [{
-            "name": {
-                "en": "KNX addr",
-                "de": "KNX-Adr",
-                "ru": "KNX-адр",
-                "pt": "End. KNX",
-                "nl": "KNX-adr",
-                "fr": "Adr KNX",
-                "it": "Ind KNX",
-                "es": "Dir KNX",
-                "pl": "Adr KNX",
-                "zh-cn": "KNX地址"
-            },
-            "path": "native.address",
-            "width": 100
-        }, {
-            "name": "DPT",
-            "path": "native.dpt",
-            "width": 100
-        }]
->>>>>>> 13b9fe440755228304ffff502205cbac0df53f11
     },
     "native": {
         "useBooleans": true,
