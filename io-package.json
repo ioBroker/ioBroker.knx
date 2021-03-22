@@ -1,11 +1,22 @@
 {
     "common": {
         "name": "knx",
-<<<<<<< HEAD
-        "version": "1.0.44",
+        "version": "1.0.45",
         "news": {
+            "1.0.45": {
+                "en": "import of ETS V5.7.5 available",
+                "de": "Import von ETS V5.7.5 verfügbar",
+                "ru": "доступен импорт ETS V5.7.5",
+                "pt": "importação de ETS V5.7.5 disponível",
+                "nl": "import van ETS V5.7.5 beschikbaar",
+                "fr": "importation d'ETS V5.7.5 disponible",
+                "it": "importazione di ETS V5.7.5 disponibile",
+                "es": "importación de ETS V5.7.5 disponible",
+                "pl": "dostępny import ETS V5.7.5",
+                "zh-cn": "可以导入ETS V5.7.5"
+            },
             "1.0.44": {
-                "en": "fixed act and state handling, added some new datapoint types, fix facility and room recognition and device allocation ",
+                "en": "fixed act and state handling, added some new datapoint types, fix facility and room recognition and device allocation",
                 "de": "Feste Akt- und Statusbehandlung, einige neue Datenpunkttypen hinzugefügt, Erkennung von Einrichtungen und Räumen sowie Gerätezuordnung korrigiert",
                 "ru": "исправлена обработка действий и состояний, добавлены некоторые новые типы точек данных, исправлено распознавание объектов и помещений, а также выделение устройств",
                 "pt": "ato fixo e manipulação de estado, adicionados alguns novos tipos de pontos de dados, instalação de conserto e reconhecimento de sala e alocação de dispositivo",
@@ -16,10 +27,6 @@
                 "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
                 "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
             },
-=======
-        "version": "1.0.42",
-        "news": {
->>>>>>> 13b9fe440755228304ffff502205cbac0df53f11
             "1.0.42": {
                 "en": "Fixed problem with missing index_m.html",
                 "de": "Problem mit fehlender index_m.html behoben",
@@ -143,7 +150,6 @@
         "restartAdapters": [
             "knx"
         ],
-<<<<<<< HEAD
         "adminColumns": [
             {
                 "name": {
@@ -167,28 +173,6 @@
                 "width": 100
             }
         ]
-=======
-        "adminColumns": [{
-            "name": {
-                "en": "KNX addr",
-                "de": "KNX-Adr",
-                "ru": "KNX-адр",
-                "pt": "End. KNX",
-                "nl": "KNX-adr",
-                "fr": "Adr KNX",
-                "it": "Ind KNX",
-                "es": "Dir KNX",
-                "pl": "Adr KNX",
-                "zh-cn": "KNX地址"
-            },
-            "path": "native.address",
-            "width": 100
-        }, {
-            "name": "DPT",
-            "path": "native.dpt",
-            "width": 100
-        }]
->>>>>>> 13b9fe440755228304ffff502205cbac0df53f11
     },
     "native": {
         "useBooleans": true,
