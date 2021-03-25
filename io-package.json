@@ -1,11 +1,7 @@
 {
     "common": {
         "name": "knx",
-<<<<<<< HEAD
         "version": "1.0.45",
-=======
-        "version": "1.0.44",
->>>>>>> 58557769786a7c2a96f335d1af2767dc22aa1a30
         "news": {
             "1.0.45": {
                 "en": "import of ETS V5.7.5 available",
@@ -31,10 +27,6 @@
                 "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
                 "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
             },
-<<<<<<< HEAD
-=======
-        "version": "1.0.42",
->>>>>>> 58557769786a7c2a96f335d1af2767dc22aa1a30
             "1.0.42": {
                 "en": "Fixed problem with missing index_m.html",
                 "de": "Problem mit fehlender index_m.html behoben",
