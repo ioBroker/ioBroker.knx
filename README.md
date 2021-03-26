@@ -116,6 +116,7 @@ Durch senden eines Wertes auf eine Statusadresse werden die Kommunikationsobjekt
 * selective import of knx-project
 * require node Version >8.9.4!
 
+
 ## Changelog
 ### 1.0.45 (2021_03_22)
 * import of ETS v5.7.5 projects
