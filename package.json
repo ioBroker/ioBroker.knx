@@ -1,12 +1,7 @@
 {
   "name": "iobroker.knx",
-<<<<<<< HEAD
   "version": "1.0.45",
   "description": "ioBroker knx Adapter ",
-=======
-  "version": "1.0.44",
-  "description": "ioBroker knx Adapter",
->>>>>>> 58557769786a7c2a96f335d1af2767dc22aa1a30
   "author": {
     "name": "K.Ringmann",
     "email": "info@punktnetzwerk.net"
