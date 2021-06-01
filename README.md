@@ -8,6 +8,7 @@
 
 ## Description
 ru: [Установка и базовая настройка адаптера](https://github.com/Anzic23/ioBroker.knx/blob/master/doc/ru/readme.md)
+
 en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- group addresses and ioBroker and puts the devices into rooms (esp. for MobileUI).
 
 It connects to standard KNX/LAN Gateways.
