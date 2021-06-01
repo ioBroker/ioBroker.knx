@@ -7,7 +7,7 @@
 [![NPM](https://nodei.co/npm/iobroker.knx.png?downloads=true)](https://nodei.co/npm/iobroker.knx/)
 
 ## Description
-ru: [Установка и базовая настройка адаптера](https://github.com/Anzic23/ioBroker.knx/blob/master/doc/ru/readme.md)
+ru: [Установка и базовая настройка адаптера](doc/ru/readme.md)
 
 en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- group addresses and ioBroker and puts the devices into rooms (esp. for MobileUI).
 
