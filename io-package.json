@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "1.0.45",
+        "version": "2.0.0",
         "news": {
+            "2.0.0": {
+                "en": "New admin GUI",
+                "de": "Neue Admin-GUI",
+                "ru": "Новый графический интерфейс администратора",
+                "pt": "Nova GUI de administrador",
+                "nl": "Nieuwe admin GUI",
+                "fr": "Nouvelle interface graphique d'administration",
+                "it": "Nuova GUI di amministrazione",
+                "es": "Nueva interfaz gráfica de usuario de administración",
+                "pl": "Nowy graficzny interfejs administratora",
+                "zh-cn": "新的管理员GUI"
+            },
             "1.0.45": {
                 "en": "import of ETS V5.7.5 available",
                 "de": "Import von ETS V5.7.5 verfügbar",
@@ -112,7 +124,9 @@
                 "zh-cn": "一些错误修复"
             }
         },
-        "title": "KNX",
+        "titleLang": {
+            "en": "KNX"
+        },
         "desc": {
             "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
             "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
@@ -147,9 +161,6 @@
         ],
         "loglevel": "info",
         "type": "iot-systems",
-        "restartAdapters": [
-            "knx"
-        ],
         "adminColumns": [
             {
                 "name": {
@@ -164,23 +175,83 @@
                     "pl": "Adr KNX",
                     "zh-cn": "KNX地址"
                 },
+                "align": "left",
                 "path": "native.address",
                 "width": 100
             },
             {
                 "name": "DPT",
                 "path": "native.dpt",
-                "width": 100
+                "width": 100,
+                "align": "left"
+            }
+        ],
+        "messages": [
+            {
+                "condition": {
+                    "operand": "and",
+                    "rules": [
+                        "oldVersion<2.0.0",
+                        "newVersion>=2.0.0"
+                    ]
+                },
+                "title": {
+                    "en": "Important notice!",
+                    "de": "Wichtiger Hinweis!",
+                    "ru": "Важное замечание!",
+                    "pt": "Notícia importante!",
+                    "nl": "Belangrijke mededeling!",
+                    "fr": "Avis important!",
+                    "it": "Avviso IMPORTANTE!",
+                    "es": "Noticia importante!",
+                    "pl": "Ważna uwaga!",
+                    "zh-cn": "重要通知!"
+                },
+                "text": {
+                    "en": "From the ioBroker.knx@2.0.0 version only 500 data points can be used fro free. If you have more than 500 KNX data points, you must order the paid license",
+                    "de": "Ab der Version ioBroker.knx@2.0.0 können nur noch 500 Datenpunkte frei verwendet werden. Wenn Sie mehr als 500 KNX-Datenpunkte haben, müssen Sie die kostenpflichtige Lizenz bestellen",
+                    "ru": "Из версии ioBroker.knx@2.0.0 только 500 точек данных можно использовать бесплатно. Если у вас более 500 точек данных KNX, необходимо заказать платную лицензию.",
+                    "pt": "Na versão ioBroker.knx@2.0.0, apenas 500 pontos de dados podem ser usados gratuitamente. Se você tiver mais de 500 pontos de dados KNX, você deve solicitar a licença paga",
+                    "nl": "Van de ioBroker.knx@2.0.0 versie kunnen slechts 500 datapunten gratis worden gebruikt. Als u meer dan 500 KNX-datapunten heeft, moet u de betaalde licentie bestellen",
+                    "fr": "À partir de la version ioBroker.knx@2.0.0, seuls 500 points de données peuvent être utilisés gratuitement. Si vous avez plus de 500 points de données KNX, vous devez commander la licence payante",
+                    "it": "Dalla versione ioBroker.knx@2.0.0 è possibile utilizzare gratuitamente solo 500 punti dati. Se hai più di 500 punti dati KNX, devi ordinare la licenza a pagamento",
+                    "es": "Desde la versión ioBroker.knx@2.0.0, solo se pueden usar 500 puntos de datos de forma gratuita. Si tiene más de 500 puntos de datos KNX, debe solicitar la licencia paga",
+                    "pl": "Od wersji ioBroker.knx@2.0.0 można bezpłatnie korzystać tylko z 500 punktów danych. Jeśli masz więcej niż 500 punktów danych KNX, musisz zamówić płatną licencję",
+                    "zh-cn": "从 ioBroker.knx@2.0.0 版本开始，只能免费使用 500 个数据点。如果您有超过 500 个 KNX 数据点，则必须订购付费许可证"
+                },
+                "link": "https://iobroker.net/www/pricing",
+                "level": "warn",
+                "linkText": {
+                    "en": "Prices",
+                    "de": "Preise",
+                    "ru": "Цены",
+                    "pt": "Preços",
+                    "nl": "Prijzen",
+                    "fr": "Des prix",
+                    "it": "Prezzi",
+                    "es": "Precios",
+                    "pl": "Ceny",
+                    "zh-cn": "价格"
+                },
+                "buttons": [
+                    "agree",
+                    "cancel"
+                ]
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.28"
             }
         ]
     },
     "native": {
         "useBooleans": true,
         "gwip": "127.0.0.1",
-        "gwipport": 3671,
+        "gwipport": 3674,
         "eibadr": "1.1.0",
         "onlyAddNewObjects": false,
-        "license": "",
+        "license": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW9icm9rZXIua254IiwiY29tbWVudCI6IiIsImRldmljZVV1aWQiOiJJRzE0NDZlYi0wMWI1LWZmODktMGIzYy02Y2E5ODIwODZjYTYwNSIsInZlbmRvciI6ImlvYm94X2dtYmgiLCJlbWFpbCI6ImsucmluZ21hbm5AcHVua3RuZXR6d2Vyay5uZXQiLCJpbnZvaWNlIjoiMTAyNyIsImludm9pY2VVdWlkIjoiMiIsInR5cGUiOiJjb21tZXJjaWFsIiwibHR5cGUiOiJzdyIsImV4cGlyZXMiOjI0ODc5MzAyOTgsInZlcnNpb24iOiI8MiIsImlkIjoiYjliOGM0MjAtZGU5NC0xMWU4LThiMGEtMTE4ODU1MGNiYmFiIiwiaWF0IjoxNTQxMTU5MDk4fQ.eiMmB-FRHTpcULj5Ya-7y_BMtrjLa5RiZAI_aOXinSEKpQ7GGbTa7x0td7CHEOZ-YD8bqOU9Na55M_SmndW5906M_vul-ERy5UEqXkHo14pvUl7Yn86nVuqZk058Ps151lWw3Ux6ESaWrEaBOQlkVId2hifAJHe3zKY6XA-UdddxfnBtbUg8ibOb6oO0vND4cKGT_PvaxIyE9VJVsEiIjVEUY2MZYaHWVhNIdFEbrP1qVAb4vMOoJZVsN63Cr7Tp1IDXPrdRoWQ0ApimcrxhTS1pO7JAUdrnQ_tW913XQk_f3GHeefDFGBDDbEmRK4P9-IRpgQJgQI03zLVTe2cKwA",
         "frameInterval": 30,
         "bind": "0.0.0.0"
     },
