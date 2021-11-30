@@ -28,7 +28,6 @@
 ## Description
 ru: [Установка и базовая настройка адаптера](doc/ru/readme.md)
 
->>>>>>> 7dd76f785bcce20690c78d5fb91b90e35f25e7b7
 en: This adapter allows importing of knxproj Files from ETS. It generates the translation between KNX- group addresses and ioBroker and puts the devices into rooms (esp. for MobileUI).
 
 ru: [Установка и базовая настройка адаптера](doc/ru/readme.md)<!-- @IGNORE PREVIOUS: link -->
@@ -39,7 +38,6 @@ It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
-<<<<<<< HEAD
 ##Features:
 
 =======
@@ -51,7 +49,6 @@ Additionally you need a license to use the adapter. The following license editio
 * **Commercial License**: When using KNX in a commercial environment or selling KNX as part of ioBroker packages to your customers this license is for you. License check is also not requiring an online connection.
 
 ## Features:
->>>>>>> 7dd76f785bcce20690c78d5fb91b90e35f25e7b7
 * importing `knxproj` file
 * generating ETS-like object structure
 * finding and combining act-channel and state-channel (heuristic)
