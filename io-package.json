@@ -1,8 +1,32 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.0",
+        "version": "2.0.2",
         "news": {
+            "2.0.2": {
+                "en": "fixed problem with license acceptance",
+                "de": "Problem mit Lizenzakzeptanz behoben",
+                "ru": "исправлена проблема с принятием лицензии",
+                "pt": "corrigido o problema com a aceitação da licença",
+                "nl": "probleem opgelost met licentie-acceptatie",
+                "fr": "problème résolu avec l'acceptation de la licence",
+                "it": "risolto problema con l'accettazione della licenza",
+                "es": "problema solucionado con la aceptación de la licencia",
+                "pl": "naprawiony problem z akceptacją licencji",
+                "zh-cn": "修复了许可证接受问题"
+            },
+            "2.0.1": {
+                "en": "fixed problem with license acceptance",
+                "de": "Problem mit Lizenzakzeptanz behoben",
+                "ru": "исправлена проблема с принятием лицензии",
+                "pt": "corrigido o problema com a aceitação da licença",
+                "nl": "probleem opgelost met licentie-acceptatie",
+                "fr": "problème résolu avec l'acceptation de la licence",
+                "it": "risolto problema con l'accettazione della licenza",
+                "es": "problema solucionado con la aceptación de la licencia",
+                "pl": "naprawiony problem z akceptacją licencji",
+                "zh-cn": "修复了许可证接受问题"
+            },
             "2.0.0": {
                 "en": "New admin GUI",
                 "de": "Neue Admin-GUI",
