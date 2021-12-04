@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.2",
+        "version": "2.0.3",
         "news": {
+            "2.0.3": {
+                "en": "fixed counting 1st Datapoint, automaticly remove old V1 license",
+                "de": "Fehler beim Zählen des 1. Datenpunkts behoben, alte V1-Lizenz automatisch entfernen",
+                "ru": "исправлен подсчет 1st Datapoint, автоматическое удаление старой лицензии V1",
+                "pt": "corrigido a contagem do 1º Datapoint, remover automaticamente a licença V1 antiga",
+                "nl": "vaste telling 1e datapunt, verwijder automatisch oude V1-licentie",
+                "fr": "comptage fixe du 1er point de données, suppression automatique de l'ancienne licence V1",
+                "it": "corretto conteggio 1st Datapoint, rimuovere automaticamente la vecchia licenza V1",
+                "es": "1er punto de datos de conteo fijo, eliminar automáticamente la antigua licencia V1",
+                "pl": "naprawiono zliczanie pierwszego punktu danych, automatyczne usuwanie starej licencji V1",
+                "zh-cn": "固定计数第一个数据点，自动删除旧的 V1 许可证"
+            },
             "2.0.2": {
                 "en": "fixed problem with license acceptance",
                 "de": "Problem mit Lizenzakzeptanz behoben",
