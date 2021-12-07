@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.3",
+        "version": "2.0.4",
         "news": {
+            "2.0.4": {
+                "en": "fixed DPT9.xxx and DPT19.xxx, small bugfixes",
+                "de": "DPT9.xxx und DPT19.xxx behoben, kleine Bugfixes",
+                "ru": "исправлены DPT9.xxx и DPT19.xxx, исправлены мелкие ошибки",
+                "pt": "DPT9.xxx e DPT19.xxx corrigidos, pequenas correções de bugs",
+                "nl": "vaste DPT9.xxx en DPT19.xxx, kleine bugfixes",
+                "fr": "correction de DPT9.xxx et DPT19.xxx, petites corrections de bugs",
+                "it": "corretti DPT9.xxx e DPT19.xxx, piccole correzioni di bug",
+                "es": "arreglado DPT9.xxx y DPT19.xxx, pequeñas correcciones de errores",
+                "pl": "poprawione DPT9.xxx i DPT19.xxx, drobne poprawki",
+                "zh-cn": "修复了 DPT9.xxx 和 DPT19.xxx，小错误修正"
+            },
             "2.0.3": {
                 "en": "fixed counting 1st Datapoint, automaticly remove old V1 license",
                 "de": "Fehler beim Zählen des 1. Datenpunkts behoben, alte V1-Lizenz automatisch entfernen",

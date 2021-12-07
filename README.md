@@ -9,6 +9,7 @@
 #### Table of content
 
 * [Description](#description)
+* [Requirements](#requirements)
 * [Features](#features)
 * [Adapter configuration](#adapter-configuration)
     * [Install the License](#install-the-license)
@@ -36,6 +37,13 @@ It connects to standard KNX/LAN Gateways.
 
 Before beginning: Every DPT of com.Objects should be set in your ETS project. Every device should be sorted into your facility structure.
 
+## Requirements
+
+* node Version >= 14.15.4
+* admin Version >= 5.2.0
+* js-controller Version >=3.3.20
+
+Without this requirements, the adapter is not installable or will work not properly.
 
 ## License requirements
 To use this adapter in ioBroker you need to accept the source code license of the adapter. The source code of this adapter is available under the CC-NC-BY license.
@@ -197,6 +205,13 @@ If there are more GA's to change properties, use multiselect. This feature works
 -->
 
 ## Changelog
+
+### 2.0.4
+
+* fixed DPT9.xxx calculation
+* implemented date-and-time DPT19.00x
+* fixed confusing "no license error"
+* small bugfixes
 
 ### 2.0.3 (2021-12-04)
 
