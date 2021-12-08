@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.4",
+        "version": "2.0.5",
         "news": {
+            "2.0.5": {
+                "en": "fixed problem on ETSv4 import, corrected some messages, corrected DPT14.x min and max range",
+                "de": "Problem beim ETSv4-Import behoben, einige Meldungen korrigiert, DPT14.x Min- und Max-Bereich korrigiert",
+                "ru": "исправлена проблема с импортом ETSv4, исправлены некоторые сообщения, исправлены минимальный и максимальный диапазон DPT14.x",
+                "pt": "corrigiu o problema na importação ETSv4, corrigiu algumas mensagens, corrigiu o intervalo mínimo e máximo DPT14.x",
+                "nl": "probleem opgelost bij ETSv4-import, enkele berichten gecorrigeerd, DPT14.x min en max bereik gecorrigeerd",
+                "fr": "correction d'un problème sur l'import ETSv4, correction de certains messages, correction de la plage min et max de DPT14.x",
+                "it": "risolto problema sull'importazione ETSv4, corretti alcuni messaggi, corretti DPT14.x intervallo minimo e massimo",
+                "es": "Se solucionó el problema en la importación de ETSv4, se corrigieron algunos mensajes, se corrigió el rango mínimo y máximo de DPT14.x",
+                "pl": "naprawiono problem z importem ETSv4, poprawiono niektóre komunikaty, poprawiono minimalny i maksymalny zasięg DPT14.x",
+                "zh-cn": "修复了 ETSv4 导入的问题，更正了一些消息，更正了 DPT14.x 最小和最大范围"
+            },
             "2.0.4": {
                 "en": "fixed DPT9.xxx and DPT19.xxx, small bugfixes",
                 "de": "DPT9.xxx und DPT19.xxx behoben, kleine Bugfixes",
@@ -193,6 +205,11 @@
         "icon": "knx.png",
         "enabled": true,
         "messagebox": true,
+        "plugins": {
+            "sentry": {
+                "dsn": "https://360fcb75fa344c36b722fdfd723951a8@sentry.iobroker.net/162"
+            }
+        },
         "subscribe": "messagebox",
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
         "compact": true,

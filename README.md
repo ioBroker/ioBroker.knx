@@ -206,6 +206,12 @@ If there are more GA's to change properties, use multiselect. This feature works
 
 ## Changelog
 
+### 2.0.5
+
+* fixed problem on ETSv4 import
+* corrected some messages
+* corrected DPT14.x min and max range
+
 ### 2.0.4
 
 * fixed DPT9.xxx calculation
@@ -474,6 +480,16 @@ If there are more GA's to change properties, use multiselect. This feature works
 #### 0.2.0
 
 * (bluefox) initial release
+
+## Exceptions and errors
+
+**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.**  
+For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)!  
+Sentry reporting is used starting with js-controller 3.0.
+
+The developer is not able to get any further special informations about the system/config/user/enviroment. In case no license is found the
+adapter version and host id is also reported.
+
 
 ## License
 The CC-NC-BY License (CC-NC-BY)
