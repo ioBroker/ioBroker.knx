@@ -62,6 +62,7 @@ Additionally you need a license to use the adapter. The license editions are ava
 * generating ETS-like object structure
 * finding and combining act-channel and state-channel (heuristic)
 * updating all states on start
+* no cloud or internet needed
 * emitting a READ to the KNX-Bus, while writing on state-object
 * edit and modify GA objects with GA-Tools
 * edit and modify state-act relations with GA-Tools
@@ -237,6 +238,12 @@ relation.
 -->
 
 ## Changelog
+### 2.0.8
+* fixed bug with unackn write
+* fixed bug in linkedState
+
+### 2.0.7
+* fixed bug with unable to write on KNX
 
 ### 2.0.6
 * fixed problem on ETSv6 import

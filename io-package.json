@@ -1,8 +1,44 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.5",
+        "version": "2.0.8",
         "news": {
+            "2.0.8": {
+                "en": "fixed warning with write without ack, some small other fixes",
+                "de": "Warnung mit Schreiben ohne Bestätigung behoben, einige kleine andere Korrekturen",
+                "ru": "исправлено предупреждение при записи без подтверждения, другие мелкие исправления",
+                "pt": "aviso corrigido com gravação sem ack, algumas outras pequenas correções",
+                "nl": "vaste waarschuwing met schrijven zonder ack, enkele kleine andere oplossingen",
+                "fr": "avertissement corrigé avec écriture sans ack, quelques petites autres corrections",
+                "it": "avviso corretto con scrittura senza ACK, alcune piccole altre correzioni",
+                "es": "advertencia fija con escritura sin ack, algunas otras pequeñas correcciones",
+                "pl": "poprawione ostrzeżenie z zapisem bez potwierdzenia, kilka innych drobnych poprawek",
+                "zh-cn": "修复了没有确认的写入警告，其他一些小的修复"
+            },
+            "2.0.7": {
+                "en": "fixed bug no write to KNX",
+                "de": "Fehler behoben, kein Schreiben auf KNX",
+                "ru": "исправлена ошибка без записи в KNX",
+                "pt": "bug corrigido sem gravação no KNX",
+                "nl": "bug opgelost, niet schrijven naar KNX",
+                "fr": "correction d'un bug pas d'écriture sur KNX",
+                "it": "bug risolto nessuna scrittura su KNX",
+                "es": "error corregido no escribir en KNX",
+                "pl": "naprawiony błąd bez zapisu do KNX",
+                "zh-cn": "修复了没有写入 KNX 的错误"
+            },
+            "2.0.6": {
+                "en": "bugfixes, new feature directLink",
+                "de": "Bugfixes, neues Feature directLink",
+                "ru": "исправления, новая функция directLink",
+                "pt": "correções de bugs, novo recurso directLink",
+                "nl": "bugfixes, nieuwe functie directLink",
+                "fr": "corrections de bugs, nouvelle fonctionnalité directLink",
+                "it": "correzioni di bug, nuova funzionalità directLink",
+                "es": "corrección de errores, nueva función directLink",
+                "pl": "poprawki błędów, nowa funkcja directLink",
+                "zh-cn": "错误修正，新功能 directLink"
+            },
             "2.0.5": {
                 "en": "fixed problem on ETSv4 import, corrected some messages, corrected DPT14.x min and max range",
                 "de": "Problem beim ETSv4-Import behoben, einige Meldungen korrigiert, DPT14.x Min- und Max-Bereich korrigiert",
