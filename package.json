@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "ioBroker knx Adapter ",
   "author": {
     "name": "K.Ringmann",
@@ -45,7 +45,6 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.1",
-    "adm-zip": "^0.4.16",
     "binary-parser": "^1.6.2",
     "binary-protocol": "^0.0.0",
     "core-js": "^3.19.1",
@@ -56,13 +55,16 @@
     "string-similarity": "^4.0.4",
     "underscore": "^1.13.1",
     "xmldom": "^0.1.27",
-    "xpath": "^0.0.32",
-    "zip": "^1.2.0"
+    "xpath": "^0.0.32"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.4.1",
     "@alcalzone/release-script-plugin-iobroker": "^3.4.1",
     "@alcalzone/release-script-plugin-license": "^3.4.1",
+    "babel-core": "^6.26.3",
+    "babel-minify": "^0.5.1",
+    "babel-plugin-polyfill-corejs2": "^0.3.0",
+    "babel-plugin-polyfill-corejs3": "^0.5.0",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "chai": "^4.3.4",
