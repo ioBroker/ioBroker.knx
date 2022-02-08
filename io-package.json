@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.9",
+        "version": "2.0.10",
         "news": {
+			"2.0.10": {
+                "en": "import of ETS6.0.2, bugfixes",
+                "de": "Import von ETS6.0.2, Bugfixes",
+                "ru": "импорт ETS6.0.2, исправления",
+                "pt": "importação de ETS6.0.2, correções de bugs",
+                "nl": "import van ETS6.0.2, bugfixes",
+                "fr": "importation d'ETS6.0.2, corrections de bogues",
+                "it": "importazione di ETS6.0.2, correzioni di bug",
+                "es": "importación de ETS6.0.2, corrección de errores",
+                "pl": "import ETS6.0.2, poprawki błędów",
+                "zh-cn": "导入 ETS6.0.2，错误修正"
+            },
             "2.0.9": {
                 "en": "import password protected project files, bug fixes",
                 "de": "passwortgeschützte Projektdateien importieren, Fehlerbehebungen",
