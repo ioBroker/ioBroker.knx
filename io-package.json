@@ -1,9 +1,33 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.10",
+        "version": "2.0.12",
         "news": {
-			"2.0.10": {
+            "2.0.12": {
+                "en": "fixed handling of undefined DP's, some small bugs, and the most important: my thoughts are with the people of Ukraine, I am infinitely sorry for what is happening to them and their country. It is an inhuman shame.",
+                "de": "gefixter Umgang mit undefinierten DP's, einige kleine Bugs, und das Wichtigste: Meine Gedanken sind bei den Menschen in der Ukraine, es tut mir unendlich leid, was mit ihnen und ihrem Land passiert. Es ist eine unmenschliche Schande.",
+                "ru": "исправлена обработка неопределенных DP'ов, небольшие баги и самое главное: мои мысли с народом Украины, я бесконечно сожалею о том, что происходит с ними и их страной. Это нечеловеческий позор.",
+                "pt": "corrigido o tratamento de DPs indefinidos, alguns pequenos bugs, e o mais importante: meus pensamentos estão com o povo da Ucrânia, sinto muito pelo que está acontecendo com eles e seu país. É uma vergonha desumana.",
+                "nl": "vaste afhandeling van ongedefinieerde DP's, enkele kleine bugs, en het belangrijkste: mijn gedachten zijn bij de mensen van Oekraïne, het spijt me oneindig voor wat er met hen en hun land gebeurt. Het is een onmenselijke schande.",
+                "fr": "correction de la gestion des DP non définis, quelques petits bugs, et le plus important : mes pensées vont au peuple ukrainien, je suis infiniment désolé de ce qui leur arrive ainsi qu'à leur pays. C'est une honte inhumaine.",
+                "it": "corretta gestione di DP non definiti, alcuni piccoli bug e il più importante: i miei pensieri sono con il popolo ucraino, sono infinitamente dispiaciuto per quello che sta succedendo a loro e al loro paese. È una vergogna disumana.",
+                "es": "manejo fijo de DP indefinidos, algunos errores pequeños y lo más importante: mis pensamientos están con la gente de Ucrania, lamento infinitamente lo que les está sucediendo a ellos y a su país. Es una vergüenza inhumana.",
+                "pl": "naprawiono obsługę niezdefiniowanych DP, kilka drobnych błędów i najważniejsze: moje myśli są z mieszkańcami Ukrainy, nieskończenie przepraszam za to, co się dzieje z nimi i ich krajem. To nieludzki wstyd.",
+                "zh-cn": "修复了未定义的 DP 的处理，一些小错误，最重要的是：我的想法与乌克兰人民同在，我对他们和他们的国家发生的事情感到无限抱歉。这是一种不人道的耻辱。"
+            },
+            "2.0.11": {
+                "en": "fixed password handling for projects from upgraded ETS",
+                "de": "Passwortbehandlung für Projekte aus aktualisierter ETS korrigiert",
+                "ru": "исправлена обработка паролей для проектов из обновленной ETS",
+                "pt": "manipulação de senha fixa para projetos do ETS atualizado",
+                "nl": "vaste wachtwoordafhandeling voor projecten van geüpgrade ETS",
+                "fr": "gestion du mot de passe fixe pour les projets d'ETS mis à niveau",
+                "it": "gestione password fissa per progetti da ETS aggiornato",
+                "es": "manejo de contraseña fija para proyectos de ETS actualizado",
+                "pl": "poprawiona obsługa haseł dla projektów z uaktualnionego ETS",
+                "zh-cn": "修复升级后 ETS 项目的密码处理"
+            },
+            "2.0.10": {
                 "en": "import of ETS6.0.2, bugfixes",
                 "de": "Import von ETS6.0.2, Bugfixes",
                 "ru": "импорт ETS6.0.2, исправления",
