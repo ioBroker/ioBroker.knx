@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.12",
+        "version": "2.0.13",
         "news": {
+            "2.0.13": {
+                "en": "added ETS5.7.7 import, fixed \"unknown value\" bug, some fixes",
+                "de": "ETS5.7.7-Import hinzugefügt, \"unbekannter Wert\"-Fehler behoben, einige Korrekturen",
+                "ru": "добавлен импорт ETS5.7.7, исправлена ошибка \"неизвестное значение\", некоторые исправления",
+                "pt": "adicionado importação ETS5.7.7, bug \"valor desconhecido\" corrigido, algumas correções",
+                "nl": "ETS5.7.7 import toegevoegd, bug met \"onbekende waarde\" opgelost, enkele fixes",
+                "fr": "ajout de l'importation ETS5.7.7, correction du bogue \"valeur inconnue\", quelques correctifs",
+                "it": "aggiunta l'importazione ETS5.7.7, corretto bug \"valore sconosciuto\", alcune correzioni",
+                "es": "Se agregó la importación ETS5.7.7, se corrigió el error de \"valor desconocido\", algunas correcciones",
+                "pl": "dodano import ETS5.7.7, naprawiono błąd \"nieznanej wartości\", kilka poprawek",
+                "zh-cn": "添加 ETS5.7.7 导入，修复“未知值”错误，一些修复"
+            },
             "2.0.12": {
                 "en": "fixed handling of undefined DP's, some small bugs, and the most important: my thoughts are with the people of Ukraine, I am infinitely sorry for what is happening to them and their country. It is an inhuman shame.",
                 "de": "gefixter Umgang mit undefinierten DP's, einige kleine Bugs, und das Wichtigste: Meine Gedanken sind bei den Menschen in der Ukraine, es tut mir unendlich leid, was mit ihnen und ihrem Land passiert. Es ist eine unmenschliche Schande.",
