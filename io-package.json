@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.13",
+        "version": "2.0.14",
         "news": {
+            "2.0.14": {
+                "en": "added ETSv6.0.4 support, small bugfixes",
+                "de": "ETSv6.0.4-Unterstützung hinzugefügt, kleine Bugfixes",
+                "ru": "добавлена поддержка ETSv6.0.4, небольшие исправления",
+                "pt": "adicionado suporte ETSv6.0.4, pequenas correções de bugs",
+                "nl": "ETSv6.0.4-ondersteuning toegevoegd, kleine bugfixes",
+                "fr": "ajout du support ETSv6.0.4, petites corrections de bogues",
+                "it": "aggiunto il supporto ETSv6.0.4, piccole correzioni di bug",
+                "es": "Se agregó compatibilidad con ETSv6.0.4, pequeñas correcciones de errores.",
+                "pl": "dodano obsługę ETSv6.0.4, drobne poprawki",
+                "zh-cn": "添加了 ETSv6.0.4 支持，小错误修复"
+            },
             "2.0.13": {
                 "en": "added ETS5.7.7 import, fixed \"unknown value\" bug, some fixes",
                 "de": "ETS5.7.7-Import hinzugefügt, \"unbekannter Wert\"-Fehler behoben, einige Korrekturen",
