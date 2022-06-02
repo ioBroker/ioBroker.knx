@@ -244,6 +244,10 @@ relation.
 -->
 
 ## Changelog
+### 2.0.15 (02.06.2022)
+* fixed import error with extrem large KNX catalogue files
+* fixed unrecognized connection breaks
+
 ### 2.0.14 (08.04.2022)
 * added ETSv6.0.4 (override 6.0.3)
 * small bugfixes

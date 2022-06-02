@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.14",
+        "version": "2.0.15",
         "news": {
+            "2.0.15": {
+                "en": "fixed import error with extrem large KNX catalogue files, fixed unrecognized connection breaks",
+                "de": "Importfehler bei extrem großen KNX-Katalogdateien behoben, nicht erkannte Verbindungsabbrüche behoben",
+                "ru": "исправлена ошибка импорта с чрезвычайно большими файлами каталога KNX, исправлены нераспознанные разрывы соединения",
+                "pt": "erro de importação corrigido com arquivos de catálogo KNX extremamente grandes, quebras de conexão não reconhecidas corrigidas",
+                "nl": "vaste importfout met extreem grote KNX-catalogusbestanden, niet-herkende verbindingsonderbrekingen verholpen",
+                "fr": "correction d'une erreur d'importation avec des fichiers de catalogue KNX extrêmement volumineux, correction de ruptures de connexion non reconnues",
+                "it": "corretto errore di importazione con file di catalogo KNX estremamente grandi, risolte interruzioni di connessione non riconosciute",
+                "es": "Se corrigió el error de importación con archivos de catálogo KNX extremadamente grandes, se corrigieron interrupciones de conexión no reconocidas.",
+                "pl": "naprawiono błąd importu z bardzo dużymi plikami katalogu KNX, naprawiono nierozpoznane przerwy w połączeniach",
+                "zh-cn": "修复了超大 KNX 目录文件的导入错误，修复了无法识别的连接中断"
+            },
             "2.0.14": {
                 "en": "added ETSv6.0.4 support, small bugfixes",
                 "de": "ETSv6.0.4-Unterstützung hinzugefügt, kleine Bugfixes",
