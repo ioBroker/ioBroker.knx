@@ -244,6 +244,14 @@ relation.
 -->
 
 ## Changelog
+### 2.0.17 (14.10.2022)
+* added ETSv6.0.6 import
+* major changes in Adapter Config UI
+* fixed change of port settings for LAN-GW
+
+### 2.0.16 (04.09.2022)
+* added ETSv6.0.5 import
+
 ### 2.0.15 (02.06.2022)
 * fixed import error with extrem large KNX catalogue files
 * fixed unrecognized connection breaks

@@ -1,8 +1,33 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.15",
+        "version": "2.0.17",
         "news": {
+            "2.0.17": {
+                "en": "added ETSv6.0.6 support, major changes in adapter-UI, fixed port settings for knx-lan GW",
+                "de": "ETSv6.0.6 Unterstützung, große Änderungen im Adapter-UI, feste Porteinstellungen für knx-lan GW",
+                "ru": "добавлена поддержка ETSv6.0.6, основные изменения в адаптер-UI, фиксированные настройки порта для knx-lan GW",
+                "pt": "adicionado suporte ETSv6.0.6, principais mudanças no adaptador-UI, configurações de porta fixa para knx-lan GW",
+                "nl": "vertaling:",
+                "fr": "support ETSv6.0.6, modifications majeures de l'interface utilisateur, réglages de port fixes pour knx-lan GW",
+                "it": "aggiunto supporto ETSv6.0.6, principali modifiche nell'adattatore-UI, impostazioni della porta fissa per knx-lan GW",
+                "es": "añadido soporte ETSv6.0.6, cambios importantes en el adaptador-UI, configuración fija del puerto para knx-lan GW",
+                "pl": "dodano obsługę ETSv6.0.6, znaczące zmiany w adapter-UI, stałe instalacje portowe dla knx-lan GW",
+                "uk": "додано підтримку ETSv6.0.6, основні зміни адаптера-UI, фіксовані параметри порту для knx-lan GW",
+                "zh-cn": "加上ETSv6.0.6支助,适应者-UI的重大变化,对Kenx-lan GW的固定港口环境"
+            },
+            "2.0.16": {
+                "en": "added ETSv6.0.5 import",
+                "de": "eTSv6.0.5 Import",
+                "ru": "добавлен импорт ETSv6.0.5",
+                "pt": "adicionado ETSv6.0.5 importação",
+                "nl": "eTSV6.0.5 import",
+                "fr": "eTSv6.0.5 importation",
+                "it": "aggiunto ETSv6.0.5 import",
+                "es": "eTSv6.0.5 importación",
+                "pl": "eTSv6 0,5 importu",
+                "zh-cn": "加入ETSv6.0.5 进口"
+            },
             "2.0.15": {
                 "en": "fixed import error with extrem large KNX catalogue files, fixed unrecognized connection breaks",
                 "de": "Importfehler bei extrem großen KNX-Katalogdateien behoben, nicht erkannte Verbindungsabbrüche behoben",

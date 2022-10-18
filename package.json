@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "2.0.15",
+  "version": "2.0.17",
   "description": "ioBroker knx Adapter ",
   "author": {
     "name": "K.Ringmann",
@@ -46,13 +46,14 @@
   "dependencies": {
     "@babel/code-frame": "^7.16.7",
     "@babel/types": "^7.17.0",
-    "@iobroker/adapter-core": "^2.5.1",
+    "@iobroker/adapter-core": "^2.6.6",
     "binary-parser": "^1.6.2",
     "binary-protocol": "^0.0.0",
     "browserlist": "^1.0.1",
     "browserslist": "^4.20.2",
     "core-js": "^3.19.1",
     "core-js-compat": "^3.20.2",
+    "del": "6.1.1",
     "esrecurse": "^4.3.0",
     "event-emitter": "^0.3.5",
     "globals": "^13.13.0",
