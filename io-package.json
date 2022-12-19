@@ -343,6 +343,7 @@
             "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
             "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
         },
+        "nogit": true,
         "materialize": true,
         "license": "CC-BY-NC-4.0",
         "platform": "Javascript/Node.js",
