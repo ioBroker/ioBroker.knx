@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.17",
+        "version": "2.0.18",
         "news": {
+            "2.0.18": {
+                "en": "many small changes, bug fixing",
+                "de": "viele kleine änderungen, fehlerbehebung",
+                "ru": "много небольших изменений, исправление ошибок",
+                "pt": "muitas pequenas mudanças, correção de bugs",
+                "nl": "veel kleine veranderingen, insecten repareren",
+                "fr": "beaucoup de petits changements, correction de bugs",
+                "it": "molti piccoli cambiamenti, fissaggio bug",
+                "es": "muchos pequeños cambios, corrección de errores",
+                "pl": "wiele drobnych zmian, błędy naprawcze",
+                "uk": "багато маленьких змін, виправлення помилок",
+                "zh-cn": "许多小的变化,偷窃"
+            },
             "2.0.17": {
                 "en": "added ETSv6.0.6 support, major changes in adapter-UI, fixed port settings for knx-lan GW",
                 "de": "ETSv6.0.6 Unterstützung, große Änderungen im Adapter-UI, feste Porteinstellungen für knx-lan GW",
@@ -243,90 +256,6 @@
                 "es": "manejo de actos y estados fijos, se agregaron algunos tipos de puntos de datos nuevos, instalaciones de reparación y reconocimiento de salas y asignación de dispositivos",
                 "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
                 "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
-            },
-            "1.0.42": {
-                "en": "Fixed problem with missing index_m.html",
-                "de": "Problem mit fehlender index_m.html behoben",
-                "ru": "Исправлена проблема с отсутствующим index_m.html",
-                "pt": "Corrigido o problema com index_m.html ausente",
-                "nl": "Probleem opgelost met ontbrekende index_m.html",
-                "fr": "Correction d'un problème avec index_m.html manquant",
-                "it": "Risolto problema con index_m.html mancante",
-                "es": "Problema solucionado con index_m.html faltante",
-                "pl": "Naprawiono problem z brakującym index_m.html",
-                "zh-cn": "解决了缺少index_m.html的问题"
-            },
-            "1.0.41": {
-                "en": "correct recognition of GroupValue_Response, correct connection to gira Gateway",
-                "de": "korrekte Erkennung von GroupValue_Response, korrekte Verbindung zum gira Gateway",
-                "ru": "правильное распознавание GroupValue_Response, правильное подключение к gira Gateway",
-                "pt": "reconhecimento correto de GroupValue_Response, conexão correta com o gira Gateway",
-                "nl": "correcte herkenning van GroupValue_Response, correcte verbinding met gira Gateway",
-                "fr": "reconnaissance correcte de GroupValue_Response, connexion correcte à gira Gateway",
-                "it": "corretto riconoscimento di GroupValue_Response, corretta connessione a gira Gateway",
-                "es": "reconocimiento correcto de GroupValue_Response, conexión correcta a gira Gateway",
-                "pl": "prawidłowe rozpoznawanie GroupValue_Response, prawidłowe połączenie z gira Gateway",
-                "zh-cn": "正确识别GroupValue_Response，正确连接到gira Gateway"
-            },
-            "1.0.40": {
-                "en": "fixed some import issues, fixed bug on GROUPVALUE_RESPONSE event",
-                "de": "Einige Importprobleme behoben, Fehler beim GROUPVALUE_RESPONSE-Ereignis behoben",
-                "ru": "исправлены некоторые проблемы с импортом, исправлена ошибка в событии GROUPVALUE_RESPONSE",
-                "pt": "corrigidos alguns problemas de importação, corrigido um erro no evento GROUPVALUE_RESPONSE",
-                "nl": "enkele importproblemen opgelost, bug opgelost op GROUPVALUE_RESPONSE-evenement",
-                "fr": "correction de quelques problèmes d'importation, correction d'un bug sur l'événement GROUPVALUE_RESPONSE",
-                "it": "risolti alcuni problemi di importazione, corretto bug sull'evento GROUPVALUE_RESPONSE",
-                "es": "Se corrigieron algunos problemas de importación, se corrigió un error en el evento GROUPVALUE_RESPONSE",
-                "pl": "naprawiono niektóre problemy z importem, naprawiono błąd w zdarzeniu GROUPVALUE_RESPONSE",
-                "zh-cn": "修复了一些导入问题，修复了GROUPVALUE_RESPONSE事件的错误"
-            },
-            "1.0.39": {
-                "en": "fixed import errors",
-                "de": "Importfehler behoben",
-                "ru": "исправлены ошибки импорта",
-                "pt": "erros de importação corrigidos",
-                "nl": "vaste importfouten",
-                "fr": "erreurs d'importation fixes",
-                "it": "errori di importazione corretti",
-                "es": "errores de importación corregidos",
-                "pl": "naprawione błędy importu",
-                "zh-cn": "修复了导入错误"
-            },
-            "1.0.38": {
-                "en": "small fixes in KNX-stack, fixed import errors",
-                "de": "kleine Korrekturen im KNX-Stack, Importfehler behoben",
-                "ru": "небольшие исправления в KNX-стеке, исправлены ошибки импорта",
-                "pt": "pequenas correções na pilha KNX, erros de importação corrigidos",
-                "nl": "kleine fixes in KNX-stack, vaste importfouten",
-                "fr": "petites corrections dans la pile KNX, erreurs d'importation fixes",
-                "it": "piccole correzioni nello stack KNX, errori di importazione corretti",
-                "es": "Pequeñas correcciones en la pila KNX, errores de importación corregidos",
-                "pl": "drobne poprawki w stosie KNX, naprawione błędy importu",
-                "zh-cn": "KNX-stack中的小修复，修复了导入错误"
-            },
-            "1.0.37": {
-                "en": "added import for ETS 5.7.3 projects",
-                "de": "Import für ETS 5.7.3 Projekte hinzugefügt",
-                "ru": "добавлен импорт для проектов ETS 5.7.3",
-                "pt": "importação adicionada para projetos ETS 5.7.3",
-                "nl": "import toegevoegd voor ETS 5.7.3-projecten",
-                "fr": "ajout d'une importation pour les projets ETS 5.7.3",
-                "it": "aggiunta importazione per progetti ETS 5.7.3",
-                "es": "importación agregada para proyectos ETS 5.7.3",
-                "pl": "dodano import projektów ETS 5.7.3",
-                "zh-cn": "为ETS 5.7.3项目增加了导入"
-            },
-            "1.0.36": {
-                "en": "some bug fixes",
-                "de": "einige Bugfixes",
-                "ru": "некоторые исправления ошибок",
-                "pt": "algumas correções de bugs",
-                "nl": "enkele bugfixes",
-                "fr": "quelques corrections de bugs",
-                "it": "alcune correzioni di bug",
-                "es": "algunas correcciones de errores",
-                "pl": "niektóre poprawki błędów",
-                "zh-cn": "一些错误修复"
             }
         },
         "titleLang": {
@@ -343,6 +272,7 @@
             "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
             "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
         },
+        "nogit": true,
         "materialize": true,
         "license": "CC-BY-NC-4.0",
         "platform": "Javascript/Node.js",
@@ -458,10 +388,10 @@
     "native": {
         "useBooleans": true,
         "gwip": "127.0.0.1",
-        "gwipport": 3674,
+        "gwipport": 3671,
         "eibadr": "1.1.0",
-        "onlyAddNewObjects": false,
-        "license": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW9icm9rZXIua254IiwiY29tbWVudCI6IiIsImRldmljZVV1aWQiOiJJRzE0NDZlYi0wMWI1LWZmODktMGIzYy02Y2E5ODIwODZjYTYwNSIsInZlbmRvciI6ImlvYm94X2dtYmgiLCJlbWFpbCI6ImsucmluZ21hbm5AcHVua3RuZXR6d2Vyay5uZXQiLCJpbnZvaWNlIjoiMTAyNyIsImludm9pY2VVdWlkIjoiMiIsInR5cGUiOiJjb21tZXJjaWFsIiwibHR5cGUiOiJzdyIsImV4cGlyZXMiOjI0ODc5MzAyOTgsInZlcnNpb24iOiI8MiIsImlkIjoiYjliOGM0MjAtZGU5NC0xMWU4LThiMGEtMTE4ODU1MGNiYmFiIiwiaWF0IjoxNTQxMTU5MDk4fQ.eiMmB-FRHTpcULj5Ya-7y_BMtrjLa5RiZAI_aOXinSEKpQ7GGbTa7x0td7CHEOZ-YD8bqOU9Na55M_SmndW5906M_vul-ERy5UEqXkHo14pvUl7Yn86nVuqZk058Ps151lWw3Ux6ESaWrEaBOQlkVId2hifAJHe3zKY6XA-UdddxfnBtbUg8ibOb6oO0vND4cKGT_PvaxIyE9VJVsEiIjVEUY2MZYaHWVhNIdFEbrP1qVAb4vMOoJZVsN63Cr7Tp1IDXPrdRoWQ0ApimcrxhTS1pO7JAUdrnQ_tW913XQk_f3GHeefDFGBDDbEmRK4P9-IRpgQJgQI03zLVTe2cKwA",
+        "onlyAddNewObjects": true,
+        "license": "",
         "frameInterval": 30,
         "bind": "0.0.0.0"
     },
