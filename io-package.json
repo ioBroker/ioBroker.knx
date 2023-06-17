@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.20",
+        "version": "2.0.21",
         "news": {
+            "2.0.21": {
+                "en": "solved problem with license check",
+                "de": "gelöstes problem mit lizenzprüfung",
+                "ru": "решена проблема с проверки лицензии",
+                "pt": "problema resolvido com verificação de licença",
+                "nl": "probleem opgelost met licentiecontrole",
+                "fr": "problème résolu avec la vérification de la licence",
+                "it": "problema risolto con il controllo della licenza",
+                "es": "problema resuelto con el cheque de licencia",
+                "pl": "rozwiązać problem z licencją",
+                "uk": "вирішена проблема з перевіркою ліцензії",
+                "zh-cn": "解决许可证检查的问题"
+            },
             "2.0.20": {
                 "en": "solved problem with license handling with js-controller Version > 5",
                 "de": "gelöstes Problem mit Lizenzhandling mit js-controller Version > 5",
@@ -246,42 +259,6 @@
                 "es": "problema solucionado con la aceptación de la licencia",
                 "pl": "naprawiony problem z akceptacją licencji",
                 "zh-cn": "修复了许可证接受问题"
-            },
-            "2.0.0": {
-                "en": "New admin GUI",
-                "de": "Neue Admin-GUI",
-                "ru": "Новый графический интерфейс администратора",
-                "pt": "Nova GUI de administrador",
-                "nl": "Nieuwe admin GUI",
-                "fr": "Nouvelle interface graphique d'administration",
-                "it": "Nuova GUI di amministrazione",
-                "es": "Nueva interfaz gráfica de usuario de administración",
-                "pl": "Nowy graficzny interfejs administratora",
-                "zh-cn": "新的管理员GUI"
-            },
-            "1.0.45": {
-                "en": "import of ETS V5.7.5 available",
-                "de": "Import von ETS V5.7.5 verfügbar",
-                "ru": "доступен импорт ETS V5.7.5",
-                "pt": "importação de ETS V5.7.5 disponível",
-                "nl": "import van ETS V5.7.5 beschikbaar",
-                "fr": "importation d'ETS V5.7.5 disponible",
-                "it": "importazione di ETS V5.7.5 disponibile",
-                "es": "importación de ETS V5.7.5 disponible",
-                "pl": "dostępny import ETS V5.7.5",
-                "zh-cn": "可以导入ETS V5.7.5"
-            },
-            "1.0.44": {
-                "en": "fixed act and state handling, added some new datapoint types, fix facility and room recognition and device allocation",
-                "de": "Feste Akt- und Statusbehandlung, einige neue Datenpunkttypen hinzugefügt, Erkennung von Einrichtungen und Räumen sowie Gerätezuordnung korrigiert",
-                "ru": "исправлена обработка действий и состояний, добавлены некоторые новые типы точек данных, исправлено распознавание объектов и помещений, а также выделение устройств",
-                "pt": "ato fixo e manipulação de estado, adicionados alguns novos tipos de pontos de dados, instalação de conserto e reconhecimento de sala e alocação de dispositivo",
-                "nl": "vaste handeling en statusafhandeling, enkele nieuwe datapunttypes toegevoegd, fixfaciliteit en kamerherkenning en apparaattoewijzing",
-                "fr": "Gestion des actes et des états fixes, ajout de nouveaux types de points de données, reconnaissance des installations et des salles et allocation des appareils",
-                "it": "azioni fisse e gestione dello stato, aggiunti alcuni nuovi tipi di punti dati, funzioni di correzione e riconoscimento della stanza e assegnazione dei dispositivi",
-                "es": "manejo de actos y estados fijos, se agregaron algunos tipos de puntos de datos nuevos, instalaciones de reparación y reconocimiento de salas y asignación de dispositivos",
-                "pl": "poprawiono obsługę działań i stanów, dodano kilka nowych typów punktów danych, naprawiono obiekt i rozpoznawanie pomieszczeń oraz przydział urządzeń",
-                "zh-cn": "修复了行为和状态处理，添加了一些新的数据点类型，修复了设施和房间识别以及设备分配"
             }
         },
         "titleLang": {
