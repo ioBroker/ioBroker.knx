@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.21",
+        "version": "2.0.22",
         "news": {
+            "2.0.22": {
+                "en": "added import specification, solved problems in GaTools",
+                "de": "zusätzliche Importspezifikation, gelöste Probleme in GaTools",
+                "ru": "добавлена спецификация импорта, решена проблемы в GaTools",
+                "pt": "especificação de importação adicionada, problemas resolvidos em GaTools",
+                "nl": "voegde import-specificaties toe",
+                "fr": "spécifications d'importation supplémentaires, problèmes résolus dans GaTools",
+                "it": "aggiunta delle specifiche di importazione, problemi risolti in GaTools",
+                "es": "añadido especificación de importación, problemas resueltos en GaTools",
+                "pl": "dodano specyfikację importu, rozwiązuje problemy z GaTools",
+                "uk": "додано специфікація імпорту, вирішені проблеми в GaTools",
+                "zh-cn": "增加进口规格,解决盖勒斯问题"
+            },
             "2.0.21": {
                 "en": "solved problem with license check",
                 "de": "gelöstes problem mit lizenzprüfung",
