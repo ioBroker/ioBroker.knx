@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.22",
+        "version": "2.0.23",
         "news": {
+            "2.0.23": {
+                "en": "- corrected wrong GW Port after adapter upgrade, allow self-defined values for min and max, some small other fixes",
+                "de": "- korrigiert falsch GW Port nach Adapter-Upgrade, erlauben selbstdefinierte Werte für min und max, einige kleine andere Fixes",
+                "ru": "- исправлено неправильно GW Порт после обновления адаптера, позволяют самоопределенные значения для мин и макс, некоторые небольшие другие исправления",
+                "pt": "- corrigido errado GW Porta após atualização do adaptador, permitir valores autodefinidos para min e max, algumas pequenas outras correções",
+                "nl": "- Verkeerde GW Port na adapter upgrade, laat jezelf definieerde waarden voor min en maximaal",
+                "fr": "- erreur corrigée GW Port après mise à niveau de l'adaptateur, permettre des valeurs auto-définies pour min et max, quelques petites autres corrections",
+                "it": "- corretto GW sbagliato Porta dopo aggiornamento adattatore, consentire valori autodefiniti per min e max, alcune piccole altre correzioni",
+                "es": "- corregido mal GW Puerto después de la actualización del adaptador, permitir valores autodefinidos para min y máx, algunos pequeños otros correcciones",
+                "pl": "Poprawiony w błędzie GW. Port po ulepszeniu adaptatora, pozwala na samookreślone wartości dla min i max, niektóre drobne naprawy",
+                "uk": "- Виправлено неправильно GW Порт після оновлення адаптера, що дозволяє самовизначеним значенням для хв і макс, деякі невеликі інші виправлення",
+                "zh-cn": "- 纠正GW不法行为 在适应人员升级之后的港口,可以对小额和小型的自我界定的价值观,有些小的其它装置"
+            },
             "2.0.22": {
                 "en": "added import specification, solved problems in GaTools",
                 "de": "zusätzliche Importspezifikation, gelöste Probleme in GaTools",
