@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.23",
+        "version": "2.0.24",
         "news": {
+            "2.0.24": {
+                "en": "updated the adapter import schema for ETS 6.1.1",
+                "de": "aktualisierung des Adapter-Importschemas für ETS 6.1.1",
+                "ru": "обновил схему импорта адаптера для ETS 6.1.1",
+                "pt": "atualizou o esquema de importação do adaptador para ETS 6.1.1",
+                "nl": "vertaling:",
+                "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.1.1",
+                "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.1.1",
+                "es": "actualizado el esquema de importación del adaptador para ETS 6.1.1",
+                "pl": "zaktualizowano schemę importową ETS 6.1.1",
+                "uk": "оновлено імпорт адаптера schema для ETS 6.1.1",
+                "zh-cn": "6.1.1 对适应技术的进口产品更新"
+            },
             "2.0.23": {
                 "en": "- corrected wrong GW Port after adapter upgrade, allow self-defined values for min and max, some small other fixes",
                 "de": "- korrigiert falsch GW Port nach Adapter-Upgrade, erlauben selbstdefinierte Werte für min und max, einige kleine andere Fixes",
@@ -117,174 +130,6 @@
                 "es": "Se corrigió el error de importación con archivos de catálogo KNX extremadamente grandes, se corrigieron interrupciones de conexión no reconocidas.",
                 "pl": "naprawiono błąd importu z bardzo dużymi plikami katalogu KNX, naprawiono nierozpoznane przerwy w połączeniach",
                 "zh-cn": "修复了超大 KNX 目录文件的导入错误，修复了无法识别的连接中断"
-            },
-            "2.0.14": {
-                "en": "added ETSv6.0.4 support, small bugfixes",
-                "de": "ETSv6.0.4-Unterstützung hinzugefügt, kleine Bugfixes",
-                "ru": "добавлена поддержка ETSv6.0.4, небольшие исправления",
-                "pt": "adicionado suporte ETSv6.0.4, pequenas correções de bugs",
-                "nl": "ETSv6.0.4-ondersteuning toegevoegd, kleine bugfixes",
-                "fr": "ajout du support ETSv6.0.4, petites corrections de bogues",
-                "it": "aggiunto il supporto ETSv6.0.4, piccole correzioni di bug",
-                "es": "Se agregó compatibilidad con ETSv6.0.4, pequeñas correcciones de errores.",
-                "pl": "dodano obsługę ETSv6.0.4, drobne poprawki",
-                "zh-cn": "添加了 ETSv6.0.4 支持，小错误修复"
-            },
-            "2.0.13": {
-                "en": "added ETS5.7.7 import, fixed \"unknown value\" bug, some fixes",
-                "de": "ETS5.7.7-Import hinzugefügt, \"unbekannter Wert\"-Fehler behoben, einige Korrekturen",
-                "ru": "добавлен импорт ETS5.7.7, исправлена ошибка \"неизвестное значение\", некоторые исправления",
-                "pt": "adicionado importação ETS5.7.7, bug \"valor desconhecido\" corrigido, algumas correções",
-                "nl": "ETS5.7.7 import toegevoegd, bug met \"onbekende waarde\" opgelost, enkele fixes",
-                "fr": "ajout de l'importation ETS5.7.7, correction du bogue \"valeur inconnue\", quelques correctifs",
-                "it": "aggiunta l'importazione ETS5.7.7, corretto bug \"valore sconosciuto\", alcune correzioni",
-                "es": "Se agregó la importación ETS5.7.7, se corrigió el error de \"valor desconocido\", algunas correcciones",
-                "pl": "dodano import ETS5.7.7, naprawiono błąd \"nieznanej wartości\", kilka poprawek",
-                "zh-cn": "添加 ETS5.7.7 导入，修复“未知值”错误，一些修复"
-            },
-            "2.0.12": {
-                "en": "fixed handling of undefined DP's, some small bugs, and the most important: my thoughts are with the people of Ukraine, I am infinitely sorry for what is happening to them and their country. It is an inhuman shame.",
-                "de": "gefixter Umgang mit undefinierten DP's, einige kleine Bugs, und das Wichtigste: Meine Gedanken sind bei den Menschen in der Ukraine, es tut mir unendlich leid, was mit ihnen und ihrem Land passiert. Es ist eine unmenschliche Schande.",
-                "ru": "исправлена обработка неопределенных DP'ов, небольшие баги и самое главное: мои мысли с народом Украины, я бесконечно сожалею о том, что происходит с ними и их страной. Это нечеловеческий позор.",
-                "pt": "corrigido o tratamento de DPs indefinidos, alguns pequenos bugs, e o mais importante: meus pensamentos estão com o povo da Ucrânia, sinto muito pelo que está acontecendo com eles e seu país. É uma vergonha desumana.",
-                "nl": "vaste afhandeling van ongedefinieerde DP's, enkele kleine bugs, en het belangrijkste: mijn gedachten zijn bij de mensen van Oekraïne, het spijt me oneindig voor wat er met hen en hun land gebeurt. Het is een onmenselijke schande.",
-                "fr": "correction de la gestion des DP non définis, quelques petits bugs, et le plus important : mes pensées vont au peuple ukrainien, je suis infiniment désolé de ce qui leur arrive ainsi qu'à leur pays. C'est une honte inhumaine.",
-                "it": "corretta gestione di DP non definiti, alcuni piccoli bug e il più importante: i miei pensieri sono con il popolo ucraino, sono infinitamente dispiaciuto per quello che sta succedendo a loro e al loro paese. È una vergogna disumana.",
-                "es": "manejo fijo de DP indefinidos, algunos errores pequeños y lo más importante: mis pensamientos están con la gente de Ucrania, lamento infinitamente lo que les está sucediendo a ellos y a su país. Es una vergüenza inhumana.",
-                "pl": "naprawiono obsługę niezdefiniowanych DP, kilka drobnych błędów i najważniejsze: moje myśli są z mieszkańcami Ukrainy, nieskończenie przepraszam za to, co się dzieje z nimi i ich krajem. To nieludzki wstyd.",
-                "zh-cn": "修复了未定义的 DP 的处理，一些小错误，最重要的是：我的想法与乌克兰人民同在，我对他们和他们的国家发生的事情感到无限抱歉。这是一种不人道的耻辱。"
-            },
-            "2.0.11": {
-                "en": "fixed password handling for projects from upgraded ETS",
-                "de": "Passwortbehandlung für Projekte aus aktualisierter ETS korrigiert",
-                "ru": "исправлена обработка паролей для проектов из обновленной ETS",
-                "pt": "manipulação de senha fixa para projetos do ETS atualizado",
-                "nl": "vaste wachtwoordafhandeling voor projecten van geüpgrade ETS",
-                "fr": "gestion du mot de passe fixe pour les projets d'ETS mis à niveau",
-                "it": "gestione password fissa per progetti da ETS aggiornato",
-                "es": "manejo de contraseña fija para proyectos de ETS actualizado",
-                "pl": "poprawiona obsługa haseł dla projektów z uaktualnionego ETS",
-                "zh-cn": "修复升级后 ETS 项目的密码处理"
-            },
-            "2.0.10": {
-                "en": "import of ETS6.0.2, bugfixes",
-                "de": "Import von ETS6.0.2, Bugfixes",
-                "ru": "импорт ETS6.0.2, исправления",
-                "pt": "importação de ETS6.0.2, correções de bugs",
-                "nl": "import van ETS6.0.2, bugfixes",
-                "fr": "importation d'ETS6.0.2, corrections de bogues",
-                "it": "importazione di ETS6.0.2, correzioni di bug",
-                "es": "importación de ETS6.0.2, corrección de errores",
-                "pl": "import ETS6.0.2, poprawki błędów",
-                "zh-cn": "导入 ETS6.0.2，错误修正"
-            },
-            "2.0.9": {
-                "en": "import password protected project files, bug fixes",
-                "de": "passwortgeschützte Projektdateien importieren, Fehlerbehebungen",
-                "ru": "импорт защищенных паролем файлов проекта, исправления ошибок",
-                "pt": "importar arquivos de projeto protegidos por senha, correções de bugs",
-                "nl": "met wachtwoord beveiligde projectbestanden importeren, bugfixes",
-                "fr": "importer des fichiers de projet protégés par mot de passe, corrections de bogues",
-                "it": "importare file di progetto protetti da password, correzioni di bug",
-                "es": "importar archivos de proyecto protegidos con contraseña, corrección de errores",
-                "pl": "importuj pliki projektów chronione hasłem, poprawki błędów",
-                "zh-cn": "导入受密码保护的项目文件，错误修复"
-            },
-            "2.0.8": {
-                "en": "fixed warning with write without ack, some small other fixes",
-                "de": "Warnung mit Schreiben ohne Bestätigung behoben, einige kleine andere Korrekturen",
-                "ru": "исправлено предупреждение при записи без подтверждения, другие мелкие исправления",
-                "pt": "aviso corrigido com gravação sem ack, algumas outras pequenas correções",
-                "nl": "vaste waarschuwing met schrijven zonder ack, enkele kleine andere oplossingen",
-                "fr": "avertissement corrigé avec écriture sans ack, quelques petites autres corrections",
-                "it": "avviso corretto con scrittura senza ACK, alcune piccole altre correzioni",
-                "es": "advertencia fija con escritura sin ack, algunas otras pequeñas correcciones",
-                "pl": "poprawione ostrzeżenie z zapisem bez potwierdzenia, kilka innych drobnych poprawek",
-                "zh-cn": "修复了没有确认的写入警告，其他一些小的修复"
-            },
-            "2.0.7": {
-                "en": "fixed bug no write to KNX",
-                "de": "Fehler behoben, kein Schreiben auf KNX",
-                "ru": "исправлена ошибка без записи в KNX",
-                "pt": "bug corrigido sem gravação no KNX",
-                "nl": "bug opgelost, niet schrijven naar KNX",
-                "fr": "correction d'un bug pas d'écriture sur KNX",
-                "it": "bug risolto nessuna scrittura su KNX",
-                "es": "error corregido no escribir en KNX",
-                "pl": "naprawiony błąd bez zapisu do KNX",
-                "zh-cn": "修复了没有写入 KNX 的错误"
-            },
-            "2.0.6": {
-                "en": "bugfixes, new feature directLink",
-                "de": "Bugfixes, neues Feature directLink",
-                "ru": "исправления, новая функция directLink",
-                "pt": "correções de bugs, novo recurso directLink",
-                "nl": "bugfixes, nieuwe functie directLink",
-                "fr": "corrections de bugs, nouvelle fonctionnalité directLink",
-                "it": "correzioni di bug, nuova funzionalità directLink",
-                "es": "corrección de errores, nueva función directLink",
-                "pl": "poprawki błędów, nowa funkcja directLink",
-                "zh-cn": "错误修正，新功能 directLink"
-            },
-            "2.0.5": {
-                "en": "fixed problem on ETSv4 import, corrected some messages, corrected DPT14.x min and max range",
-                "de": "Problem beim ETSv4-Import behoben, einige Meldungen korrigiert, DPT14.x Min- und Max-Bereich korrigiert",
-                "ru": "исправлена проблема с импортом ETSv4, исправлены некоторые сообщения, исправлены минимальный и максимальный диапазон DPT14.x",
-                "pt": "corrigiu o problema na importação ETSv4, corrigiu algumas mensagens, corrigiu o intervalo mínimo e máximo DPT14.x",
-                "nl": "probleem opgelost bij ETSv4-import, enkele berichten gecorrigeerd, DPT14.x min en max bereik gecorrigeerd",
-                "fr": "correction d'un problème sur l'import ETSv4, correction de certains messages, correction de la plage min et max de DPT14.x",
-                "it": "risolto problema sull'importazione ETSv4, corretti alcuni messaggi, corretti DPT14.x intervallo minimo e massimo",
-                "es": "Se solucionó el problema en la importación de ETSv4, se corrigieron algunos mensajes, se corrigió el rango mínimo y máximo de DPT14.x",
-                "pl": "naprawiono problem z importem ETSv4, poprawiono niektóre komunikaty, poprawiono minimalny i maksymalny zasięg DPT14.x",
-                "zh-cn": "修复了 ETSv4 导入的问题，更正了一些消息，更正了 DPT14.x 最小和最大范围"
-            },
-            "2.0.4": {
-                "en": "fixed DPT9.xxx and DPT19.xxx, small bugfixes",
-                "de": "DPT9.xxx und DPT19.xxx behoben, kleine Bugfixes",
-                "ru": "исправлены DPT9.xxx и DPT19.xxx, исправлены мелкие ошибки",
-                "pt": "DPT9.xxx e DPT19.xxx corrigidos, pequenas correções de bugs",
-                "nl": "vaste DPT9.xxx en DPT19.xxx, kleine bugfixes",
-                "fr": "correction de DPT9.xxx et DPT19.xxx, petites corrections de bugs",
-                "it": "corretti DPT9.xxx e DPT19.xxx, piccole correzioni di bug",
-                "es": "arreglado DPT9.xxx y DPT19.xxx, pequeñas correcciones de errores",
-                "pl": "poprawione DPT9.xxx i DPT19.xxx, drobne poprawki",
-                "zh-cn": "修复了 DPT9.xxx 和 DPT19.xxx，小错误修正"
-            },
-            "2.0.3": {
-                "en": "fixed counting 1st Datapoint, automaticly remove old V1 license",
-                "de": "Fehler beim Zählen des 1. Datenpunkts behoben, alte V1-Lizenz automatisch entfernen",
-                "ru": "исправлен подсчет 1st Datapoint, автоматическое удаление старой лицензии V1",
-                "pt": "corrigido a contagem do 1º Datapoint, remover automaticamente a licença V1 antiga",
-                "nl": "vaste telling 1e datapunt, verwijder automatisch oude V1-licentie",
-                "fr": "comptage fixe du 1er point de données, suppression automatique de l'ancienne licence V1",
-                "it": "corretto conteggio 1st Datapoint, rimuovere automaticamente la vecchia licenza V1",
-                "es": "1er punto de datos de conteo fijo, eliminar automáticamente la antigua licencia V1",
-                "pl": "naprawiono zliczanie pierwszego punktu danych, automatyczne usuwanie starej licencji V1",
-                "zh-cn": "固定计数第一个数据点，自动删除旧的 V1 许可证"
-            },
-            "2.0.2": {
-                "en": "fixed problem with license acceptance",
-                "de": "Problem mit Lizenzakzeptanz behoben",
-                "ru": "исправлена проблема с принятием лицензии",
-                "pt": "corrigido o problema com a aceitação da licença",
-                "nl": "probleem opgelost met licentie-acceptatie",
-                "fr": "problème résolu avec l'acceptation de la licence",
-                "it": "risolto problema con l'accettazione della licenza",
-                "es": "problema solucionado con la aceptación de la licencia",
-                "pl": "naprawiony problem z akceptacją licencji",
-                "zh-cn": "修复了许可证接受问题"
-            },
-            "2.0.1": {
-                "en": "fixed problem with license acceptance",
-                "de": "Problem mit Lizenzakzeptanz behoben",
-                "ru": "исправлена проблема с принятием лицензии",
-                "pt": "corrigido o problema com a aceitação da licença",
-                "nl": "probleem opgelost met licentie-acceptatie",
-                "fr": "problème résolu avec l'acceptation de la licence",
-                "it": "risolto problema con l'accettazione della licenza",
-                "es": "problema solucionado con la aceptación de la licencia",
-                "pl": "naprawiony problem z akceptacją licencji",
-                "zh-cn": "修复了许可证接受问题"
             }
         },
         "titleLang": {
