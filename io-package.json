@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "knx",
-        "version": "2.0.24",
+        "version": "2.0.25",
         "news": {
+            "2.0.25": {
+                "en": "updated the adapter import schema for ETS 6.2.0, small bugfixes",
+                "de": "aktualisiert das Adapter-Importschema für ETS 6.2.0, kleine Bugfixes",
+                "ru": "обновление схемы импорта адаптера для ETS 6.2.0, небольшие исправления",
+                "pt": "atualizou o esquema de importação do adaptador para ETS 6.2.0, pequenos bugfixes",
+                "nl": "bijgewerkt van de adapter import schema voor ETS 6.2.0, kleine bugfixes",
+                "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.2.0, petits bugfixs",
+                "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.2.0, piccoli bugfix",
+                "es": "actualizado el esquema de importación de adaptador para ETS 6.2.0, pequeños bugfixes",
+                "pl": "zaktualizowany schemat importu adaptera dla ETS 6.2.0, małych poprawek",
+                "uk": "оновлено імпорт адаптера schema для ETS 6.2.0, невеликі fixes",
+                "zh-cn": "更新 ETS 6.2.0 的适配器导入方案, 小错误修正"
+            },
             "2.0.24": {
                 "en": "updated the adapter import schema for ETS 6.1.1",
                 "de": "aktualisierung des Adapter-Importschemas für ETS 6.1.1",
