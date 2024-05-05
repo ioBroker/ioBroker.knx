@@ -187,7 +187,6 @@
     },
     "nogit": true,
     "materialize": true,
-    "license": "CC-BY-NC-4.0",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "knx.png",
