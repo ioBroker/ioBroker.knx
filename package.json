@@ -16,12 +16,6 @@
     }
   ],
   "homepage": "https://github.com/ioBroker/ioBroker.knx",
-  "licenses": [
-    {
-      "type": "CC-BY-NC-4.0",
-      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE"
-    }
-  ],
   "license": "CC-BY-NC-4.0",
   "keywords": [
     "ioBroker",
