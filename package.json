@@ -1,6 +1,6 @@
 {
   "name": "iobroker.knx",
-  "version": "2.0.26",
+  "version": "2.0.28",
   "description": "ioBroker knx Adapter ",
   "author": {
     "name": "K.Ringmann",
@@ -16,12 +16,6 @@
     }
   ],
   "homepage": "https://github.com/ioBroker/ioBroker.knx",
-  "licenses": [
-    {
-      "type": "CC-BY-NC-4.0",
-      "url": "https://github.com/ioBroker/ioBroker.knx/blob/master/LICENSE"
-    }
-  ],
   "license": "CC-BY-NC-4.0",
   "keywords": [
     "ioBroker",
@@ -45,7 +39,7 @@
   "dependencies": {
     "@babel/code-frame": "^7.22.13",
     "@babel/types": "^7.23.0",
-    "@iobroker/adapter-core": "^3.0.3",
+    "@iobroker/adapter-core": "^3.1.4",
     "binary-parser": "^2.2.1",
     "binary-protocol": "^0.0.0",
     "browserlist": "^1.0.1",
@@ -141,7 +135,7 @@
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-modules": "^0.1.6",
     "@babel/runtime": "^7.23.1",
-    "@iobroker/testing": "^4.1.0",
+    "@iobroker/testing": "^4.1.3",
     "@types/mocha": "^10.0.2",
     "babel-core": "^6.26.3",
     "babel-minify": "^0.5.2",

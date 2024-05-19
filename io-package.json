@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "knx",
-    "version": "2.0.27",
+    "version": "2.0.28",
     "news": {
+      "2.0.28": {
+        "en": "Update license related data and fix package version",
+        "de": "Aktualisieren von lizenzbezogenen Daten und Fixpaketversion",
+        "ru": "Обновление данных, связанных с лицензией, и исправления версии пакета",
+        "pt": "Atualizar dados relacionados à licença e corrigir a versão do pacote",
+        "nl": "Update licentie gerelateerde gegevens en fix pakketversie",
+        "fr": "Mettre à jour les données liées à la licence et corriger la version du paquet",
+        "it": "Aggiornare i dati relativi alla licenza e correggere la versione del pacchetto",
+        "es": "Actualizar datos relacionados con la licencia y arreglar la versión del paquete",
+        "pl": "Aktualizuj dane związane z licencją i poprawiaj wersję pakietu",
+        "uk": "Оновлення ліцензії пов'язаних даних та виправлень версії пакету",
+        "zh-cn": "更新许可证相关数据和固定包版本"
+      },
       "2.0.27": {
         "en": "updated the adapter import schema for ETS 6.2.2, fixed UTF-8 bug",
         "de": "aktualisiert das Adapter-Importschema für ETS 6.2.2, Fix UTF-8 Bug",
@@ -187,7 +200,6 @@
     },
     "nogit": true,
     "materialize": true,
-    "license": "CC-BY-NC-4.0",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "knx.png",
@@ -301,7 +313,7 @@
     "licenseInformation": {
       "link": "https://github.com/ioBroker/ioBroker.knx?tab=readme-ov-file#license-requirements",
       "type": "limited",
-      "license": "CC BY-NC 4.0"
+      "license": "CC-BY-NC-4.0"
     }
   },
   "native": {
