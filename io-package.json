@@ -187,7 +187,6 @@
     },
     "nogit": true,
     "materialize": true,
-    "license": "CC-BY-NC-4.0",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "knx.png",
@@ -301,7 +300,7 @@
     "licenseInformation": {
       "link": "https://github.com/ioBroker/ioBroker.knx?tab=readme-ov-file#license-requirements",
       "type": "limited",
-      "license": "CC BY-NC 4.0"
+      "license": "CC-BY-NC-4.0"
     }
   },
   "native": {
