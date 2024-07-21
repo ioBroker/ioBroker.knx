@@ -311,7 +311,7 @@
     ],
     "tier": 2,
     "licenseInformation": {
-      "link": "https://github.com/ioBroker/ioBroker.knx?tab=readme-ov-file#license-requirements",
+      "link": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/LICENSE",
       "type": "limited",
       "license": "CC-BY-NC-4.0"
     }
