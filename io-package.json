@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "knx",
-    "version": "2.0.30",
+    "version": "2.0.31",
     "news": {
+      "2.0.31": {
+        "en": "updated import scheme for ETS v6.3.1",
+        "de": "aktualisierte Einfuhrregelung für ETS v6.3.1",
+        "ru": "обновленная схема импорта ETS v6.3.1",
+        "pt": "sistema de importação atualizado para ETS v6.3.1",
+        "nl": "bijgewerkte invoerregeling voor ETS v6.3.1",
+        "fr": "système d'importation actualisé pour le SEQE v6.3.1",
+        "it": "schema di importazione aggiornato per ETS v6.3.1",
+        "es": "plan de importación actualizado para ETS v6.3.1",
+        "pl": "zaktualizowany system przywozu ETS v6.3.1",
+        "uk": "оновлена схема імпорту для ETS v6.3.1",
+        "zh-cn": "更新ETS v6.3.1 的导入方案"
+      },
       "2.0.30": {
         "en": "fixed GUI errors, starting redesign GA-Tools",
         "de": "gUI Fehler behoben, GA-Tools neu gestaltet",
@@ -333,7 +346,7 @@
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.1.28"
+        "admin": ">=7.6.17"
       }
     ],
     "tier": 2,

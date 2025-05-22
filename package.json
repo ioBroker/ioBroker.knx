@@ -1,13 +1,13 @@
 {
   "name": "iobroker.knx",
-  "version": "2.0.30",
+  "version": "2.0.31",
   "description": "ioBroker knx Adapter ",
   "author": {
     "name": "K.Ringmann",
     "email": "info@punktnetzwerk.net"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "contributors": [
     {
@@ -121,7 +121,7 @@
     "@babel/plugin-transform-unicode-regex": "^7.22.5",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-modules": "^0.1.6",
-    "@babel/runtime": "^7.23.1",
+    "@babel/runtime": "^8.0.0-alpha.17",
     "@babel/types": "^7.23.0",
     "@emotion/react": "^11.14.0",
     "@iobroker/build-tools": "^1.0.0",
