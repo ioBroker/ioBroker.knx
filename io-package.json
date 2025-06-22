@@ -1,8 +1,34 @@
 {
   "common": {
     "name": "knx",
-    "version": "2.0.31",
+    "version": "2.0.33",
     "news": {
+      "2.0.33": {
+        "en": "unstable knx-connection problem solved",
+        "de": "instabiles knx-verbindungsproblem gelöst",
+        "ru": "нестабильная проблема соединения knx решена",
+        "pt": "problema de ligação 'knx' instável resolvido",
+        "nl": "instabiele knx-verbinding probleem opgelost",
+        "fr": "unstable knx-connection problème résolu",
+        "it": "problema di connessione knx instabile risolto",
+        "es": "problema inestable de la conexión knx",
+        "pl": "problem niestabilnego połączenia knx-",
+        "uk": "нестабільна проблема з'єднання knx",
+        "zh-cn": "解决了不稳定的 knx 连接问题"
+      },
+      "2.0.32": {
+        "en": "fixed connetion problem",
+        "de": "festes netzproblem",
+        "ru": "фиксированная проблема с коннекцией",
+        "pt": "problema de ligação fixa",
+        "nl": "probleem met de vaste verbinding",
+        "fr": "problème de connexion fixe",
+        "it": "problema di connesione fisso",
+        "es": "problema de conneción fija",
+        "pl": "problemy ze złączem",
+        "uk": "виправлена задача коннетції",
+        "zh-cn": "固定接合问题"
+      },
       "2.0.31": {
         "en": "updated import scheme for ETS v6.3.1",
         "de": "aktualisierte Einfuhrregelung für ETS v6.3.1",
