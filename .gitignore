@@ -3,3 +3,5 @@
 /scratch
 /.git
 /nbproject/private/
+#ignore .commitinfo created by ioBroker release script
+.commitinfo
