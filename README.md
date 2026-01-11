@@ -641,7 +641,7 @@ adapter version and host ID are also reported.
 ## License
 The CC-NC-BY License (CC-NC-BY)
 
-Copyright (c) 2016-2024 K.Ringmann <info@punktnetzwerk.net>
+Copyright (c) 2016-2026 K.Ringmann <info@punktnetzwerk.net>
 
 THE WORK IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
 COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
