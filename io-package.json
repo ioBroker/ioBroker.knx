@@ -249,9 +249,19 @@
         "zh-cn": "修复了超大 KNX 目录文件的导入错误，修复了无法识别的连接中断"
       }
     },
-    "titleLang": {
-      "en": "KNX"
-    },
+    "titleLang":{
+      "en": "KNX",
+      "de": "KNX",
+      "ru": "KNX",
+      "pt": "KNX",
+      "nl": "KNX",
+      "fr": "KNX",
+      "it": "KNX",
+      "es": "KNX",
+      "pl": "KNX",
+      "uk": "KNX",
+      "zh-cn": "KNX"
+    }
     "desc": {
       "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
       "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
@@ -368,6 +378,11 @@
           "agree",
           "cancel"
         ]
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.19"
       }
     ],
     "globalDependencies": [
