@@ -1,401 +1,250 @@
 {
   "common": {
-    "name": "knx",
-    "version": "2.0.33",
-    "news": {
-      "2.0.33": {
-        "en": "unstable knx-connection problem solved",
-        "de": "instabiles knx-verbindungsproblem gelöst",
-        "ru": "нестабильная проблема соединения knx решена",
-        "pt": "problema de ligação 'knx' instável resolvido",
-        "nl": "instabiele knx-verbinding probleem opgelost",
-        "fr": "unstable knx-connection problème résolu",
-        "it": "problema di connessione knx instabile risolto",
-        "es": "problema inestable de la conexión knx",
-        "pl": "problem niestabilnego połączenia knx-",
-        "uk": "нестабільна проблема з'єднання knx",
-        "zh-cn": "解决了不稳定的 knx 连接问题"
+      "name": "knx",
+      "version": "2.0.37",
+      "news": {
+          "2.0.37": {
+              "en": "dependency updates, bug fix in adapter configuration",
+              "de": "abhängigkeitsaktualisierung, bugfix in adapterkonfiguration",
+              "ru": "обновления зависимостей, исправление ошибок в конфигурации адаптера",
+              "pt": "atualizações de dependência, correção de erros na configuração do adaptador",
+              "nl": "afhankelijkheidsupdates, foutherstel in adapterconfiguratie",
+              "fr": "mises à jour de dépendance, correction de bug dans la configuration de l'adaptateur",
+              "it": "aggiornamenti di dipendenza, correzione bug nella configurazione dell'adattatore",
+              "es": "actualizaciones de dependencia, corrección de errores en la configuración del adaptador",
+              "pl": "aktualizacje zależności, poprawianie błędów w konfiguracji adaptera",
+              "uk": "оновлення залежності, виправлення помилок в конфігурації адаптера",
+              "zh-cn": "依赖性更新, 适配器配置中的错误修复"
+          },
+          "2.0.35": {
+              "en": "dependency updates, bug fixing in GA-Tools, feature enhancements in GA-Tools",
+              "de": "abhängigkeitsaktualisierungen, Bugfixierung in GA-Tools, Featureerweiterungen in GA-Tools",
+              "ru": "обновления зависимостей, исправление ошибок в GA-Tools, улучшения функций в GA-Tools",
+              "pt": "atualizações de dependência, correção de erros em ferramentas GA, melhorias de recursos em ferramentas GA",
+              "nl": "afhankelijkheidsupdates, bugfixing in GA-tools, functieverbeteringen in GA-tools",
+              "fr": "mises à jour de dépendance, correction de bugs dans GA-Tools, améliorations de fonctionnalités dans GA-Tools",
+              "it": "aggiornamenti di dipendenza, fissaggio bug in GA-Tools, miglioramenti della funzionalità in GA-Tools",
+              "es": "actualizaciones de dependencia, corrección de errores en GA-Herramientas, mejoras de características en GA-Herramientas",
+              "pl": "aktualizacje zależności, ustalanie błędów w GA- Narzędzia, ulepszanie funkcji w GA- Narzędzia",
+              "uk": "оновлення залежності, виправлення помилок в GA-Tools, поліпшення функцій в GA-Tools",
+              "zh-cn": "依赖性更新, GA- Tools 中的错误修复, GA- Tools 中的特性增强"
+          },
+          "2.0.33": {
+              "en": "unstable knx-connection problem solved",
+              "de": "instabiles knx-verbindungsproblem gelöst",
+              "ru": "нестабильная проблема соединения knx решена",
+              "pt": "problema de ligação 'knx' instável resolvido",
+              "nl": "instabiele knx-verbinding probleem opgelost",
+              "fr": "unstable knx-connection problème résolu",
+              "it": "problema di connessione knx instabile risolto",
+              "es": "problema inestable de la conexión knx",
+              "pl": "problem niestabilnego połączenia knx-",
+              "uk": "нестабільна проблема з'єднання knx",
+              "zh-cn": "解决了不稳定的 knx 连接问题"
+          },
+          "2.0.31": {
+              "en": "updated import scheme for ETS v6.3.1",
+              "de": "aktualisierte Einfuhrregelung für ETS v6.3.1",
+              "ru": "обновленная схема импорта ETS v6.3.1",
+              "pt": "sistema de importação atualizado para ETS v6.3.1",
+              "nl": "bijgewerkte invoerregeling voor ETS v6.3.1",
+              "fr": "système d'importation actualisé pour le SEQE v6.3.1",
+              "it": "schema di importazione aggiornato per ETS v6.3.1",
+              "es": "plan de importación actualizado para ETS v6.3.1",
+              "pl": "zaktualizowany system przywozu ETS v6.3.1",
+              "uk": "оновлена схема імпорту для ETS v6.3.1",
+              "zh-cn": "更新ETS v6.3.1 的导入方案"
+          },
+          "2.0.30": {
+              "en": "fixed GUI errors, starting redesign GA-Tools",
+              "de": "gUI Fehler behoben, GA-Tools neu gestaltet",
+              "ru": "фиксированные ошибки GUI, начав редизайн GA-Tools",
+              "pt": "erros de GUI fixos, começando redesign GA-Tools",
+              "nl": "vaste GUI-fouten, start met herontwerp GA-tools",
+              "fr": "erreurs d'interface graphique corrigées, démarrage redessiner GA-Tools",
+              "it": "errori GUI fissi, riprogettazione iniziale GA-Tools",
+              "es": "errores de GUI fijos, empezando a rediseñar GA-Herramientas",
+              "pl": "stałe błędy GUI, począwszy od zmiany projektu GA- Narzędzia",
+              "uk": "виправлені помилки інтерфейсу, починаючи редизайн GA-Tools",
+              "zh-cn": "固定的图形用户界面错误, 开始重新设计 GA- Tools"
+          },
+          "2.0.29": {
+              "en": "updated import filter for ETSv 6.3.0",
+              "de": "aktualisierter Importfilter für ETSv 6.3.0",
+              "ru": "обновленный импортный фильтр для ETSv 6.3.0",
+              "pt": "filtro de importação atualizado para ETSv 6.3.0",
+              "nl": "bijgewerkt importfilter voor ETSv 6.3.0",
+              "fr": "filtre d'importation mis à jour pour ETSv 6.3.0",
+              "it": "filtro di importazione aggiornato per ETSv 6.3.0",
+              "es": "filtro de importación actualizado para ETSv 6.3.0",
+              "pl": "zaktualizowany filtr importu dla ETSv 6.3.0",
+              "uk": "оновлений імпортний фільтр для ETSv 6.3.0",
+              "zh-cn": "eTSv 6.3.0 更新的导入过滤器"
+          },
+          "2.0.28": {
+              "en": "Update license related data and fix package version",
+              "de": "Aktualisieren von lizenzbezogenen Daten und Fixpaketversion",
+              "ru": "Обновление данных, связанных с лицензией, и исправления версии пакета",
+              "pt": "Atualizar dados relacionados à licença e corrigir a versão do pacote",
+              "nl": "Update licentie gerelateerde gegevens en fix pakketversie",
+              "fr": "Mettre à jour les données liées à la licence et corriger la version du paquet",
+              "it": "Aggiornare i dati relativi alla licenza e correggere la versione del pacchetto",
+              "es": "Actualizar datos relacionados con la licencia y arreglar la versión del paquete",
+              "pl": "Aktualizuj dane związane z licencją i poprawiaj wersję pakietu",
+              "uk": "Оновлення ліцензії пов'язаних даних та виправлень версії пакету",
+              "zh-cn": "更新许可证相关数据和固定包版本"
+          },
+          "2.0.27": {
+              "en": "updated the adapter import schema for ETS 6.2.2, fixed UTF-8 bug",
+              "de": "aktualisiert das Adapter-Importschema für ETS 6.2.2, Fix UTF-8 Bug",
+              "ru": "обновлена схема импорта адаптера для ETS 6.2.2, исправлена ошибка UTF-8",
+              "pt": "atualizado o esquema de importação do adaptador para ETS 6.2.2, corrigido UTF-8 bug",
+              "nl": "het invoerschema van de adapter voor ETS 6.2.2, vaste UTF-8 bug bijgewerkt",
+              "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.2.2, bug UTF-8 fixe",
+              "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.2.2, bug UTF-8 fisso",
+              "es": "actualizado el esquema de importación de adaptador para ETS 6.2.2, error UTF-8 fijo",
+              "pl": "zaktualizowany schemat importu adaptera dla ETS 6.2.2, błąd UTF- 8",
+              "uk": "оновлено імпорт адаптера schema для ETS 6.2.2, виправлено помилку UTF-8",
+              "zh-cn": "更新 ETS 6.2.2 的适配器导入方案, 固定 UTF-8 bug"
+          }
       },
-      "2.0.32": {
-        "en": "fixed connetion problem",
-        "de": "festes netzproblem",
-        "ru": "фиксированная проблема с коннекцией",
-        "pt": "problema de ligação fixa",
-        "nl": "probleem met de vaste verbinding",
-        "fr": "problème de connexion fixe",
-        "it": "problema di connesione fisso",
-        "es": "problema de conneción fija",
-        "pl": "problemy ze złączem",
-        "uk": "виправлена задача коннетції",
-        "zh-cn": "固定接合问题"
+      "titleLang": {
+          "en": "KNX",
+          "de": "KNX",
+          "ru": "KNX",
+          "pt": "KNX",
+          "nl": "KNX",
+          "fr": "KNX",
+          "it": "KNX",
+          "es": "KNX",
+          "pl": "KNX",
+          "uk": "KNX",
+          "zh-cn": "KNX"
       },
-      "2.0.31": {
-        "en": "updated import scheme for ETS v6.3.1",
-        "de": "aktualisierte Einfuhrregelung für ETS v6.3.1",
-        "ru": "обновленная схема импорта ETS v6.3.1",
-        "pt": "sistema de importação atualizado para ETS v6.3.1",
-        "nl": "bijgewerkte invoerregeling voor ETS v6.3.1",
-        "fr": "système d'importation actualisé pour le SEQE v6.3.1",
-        "it": "schema di importazione aggiornato per ETS v6.3.1",
-        "es": "plan de importación actualizado para ETS v6.3.1",
-        "pl": "zaktualizowany system przywozu ETS v6.3.1",
-        "uk": "оновлена схема імпорту для ETS v6.3.1",
-        "zh-cn": "更新ETS v6.3.1 的导入方案"
+      "desc": {
+          "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
+          "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
+          "ru": "Этот адаптер позволяет импортировать проекты KNX из ETS и связываться с устройствами через KNX IP Gateway",
+          "pt": "Este adaptador permite importar projetos KNX da ETS e se comunicar com dispositivos via KNX IP Gateway",
+          "nl": "Met deze adapter kunt u KNX-projecten van ETS importeren en met apparaten communiceren via KNX IP Gateway",
+          "fr": "Cet adaptateur permet d'importer des projets KNX depuis ETS et de communiquer avec des appareils via la passerelle IP KNX",
+          "it": "Questo adattatore consente di importare progetti KNX da ETS e comunicare con dispositivi tramite KNX IP Gateway",
+          "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
+          "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP",
+          "uk": "Цей адаптер дозволяє імпортувати проекти KNX від ETS і спілкуватися з пристроями через KNX IP Gateway",
+          "zh-cn": "此适配器允许从 ETS 导入 KNX 项目,并通过 KNX IP 网关与设备通信"
       },
-      "2.0.30": {
-        "en": "fixed GUI errors, starting redesign GA-Tools",
-        "de": "gUI Fehler behoben, GA-Tools neu gestaltet",
-        "ru": "фиксированные ошибки GUI, начав редизайн GA-Tools",
-        "pt": "erros de GUI fixos, começando redesign GA-Tools",
-        "nl": "vaste GUI-fouten, start met herontwerp GA-tools",
-        "fr": "erreurs d'interface graphique corrigées, démarrage redessiner GA-Tools",
-        "it": "errori GUI fissi, riprogettazione iniziale GA-Tools",
-        "es": "errores de GUI fijos, empezando a rediseñar GA-Herramientas",
-        "pl": "stałe błędy GUI, począwszy od zmiany projektu GA- Narzędzia",
-        "uk": "виправлені помилки інтерфейсу, починаючи редизайн GA-Tools",
-        "zh-cn": "固定的图形用户界面错误, 开始重新设计 GA- Tools"
+      "nogit": true,
+      "adminUI": {
+          "config": "materialize"
       },
-      "2.0.29": {
-        "en": "updated import filter for ETSv 6.3.0",
-        "de": "aktualisierter Importfilter für ETSv 6.3.0",
-        "ru": "обновленный импортный фильтр для ETSv 6.3.0",
-        "pt": "filtro de importação atualizado para ETSv 6.3.0",
-        "nl": "bijgewerkt importfilter voor ETSv 6.3.0",
-        "fr": "filtre d'importation mis à jour pour ETSv 6.3.0",
-        "it": "filtro di importazione aggiornato per ETSv 6.3.0",
-        "es": "filtro de importación actualizado para ETSv 6.3.0",
-        "pl": "zaktualizowany filtr importu dla ETSv 6.3.0",
-        "uk": "оновлений імпортний фільтр для ETSv 6.3.0",
-        "zh-cn": "eTSv 6.3.0 更新的导入过滤器"
+      "platform": "Javascript/Node.js",
+      "mode": "daemon",
+      "icon": "knx.png",
+      "enabled": true,
+      "messagebox": true,
+      "plugins": {
+          "sentry": {
+              "dsn": "https://360fcb75fa344c36b722fdfd723951a8@sentry.iobroker.net/162"
+          }
       },
-      "2.0.28": {
-        "en": "Update license related data and fix package version",
-        "de": "Aktualisieren von lizenzbezogenen Daten und Fixpaketversion",
-        "ru": "Обновление данных, связанных с лицензией, и исправления версии пакета",
-        "pt": "Atualizar dados relacionados à licença e corrigir a versão do pacote",
-        "nl": "Update licentie gerelateerde gegevens en fix pakketversie",
-        "fr": "Mettre à jour les données liées à la licence et corriger la version du paquet",
-        "it": "Aggiornare i dati relativi alla licenza e correggere la versione del pacchetto",
-        "es": "Actualizar datos relacionados con la licencia y arreglar la versión del paquete",
-        "pl": "Aktualizuj dane związane z licencją i poprawiaj wersję pakietu",
-        "uk": "Оновлення ліцензії пов'язаних даних та виправлень версії пакету",
-        "zh-cn": "更新许可证相关数据和固定包版本"
-      },
-      "2.0.27": {
-        "en": "updated the adapter import schema for ETS 6.2.2, fixed UTF-8 bug",
-        "de": "aktualisiert das Adapter-Importschema für ETS 6.2.2, Fix UTF-8 Bug",
-        "ru": "обновлена схема импорта адаптера для ETS 6.2.2, исправлена ошибка UTF-8",
-        "pt": "atualizado o esquema de importação do adaptador para ETS 6.2.2, corrigido UTF-8 bug",
-        "nl": "het invoerschema van de adapter voor ETS 6.2.2, vaste UTF-8 bug bijgewerkt",
-        "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.2.2, bug UTF-8 fixe",
-        "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.2.2, bug UTF-8 fisso",
-        "es": "actualizado el esquema de importación de adaptador para ETS 6.2.2, error UTF-8 fijo",
-        "pl": "zaktualizowany schemat importu adaptera dla ETS 6.2.2, błąd UTF- 8",
-        "uk": "оновлено імпорт адаптера schema для ETS 6.2.2, виправлено помилку UTF-8",
-        "zh-cn": "更新 ETS 6.2.2 的适配器导入方案, 固定 UTF-8 bug"
-      },
-      "2.0.26": {
-        "en": "updated adapter import schema for ETS 6.2.1, nodejs>=18 is required",
-        "de": "aktualisiertes Adapter-Importschema für ETS 6.2.1, nodejs>=18 ist erforderlich",
-        "ru": "требуется обновленная схема импорта адаптера для ETS 6.2.1, nodejs>=18",
-        "pt": "esquema de importação de adaptador atualizado para ETS 6.2.1, nodejs>=18 é necessário",
-        "nl": "bijgewerkt adapter-importschema voor ETS 6.2.1, nodejs>=18 is vereist",
-        "fr": "un schéma d'importation de l'adaptateur mis à jour pour ETS 6.2.1, nodejs>=18 est requis",
-        "it": "aggiornato schema di importazione dell'adattatore per ETS 6.2.1, nodejs>=18 è richiesto",
-        "es": "esquema de importación de adaptador actualizado para ETS 6.2.1, nodejs confianza=18 se requiere",
-        "pl": "zaktualizowany schemat importu adaptera dla ETS 6.2.1, nodejs > = 18",
-        "uk": "оновлений імпорт адаптера schema для ETS 6.2.1, nodejs>=18 потрібно",
-        "zh-cn": "需要更新 ETS 6.2.1 的适配器导入方案, nodejsQQQ18"
-      },
-      "2.0.25": {
-        "en": "updated the adapter import schema for ETS 6.2.0, small bugfixes",
-        "de": "aktualisiert das Adapter-Importschema für ETS 6.2.0, kleine Bugfixes",
-        "ru": "обновление схемы импорта адаптера для ETS 6.2.0, небольшие исправления",
-        "pt": "atualizou o esquema de importação do adaptador para ETS 6.2.0, pequenos bugfixes",
-        "nl": "bijgewerkt van de adapter import schema voor ETS 6.2.0, kleine bugfixes",
-        "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.2.0, petits bugfixs",
-        "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.2.0, piccoli bugfix",
-        "es": "actualizado el esquema de importación de adaptador para ETS 6.2.0, pequeños bugfixes",
-        "pl": "zaktualizowany schemat importu adaptera dla ETS 6.2.0, małych poprawek",
-        "uk": "оновлено імпорт адаптера schema для ETS 6.2.0, невеликі fixes",
-        "zh-cn": "更新 ETS 6.2.0 的适配器导入方案, 小错误修正"
-      },
-      "2.0.24": {
-        "en": "updated the adapter import schema for ETS 6.1.1",
-        "de": "aktualisierung des Adapter-Importschemas für ETS 6.1.1",
-        "ru": "обновил схему импорта адаптера для ETS 6.1.1",
-        "pt": "atualizou o esquema de importação do adaptador para ETS 6.1.1",
-        "nl": "vertaling:",
-        "fr": "mis à jour le schéma d'importation de l'adaptateur pour ETS 6.1.1",
-        "it": "aggiornato lo schema di importazione dell'adattatore per ETS 6.1.1",
-        "es": "actualizado el esquema de importación del adaptador para ETS 6.1.1",
-        "pl": "zaktualizowano schemę importową ETS 6.1.1",
-        "uk": "оновлено імпорт адаптера schema для ETS 6.1.1",
-        "zh-cn": "6.1.1 对适应技术的进口产品更新"
-      },
-      "2.0.23": {
-        "en": "- corrected wrong GW Port after adapter upgrade, allow self-defined values for min and max, some small other fixes",
-        "de": "- korrigiert falsch GW Port nach Adapter-Upgrade, erlauben selbstdefinierte Werte für min und max, einige kleine andere Fixes",
-        "ru": "- исправлено неправильно GW Порт после обновления адаптера, позволяют самоопределенные значения для мин и макс, некоторые небольшие другие исправления",
-        "pt": "- corrigido errado GW Porta após atualização do adaptador, permitir valores autodefinidos para min e max, algumas pequenas outras correções",
-        "nl": "- Verkeerde GW Port na adapter upgrade, laat jezelf definieerde waarden voor min en maximaal",
-        "fr": "- erreur corrigée GW Port après mise à niveau de l'adaptateur, permettre des valeurs auto-définies pour min et max, quelques petites autres corrections",
-        "it": "- corretto GW sbagliato Porta dopo aggiornamento adattatore, consentire valori autodefiniti per min e max, alcune piccole altre correzioni",
-        "es": "- corregido mal GW Puerto después de la actualización del adaptador, permitir valores autodefinidos para min y máx, algunos pequeños otros correcciones",
-        "pl": "Poprawiony w błędzie GW. Port po ulepszeniu adaptatora, pozwala na samookreślone wartości dla min i max, niektóre drobne naprawy",
-        "uk": "- Виправлено неправильно GW Порт після оновлення адаптера, що дозволяє самовизначеним значенням для хв і макс, деякі невеликі інші виправлення",
-        "zh-cn": "- 纠正GW不法行为 在适应人员升级之后的港口,可以对小额和小型的自我界定的价值观,有些小的其它装置"
-      },
-      "2.0.22": {
-        "en": "added import specification, solved problems in GaTools",
-        "de": "zusätzliche Importspezifikation, gelöste Probleme in GaTools",
-        "ru": "добавлена спецификация импорта, решена проблемы в GaTools",
-        "pt": "especificação de importação adicionada, problemas resolvidos em GaTools",
-        "nl": "voegde import-specificaties toe",
-        "fr": "spécifications d'importation supplémentaires, problèmes résolus dans GaTools",
-        "it": "aggiunta delle specifiche di importazione, problemi risolti in GaTools",
-        "es": "añadido especificación de importación, problemas resueltos en GaTools",
-        "pl": "dodano specyfikację importu, rozwiązuje problemy z GaTools",
-        "uk": "додано специфікація імпорту, вирішені проблеми в GaTools",
-        "zh-cn": "增加进口规格,解决盖勒斯问题"
-      },
-      "2.0.21": {
-        "en": "solved problem with license check",
-        "de": "gelöstes problem mit lizenzprüfung",
-        "ru": "решена проблема с проверки лицензии",
-        "pt": "problema resolvido com verificação de licença",
-        "nl": "probleem opgelost met licentiecontrole",
-        "fr": "problème résolu avec la vérification de la licence",
-        "it": "problema risolto con il controllo della licenza",
-        "es": "problema resuelto con el cheque de licencia",
-        "pl": "rozwiązać problem z licencją",
-        "uk": "вирішена проблема з перевіркою ліцензії",
-        "zh-cn": "解决许可证检查的问题"
-      },
-      "2.0.20": {
-        "en": "solved problem with license handling with js-controller Version > 5",
-        "de": "gelöstes Problem mit Lizenzhandling mit js-controller Version > 5",
-        "ru": "решена проблема с лицензией обработки с js-controller Version > 5",
-        "pt": "problema resolvido com o manuseio de licenças com a versão js-controller > 5",
-        "nl": "een probleem opgelost met een rijbewijs met J-controller Version. 5",
-        "fr": "problème résolu avec la manipulation de la licence avec js-controller Version 5",
-        "it": "problema risolto con la gestione della licenza con js-controller Versione > 5",
-        "es": "problema resuelto con el manejo de la licencia con js-controller Version 5",
-        "pl": "rozwiązanie problemu z obsługą licencji z wersją js-controller. 5",
-        "uk": "вирішена проблема з ліцензійним обслуговуванням з js-controller Version > 5 хв",
-        "zh-cn": "解决许可证处理问题,涉及控制的防务。 5"
-      },
-      "2.0.19": {
-        "en": "ready to import KNX-Projects with ETS-Version 6.1.0",
-        "de": "bereit KNX-Projekte mit ETS-Version 6.1.0 zu importieren",
-        "ru": "готов к импорту KNX-Проекты с ETS-Version 6.1.0",
-        "pt": "pronto para importar KNX-Projetos com ETS-Version 6.1.0",
-        "nl": "quality over Quantity (QoQ) Releases Vertaling:",
-        "fr": "prêt à importer KNX-Projects avec ETS-Version 6.1.0",
-        "it": "pronto a importare KNX-Projects con ETS-Version 6.1.0",
-        "es": "listo para importar KNX-Projects con ETS-Version 6.1.0",
-        "pl": "propozycja KNX-Projects z ETS-Version 6.1.0",
-        "uk": "готовий імпортувати KNX-Проекти з ETS-Version 6.1.0",
-        "zh-cn": "准备与经济、社会、文化权利委员会进口KNX-Project。"
-      },
-      "2.0.18": {
-        "en": "many small changes, bug fixing",
-        "de": "viele kleine änderungen, fehlerbehebung",
-        "ru": "много небольших изменений, исправление ошибок",
-        "pt": "muitas pequenas mudanças, correção de bugs",
-        "nl": "veel kleine veranderingen, insecten repareren",
-        "fr": "beaucoup de petits changements, correction de bugs",
-        "it": "molti piccoli cambiamenti, fissaggio bug",
-        "es": "muchos pequeños cambios, corrección de errores",
-        "pl": "wiele drobnych zmian, błędy naprawcze",
-        "uk": "багато маленьких змін, виправлення помилок",
-        "zh-cn": "许多小的变化,偷窃"
-      },
-      "2.0.17": {
-        "en": "added ETSv6.0.6 support, major changes in adapter-UI, fixed port settings for knx-lan GW",
-        "de": "ETSv6.0.6 Unterstützung, große Änderungen im Adapter-UI, feste Porteinstellungen für knx-lan GW",
-        "ru": "добавлена поддержка ETSv6.0.6, основные изменения в адаптер-UI, фиксированные настройки порта для knx-lan GW",
-        "pt": "adicionado suporte ETSv6.0.6, principais mudanças no adaptador-UI, configurações de porta fixa para knx-lan GW",
-        "nl": "vertaling:",
-        "fr": "support ETSv6.0.6, modifications majeures de l'interface utilisateur, réglages de port fixes pour knx-lan GW",
-        "it": "aggiunto supporto ETSv6.0.6, principali modifiche nell'adattatore-UI, impostazioni della porta fissa per knx-lan GW",
-        "es": "añadido soporte ETSv6.0.6, cambios importantes en el adaptador-UI, configuración fija del puerto para knx-lan GW",
-        "pl": "dodano obsługę ETSv6.0.6, znaczące zmiany w adapter-UI, stałe instalacje portowe dla knx-lan GW",
-        "uk": "додано підтримку ETSv6.0.6, основні зміни адаптера-UI, фіксовані параметри порту для knx-lan GW",
-        "zh-cn": "加上ETSv6.0.6支助,适应者-UI的重大变化,对Kenx-lan GW的固定港口环境"
-      },
-      "2.0.16": {
-        "en": "added ETSv6.0.5 import",
-        "de": "eTSv6.0.5 Import",
-        "ru": "добавлен импорт ETSv6.0.5",
-        "pt": "adicionado ETSv6.0.5 importação",
-        "nl": "eTSV6.0.5 import",
-        "fr": "eTSv6.0.5 importation",
-        "it": "aggiunto ETSv6.0.5 import",
-        "es": "eTSv6.0.5 importación",
-        "pl": "eTSv6 0,5 importu",
-        "zh-cn": "加入ETSv6.0.5 进口"
-      },
-      "2.0.15": {
-        "en": "fixed import error with extrem large KNX catalogue files, fixed unrecognized connection breaks",
-        "de": "Importfehler bei extrem großen KNX-Katalogdateien behoben, nicht erkannte Verbindungsabbrüche behoben",
-        "ru": "исправлена ошибка импорта с чрезвычайно большими файлами каталога KNX, исправлены нераспознанные разрывы соединения",
-        "pt": "erro de importação corrigido com arquivos de catálogo KNX extremamente grandes, quebras de conexão não reconhecidas corrigidas",
-        "nl": "vaste importfout met extreem grote KNX-catalogusbestanden, niet-herkende verbindingsonderbrekingen verholpen",
-        "fr": "correction d'une erreur d'importation avec des fichiers de catalogue KNX extrêmement volumineux, correction de ruptures de connexion non reconnues",
-        "it": "corretto errore di importazione con file di catalogo KNX estremamente grandi, risolte interruzioni di connessione non riconosciute",
-        "es": "Se corrigió el error de importación con archivos de catálogo KNX extremadamente grandes, se corrigieron interrupciones de conexión no reconocidas.",
-        "pl": "naprawiono błąd importu z bardzo dużymi plikami katalogu KNX, naprawiono nierozpoznane przerwy w połączeniach",
-        "zh-cn": "修复了超大 KNX 目录文件的导入错误，修复了无法识别的连接中断"
+      "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
+      "compact": true,
+      "keywords": ["knx", "vis", "GUI", "graphical", "scada"],
+      "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
+      "authors": ["K.Ringmann <info@punktnetzwerk.net>"],
+      "loglevel": "info",
+      "type": "iot-systems",
+      "connectionType": "local",
+      "dataSource": "push",
+      "adminColumns": [
+          {
+              "name": {
+                  "en": "KNX addr",
+                  "de": "KNX-Adr",
+                  "ru": "KNX-адр",
+                  "pt": "End. KNX",
+                  "nl": "KNX-adr",
+                  "fr": "Adr KNX",
+                  "it": "Ind KNX",
+                  "es": "Dir KNX",
+                  "pl": "Adr KNX",
+                  "zh-cn": "KNX地址"
+              },
+              "align": "left",
+              "path": "native.address",
+              "width": 100
+          },
+          {
+              "name": "DPT",
+              "path": "native.dpt",
+              "width": 100,
+              "align": "left"
+          }
+      ],
+      "messages": [
+          {
+              "condition": {
+                  "operand": "and",
+                  "rules": ["oldVersion<2.0.0", "newVersion>=2.0.0"]
+              },
+              "title": {
+                  "en": "Important notice!",
+                  "de": "Wichtiger Hinweis!",
+                  "ru": "Важное замечание!",
+                  "pt": "Notícia importante!",
+                  "nl": "Belangrijke mededeling!",
+                  "fr": "Avis important!",
+                  "it": "Avviso IMPORTANTE!",
+                  "es": "Noticia importante!",
+                  "pl": "Ważna uwaga!",
+                  "zh-cn": "重要通知!"
+              },
+              "text": {
+                  "en": "From the ioBroker.knx@2.0.0 version only 500 data points can be used fro free. If you have more than 500 KNX data points, you must order the paid license",
+                  "de": "Ab der Version ioBroker.knx@2.0.0 können nur noch 500 Datenpunkte frei verwendet werden. Wenn Sie mehr als 500 KNX-Datenpunkte haben, müssen Sie die kostenpflichtige Lizenz bestellen",
+                  "ru": "Из версии ioBroker.knx@2.0.0 только 500 точек данных можно использовать бесплатно. Если у вас более 500 точек данных KNX, необходимо заказать платную лицензию.",
+                  "pt": "Na versão ioBroker.knx@2.0.0, apenas 500 pontos de dados podem ser usados gratuitamente. Se você tiver mais de 500 pontos de dados KNX, você deve solicitar a licença paga",
+                  "nl": "Van de ioBroker.knx@2.0.0 versie kunnen slechts 500 datapunten gratis worden gebruikt. Als u meer dan 500 KNX-datapunten heeft, moet u de betaalde licentie bestellen",
+                  "fr": "À partir de la version ioBroker.knx@2.0.0, seuls 500 points de données peuvent être utilisés gratuitement. Si vous avez plus de 500 points de données KNX, vous devez commander la licence payante",
+                  "it": "Dalla versione ioBroker.knx@2.0.0 è possibile utilizzare gratuitamente solo 500 punti dati. Se hai più di 500 punti dati KNX, devi ordinare la licenza a pagamento",
+                  "es": "Desde la versión ioBroker.knx@2.0.0, solo se pueden usar 500 puntos de datos de forma gratuita. Si tiene más de 500 puntos de datos KNX, debe solicitar la licencia paga",
+                  "pl": "Od wersji ioBroker.knx@2.0.0 można bezpłatnie korzystać tylko z 500 punktów danych. Jeśli masz więcej niż 500 punktów danych KNX, musisz zamówić płatną licencję",
+                  "zh-cn": "从 ioBroker.knx@2.0.0 版本开始，只能免费使用 500 个数据点。如果您有超过 500 个 KNX 数据点，则必须订购付费许可证"
+              },
+              "link": "https://iobroker.net/www/pricing",
+              "level": "warn",
+              "linkText": {
+                  "en": "Prices",
+                  "de": "Preise",
+                  "ru": "Цены",
+                  "pt": "Preços",
+                  "nl": "Prijzen",
+                  "fr": "Des prix",
+                  "it": "Prezzi",
+                  "es": "Precios",
+                  "pl": "Ceny",
+                  "zh-cn": "价格"
+              },
+              "buttons": ["agree", "cancel"]
+          }
+      ],
+      "dependencies": [
+          {
+              "js-controller": ">=6.0.11"
+          }
+      ],
+      "globalDependencies": [
+          {
+              "admin": ">=7.6.17"
+          }
+      ],
+      "tier": 2,
+      "licenseInformation": {
+          "link": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/LICENSE",
+          "type": "limited",
+          "license": "CC-BY-NC-4.0"
       }
-    },
-    "titleLang":{
-      "en": "KNX",
-      "de": "KNX",
-      "ru": "KNX",
-      "pt": "KNX",
-      "nl": "KNX",
-      "fr": "KNX",
-      "it": "KNX",
-      "es": "KNX",
-      "pl": "KNX",
-      "uk": "KNX",
-      "zh-cn": "KNX"
-    },
-    "desc": {
-      "en": "This adapter allows to import KNX projects from ETS and communicate with devices via KNX IP Gateway",
-      "de": "Dieser Adapter ermöglicht den Import von KNX-Projekten aus der ETS und die Kommunikation mit Geräten über das KNX IP Gateway",
-      "ru": "Этот адаптер позволяет импортировать проекты KNX из ETS и связываться с устройствами через KNX IP Gateway",
-      "pt": "Este adaptador permite importar projetos KNX da ETS e se comunicar com dispositivos via KNX IP Gateway",
-      "nl": "Met deze adapter kunt u KNX-projecten van ETS importeren en met apparaten communiceren via KNX IP Gateway",
-      "fr": "Cet adaptateur permet d'importer des projets KNX depuis ETS et de communiquer avec des appareils via la passerelle IP KNX",
-      "it": "Questo adattatore consente di importare progetti KNX da ETS e comunicare con dispositivi tramite KNX IP Gateway",
-      "es": "Este adaptador permite importar proyectos KNX desde ETS y comunicarse con dispositivos a través de KNX IP Gateway",
-      "pl": "Ten adapter umożliwia import projektów KNX z ETS i komunikację z urządzeniami za pośrednictwem bramy KNX IP"
-    },
-    "nogit": true,
-    "materialize": true,
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "knx.png",
-    "enabled": true,
-    "messagebox": true,
-    "plugins": {
-      "sentry": {
-        "dsn": "https://360fcb75fa344c36b722fdfd723951a8@sentry.iobroker.net/162"
-      }
-    },
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/admin/knx.png",
-    "compact": true,
-    "keywords": [
-      "knx",
-      "vis",
-      "GUI",
-      "graphical",
-      "scada"
-    ],
-    "readme": "https://github.com/ioBroker/ioBroker.knx/blob/master/README.md",
-    "authors": [
-      "K.Ringmann <info@punktnetzwerk.net>"
-    ],
-    "loglevel": "info",
-    "type": "iot-systems",
-    "connectionType": "local",
-    "dataSource": "push",
-    "adminColumns": [
-      {
-        "name": {
-          "en": "KNX addr",
-          "de": "KNX-Adr",
-          "ru": "KNX-адр",
-          "pt": "End. KNX",
-          "nl": "KNX-adr",
-          "fr": "Adr KNX",
-          "it": "Ind KNX",
-          "es": "Dir KNX",
-          "pl": "Adr KNX",
-          "zh-cn": "KNX地址"
-        },
-        "align": "left",
-        "path": "native.address",
-        "width": 100
-      },
-      {
-        "name": "DPT",
-        "path": "native.dpt",
-        "width": 100,
-        "align": "left"
-      }
-    ],
-    "messages": [
-      {
-        "condition": {
-          "operand": "and",
-          "rules": [
-            "oldVersion<2.0.0",
-            "newVersion>=2.0.0"
-          ]
-        },
-        "title": {
-          "en": "Important notice!",
-          "de": "Wichtiger Hinweis!",
-          "ru": "Важное замечание!",
-          "pt": "Notícia importante!",
-          "nl": "Belangrijke mededeling!",
-          "fr": "Avis important!",
-          "it": "Avviso IMPORTANTE!",
-          "es": "Noticia importante!",
-          "pl": "Ważna uwaga!",
-          "zh-cn": "重要通知!"
-        },
-        "text": {
-          "en": "From the ioBroker.knx@2.0.0 version only 500 data points can be used fro free. If you have more than 500 KNX data points, you must order the paid license",
-          "de": "Ab der Version ioBroker.knx@2.0.0 können nur noch 500 Datenpunkte frei verwendet werden. Wenn Sie mehr als 500 KNX-Datenpunkte haben, müssen Sie die kostenpflichtige Lizenz bestellen",
-          "ru": "Из версии ioBroker.knx@2.0.0 только 500 точек данных можно использовать бесплатно. Если у вас более 500 точек данных KNX, необходимо заказать платную лицензию.",
-          "pt": "Na versão ioBroker.knx@2.0.0, apenas 500 pontos de dados podem ser usados gratuitamente. Se você tiver mais de 500 pontos de dados KNX, você deve solicitar a licença paga",
-          "nl": "Van de ioBroker.knx@2.0.0 versie kunnen slechts 500 datapunten gratis worden gebruikt. Als u meer dan 500 KNX-datapunten heeft, moet u de betaalde licentie bestellen",
-          "fr": "À partir de la version ioBroker.knx@2.0.0, seuls 500 points de données peuvent être utilisés gratuitement. Si vous avez plus de 500 points de données KNX, vous devez commander la licence payante",
-          "it": "Dalla versione ioBroker.knx@2.0.0 è possibile utilizzare gratuitamente solo 500 punti dati. Se hai più di 500 punti dati KNX, devi ordinare la licenza a pagamento",
-          "es": "Desde la versión ioBroker.knx@2.0.0, solo se pueden usar 500 puntos de datos de forma gratuita. Si tiene más de 500 puntos de datos KNX, debe solicitar la licencia paga",
-          "pl": "Od wersji ioBroker.knx@2.0.0 można bezpłatnie korzystać tylko z 500 punktów danych. Jeśli masz więcej niż 500 punktów danych KNX, musisz zamówić płatną licencję",
-          "zh-cn": "从 ioBroker.knx@2.0.0 版本开始，只能免费使用 500 个数据点。如果您有超过 500 个 KNX 数据点，则必须订购付费许可证"
-        },
-        "link": "https://iobroker.net/www/pricing",
-        "level": "warn",
-        "linkText": {
-          "en": "Prices",
-          "de": "Preise",
-          "ru": "Цены",
-          "pt": "Preços",
-          "nl": "Prijzen",
-          "fr": "Des prix",
-          "it": "Prezzi",
-          "es": "Precios",
-          "pl": "Ceny",
-          "zh-cn": "价格"
-        },
-        "buttons": [
-          "agree",
-          "cancel"
-        ]
-      }
-    ],
-    "dependencies": [
-      {
-        "js-controller": ">=5.0.19"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=7.6.17"
-      }
-    ],
-    "tier": 2,
-    "licenseInformation": {
-      "link": "https://raw.githubusercontent.com/ioBroker/ioBroker.knx/master/LICENSE",
-      "type": "limited",
-      "license": "CC-BY-NC-4.0"
-    }
   },
   "native": {
     "useBooleans": true,

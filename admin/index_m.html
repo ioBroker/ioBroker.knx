@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link
+            rel="shortcut icon"
+            href="knx.png"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta
+            name="theme-color"
+            content="#000000"
+        />
+        <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+        <link
+            rel="manifest"
+            href="manifest.json"
+        />
+        <script>
+            window.process = window.process || {};
+            window.process.browser = true;
+        </script>
+        <script>
+            // Socket.IO automatisch passend zur Umgebung laden
+            // - Vite (Port 3000): über Vite-Proxy /lib
+            // - ioBroker Admin: relativ aus ../../lib
+            // - Fallback: absolute URL basierend auf aktuellem Host/Proto
+            const script = document.createElement('script');
+            window.registerSocketOnLoad = function (cb) {
+                window.socketLoadedHandler = cb;
+            };
+            script.onload = function () {
+                typeof window.socketLoadedHandler === 'function' && window.socketLoadedHandler();
+            };
+            const { protocol, hostname, port } = window.location;
+            const isViteDev = port === '3000';
+            // Primäre Quelle abhängig von Umgebung
+            // Dev: Admin läuft aktuell über HTTP → direkt vom Admin über HTTP laden
+            let src = isViteDev ? 'http://localhost:8081/lib/js/socket.io.js' : '../../lib/js/socket.io.js';
+            // Fallback-URL absolut: nutzt aktuellen Host/Port (z. B. https://<host>:8081)
+            const fallback = `${protocol}//${hostname}:${isViteDev ? '8081' : (port || (protocol === 'https:' ? '443' : '80'))}/lib/js/socket.io.js`;
+            let triedFallback = false;
+            script.onerror = function () {
+                if (!triedFallback) {
+                    triedFallback = true;
+                    script.src = fallback;
+                } else {
+                    setTimeout(function () { window.location.reload(); }, 5000);
+                }
+            };
+            script.src = src;
+            document.head.appendChild(script);
+        </script>
+        <title>KNX settings</title>
+      <script type="module" crossorigin src="./assets/index-BeBoQwx8.js"></script>
+      <link rel="stylesheet" crossorigin href="./assets/index-Bd3GtHgn.css">
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+
+    </body>
+</html>
