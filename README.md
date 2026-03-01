@@ -272,7 +272,13 @@ relation.
 ## Changelog
 
 ## Versions
-### 2.0.37 (20.02.2027)
+
+### 2.0.38 (01.03.2026)
+
+* added support for ETS 6.4.0
+
+### 2.0.37 (20.02.2026)
+
 * dependency updates
 * bug fix in adapter configuration
 

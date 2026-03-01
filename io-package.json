@@ -1,8 +1,21 @@
 {
   "common": {
       "name": "knx",
-      "version": "2.0.37",
+      "version": "2.0.38",
       "news": {
+          "2.0.38": {
+              "en": "added ETS6.4.0 support",
+              "de": "eTS6.4.0 Unterstützung",
+              "ru": "поддержка ETS6.4.0",
+              "pt": "suporte ETS6.4.0 adicionado",
+              "nl": "toegevoegde ETS6.0 ondersteuning",
+              "fr": "appui additionnel ETS6.4.0",
+              "it": "aggiunto supporto ETS6.4.0",
+              "es": "añadido soporte ETS6.4.0",
+              "pl": "dodane wsparcie ETS6.4.0",
+              "uk": "додано підтримку ETS6.4.0",
+              "zh-cn": "添加 ETS6.4.0 支持"
+          },
           "2.0.37": {
               "en": "dependency updates, bug fix in adapter configuration",
               "de": "abhängigkeitsaktualisierung, bugfix in adapterkonfiguration",
