@@ -271,6 +271,8 @@ relation.
 
 ## Changelog
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## Versions
 
 ### 2.0.39 (05.04.2026)
