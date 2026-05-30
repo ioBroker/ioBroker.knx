@@ -1,126 +1,127 @@
 {
-    "name": "iobroker.knx",
-    "version": "2.0.40",
-    "description": "ioBroker knx Adapter ",
-    "author": {
-        "name": "K.Ringmann",
-        "email": "info@punktnetzwerk.net"
-    },
-    "engines": {
-        "node": ">=22"
-    },
-    "contributors": [
-        {
-            "name": "K.Ringmann",
-            "email": "info@punktnetzwerk.net"
-        }
-    ],
-    "homepage": "https://github.com/ioBroker/ioBroker.knx",
-    "license": "CC-BY-NC-4.0",
-    "keywords": [
-        "ioBroker",
-        "knx",
-        "Smart Home",
-        "home automation"
-    ],
-    "main": "knx.js",
-    "files": [
-        "admin/",
-        "lib/easy-knx/LICENSE.txt",
-        "lib/cloudCert.crt",
-        "io-package.json",
-        "LICENSE",
-        "knx.js"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ioBroker/ioBroker.knx"
-    },
-    "dependencies": {
-        "@iobroker/adapter-core": "^3.3.2",
-        "@xmldom/xmldom": "^0.8.10",
-        "@zip.js/zip.js": "^2.7.53",
-        "binary-parser": "^2.2.1",
-        "binary-protocol": "^0.0.0",
-        "esrecurse": "^4.3.0",
-        "ieee754": "^1.2.1",
-        "jsonwebtoken": "^9.0.3",
-        "pbkdf2-hmac": "^1.2.1",
-        "sha": "^3.0.0",
-        "similarity": "^1.2.1",
-        "underscore": "^1.13.6",
-        "xpath": "^0.0.34",
-        "yauzl": "^2.10.0"
-    },
-    "devDependencies": {
-        "@alcalzone/release-script": "^5.1.1",
-        "@alcalzone/release-script-plugin-iobroker": "^5.1.2",
-        "@alcalzone/release-script-plugin-license": "^5.1.1",
-        "@alcalzone/release-script-plugin-manual-review": "^5.1.1",
-        "@babel/core": "^7.23.0",
-        "@babel/preset-env": "^7.28.5",
-        "@babel/runtime": "^8.0.0-alpha.17",
-        "@emotion/react": "^11.14.0",
-        "@eslint/config-array": "^0.19.1",
-        "@eslint/object-schema": "^2.1.4",
-        "@iobroker/adapter-dev": "^1.5.0",
-        "@iobroker/build-tools": "^2.0.15",
-        "@iobroker/eslint-config": "^2.2.0",
-        "@iobroker/testing": "^5.2.2",
-        "esbuild": "^0.27.3",
-        "eslint": "^9.15.0",
-        "gulp": "^5.0.1",
-        "gulp-javascript-obfuscator": "^1.1.6",
-        "gulp-rename": "^2.1.0",
-        "gulp-replace": "^1.1.4",
-        "gulp-sourcemaps": "^3.0.0",
-        "javascript-obfuscator": "^4.1.0",
-        "prettier": "^3.7.4",
-        "sourcemap-lookup": "^0.0.5",
-        "vinyl-buffer": "^1.0.1",
-        "vinyl-sourcemaps-apply": "^0.2.1"
-    },
-    "overrides": {
-        "diff": "^8.0.3",
-        "xmldom": "npm:@xmldom/xmldom@^0.8.11",
-        "@eslint/eslintrc": "^3.2.0",
-        "@eslint/config-array": "^0.19.1",
-        "minimatch": ">=9.0.4",
-        "glob": ">=11.0.0",
-        "rimraf": ">=5.0.0",
-        "multimatch": ">=6.0.0",
-        "postcss": ">=8.4.31",
-        "@gulp-sourcemaps/identity-map": ">=2.0.0",
-        "bn.js": ">=5.2.3",
-        "asn1.js": ">=5.4.1",
-        "browserify-sign": ">=4.2.2",
-        "create-ecdh": ">=4.0.4",
-        "crypto-browserify": ">=3.12.0",
-        "diffie-hellman": ">=5.0.3",
-        "miller-rabin": ">=4.0.1",
-        "parse-asn1": ">=5.1.7",
-        "public-encrypt": ">=4.0.3",
-        "@alcalzone/esbuild-register": {
-            "esbuild": "^0.27.3"
-        }
-    },
-    "scripts": {
-        "test": "mocha",
-        "test:package": "mocha test/packageFiles --exit",
-        "test:integration": "mocha test/integrationAdapter --exit",
-        "prepublishOnly": "gulp",
-        "release": "release-script",
-        "release-patch": "release-script patch --yes",
-        "release-minor": "release-script minor --yes",
-        "release-major": "release-script major --yes",
-        "build": "gulp",
-        "lint": "eslint -c eslint.config.mjs .",
-        "update-packages": "ncu --upgrade && cd src && ncu --upgrade && cd ..",
-        "npm": "npm i && cd src && npm i -f",
-        "pack:to-test": "npm run build && node -e \"const cp=require('node:child_process');const fs=require('fs');const path=require('path');const pkg=require('./package.json');cp.execSync('npm pack',{stdio:'inherit'});const f=`${pkg.name.replace('/', '-')}-${pkg.version}.tgz`;fs.mkdirSync('test',{recursive:true});fs.renameSync(f,path.join('test',f));console.log('Paket gespeichert unter:',path.join('test',f));\""
-    },
-    "bugs": {
-        "url": "https://github.com/ioBroker/ioBroker.knx/issues"
-    },
-    "readmeFilename": "README.md"
+  "name": "iobroker.knx",
+  "version": "2.0.40",
+  "description": "ioBroker knx Adapter ",
+  "author": {
+    "name": "K.Ringmann",
+    "email": "info@punktnetzwerk.net"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "contributors": [
+    {
+      "name": "K.Ringmann",
+      "email": "info@punktnetzwerk.net"
+    }
+  ],
+  "homepage": "https://github.com/ioBroker/ioBroker.knx",
+  "license": "CC-BY-NC-4.0",
+  "keywords": [
+    "ioBroker",
+    "knx",
+    "Smart Home",
+    "home automation"
+  ],
+  "main": "knx.js",
+  "files": [
+    "admin/",
+    "lib/easy-knx/LICENSE.txt",
+    "lib/cloudCert.crt",
+    "io-package.json",
+    "LICENSE",
+    "knx.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ioBroker/ioBroker.knx"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^3.3.2",
+    "@xmldom/xmldom": "^0.8.10",
+    "@zip.js/zip.js": "^2.7.53",
+    "binary-parser": "^2.2.1",
+    "binary-protocol": "^0.0.0",
+    "esrecurse": "^4.3.0",
+    "ieee754": "^1.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pbkdf2-hmac": "^1.2.1",
+    "sha": "^3.0.0",
+    "similarity": "^1.2.1",
+    "underscore": "^1.13.6",
+    "xpath": "^0.0.34",
+    "yauzl": "^2.10.0"
+  },
+  "devDependencies": {
+    "@alcalzone/release-script": "^5.1.1",
+    "@alcalzone/release-script-plugin-iobroker": "^5.1.2",
+    "@alcalzone/release-script-plugin-license": "^5.1.1",
+    "@alcalzone/release-script-plugin-manual-review": "^5.1.1",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/runtime": "^8.0.0-alpha.17",
+    "@emotion/react": "^11.14.0",
+    "@eslint/config-array": "^0.19.1",
+    "@eslint/object-schema": "^2.1.4",
+    "@iobroker/adapter-dev": "^1.5.0",
+    "@iobroker/build-tools": "^2.0.15",
+    "@iobroker/eslint-config": "^2.2.0",
+    "@iobroker/testing": "^5.2.2",
+    "@tsconfig/node22": "^22.0.5",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.15.0",
+    "gulp": "^5.0.1",
+    "gulp-javascript-obfuscator": "^1.1.6",
+    "gulp-rename": "^2.1.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sourcemaps": "^3.0.0",
+    "javascript-obfuscator": "^4.1.0",
+    "prettier": "^3.7.4",
+    "sourcemap-lookup": "^0.0.5",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-sourcemaps-apply": "^0.2.1"
+  },
+  "overrides": {
+    "diff": "^8.0.3",
+    "xmldom": "npm:@xmldom/xmldom@^0.8.11",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/config-array": "^0.19.1",
+    "minimatch": ">=9.0.4",
+    "glob": ">=11.0.0",
+    "rimraf": ">=5.0.0",
+    "multimatch": ">=6.0.0",
+    "postcss": ">=8.4.31",
+    "@gulp-sourcemaps/identity-map": ">=2.0.0",
+    "bn.js": ">=5.2.3",
+    "asn1.js": ">=5.4.1",
+    "browserify-sign": ">=4.2.2",
+    "create-ecdh": ">=4.0.4",
+    "crypto-browserify": ">=3.12.0",
+    "diffie-hellman": ">=5.0.3",
+    "miller-rabin": ">=4.0.1",
+    "parse-asn1": ">=5.1.7",
+    "public-encrypt": ">=4.0.3",
+    "@alcalzone/esbuild-register": {
+      "esbuild": "^0.27.3"
+    }
+  },
+  "scripts": {
+    "test": "mocha",
+    "test:package": "mocha test/packageFiles --exit",
+    "test:integration": "mocha test/integrationAdapter --exit",
+    "prepublishOnly": "gulp",
+    "release": "release-script",
+    "release-patch": "release-script patch --yes",
+    "release-minor": "release-script minor --yes",
+    "release-major": "release-script major --yes",
+    "build": "gulp",
+    "lint": "eslint -c eslint.config.mjs .",
+    "update-packages": "ncu --upgrade && cd src && ncu --upgrade && cd ..",
+    "npm": "npm i && cd src && npm i -f",
+    "pack:to-test": "npm run build && node -e \"const cp=require('node:child_process');const fs=require('fs');const path=require('path');const pkg=require('./package.json');cp.execSync('npm pack',{stdio:'inherit'});const f=`${pkg.name.replace('/', '-')}-${pkg.version}.tgz`;fs.mkdirSync('test',{recursive:true});fs.renameSync(f,path.join('test',f));console.log('Paket gespeichert unter:',path.join('test',f));\""
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.knx/issues"
+  },
+  "readmeFilename": "README.md"
 }
