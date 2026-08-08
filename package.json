@@ -68,7 +68,7 @@
     "@iobroker/eslint-config": "^2.2.0",
     "@iobroker/testing": "^5.2.2",
     "@tsconfig/node22": "^22.0.5",
-    "esbuild": "^0.27.3",
+    "esbuild": "^0.28.1",
     "eslint": "^9.15.0",
     "gulp": "^5.0.1",
     "gulp-javascript-obfuscator": "^1.1.6",
