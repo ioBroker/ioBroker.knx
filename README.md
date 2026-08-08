@@ -272,6 +272,8 @@ relation.
 
 ## Changelog
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ### 2.0.40 (05.04.2026)
 
 * fixed connection state response handling
