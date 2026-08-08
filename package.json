@@ -59,7 +59,7 @@
     "@alcalzone/release-script-plugin-manual-review": "^5.1.1",
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.28.5",
-    "@babel/runtime": "^8.0.0-alpha.17",
+    "@babel/runtime": "^8.0.0",
     "@emotion/react": "^11.14.0",
     "@eslint/config-array": "^0.19.1",
     "@eslint/object-schema": "^2.1.4",
