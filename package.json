@@ -50,7 +50,7 @@
     "similarity": "^1.2.1",
     "underscore": "^1.13.6",
     "xpath": "^0.0.34",
-    "yauzl": "^2.10.0"
+    "yauzl": "^3.4.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",
