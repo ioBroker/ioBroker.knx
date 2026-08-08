@@ -272,8 +272,6 @@ relation.
 
 ## Changelog
 
-## Versions
-
 ### 2.0.40 (05.04.2026)
 
 * fixed connection state response handling
