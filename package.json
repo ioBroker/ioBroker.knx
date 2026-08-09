@@ -62,7 +62,7 @@
     "@babel/runtime": "^8.0.0",
     "@emotion/react": "^11.14.0",
     "@eslint/config-array": "^0.19.1",
-    "@eslint/object-schema": "^2.1.4",
+    "@eslint/object-schema": "^3.0.5",
     "@iobroker/adapter-dev": "^1.5.0",
     "@iobroker/build-tools": "^2.0.15",
     "@iobroker/eslint-config": "^2.2.0",
