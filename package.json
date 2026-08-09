@@ -64,7 +64,7 @@
     "@eslint/config-array": "^0.19.1",
     "@eslint/object-schema": "^3.0.5",
     "@iobroker/adapter-dev": "^1.5.0",
-    "@iobroker/build-tools": "^2.0.15",
+    "@iobroker/build-tools": "^3.0.1",
     "@iobroker/eslint-config": "^2.2.0",
     "@iobroker/testing": "^5.3.0",
     "@tsconfig/node22": "^22.0.5",
