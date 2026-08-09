@@ -37,7 +37,7 @@
     "url": "https://github.com/ioBroker/ioBroker.knx"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.3.2",
+    "@iobroker/adapter-core": "^3.4.3",
     "@xmldom/xmldom": "^0.9.10",
     "@zip.js/zip.js": "^2.8.34",
     "binary-parser": "^2.2.1",
