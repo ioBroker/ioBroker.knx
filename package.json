@@ -49,7 +49,7 @@
     "sha": "^3.0.0",
     "similarity": "^1.2.1",
     "underscore": "^1.13.6",
-    "xpath": "^0.0.34",
+    "xpath": "^0.0.35",
     "yauzl": "^3.4.0"
   },
   "devDependencies": {
