@@ -76,7 +76,7 @@
     "gulp-replace": "^1.1.4",
     "gulp-sourcemaps": "^3.0.0",
     "javascript-obfuscator": "^5.9.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.9",
     "sourcemap-lookup": "^0.0.5",
     "vinyl-buffer": "^1.0.1",
     "vinyl-sourcemaps-apply": "^0.2.1"
