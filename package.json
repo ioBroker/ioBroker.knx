@@ -7,7 +7,7 @@
     "email": "info@punktnetzwerk.net"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.19.0"
   },
   "contributors": [
     {

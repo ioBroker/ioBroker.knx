@@ -272,6 +272,9 @@ relation.
 
 ## Changelog
 
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22.19.0 now
+
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
 ### 2.0.40 (05.04.2026)
